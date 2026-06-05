@@ -21,8 +21,9 @@ async function fetchTab(gid) {
   if (!resp.ok) throw new Error(`Sheet tab ${gid} failed`);
   const text = await resp.text();
   const lines = text.trim().split('\n');
-  const headers = parseCSVLine(lines[0]).map(h => h.trim().toLowerCase().replace(/\s+/g,'_'));
-  return lines.slice(1)
+  // Row 0 = section title, Row 1 = column headers, Row 2 = notes, Row 3+ = data
+  const headers = parseCSVLine(lines[1]).map(h => h.trim().toLowerCase().replace(/\s+/g,'_'));
+  return lines.slice(3)
     .map(line => {
       const vals = parseCSVLine(line);
       const obj = {};
