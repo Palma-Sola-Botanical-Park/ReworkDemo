@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="300"> <!-- hard refresh every 5 min -->
+<title>Palma Sola Botanical Park · Display</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep:  #1a3a1f;
+    --green-mid:   #2d6a35;
+    --green-light: #4a9e56;
+    --gold:        #c5922a;
+    --gold-light:  #eabc5a;
+    --white:       #fff;
+    --cream:       #faf8f3;
+  }
+
+  html, body {
+    width: 100vw; height: 100vh;
+    overflow: hidden;
+    background: var(--green-deep);
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--white);
+  }
+
+  /* ── SLIDE CONTAINER ── */
+  #slideContainer {
+    position: relative;
+    width: 100vw; height: 100vh;
+  }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: flex;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    pointer-events: none;
+  }
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ── PERSISTENT HEADER BAR ── */
+  #header-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 80px;
+    background: var(--green-deep);
+    border-bottom: 3px solid var(--gold);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem;
+  }
+  #header-bar img { height: 52px; }
+  #header-bar .clock {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--gold-light);
+    letter-spacing: .04em;
+  }
+  #header-bar .date-str {
+    font-size: .9rem; color: rgba(255,255,255,.6);
+    text-align: right; line-height: 1.4;
+  }
+
+  /* ── PERSISTENT FOOTER ── */
+  #footer-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+    height: 56px;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255,255,255,.1);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem;
+  }
+  .footer-inat-stats {
+    display: flex; gap: 2.5rem; align-items: center;
+  }
+  .footer-stat {
+    display: flex; align-items: baseline; gap: .5rem;
+  }
+  .footer-stat strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--gold-light);
+  }
+  .footer-stat span { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; opacity: .65; }
+  .footer-inat-photos { display: flex; gap: .5rem; align-items: center; }
+  .footer-thumb {
+    width: 40px; height: 40px; border-radius: 5px;
+    object-fit: cover; border: 2px solid rgba(255,255,255,.2);
+    opacity: .85;
+  }
+  .footer-inat-label { font-size: .72rem; color: rgba(255,255,255,.5); margin-right: .5rem; text-transform: uppercase; letter-spacing: .07em; }
+
+  /* progress bar */
+  #progress-bar {
+    position: fixed; bottom: 56px; left: 0; right: 0; z-index: 101;
+    height: 3px; background: rgba(255,255,255,.08);
+  }
+  #progress-fill {
+    height: 100%; background: var(--gold);
+    width: 0%; transition: width linear;
+  }
+
+  /* ── SLIDE LAYOUTS ── */
+
+  /* Layout A: Full photo background with text overlay */
+  .slide-photo {
+    background-size: cover; background-position: center;
+  }
+  .slide-photo .overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,.75) 0%, rgba(0,0,0,.2) 60%, transparent 100%);
+  }
+  .slide-photo .content {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 7rem 5rem 5rem;
+    max-width: 55%;
+  }
+
+  /* Layout B: Split — content left, photo right */
+  .slide-split .split-left {
+    width: 45%; background: var(--green-deep);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 7rem 3.5rem 5rem;
+    border-right: 4px solid var(--gold);
+  }
+  .slide-split .split-right {
+    flex: 1;
+    background-size: cover; background-position: center;
+  }
+
+  /* Layout C: Centered announcement */
+  .slide-center {
+    background: var(--green-deep);
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 7rem 6rem 5rem;
+    position: relative;
+  }
+  .slide-center::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(74,158,86,.15) 0%, transparent 70%);
+  }
+  .slide-center > * { position: relative; z-index: 1; }
+
+  /* Layout D: iNat observation showcase */
+  .slide-inat {
+    background: #0e1f11;
+    flex-direction: column;
+    padding: 7rem 4rem 5rem;
+  }
+  .obs-showcase {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex: 1;
+  }
+  .obs-showcase-card {
+    border-radius: 10px; overflow: hidden;
+    position: relative;
+  }
+  .obs-showcase-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .obs-showcase-card .obs-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,.75));
+    padding: .75rem .75rem .6rem;
+    font-size: .85rem; color: var(--white);
+  }
+  .obs-showcase-card .obs-label em {
+    display: block; font-size: .72rem; opacity: .65; font-style: normal;
+  }
+
+  /* Layout E: Classes/Events listing */
+  .slide-listing {
+    background: var(--green-deep);
+    padding: 7rem 4rem 5rem;
+    flex-direction: column;
+  }
+  .listing-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.25rem; margin-top: 1.5rem;
+    overflow: hidden;
+  }
+  .listing-item {
+    background: rgba(255,255,255,.07);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 1.1rem 1.25rem;
+  }
+  .listing-item .li-date {
+    font-size: .75rem; color: var(--gold-light);
+    text-transform: uppercase; letter-spacing: .08em; margin-bottom: .3rem;
+  }
+  .listing-item h3 { font-size: 1.1rem; margin-bottom: .25rem; }
+  .listing-item p { font-size: .85rem; color: rgba(255,255,255,.65); line-height: 1.5; }
+
+  /* ── TYPOGRAPHY ── */
+  .kicker {
+    font-size: .82rem; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--gold-light); margin-bottom: .9rem;
+  }
+  .slide-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    line-height: 1.1; margin-bottom: 1rem;
+    color: var(--white);
+  }
+  .slide-title em { color: var(--gold-light); font-style: italic; }
+  .slide-body {
+    font-size: clamp(1rem, 1.6vw, 1.3rem);
+    color: rgba(255,255,255,.78);
+    line-height: 1.72; max-width: 560px;
+  }
+  .slide-tag {
+    display: inline-block; margin-top: 1.25rem;
+    background: var(--gold); color: var(--green-deep);
+    font-weight: 700; font-size: .85rem; padding: .35rem .9rem;
+    border-radius: 20px;
+  }
+  .big-stat {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    color: var(--gold-light); line-height: 1;
+    margin-bottom: .5rem;
+  }
+
+  /* ── SLIDE COUNTER ── */
+  #slide-counter {
+    position: fixed; bottom: 68px; right: 2rem; z-index: 100;
+    display: flex; gap: .4rem; align-items: center;
+  }
+  .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(255,255,255,.25); transition: background .3s;
+  }
+  .dot.on { background: var(--gold); }
+
+  /* loading */
+  #loading-screen {
+    position: fixed; inset: 0; background: var(--green-deep);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 500; transition: opacity .6s;
+  }
+  #loading-screen img { height: 80px; margin-bottom: 2rem; opacity: .8; }
+  #loading-screen p { color: rgba(255,255,255,.5); font-size: .9rem; letter-spacing: .1em; text-transform: uppercase; }
+
+  .pulse { animation: pulse 1.8s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+</style>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div id="loading-screen">
+  <img src="../images/white_PSBP_logo.png" alt="Palma Sola Botanical Park">
+  <p class="pulse">Loading…</p>
+</div>
+
+<!-- Persistent header -->
+<div id="header-bar">
+  <img src="../images/white_PSBP_logo.png" alt="Palma Sola Botanical Park">
+  <div style="text-align:right">
+    <div class="clock" id="clock">—</div>
+    <div class="date-str" id="dateStr">—</div>
+  </div>
+</div>
+
+<!-- Progress bar -->
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<!-- Slide container -->
+<div id="slideContainer"></div>
+
+<!-- Slide dots -->
+<div id="slide-counter"></div>
+
+<!-- Persistent footer -->
+<div id="footer-bar">
+  <div class="footer-inat-stats">
+    <div class="footer-stat"><strong id="ftTotal" class="pulse">—</strong><span>Observations</span></div>
+    <div class="footer-stat"><strong id="ftSpecies" class="pulse">—</strong><span>Species</span></div>
+    <div class="footer-stat"><strong id="ftWeek" class="pulse">—</strong><span>This Week</span></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:.75rem">
+    <span class="footer-inat-label">Latest</span>
+    <div class="footer-inat-photos" id="footerPhotos"></div>
+  </div>
+</div>
+
+<script>
+const SHEET_ID     = '1bxa4w47DCSgQuENjagORVUpR9qf9o2IYyxM5z_2Azpc';
+const INAT_PROJECT = 'palma-sola-botanical-park';
+const SLIDE_DURATION = 12000; // ms per slide
+
+// Display filter for screens
+const SCREEN_DISPLAY = new Set(['screen', 'both']);
+
+// Park photos for background slides
+const PARK_PHOTOS = [
+  '../images/Hamelia_patens.jpg',
+  '../images/Cordyline_fruticosa.jpg',
+  '../images/Cassia_fistula.jpg',
+  '../images/Tecoma_stans.jpg',
+  '../images/Sagittaria_lancifolia.jpg',
+  '../images/Phoenix_reclinata.jpg',
+  '../images/Quercus_myrtifolia.jpg',
+  '../images/Ixora_coccinea.jpg',
+  '../images/Rhapis_excelsa.jpg',
+  '../images/Trimezia_steyermarkii.jpg',
+  '../images/Thunbergia_erecta.jpg',
+  '../images/Ficus_aurea.jpg',
+];
+
+// ── CLOCK ──────────────────────────────────────────────────
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent =
+    now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+  document.getElementById('dateStr').textContent =
+    now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ── CSV PARSER ─────────────────────────────────────────────
+function parseCSVLine(line) {
+  const result = []; let cur = ''; let inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') { if (inQ && line[i+1]==='"') { cur+='"'; i++; } else inQ=!inQ; }
+    else if (ch===',' && !inQ) { result.push(cur); cur=''; }
+    else cur+=ch;
+  }
+  result.push(cur);
+  return result;
+}
+
+async function fetchTab(gid) {
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
+  const resp = await fetch(url);
+  const text = await resp.text();
+  const lines = text.trim().split('\n');
+  const headers = parseCSVLine(lines[0]).map(h => h.trim().toLowerCase().replace(/\s+/g,'_'));
+  return lines.slice(1).map(line => {
+    const vals = parseCSVLine(line);
+    const obj = {};
+    headers.forEach((h,i) => obj[h] = (vals[i]||'').trim());
+    return obj;
+  }).filter(r => Object.values(r).some(v=>v));
+}
+
+function isScreenVisible(row) {
+  return SCREEN_DISPLAY.has((row.display||'').toLowerCase().trim());
+}
+
+// ── iNAT ──────────────────────────────────────────────────
+async function loadINatData() {
+  try {
+    const base = 'https://api.inaturalist.org/v1';
+    const [tR, sR] = await Promise.all([
+      fetch(`${base}/observations?project_id=${INAT_PROJECT}&per_page=1`).then(r=>r.json()),
+      fetch(`${base}/observations/species_counts?project_id=${INAT_PROJECT}`).then(r=>r.json()),
+    ]);
+    const weekAgo = new Date(); weekAgo.setDate(weekAgo.getDate()-7);
+    const wR = await fetch(`${base}/observations?project_id=${INAT_PROJECT}&created_d1=${weekAgo.toISOString().split('T')[0]}&per_page=1`).then(r=>r.json());
+    const total = tR.total_results||0;
+    const species = sR.total_results||0;
+    const week = wR.total_results||0;
+
+    const set = (id, val) => { const el=document.getElementById(id); if(el){el.textContent=val.toLocaleString();el.classList.remove('pulse');} };
+    set('ftTotal',total); set('ftSpecies',species); set('ftWeek',week);
+
+    // Recent photos for footer
+    const pR = await fetch(`${base}/observations?project_id=${INAT_PROJECT}&per_page=8&order=desc&order_by=created_at&photos=true`).then(r=>r.json());
+    const fp = document.getElementById('footerPhotos');
+    if (fp) {
+      fp.innerHTML = '';
+      (pR.results||[]).slice(0,6).forEach(o => {
+        if (o.photos?.[0]) {
+          const img = document.createElement('img');
+          img.src = (o.photos[0].url||'').replace('square','small');
+          img.className = 'footer-thumb';
+          img.title = o.species_guess||'';
+          fp.appendChild(img);
+        }
+      });
+    }
+    return { total, species, week, recentObs: pR.results||[] };
+  } catch(e) { return { total:0, species:0, week:0, recentObs:[] }; }
+}
+
+// ── BUILD SLIDES ───────────────────────────────────────────
+function buildSlides(data) {
+  const slides = [];
+  const { inat, events, classes, announcements } = data;
+
+  // 1. Welcome slide (always)
+  slides.push({
+    type: 'photo',
+    bg: PARK_PHOTOS[0],
+    kicker: 'Welcome to',
+    title: 'Palma Sola<br>Botanical Park',
+    body: 'Ten acres of subtropical nature at the edge of Palma Sola Bay.<br>Free to visit · Open 8am–Dusk daily',
+    tag: '🌿 Come explore',
+  });
+
+  // 2. iNat stats slide (always)
+  slides.push({
+    type: 'center',
+    kicker: 'Living Record · iNaturalist',
+    bigStat: inat.total.toLocaleString(),
+    title: 'observations documented',
+    body: `${inat.species.toLocaleString()} species · ${inat.week.toLocaleString()} added this week\nYour photo could be next. Download iNaturalist and join the project.`,
+  });
+
+  // 3. Recent iNat observations
+  if (inat.recentObs.length >= 4) {
+    slides.push({ type: 'inat', obs: inat.recentObs.slice(0,8) });
+  }
+
+  // 4. Announcements (screen or both)
+  announcements.filter(isScreenVisible).forEach((a, idx) => {
+    slides.push({
+      type: 'split',
+      bg: PARK_PHOTOS[(idx + 1) % PARK_PHOTOS.length],
+      kicker: a.emoji ? `${a.emoji} Announcement` : 'Park News',
+      title: a.title || '',
+      body: a.body || '',
+      pdf: a.pdf_url || '',
+    });
+  });
+
+  // 5. Upcoming events (screen or both)
+  const now = new Date();
+  const upcomingEvents = events
+    .filter(isScreenVisible)
+    .filter(e => { try { return new Date(e.date+'T12:00') >= now; } catch{ return false; } })
+    .sort((a,b) => new Date(a.date)-new Date(b.date))
+    .slice(0, 8);
+
+  if (upcomingEvents.length) {
+    slides.push({ type: 'listing', kicker: '📅 Coming Up', title: 'Events & Classes', items: upcomingEvents });
+  }
+
+  // 6. Classes (screen or both)
+  const visibleClasses = classes.filter(isScreenVisible);
+  if (visibleClasses.length) {
+    slides.push({ type: 'listing', kicker: '📚 Regular Programs', title: 'Classes at the Park', items: visibleClasses.map(c => ({
+      date: `${c.day||''} ${c.time||''}`.trim(),
+      title: c.title||'',
+      description: c.description||'',
+    })) });
+  }
+
+  // 7. Photo slides — rotate through park images
+  const photoSlides = [2,4,6,8,10].map(i => ({
+    type: 'photo',
+    bg: PARK_PHOTOS[i % PARK_PHOTOS.length],
+    kicker: 'Palma Sola Botanical Park',
+    title: 'Always free.<br><em>Always open.</em>',
+    body: '9800 17th Ave NW · Bradenton, FL · 8am–Dusk daily',
+    tag: 'palmasolabp.org',
+  }));
+  slides.push(...photoSlides);
+
+  return slides;
+}
+
+// ── RENDER SLIDES ──────────────────────────────────────────
+function renderSlide(slide, idx) {
+  const div = document.createElement('div');
+  div.className = 'slide';
+  div.id = `slide-${idx}`;
+
+  if (slide.type === 'photo') {
+    div.classList.add('slide-photo');
+    div.style.backgroundImage = `url('${slide.bg}')`;
+    div.innerHTML = `
+      <div class="overlay"></div>
+      <div class="content">
+        <div class="kicker">${slide.kicker}</div>
+        <h1 class="slide-title">${slide.title}</h1>
+        <p class="slide-body">${slide.body}</p>
+        ${slide.tag ? `<span class="slide-tag">${slide.tag}</span>` : ''}
+      </div>`;
+
+  } else if (slide.type === 'split') {
+    div.classList.add('slide-split');
+    div.innerHTML = `
+      <div class="split-left">
+        <div class="kicker">${slide.kicker}</div>
+        <h1 class="slide-title">${slide.title}</h1>
+        <p class="slide-body">${slide.body}</p>
+        ${slide.pdf ? `<div style="margin-top:1.25rem;font-size:.9rem;color:rgba(255,255,255,.5)">📄 Details available at the front desk</div>` : ''}
+      </div>
+      <div class="split-right" style="background-image:url('${slide.bg}')"></div>`;
+
+  } else if (slide.type === 'center') {
+    div.classList.add('slide-center');
+    div.innerHTML = `
+      <div class="kicker">${slide.kicker}</div>
+      <div class="big-stat">${slide.bigStat}</div>
+      <h1 class="slide-title" style="font-size:clamp(1.4rem,3vw,2.4rem)">${slide.title}</h1>
+      <p class="slide-body" style="max-width:700px;margin:0 auto">${slide.body.replace('\n','<br>')}</p>`;
+
+  } else if (slide.type === 'inat') {
+    div.classList.add('slide-inat');
+    const obsCards = (slide.obs||[]).slice(0,8).map(o => {
+      const photo = o.photos?.[0]?.url?.replace('square','medium')||'';
+      return photo ? `<div class="obs-showcase-card">
+        <img src="${photo}" alt="${o.species_guess||''}">
+        <div class="obs-label">
+          ${o.species_guess||o.taxon?.name||'Unknown'}
+          <em>📷 ${o.user?.login||'observer'}</em>
+        </div>
+      </div>` : '';
+    }).join('');
+    div.innerHTML = `
+      <div class="kicker">📷 Recent Observations · iNaturalist</div>
+      <h1 class="slide-title" style="font-size:clamp(1.6rem,2.5vw,2.4rem)">What's been seen at the park</h1>
+      <div class="obs-showcase">${obsCards}</div>`;
+
+  } else if (slide.type === 'listing') {
+    div.classList.add('slide-listing');
+    const items = (slide.items||[]).slice(0,6).map(item => {
+      const dateStr = item.date || (item.day ? `${item.day} ${item.time||''}`.trim() : '');
+      return `<div class="listing-item">
+        ${dateStr ? `<div class="li-date">${dateStr}</div>` : ''}
+        <h3>${item.title||''}</h3>
+        ${item.description ? `<p>${item.description.slice(0,100)}</p>` : ''}
+      </div>`;
+    }).join('');
+    div.innerHTML = `
+      <div class="kicker">${slide.kicker}</div>
+      <h1 class="slide-title" style="font-size:clamp(1.6rem,2.5vw,2.8rem)">${slide.title}</h1>
+      <div class="listing-grid">${items}</div>`;
+  }
+
+  return div;
+}
+
+// ── SLIDESHOW CONTROLLER ───────────────────────────────────
+let slides = [];
+let currentSlide = 0;
+let progressInterval = null;
+let slideTimeout = null;
+
+function goToSlide(idx) {
+  const container = document.getElementById('slideContainer');
+  const dots = document.querySelectorAll('.dot');
+  const fill = document.getElementById('progress-fill');
+
+  // Remove active
+  container.querySelectorAll('.slide.active').forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('on'));
+
+  // Activate new
+  const newSlide = document.getElementById(`slide-${idx}`);
+  if (newSlide) newSlide.classList.add('active');
+  if (dots[idx]) dots[idx].classList.add('on');
+
+  currentSlide = idx;
+
+  // Progress bar
+  if (fill) {
+    fill.style.transition = 'none';
+    fill.style.width = '0%';
+    requestAnimationFrame(() => {
+      fill.style.transition = `width ${SLIDE_DURATION}ms linear`;
+      fill.style.width = '100%';
+    });
+  }
+
+  // Schedule next
+  clearTimeout(slideTimeout);
+  slideTimeout = setTimeout(() => {
+    goToSlide((currentSlide + 1) % slides.length);
+  }, SLIDE_DURATION);
+}
+
+function buildDots(count) {
+  const counter = document.getElementById('slide-counter');
+  counter.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.onclick = () => goToSlide(i);
+    counter.appendChild(dot);
+  }
+}
+
+// ── INIT ──────────────────────────────────────────────────
+async function init() {
+  try {
+    const [inat, eventsRaw, classesRaw, announcementsRaw] = await Promise.all([
+      loadINatData(),
+      fetchTab(0).catch(()=>[]),
+      fetchTab(1).catch(()=>[]),
+      fetchTab(3).catch(()=>[]),
+    ]);
+
+    const slideData = buildSlides({
+      inat,
+      events: eventsRaw,
+      classes: classesRaw,
+      announcements: announcementsRaw,
+    });
+
+    const container = document.getElementById('slideContainer');
+    container.innerHTML = '';
+    slideData.forEach((s, i) => container.appendChild(renderSlide(s, i)));
+
+    slides = slideData;
+    buildDots(slides.length);
+    goToSlide(0);
+
+    // Hide loading
+    const loading = document.getElementById('loading-screen');
+    loading.style.opacity = '0';
+    setTimeout(() => loading.style.display='none', 700);
+
+  } catch(e) {
+    console.error('Init error', e);
+    document.getElementById('loading-screen').querySelector('p').textContent = 'Retrying…';
+    setTimeout(init, 5000);
+  }
+}
+
+init();
+
+// Refresh data every 5 minutes without full page reload
+setInterval(async () => {
+  const inat = await loadINatData();
+  // iNat footer stats auto-update via loadINatData
+}, 5 * 60 * 1000);
+</script>
+</body>
+</html>

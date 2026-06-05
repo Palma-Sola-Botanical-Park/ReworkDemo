@@ -382,3 +382,40 @@ section { padding: 4.5rem 1.5rem; }
   .inat-bar-stat { min-width: 60px; }
   section { padding: 3rem 1rem; }
 }
+
+/* ── CLASSES ── */
+.class-card {
+  background: var(--white); border-radius: 10px;
+  padding: 1.25rem; border-left: 4px solid var(--gold);
+  box-shadow: 0 2px 8px rgba(0,0,0,.07);
+}
+.class-day {
+  font-size: .78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--gold); margin-bottom: .3rem;
+}
+.class-day span { color: var(--text-soft); font-weight: 400; }
+.class-card h4 { font-size: 1rem; color: var(--green-deep); margin-bottom: .2rem; }
+.class-instructor { font-size: .82rem; color: var(--text-soft); font-style: italic; margin-bottom: .4rem; }
+.class-card p { font-size: .87rem; color: var(--text-soft); line-height: 1.55; }
+
+/* ── ANNOUNCEMENTS ── */
+#announcements-bar {
+  background: var(--green-mid);
+  padding: .85rem 1.5rem;
+}
+.announcement-card {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: .75rem 1.25rem;
+  background: rgba(255,255,255,.12); border-radius: 8px;
+  margin-bottom: .6rem; color: var(--white);
+}
+.announcement-card:last-child { margin-bottom: 0; }
+.ann-emoji { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
+.ann-body strong { display: block; font-size: 1rem; margin-bottom: .2rem; }
+.ann-body p { font-size: .87rem; color: rgba(255,255,255,.78); line-height: 1.55; }
+.ann-link {
+  display: inline-block; margin-top: .4rem;
+  color: var(--gold-light); font-size: .82rem; font-weight: 700;
+  text-decoration: none;
+}
+.ann-link:hover { text-decoration: underline; }
