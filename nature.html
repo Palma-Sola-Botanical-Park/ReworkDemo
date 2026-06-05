@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nature at Palma Sola · Flora & Fauna</title>
+<link rel="stylesheet" href="css/site.css">
+<style>
+.nature-hero {
+  background: var(--green-deep); padding: 4rem 1.5rem 3rem;
+  text-align: center; position: relative; overflow: hidden;
+}
+.nature-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url('images/Sagittaria_lancifolia.jpg') center/cover no-repeat;
+  opacity: .2;
+}
+.nature-hero > * { position: relative; z-index: 1; }
+.nature-hero h1 { color: var(--white); font-size: clamp(2rem,5vw,3.2rem); margin-bottom: .75rem; }
+.nature-hero p { color: rgba(255,255,255,.75); font-size: 1.05rem; max-width: 620px; margin: 0 auto 2rem; line-height: 1.75; }
+
+.two-tabs {
+  display: flex; justify-content: center; gap: 0;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 2.5rem; flex-wrap: wrap;
+}
+.tab-btn {
+  padding: .85rem 2.5rem; font-size: 1rem; font-weight: 700;
+  background: none; border: none; cursor: pointer;
+  color: var(--text-soft); border-bottom: 3px solid transparent;
+  font-family: 'Playfair Display', serif; transition: all .15s;
+  margin-bottom: -2px;
+}
+.tab-btn:hover { color: var(--green-deep); }
+.tab-btn.active { color: var(--green-deep); border-bottom-color: var(--green-mid); }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.inat-how {
+  background: var(--green-deep); border-radius: 14px;
+  padding: 2.5rem; color: var(--white); margin-bottom: 3rem;
+}
+.inat-how h3 { color: var(--white); font-size: 1.5rem; margin-bottom: .75rem; }
+.inat-how p { color: rgba(255,255,255,.72); line-height: 1.72; margin-bottom: 1.25rem; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 1rem; margin-top: 1.5rem; }
+.step { background: rgba(255,255,255,.08); border-radius: 8px; padding: 1.1rem; }
+.step-n { background: var(--gold); color: var(--green-deep); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .85rem; margin-bottom: .6rem; }
+.step p { font-size: .88rem; color: rgba(255,255,255,.78); }
+
+.wildlife-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 1rem; }
+.wildlife-card {
+  background: var(--white); border-radius: 10px; padding: 1.2rem;
+  border-left: 4px solid var(--green-light);
+  box-shadow: 0 2px 8px rgba(0,0,0,.07);
+}
+.wildlife-card .icon { font-size: 1.6rem; margin-bottom: .5rem; }
+.wildlife-card h4 { font-size: .95rem; color: var(--green-deep); margin-bottom: .3rem; }
+.wildlife-card p { font-size: .82rem; color: var(--text-soft); line-height: 1.55; }
+.wildlife-card .obs-count { font-size: .75rem; color: var(--green-mid); font-weight: 700; margin-top: .4rem; }
+
+.bloom-tracker {
+  background: var(--sand); border-radius: 12px; padding: 2rem; margin-bottom: 2.5rem;
+}
+.bloom-months { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: 1.25rem; }
+.bloom-month {
+  flex: 1; min-width: 60px; text-align: center;
+  padding: .6rem .3rem; border-radius: 6px;
+  background: var(--white); border: 1px solid var(--border);
+}
+.bloom-month .mo-name { font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; color: var(--text-soft); }
+.bloom-month .mo-count { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--green-deep); }
+.bloom-month.active { background: var(--green-mid); border-color: var(--green-mid); }
+.bloom-month.active .mo-name, .bloom-month.active .mo-count { color: var(--white); }
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<div id="inat-bar-placeholder"></div>
+
+<!-- HERO -->
+<div class="nature-hero">
+  <div class="label label-light">Flora & Fauna</div>
+  <h1>Everything that lives here</h1>
+  <p>
+    Plants, birds, reptiles, insects, fungi — they all share this 10-acre park. 
+    We document all of it. Not because we're scientists, but because it matters, and because anyone can contribute.
+  </p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <a href="#plants" onclick="showTab('plants')" class="btn btn-gold">🌿 Plants</a>
+    <a href="#wildlife" onclick="showTab('wildlife')" class="btn btn-outline">🦜 Wildlife</a>
+    <a href="#inat" class="btn btn-outline">📷 iNaturalist</a>
+  </div>
+</div>
+
+<!-- STATS ROW -->
+<section class="bg-white" style="padding:2rem 1.5rem">
+  <div class="section-inner">
+    <div style="display:flex;gap:2.5rem;flex-wrap:wrap;align-items:center;justify-content:center">
+      <div style="text-align:center">
+        <span style="display:block;font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--green-deep)" id="statTotal" class="pulse">—</span>
+        <span style="font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft)">Total Observations</span>
+      </div>
+      <div style="text-align:center">
+        <span style="display:block;font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--green-deep)" id="statSpecies" class="pulse">—</span>
+        <span style="font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft)">Species Documented</span>
+      </div>
+      <div style="text-align:center">
+        <span style="display:block;font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--green-deep)" id="statObservers" class="pulse">—</span>
+        <span style="font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft)">Community Observers</span>
+      </div>
+      <div style="text-align:center">
+        <span style="display:block;font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--green-deep)" id="statWeek" class="pulse">—</span>
+        <span style="font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft)">Added This Week</span>
+      </div>
+      <a href="https://www.inaturalist.org/projects/palma-sola-botanical-park" target="_blank" rel="noopener" class="btn btn-gold">Open Project →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TABS -->
+<section class="bg-cream" id="tabSection">
+  <div class="section-inner">
+    <div class="two-tabs">
+      <button class="tab-btn active" id="tab-plants" onclick="showTab('plants')">🌿 Plants</button>
+      <button class="tab-btn" id="tab-wildlife" onclick="showTab('wildlife')">🦜 Wildlife</button>
+      <button class="tab-btn" id="tab-recent" onclick="showTab('recent')">📷 Recent Observations</button>
+    </div>
+
+    <!-- PLANTS TAB -->
+    <div class="tab-panel active" id="panel-plants">
+      <div style="max-width:720px;margin-bottom:2rem">
+        <p class="section-sub" style="margin-bottom:1rem">
+          Over 800 documented plant species in a 10-acre park. The collection spans tropical specimen trees, 
+          Florida natives, rare palms, edible plants, and a few invasives kept on-site for education. 
+          Click any card for the full story.
+        </p>
+      </div>
+
+      <!-- Bloom tracker concept -->
+      <div class="bloom-tracker">
+        <h3 style="font-size:1.1rem;color:var(--green-deep);margin-bottom:.35rem">🌸 Bloom Season Tracker</h3>
+        <p style="font-size:.88rem;color:var(--text-soft);max-width:560px">
+          Something is always in flower at Palma Sola. This tracker will be populated as observers log bloom dates on iNaturalist throughout the year. 
+          Come back each season — or better yet, help fill it in.
+        </p>
+        <div class="bloom-months" id="bloomMonths"></div>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="plantSearch" placeholder="Search by name, family, origin…" oninput="filterPlants()">
+        <button class="filter-btn f-native" data-filter="native" onclick="toggleFilter('native')">🌿 Florida Native</button>
+        <button class="filter-btn f-butterfly" data-filter="butterfly" onclick="toggleFilter('butterfly')">🦋 Butterfly Plant</button>
+        <button class="filter-btn f-toxic" data-filter="toxic" onclick="toggleFilter('toxic')">⚠️ Toxic</button>
+        <button class="filter-btn" data-filter="edible" onclick="toggleFilter('edible')">🍃 Edible</button>
+        <button class="filter-btn" data-filter="wetland" onclick="toggleFilter('wetland')">💧 Wetland</button>
+        <button class="filter-btn" data-filter="invasive" onclick="toggleFilter('invasive')">🚫 Invasive Watch</button>
+        <button class="filter-btn" onclick="clearFilters()" style="margin-left:auto;color:#aaa">✕ Clear</button>
+      </div>
+      <div style="font-size:.87rem;color:var(--text-soft);margin-bottom:1rem">Showing <strong id="plantCount">—</strong> plants</div>
+      <div class="grid-auto" id="plantGrid"></div>
+    </div>
+
+    <!-- WILDLIFE TAB -->
+    <div class="tab-panel" id="panel-wildlife" id="wildlife">
+      <p class="section-sub">
+        The park sits on Palma Sola Bay, surrounded by wetlands, native trees, and a productive pond system. 
+        Birds especially — but also reptiles, amphibians, and insects — are a permanent part of what lives here. 
+        These are some of the most-documented species from our iNaturalist project.
+      </p>
+
+      <h3 style="font-size:1.2rem;color:var(--green-deep);margin-bottom:1.25rem">🐦 Documented at the park</h3>
+      <div class="wildlife-grid" style="margin-bottom:3rem">
+        <div class="wildlife-card"><div class="icon">🦅</div><h4>Pileated Woodpecker</h4><p>Dramatic red-crested woodpecker seen on the Bald Cypress. The project's banner bird.</p><div class="obs-count">Documented on iNat</div></div>
+        <div class="wildlife-card"><div class="icon">🦢</div><h4>White Ibis</h4><p>Wades the pond edge probing for invertebrates. 10 observations in the project.</p><div class="obs-count">10 observations</div></div>
+        <div class="wildlife-card"><div class="icon">🐦</div><h4>Anhinga</h4><p>Spreads wings to dry after diving — one of the park's most photogenic birds.</p><div class="obs-count">10 observations</div></div>
+        <div class="wildlife-card"><div class="icon">🐦</div><h4>Common Gallinule</h4><p>Red-fronted, green-legged, and utterly at home on the pond.</p><div class="obs-count">9 observations</div></div>
+        <div class="wildlife-card"><div class="icon">🦅</div><h4>Great Egret</h4><p>Tall, patient, and spectacular. Forages the shallows year-round.</p><div class="obs-count">5 observations</div></div>
+        <div class="wildlife-card" style="border-left-color:var(--gold)"><div class="icon">🦎</div><h4>Brown Anole</h4><p>Most-documented animal in the project with 23 observations. They're everywhere.</p><div class="obs-count">23 observations</div></div>
+        <div class="wildlife-card" style="border-left-color:#6a1f9a"><div class="icon">🦋</div><h4>Butterfly Community</h4><p>Monarch, Queen, Zebra Longwing, Gulf Fritillary, Giant Swallowtail — all documented.</p><div class="obs-count">Multiple species</div></div>
+        <div class="wildlife-card"><div class="icon">🐸</div><h4>Frogs & Reptiles</h4><p>The pond margins support a healthy amphibian and reptile community. Night visitors especially rewarding.</p><div class="obs-count">Ongoing</div></div>
+      </div>
+
+      <h3 style="font-size:1.2rem;color:var(--green-deep);margin-bottom:1rem">Recent wildlife observations</h3>
+      <div class="grid-auto" id="wildlifeObsGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-soft)">Loading…</div>
+      </div>
+      <div style="text-align:center;margin-top:1.5rem">
+        <a href="https://www.inaturalist.org/observations?project_id=palma-sola-botanical-park&iconic_taxa=Aves,Reptilia,Amphibia,Insecta,Arachnida,Mammalia&verifiable=any" target="_blank" rel="noopener" class="btn btn-green">All wildlife observations →</a>
+      </div>
+    </div>
+
+    <!-- RECENT OBSERVATIONS TAB -->
+    <div class="tab-panel" id="panel-recent">
+      <p class="section-sub">
+        Plants and animals together — the complete recent record from our iNaturalist project. 
+        Click any card to see the observation, the identifier, and the community discussion.
+      </p>
+      <div class="grid-auto" id="recentObsGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-soft)">Loading…</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- iNAT HOW-TO -->
+<section class="bg-white" id="inat">
+  <div class="section-inner">
+    <div class="inat-how">
+      <span class="label label-light">iNaturalist Partnership</span>
+      <h3>We rely on the community for identification</h3>
+      <p>
+        We're not a team of scientists. We're a park run by volunteers and community members who care about this place. 
+        iNaturalist gives us the infrastructure to document everything — and a global network of experts to help identify it. 
+        When we're not sure what something is, we post it and let the community weigh in. You can too.
+      </p>
+      <p>
+        The project is called <strong style="color:var(--gold-light)">Palma Sola Botanical Park Collection Project</strong>. 
+        It currently has 839 observations, 347 species, and 7 members. Every single one of those was submitted by a person 
+        walking through the park with their phone.
+      </p>
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><p>Download the free iNaturalist app</p></div>
+        <div class="step"><div class="step-n">2</div><p>Photograph anything — plant, bird, bug, fungi, lizard</p></div>
+        <div class="step"><div class="step-n">3</div><p>Add it to the Palma Sola Botanical Park project</p></div>
+        <div class="step"><div class="step-n">4</div><p>For cultivated plants: mark as "Captive / Cultivated"</p></div>
+        <div class="step"><div class="step-n">5</div><p>The community identifies, you learn, the record grows</p></div>
+      </div>
+      <div style="margin-top:1.75rem;display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="https://www.inaturalist.org/projects/palma-sola-botanical-park" target="_blank" rel="noopener" class="btn btn-gold">Open the Project →</a>
+        <a href="https://www.inaturalist.org/pages/getting+started" target="_blank" rel="noopener" class="btn btn-outline">Getting started guide →</a>
+      </div>
+    </div>
+
+    <div class="grid-2" style="gap:2.5rem;align-items:start">
+      <div>
+        <h3 style="font-size:1.2rem;color:var(--green-deep);margin-bottom:1rem">Why it matters</h3>
+        <ul style="padding-left:1.2rem;color:var(--text-soft);font-size:.95rem;line-height:1.75;display:flex;flex-direction:column;gap:.75rem">
+          <li>Every observation is a permanent, timestamped, geolocated scientific record</li>
+          <li>Bloom logs help track seasonal patterns over years — which plants flower in March vs October</li>
+          <li>Wildlife observations show which animals use which plants, and when</li>
+          <li>The data belongs to everyone — researchers, educators, future park visitors</li>
+          <li>You can disagree with an identification and the community will sort it out</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:1.2rem;color:var(--green-deep);margin-bottom:1rem">What to observe</h3>
+        <ul style="padding-left:1.2rem;color:var(--text-soft);font-size:.95rem;line-height:1.75;display:flex;flex-direction:column;gap:.75rem">
+          <li>🌸 A plant in bloom — log it and it becomes part of the seasonal record</li>
+          <li>🦜 Any bird you can photograph — even blurry counts</li>
+          <li>🦎 Lizards, frogs, and snakes on or near the path</li>
+          <li>🦋 Butterflies landing on specific plants (the plant–insect relationship matters)</li>
+          <li>🍄 Fungi — we have very few observations of fungi; this is a gap worth filling</li>
+          <li>🐛 Caterpillars on host plants — links the plant collection to the wildlife record</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/site.js"></script>
+<script>
+injectShared({ inatBar: true });
+renderPlants(PLANTS);
+
+// Inject modal
+document.body.insertAdjacentHTML('beforeend', MODAL_HTML);
+
+// Bloom month display
+const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const curMonth = new Date().getMonth();
+const bloomEl = document.getElementById('bloomMonths');
+bloomEl.innerHTML = months.map((m,i) => `
+  <div class="bloom-month ${i===curMonth?'active':''}">
+    <div class="mo-name">${m}</div>
+    <div class="mo-count">—</div>
+  </div>`).join('');
+
+// Tab logic
+function showTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name)?.classList.add('active');
+  document.getElementById('panel-' + name)?.classList.add('active');
+  if (name === 'wildlife' && !window._wildlifeLoaded) {
+    window._wildlifeLoaded = true;
+    loadRecentObs({ iconicTaxon: 'Aves,Reptilia,Amphibia,Insecta,Arachnida', count: 12 }).then(obs => renderObsGrid('wildlifeObsGrid', obs));
+  }
+  if (name === 'recent' && !window._recentLoaded) {
+    window._recentLoaded = true;
+    loadRecentObs({ count: 16 }).then(obs => renderObsGrid('recentObsGrid', obs));
+  }
+}
+
+// Handle hash links
+if (window.location.hash === '#wildlife') showTab('wildlife');
+
+loadINat();
+</script>
+</body>
+</html>

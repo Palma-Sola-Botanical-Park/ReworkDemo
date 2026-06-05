@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palma Sola Botanical Park · Bradenton, FL</title>
+<link rel="stylesheet" href="css/site.css">
+<style>
+/* ── HOME-SPECIFIC ── */
+.hero {
+  min-height: calc(100vh - 64px);
+  display: grid; grid-template-columns: 1fr 1fr;
+  background: var(--green-deep);
+  overflow: hidden;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 4rem 3rem 4rem 2rem;
+  position: relative; z-index: 1;
+}
+.hero-right {
+  position: relative; overflow: hidden;
+}
+.hero-slideshow { position: absolute; inset: 0; }
+.hero-slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0; transition: opacity 1.2s;
+}
+.hero-slide.on { opacity: 1; }
+.slide-caption {
+  position: absolute; bottom: 1rem; right: 1rem;
+  background: rgba(0,0,0,.5); color: rgba(255,255,255,.85);
+  font-size: .75rem; font-style: italic;
+  padding: .3rem .7rem; border-radius: 4px;
+  backdrop-filter: blur(3px);
+}
+.hero-kicker { color: var(--gold-light); font-size: .82rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; }
+.hero-title { font-size: clamp(2.2rem, 4.5vw, 3.6rem); color: var(--white); line-height: 1.12; margin-bottom: 1.1rem; }
+.hero-title em { color: var(--gold-light); font-style: italic; }
+.hero-body { color: rgba(255,255,255,.75); font-size: 1.05rem; line-height: 1.75; max-width: 480px; margin-bottom: 2rem; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: .55rem; margin-bottom: 2rem; }
+.hero-badge { background: rgba(255,255,255,.1); color: rgba(255,255,255,.82); font-size: .78rem; font-weight: 600; padding: .3rem .8rem; border-radius: 20px; border: 1px solid rgba(255,255,255,.18); }
+
+.three-things { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; }
+.thing {
+  padding: 2.5rem 2rem; border-right: 1px solid rgba(255,255,255,.08);
+  text-align: center;
+}
+.thing:last-child { border-right: none; }
+.thing-icon { font-size: 2.2rem; margin-bottom: .75rem; }
+.thing h3 { color: var(--white); font-size: 1.2rem; margin-bottom: .6rem; }
+.thing p { color: rgba(255,255,255,.65); font-size: .92rem; line-height: 1.65; }
+
+.live-mosaic { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: .75rem; }
+.mosaic-card { border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; }
+.mosaic-img { width: 100%; aspect-ratio: 1; object-fit: cover; background-size: cover; background-position: center; background-color: var(--sand); transition: transform .2s; }
+.mosaic-card:hover .mosaic-img { transform: scale(1.04); }
+.mosaic-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,.65));
+  color: var(--white); font-size: .78rem; padding: .5rem .6rem .4rem;
+}
+.mosaic-label em { display: block; font-size: .68rem; opacity: .75; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { height: 280px; }
+  .three-things { grid-template-columns: 1fr; }
+  .thing { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); padding: 1.75rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<div id="inat-bar-placeholder"></div>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;margin-top:0">
+  <div class="hero-left">
+    <div class="hero-kicker">Bradenton, Florida · Free · 8am–Dusk Daily</div>
+    <h1 class="hero-title">Nature is here.<br><em>Come find it.</em></h1>
+    <p class="hero-body">
+      Ten acres at the edge of Palma Sola Bay. A living record of everything that grows and moves through this place — plants, birds, reptiles, insects. 
+      You don't need to be a scientist. You just need your phone and some curiosity.
+    </p>
+    <div class="hero-badges">
+      <span class="hero-badge">Always Free</span>
+      <span class="hero-badge">800+ Plant Species</span>
+      <span class="hero-badge">iNaturalist Partner</span>
+      <span class="hero-badge">Community-Run</span>
+    </div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap">
+      <a href="nature.html" class="btn btn-gold">Explore Nature</a>
+      <a href="visit.html" class="btn btn-outline">Plan Your Visit</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-slideshow" id="heroSlides">
+      <div class="hero-slide on" style="background-image:url('images/Hamelia_patens.jpg')">
+        <div class="slide-caption">Firebush · <em>Hamelia patens</em></div>
+      </div>
+      <div class="hero-slide" style="background-image:url('images/Sagittaria_lancifolia.jpg')">
+        <div class="slide-caption">Bulltongue Arrowhead · pond edge</div>
+      </div>
+      <div class="hero-slide" style="background-image:url('images/Cassia_fistula.jpg')">
+        <div class="slide-caption">Golden Shower Tree · <em>Cassia fistula</em></div>
+      </div>
+      <div class="hero-slide" style="background-image:url('images/Cordyline_fruticosa.jpg')">
+        <div class="slide-caption">Ti Plant · <em>Cordyline fruticosa</em></div>
+      </div>
+      <div class="hero-slide" style="background-image:url('images/Tecoma_stans.jpg')">
+        <div class="slide-caption">Yellow Elder · <em>Tecoma stans</em></div>
+      </div>
+      <div class="hero-slide" style="background-image:url('images/Phoenix_reclinata.jpg')">
+        <div class="slide-caption">Senegal Date Palm · <em>Phoenix reclinata</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE DECLARATIONS -->
+<section style="padding:0;background:var(--green-deep)">
+  <div class="three-things">
+    <div class="thing">
+      <div class="thing-icon">🆓</div>
+      <h3>Always free.</h3>
+      <p>No entrance fee. No government funding. Three donation boxes on-site. Every dollar you leave goes straight back into the park.</p>
+    </div>
+    <div class="thing">
+      <div class="thing-icon">📱</div>
+      <h3>Your phone is the tool.</h3>
+      <p>We partner with iNaturalist for species identification. Photograph anything — plant, bird, insect, lizard — and the global community helps name it.</p>
+    </div>
+    <div class="thing">
+      <div class="thing-icon">🌱</div>
+      <h3>You can make a difference today.</h3>
+      <p>Not someday. Today. One observation adds to a permanent scientific record. One donation plants something new. Come talk to us directly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE NATURE MOSAIC -->
+<section class="bg-cream">
+  <div class="section-inner">
+    <span class="label">Live from the Park</span>
+    <h2 class="section-title">What's been seen lately</h2>
+    <p class="section-sub">
+      Every photo below was taken at Palma Sola Botanical Park and submitted to our iNaturalist project. 
+      Plants and animals together — because that's how a living park actually works.
+    </p>
+    <div class="live-mosaic" id="mosaicGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-soft)">Loading recent observations…</div>
+    </div>
+    <div style="text-align:center;margin-top:2rem">
+      <a href="nature.html#inat" class="btn btn-green">See everything on iNaturalist →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS THIS PLACE -->
+<section class="bg-white">
+  <div class="section-inner">
+    <div class="grid-2" style="align-items:center;gap:3.5rem">
+      <div>
+        <span class="label">The park, plainly</span>
+        <h2 class="section-title">We're not Selby Gardens.<br>We're yours.</h2>
+        <p style="color:var(--text-soft);line-height:1.78;margin-bottom:1.25rem">
+          Selby has a team of scientists and a budget to match. We have 10 acres, a lot of volunteers, and a community 
+          that cares. That's actually enough to do something real.
+        </p>
+        <p style="color:var(--text-soft);line-height:1.78;margin-bottom:1.25rem">
+          Our plant collection has over 800 species. Our iNaturalist project has documented 347 species of plants, birds, 
+          reptiles, insects, and fungi — and counting. We rely on iNaturalist for final identifications. 
+          You're welcome to join the debate there.
+        </p>
+        <p style="color:var(--text-soft);line-height:1.78;margin-bottom:2rem">
+          Come in the morning when the birds are active. Come in summer when the pond overflows with life. 
+          Come whenever you feel like it — the gate is always open.
+        </p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="nature.html" class="btn btn-gold">Flora & Fauna →</a>
+          <a href="visit.html" class="btn btn-green">Hours & Directions →</a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:1;background-image:url('images/Quercus_myrtifolia.jpg');background-size:cover;background-position:center"></div>
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:1;background-image:url('images/Trimezia_steyermarkii.jpg');background-size:cover;background-position:center;margin-top:1.5rem"></div>
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:1;background-image:url('images/Ixora_coccinea.jpg');background-size:cover;background-position:center;margin-top:-1.5rem"></div>
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:1;background-image:url('images/Rhapis_excelsa.jpg');background-size:cover;background-position:center"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SNAPSHOT: EVENTS + QUICK INFO -->
+<section class="bg-sand">
+  <div class="section-inner">
+    <div class="grid-2" style="gap:3rem;align-items:start">
+      <div>
+        <span class="label">Coming Up</span>
+        <h2 class="section-title" style="margin-bottom:1.5rem">Events</h2>
+        <div id="homeEvents"><p class="text-soft">Loading…</p></div>
+        <a href="events.html" class="btn btn-green mt-2">Full Calendar →</a>
+      </div>
+      <div>
+        <span class="label">Quick Info</span>
+        <h2 class="section-title" style="margin-bottom:1.5rem">Find us</h2>
+        <div style="display:flex;flex-direction:column;gap:1rem">
+          <div class="info-card">
+            <div class="info-card-icon">🌅</div>
+            <h3>Hours</h3>
+            <p><strong>8am – Dusk, every day of the year</strong><br>Closed for private events — check the calendar before a weekend visit.</p>
+          </div>
+          <div class="info-card" style="border-top-color:var(--gold)">
+            <div class="info-card-icon">🆓</div>
+            <h3>Admission</h3>
+            <p><span class="free-tag">FREE</span><br><span style="font-size:.85rem">No federal, state, or local government subsidies. Donations keep the lights on.</span></p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">📍</div>
+            <h3>Address</h3>
+            <p>9800 17th Ave NW<br>Bradenton, FL 34209<br><a href="https://maps.google.com/maps?q=Palma+Sola+Botanical+Park" target="_blank" rel="noopener">Open in Maps →</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- iNAT CTA -->
+<section class="bg-deep" style="text-align:center">
+  <div class="section-inner" style="max-width:640px;margin:0 auto">
+    <span class="label label-light">Community Science</span>
+    <h2 class="section-title" style="color:var(--white);margin-bottom:1rem">Every observation counts</h2>
+    <p style="color:rgba(255,255,255,.72);font-size:1.05rem;line-height:1.75;margin-bottom:2rem">
+      We track bloom seasons by logging when things flower. We document which birds show up and when. 
+      We note what's fruiting, what's emerging, what's in decline. 
+      None of this works without people walking through the park with their phones out.
+    </p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="https://www.inaturalist.org/projects/palma-sola-botanical-park" target="_blank" rel="noopener" class="btn btn-gold">Open Our iNaturalist Project</a>
+      <a href="nature.html#inat" class="btn btn-outline">How to contribute →</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/site.js"></script>
+<script>
+injectShared({ inatBar: true });
+
+// Slideshow
+const slides = document.querySelectorAll('.hero-slide');
+let cur = 0;
+setInterval(() => {
+  slides[cur].classList.remove('on');
+  cur = (cur + 1) % slides.length;
+  slides[cur].classList.add('on');
+}, 4500);
+
+// Load iNat mosaic (plants + animals together)
+loadINat().then(async () => {
+  const obs = await loadRecentObs({ count: 12 });
+  const grid = document.getElementById('mosaicGrid');
+  if (!obs.length) { grid.innerHTML = '<p class="text-soft" style="grid-column:1/-1;text-align:center;padding:2rem">Visit the iNaturalist project to see recent observations.</p>'; return; }
+  grid.innerHTML = obs.map(o => {
+    const url = o.photos?.[0]?.url?.replace('square','medium');
+    if (!url) return '';
+    const name = o.species_guess || o.taxon?.name || 'Unknown';
+    const isPlant = ['Plantae','Fungi'].includes(o.taxon?.iconic_taxon_name);
+    const emoji = isPlant ? '🌿' : '🦎';
+    return `
+      <a class="mosaic-card" href="https://www.inaturalist.org/observations/${o.id}" target="_blank" rel="noopener">
+        <div class="mosaic-img" style="background-image:url('${url}')"></div>
+        <div class="mosaic-label">${emoji} ${name}<em>by ${o.user?.login || 'observer'}</em></div>
+      </a>`;
+  }).join('');
+});
+
+loadEvents('homeEvents', 4);
+</script>
+</body>
+</html>

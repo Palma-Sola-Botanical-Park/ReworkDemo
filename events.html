@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Events · Palma Sola Botanical Park</title>
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div id="inat-bar-placeholder"></div>
+
+<div class="page-hero" style="min-height:300px">
+  <div class="page-hero-bg" style="background-image:url('images/Ixora_coccinea.jpg')"></div>
+  <div class="page-hero-content" style="text-align:center;margin:0 auto">
+    <div class="label label-light">What's On</div>
+    <h1>Events & Calendar</h1>
+    <p>Learning events, community gatherings, weddings, art shows. Always check before a weekend — we sometimes close for private events.</p>
+  </div>
+</div>
+
+<section class="bg-cream">
+  <div class="section-inner">
+    <div class="grid-2" style="gap:3rem;align-items:start">
+      <div>
+        <span class="label">Upcoming</span>
+        <h2 class="section-title" style="margin-bottom:1.5rem">Coming up at the park</h2>
+        <div id="allEvents" style="display:flex;flex-direction:column;gap:.9rem">
+          <p class="text-soft">Loading events…</p>
+        </div>
+        <div style="margin-top:1.75rem;font-size:.84rem;color:var(--text-soft);background:var(--sand);padding:1rem;border-radius:8px">
+          📅 This calendar is maintained by the park director and updates automatically. 
+          Weddings and private events are noted so you can plan your visit accordingly.
+        </div>
+      </div>
+      <div>
+        <span class="label">The Space</span>
+        <h2 class="section-title" style="margin-bottom:1rem">The park is a venue</h2>
+        <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1.25rem">
+          Ten acres of subtropical greenery, a serene pond, pavilion, gazebo, and gallery space. 
+          We host weddings, workshops, birthday parties, corporate events, and community celebrations.
+        </p>
+        <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1.5rem">
+          Every event fee goes directly to park operations and maintenance.
+        </p>
+        <a href="venue.html" class="btn btn-gold">Venue Rental Details →</a>
+
+        <div style="margin-top:2rem">
+          <span class="label">Zumba in the Park</span>
+          <div class="info-card" style="margin-top:.5rem">
+            <div class="info-card-icon">💃</div>
+            <h3>Monday mornings</h3>
+            <p>Zumba classes at 9:30 AM — open to all. Come move through the garden. <a href="https://palmasolabp.org/zumba-in-the-park/" target="_blank" rel="noopener">Learn more →</a></p>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem">
+          <span class="label">Art in the Park</span>
+          <div class="info-card" style="margin-top:.5rem">
+            <div class="info-card-icon">🎨</div>
+            <h3>Monthly rotating exhibition</h3>
+            <p>Our Galleria features local artists each month. All works for sale. A portion of every sale supports the park. <a href="venue.html#art">Details →</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-deep" style="text-align:center">
+  <div class="section-inner" style="max-width:580px;margin:0 auto">
+    <span class="label label-light">Stay in the Loop</span>
+    <h2 class="section-title" style="color:var(--white);margin-bottom:.75rem">Newsletter</h2>
+    <p style="color:rgba(255,255,255,.72);margin-bottom:2rem">Monthly updates on events, what's blooming, and volunteer opportunities. No spam.</p>
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center">
+      <input type="email" placeholder="your@email.com" style="flex:1;min-width:200px;padding:.7rem 1rem;border-radius:6px;border:none;font-size:.95rem;font-family:inherit">
+      <button class="btn btn-gold">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/site.js"></script>
+<script>
+injectShared({ inatBar: false });
+loadINat();
+loadEvents('allEvents', 12);
+</script>
+</body>
+</html>
