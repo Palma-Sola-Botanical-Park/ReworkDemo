@@ -79,7 +79,7 @@
 .mosaic-card {
   border-radius: 8px; overflow: hidden;
   position: relative;
-  cursor: default; /* no outbound link — attribution only */
+  cursor: default;
   opacity: 0;
   animation: mosaicFadeIn .7s ease forwards;
 }
@@ -116,6 +116,25 @@
 .mosaic-label em {
   display: block; font-size: .68rem; opacity: .78;
   font-style: normal; margin-top: .15rem;
+}
+
+/* ── Mobile: horizontal filmstrip ── */
+@media (max-width: 600px) {
+  .live-mosaic {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: .6rem;
+    padding-bottom: .5rem;
+    /* hide scrollbar but keep scrollability */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .live-mosaic::-webkit-scrollbar { display: none; }
+  .mosaic-card {
+    flex: 0 0 140px; /* fixed width, doesn't shrink */
+  }
+  .mosaic-img { aspect-ratio: 1; }
 }
 
 /* ── iNat summary inline ── */
