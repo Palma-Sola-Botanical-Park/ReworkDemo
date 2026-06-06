@@ -1,15 +1,14 @@
 /* ── PALMA SOLA BOTANICAL PARK · SHARED JS v2 ── */
 
 const INAT_PROJECT = 'palma-sola-botanical-park';
-const SHEET_ID     = '12gRB-c4gND8qJWPmwBoV2X4adqTfRROYHtA8jR4-kS4';
+const SHEET_ID     = '13h-8q_ILIpPHYSrcW-2O1-aWHoOV1pdmoNjdWvAdsPE';
 
 // Sheet tab GIDs — update if Bev renames tabs
 const TAB = {
-  events:        992316234,       // gid=0  (first tab)
-  classes:       141740803,       // gid=1
-  volunteer:     269225929,       // gid=2
-  announcements: 673905300,       // gid=3
-  Newsletters:   1749891854,      // gid=4
+  events:        472547841,       // gid=0  (first tab)
+  classes:       563712397,       // gid=1
+  volunteer:     2021000756,       // gid=2
+  announcements: 1425218403,       // gid=3
 };
 
 // display filter: which values should appear on the website
@@ -420,7 +419,21 @@ const PLANTS = [
 let _activeFilters = new Set();
 
 function plantCard(p) {
-  return `<div class="card plant-card" onclick="openPlantModal('${p.id}')">
+  // Derive photo filename from ID and common name:
+  // PSBP-00002-Weeping-Bottlebrush → PSBP-00002_Weeping_Bottlebrush.jpg
+  const slug = p.id + '-' + p.common.replace(/[^a-zA-Z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  const photoFile = slug.replace(/-/g, '_') + '.jpg';
+  const photoUrl  = 'plants/' + photoFile;
+  const pageUrl   = 'plants/' + slug + '.html';
+
+  return `<a class="card plant-card" href="${pageUrl}" style="text-decoration:none;display:block">
+    <div style="height:160px;overflow:hidden;position:relative;background:var(--sand)">
+      <img src="${photoUrl}" alt="${p.common}"
+        style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .4s ease"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+        loading="lazy">
+      <div style="display:none;height:100%;align-items:center;justify-content:center;font-size:2.5rem;color:var(--text-soft);opacity:.3">🌿</div>
+    </div>
     <div class="card-body">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.4rem;margin-bottom:.25rem">
         <h4 style="font-size:.97rem;color:var(--green-deep);line-height:1.3">${p.common}</h4>
@@ -436,7 +449,7 @@ function plantCard(p) {
         ${p.wetland?'<span class="tag tag-wetland">💧</span>':''}
       </div>
     </div>
-  </div>`;
+  </a>`;
 }
 
 function renderPlants(list) {
