@@ -1,14 +1,15 @@
 /* ── PALMA SOLA BOTANICAL PARK · SHARED JS v2 ── */
 
 const INAT_PROJECT = 'palma-sola-botanical-park';
-const SHEET_ID     = '13h-8q_ILIpPHYSrcW-2O1-aWHoOV1pdmoNjdWvAdsPE';
+const SHEET_ID = '12gRB-c4gND8qJWPmwBoV2X4adqTfRROYHtA8jR4-kS4';
 
 // Sheet tab GIDs — update if Bev renames tabs
 const TAB = {
-  events:        472547841,       // gid=0  (first tab)
-  classes:       563712397,       // gid=1
-  volunteer:     2021000756,       // gid=2
-  announcements: 1425218403,       // gid=3
+  events:        992316234,
+  classes:       141740803,
+  volunteer:     269225929,
+  announcements: 673905300,
+  newsletters:   1749891854,
 };
 
 // display filter: which values should appear on the website
