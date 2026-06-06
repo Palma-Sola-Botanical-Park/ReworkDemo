@@ -5,6 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Venue Rentals · Palma Sola Botanical Park</title>
 <link rel="stylesheet" href="css/site.css">
+<style>
+/* ── Photo placeholder slots ── */
+.photo-placeholder {
+  background: var(--sand);
+  border: 2px dashed rgba(90,122,74,0.35);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  color: var(--text-soft);
+  font-size: .82rem;
+  text-align: center;
+  padding: 1rem;
+}
+.photo-placeholder .ph-icon { font-size: 1.8rem; opacity: .45; }
+.photo-placeholder .ph-label { font-weight: 700; color: var(--green-mid); font-size: .78rem; letter-spacing: .05em; text-transform: uppercase; }
+.photo-placeholder .ph-hint  { font-size: .72rem; color: #aaa; }
+
+/* ── Venue photo gallery grid ── */
+.venue-gallery {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 260px 200px;
+  gap: .75rem;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.venue-gallery > * { border-radius: 8px; overflow: hidden; }
+.venue-gallery .main-photo { grid-row: 1 / 3; }
+
+/* ── Setup photo strip ── */
+.setup-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .75rem;
+  margin-top: 2rem;
+}
+</style>
 </head>
 <body>
 <div id="nav-placeholder"></div>
@@ -19,25 +59,47 @@
   </div>
 </div>
 
+<!-- EVENT TYPES -->
 <section class="bg-cream">
   <div class="section-inner">
     <div class="grid-3">
       <div class="card">
-        <div style="height:200px;background-image:url('images/Cassia_fistula.jpg');background-size:cover;background-position:center"></div>
+        <!-- PHOTO SLOT: Wedding/ceremony setup photo — chairs, arch, pond backdrop -->
+        <div style="height:200px;position:relative">
+          <div class="photo-placeholder" style="height:100%;border-radius:0">
+            <div class="ph-icon">💍</div>
+            <div class="ph-label">Wedding Photo</div>
+            <div class="ph-hint">Replace with ceremony/setup shot<br>Ideal: chairs, arch, or pond backdrop</div>
+          </div>
+        </div>
         <div class="card-body">
           <h3 style="font-size:1.1rem;color:var(--green-deep);margin-bottom:.5rem">Weddings & Ceremonies</h3>
           <p style="font-size:.9rem;color:var(--text-soft);line-height:1.65">Exchange vows under a canopy of subtropical trees, beside the pond, or in the pavilion. We've hosted hundreds of ceremonies — intimate to full production. Call us.</p>
         </div>
       </div>
       <div class="card">
-        <div style="height:200px;background-image:url('images/Tecoma_stans.jpg');background-size:cover;background-position:center"></div>
+        <!-- PHOTO SLOT: Educational event — workshop tables, people learning -->
+        <div style="height:200px;position:relative">
+          <div class="photo-placeholder" style="height:100%;border-radius:0">
+            <div class="ph-icon">📚</div>
+            <div class="ph-label">Educational Event Photo</div>
+            <div class="ph-hint">Replace with workshop or class photo<br>Ideal: tables, participants, plants</div>
+          </div>
+        </div>
         <div class="card-body">
           <h3 style="font-size:1.1rem;color:var(--green-deep);margin-bottom:.5rem">Educational Events</h3>
           <p style="font-size:.9rem;color:var(--text-soft);line-height:1.65">Workshops, school programs, native plant talks, photography walks, master gardener sessions. If it involves learning and nature, this is your room.</p>
         </div>
       </div>
       <div class="card">
-        <div style="height:200px;background-image:url('images/Thunbergia_erecta.jpg');background-size:cover;background-position:center"></div>
+        <!-- PHOTO SLOT: Social gathering — tables set up, guests, casual -->
+        <div style="height:200px;position:relative">
+          <div class="photo-placeholder" style="height:100%;border-radius:0">
+            <div class="ph-icon">🎉</div>
+            <div class="ph-label">Social Event Photo</div>
+            <div class="ph-hint">Replace with party or gathering photo<br>Ideal: tables set up, guests, pavilion</div>
+          </div>
+        </div>
         <div class="card-body">
           <h3 style="font-size:1.1rem;color:var(--green-deep);margin-bottom:.5rem">Social Gatherings</h3>
           <p style="font-size:.9rem;color:var(--text-soft);line-height:1.65">Birthday parties, family reunions, corporate picnics. A botanical park setting makes any gathering more memorable. Nonprofit pricing available.</p>
@@ -55,14 +117,77 @@
   </div>
 </section>
 
-<section class="bg-white" id="art">
+<!-- VENUE GALLERY — photo placeholder slots for real event photos -->
+<section class="bg-white">
+  <div class="section-inner">
+    <span class="label">The Setting</span>
+    <h2 class="section-title" style="margin-bottom:1.5rem">See it for yourself</h2>
+
+    <div class="venue-gallery">
+      <!-- MAIN PHOTO — largest slot, hero venue shot -->
+      <div class="main-photo">
+        <div class="photo-placeholder" style="height:100%">
+          <div class="ph-icon">📸</div>
+          <div class="ph-label">Main Venue Photo</div>
+          <div class="ph-hint">Replace with your best wide venue shot<br>Ideal: pavilion, garden, or pond view with event setup</div>
+        </div>
+      </div>
+      <!-- SECONDARY PHOTOS -->
+      <div>
+        <div class="photo-placeholder" style="height:100%">
+          <div class="ph-icon">🌿</div>
+          <div class="ph-label">Garden Detail</div>
+          <div class="ph-hint">Ceremony arch, floral arrangement, or garden path</div>
+        </div>
+      </div>
+      <div>
+        <div class="photo-placeholder" style="height:100%">
+          <div class="ph-icon">🌅</div>
+          <div class="ph-label">Atmosphere Shot</div>
+          <div class="ph-hint">Lighting, tables set, guests arriving</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETUP STRIP — four smaller slots -->
+    <div class="setup-strip">
+      <div class="photo-placeholder" style="height:160px">
+        <div class="ph-icon">🪑</div>
+        <div class="ph-label">Seating Setup</div>
+        <div class="ph-hint">Chairs, rows, or round tables</div>
+      </div>
+      <div class="photo-placeholder" style="height:160px">
+        <div class="ph-icon">🌺</div>
+        <div class="ph-label">Floral / Décor</div>
+        <div class="ph-hint">Centerpieces or entrance décor</div>
+      </div>
+      <div class="photo-placeholder" style="height:160px">
+        <div class="ph-icon">🍽️</div>
+        <div class="ph-label">Reception Setup</div>
+        <div class="ph-hint">Catering tables, food display</div>
+      </div>
+      <div class="photo-placeholder" style="height:160px">
+        <div class="ph-icon">🌙</div>
+        <div class="ph-label">Evening / Lighting</div>
+        <div class="ph-hint">String lights, candles, dusk shot</div>
+      </div>
+    </div>
+
+    <p style="font-size:.78rem;color:#bbb;margin-top:1rem;text-align:center">
+      📌 <em>Staff: replace placeholder divs with &lt;img&gt; tags or background-image styles when real photos are available</em>
+    </p>
+  </div>
+</section>
+
+<!-- ART IN THE PARK -->
+<section class="bg-pale" id="art">
   <div class="section-inner">
     <div class="grid-2" style="gap:3rem;align-items:center">
       <div>
         <span class="label">Art in the Park</span>
         <h2 class="section-title">The Galleria</h2>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1.25rem">
-          Every month our Galleria building features a local artist or guild — watercolor, oil, pastel, photography, sculpture. 
+          Every month our Galleria building features a local artist or guild — watercolor, oil, pastel, photography, sculpture.
           All works are for sale, and a portion of every sale supports the park's operations.
         </p>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1.5rem">
@@ -80,12 +205,12 @@
   </div>
 </section>
 
-<section class="bg-pale">
+<section class="bg-deep">
   <div class="section-inner" style="max-width:680px;margin:0 auto;text-align:center">
-    <span class="label">A note</span>
-    <h2 class="section-title">Every rental keeps the park free</h2>
-    <p style="color:var(--text-soft);font-size:1.02rem;line-height:1.78">
-      We receive no government funding. Venue rentals, donations, memberships, and nursery sales are what keep 10 acres of botanical park 
+    <span class="label label-light">A note</span>
+    <h2 class="section-title" style="color:var(--white);margin-bottom:1rem">Every rental keeps the park free</h2>
+    <p style="color:rgba(255,255,255,.72);font-size:1.02rem;line-height:1.78">
+      We receive no government funding. Venue rentals, donations, memberships, and nursery sales are what keep 10 acres of botanical park
       open and free to the public 365 days a year. When you choose Palma Sola for your event, you're part of that.
     </p>
   </div>
@@ -95,7 +220,6 @@
 <script src="js/site.js"></script>
 <script>
 injectShared({ inatBar: false });
-loadINat();
 </script>
 </body>
 </html>
