@@ -8,7 +8,7 @@
 <style>
 /* ── HOME-SPECIFIC ── */
 .hero {
-  min-height: calc(100vh - 64px);
+  min-height: calc(67vh - 64px);
   display: grid; grid-template-columns: 1fr 1fr;
   background: var(--green-deep);
   overflow: hidden;
@@ -43,6 +43,11 @@
 /* ── Announcements bar ── */
 #announcements-bar {
   /* inherits from site.css .announcement-card styles */
+}
+#announcements-bar > div {
+  max-width: 870px; /* ~75% of 1160px content width */
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 /* Slow fade cycling for announcements */
 .ann-cycle-wrap { position: relative; min-height: 48px; }
@@ -153,15 +158,11 @@
     <div class="hero-kicker">Bradenton, Florida · Free · 8am–Dusk Daily</div>
     <h1 class="hero-title">Nature is here.<br><em>Come find it.</em></h1>
     <p class="hero-body">
-      Ten acres at the edge of Palma Sola Bay. A living record of everything that grows and moves through this place — plants, birds, reptiles, insects.
-      You don't need to be a scientist. You just need your phone and some curiosity.
+      Ten acres at the edge of Palma Sola Bay — free, open, and genuinely yours.<br><br>
+      This is a place to walk slowly, notice things, and come back again. To bring your dog, your kids, your camera, or just yourself. To volunteer on a Saturday morning and stay for lunch. To hear live music under the palms, celebrate a birthday in the gazebo, or sit quietly by the pond and watch what happens.<br><br>
+      The plants here have names and stories. The birds have been coming for decades. The people who tend this place know it like a neighborhood — because it is one.<br><br>
+      You don't have to be a botanist or a birder. You just have to show up.
     </p>
-    <div class="hero-badges">
-      <span class="hero-badge">Always Free</span>
-      <span class="hero-badge">800+ Plant Species</span>
-      <span class="hero-badge">iNaturalist Partner</span>
-      <span class="hero-badge">Community-Run</span>
-    </div>
     <div style="display:flex;gap:1rem;flex-wrap:wrap">
       <a href="nature.html" class="btn btn-gold">Explore Nature</a>
       <a href="visit.html" class="btn btn-outline">Plan Your Visit</a>
