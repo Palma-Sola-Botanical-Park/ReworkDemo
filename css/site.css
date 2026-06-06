@@ -404,18 +404,18 @@ section { padding: 4.5rem 1.5rem; }
 /* ── ANNOUNCEMENTS ── */
 #announcements-bar {
   background: var(--green-mid);
-  padding: .85rem 1.5rem;
+  padding: .45rem 1.5rem;
 }
 .announcement-card {
-  display: flex; align-items: flex-start; gap: 1rem;
-  padding: .75rem 1.25rem;
-  background: rgba(255,255,255,.12); border-radius: 8px;
-  margin-bottom: .6rem; color: var(--white);
+  display: flex; align-items: center; gap: .75rem;
+  padding: .35rem .75rem;
+  background: rgba(255,255,255,.08); border-radius: 6px;
+  margin-bottom: .4rem; color: var(--white);
 }
 .announcement-card:last-child { margin-bottom: 0; }
-.ann-emoji { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
-.ann-body strong { display: block; font-size: 1rem; margin-bottom: .2rem; }
-.ann-body p { font-size: .87rem; color: rgba(255,255,255,.78); line-height: 1.55; }
+.ann-emoji { font-size: 1.2rem; line-height: 1; flex-shrink: 0; }
+.ann-body strong { display: inline; font-size: .9rem; }
+.ann-body p { display: inline; font-size: .85rem; color: rgba(255,255,255,.78); line-height: 1.4; margin-left: .35rem; }
 .ann-link {
   display: inline-block; margin-top: .4rem;
   color: var(--gold-light); font-size: .82rem; font-weight: 700;
