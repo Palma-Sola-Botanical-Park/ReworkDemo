@@ -5,10 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Visit · Palma Sola Botanical Park</title>
 <link rel="stylesheet" href="css/site.css">
+<style>
+/* ── Rare Fruit linked cards ── */
+.fruit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+  gap: 1rem;
+}
+.fruit-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 1.3rem 1.1rem;
+  border-top: 4px solid var(--green-mid);
+  box-shadow: 0 2px 10px rgba(0,0,0,.07);
+  text-decoration: none; color: inherit;
+  transition: transform .15s, box-shadow .15s;
+  display: block;
+}
+.fruit-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  text-decoration: none;
+}
+.fruit-card:hover h3 { color: var(--green-mid); }
+.fruit-icon { font-size: 2rem; margin-bottom: .6rem; }
+.fruit-card h3 { font-size: .92rem; color: var(--green-deep); margin-bottom: .15rem; transition: color .15s; }
+.fruit-card p  { font-size: .78rem; color: var(--text-soft); font-style: italic; margin: 0; line-height: 1.4; }
+.fruit-card .fruit-hint { font-size: .72rem; color: var(--green-mid); font-weight: 700; font-style: normal; margin-top: .5rem; }
+</style>
 </head>
 <body>
 <div id="nav-placeholder"></div>
-<div id="inat-bar-placeholder"></div>
+<div id="announcements-bar" style="display:none">
+  <div class="container" style="max-width:1160px;margin:0 auto" id="announcementsList"></div>
+</div>
 
 <div class="page-hero" style="min-height:340px">
   <div class="page-hero-bg" style="background-image:url('images/Ficus_aurea.jpg')"></div>
@@ -19,6 +49,7 @@
   </div>
 </div>
 
+<!-- QUICK INFO CARDS -->
 <section class="bg-cream">
   <div class="section-inner">
     <div class="grid-4">
@@ -40,12 +71,15 @@
       <div class="info-card">
         <div class="info-card-icon">📞</div>
         <h3>Contact</h3>
-        <p><a href="tel:9417612866">(941) 761-2866</a><br><a href="mailto:info@palmasolabp.org">info@palmasolabp.org</a><br><a href="https://www.facebook.com/people/Palma-Sola-Botanical-Park/100064517386906/" target="_blank" rel="noopener">Facebook</a> &nbsp;·&nbsp; <a href="https://www.instagram.com/palmasolabotanical/" target="_blank" rel="noopener">Instagram</a></p>
+        <p><a href="tel:9417612866">(941) 761-2866</a><br><a href="mailto:info@palmasolabp.org">info@palmasolabp.org</a><br>
+          <a href="https://www.facebook.com/people/Palma-Sola-Botanical-Park/100064517386906/" target="_blank" rel="noopener">Facebook</a> &nbsp;·&nbsp;
+          <a href="https://www.instagram.com/palmasolabotanical/" target="_blank" rel="noopener">Instagram</a></p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- MAP + ACCESSIBILITY -->
 <section class="bg-white">
   <div class="section-inner">
     <div class="grid-2" style="gap:3rem;align-items:start">
@@ -53,7 +87,7 @@
         <span class="label">Find Us</span>
         <h2 class="section-title">Getting here</h2>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1.25rem">
-          We're tucked into the northeast shore of Palma Sola Bay, just west of Manatee Avenue. Free parking. 
+          We're tucked into the northeast shore of Palma Sola Bay, just west of Manatee Avenue. Free parking.
           Paved and natural paths suitable for most visitors.
         </p>
         <div class="info-card" style="margin-bottom:1rem">
@@ -73,6 +107,7 @@
   </div>
 </section>
 
+<!-- RARE FRUIT TRAIL — now linked cards to plant pages -->
 <section class="bg-pale" id="rarefruit">
   <div class="section-inner">
     <div class="grid-2" style="gap:3rem;align-items:center">
@@ -80,25 +115,72 @@
         <span class="label">Rare Fruit Trail</span>
         <h2 class="section-title">Our warm little microclimate</h2>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1rem">
-          Palma Sola sits in a notably frost-free pocket — which means we can grow things that shouldn't survive in Manatee County. 
+          Palma Sola sits in a notably frost-free pocket — which means we can grow things that shouldn't survive in Manatee County.
           The Manatee Rare Fruit Council has tended an exotic fruit section here since 2008.
         </p>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1.5rem">
-          Star fruit, dragon fruit, jackfruit, lychee, sapodilla, tamarind, Surinam cherry, sugar apple, and more. 
           New specimens are added every year, often donated by the Rare Fruit Council.
+          Tap any plant below to read its full profile.
         </p>
         <a href="https://www.mrfc.org/p/palma-sola.html" target="_blank" rel="noopener" class="btn btn-green">Manatee Rare Fruit Council →</a>
       </div>
-      <div class="grid-2" style="gap:.75rem">
-        <div class="info-card"><div class="info-card-icon">🌟</div><h3>Star Fruit</h3><p><em>Averrhoa carambola</em></p></div>
-        <div class="info-card"><div class="info-card-icon">🐉</div><h3>Dragon Fruit</h3><p><em>Selenicereus undatus</em></p></div>
-        <div class="info-card"><div class="info-card-icon">🍈</div><h3>Jackfruit</h3><p><em>Artocarpus heterophyllus</em></p></div>
-        <div class="info-card"><div class="info-card-icon">🍒</div><h3>Surinam Cherry</h3><p><em>Eugenia uniflora</em></p></div>
+
+      <!-- Linked cards — each one goes to the plant detail page -->
+      <div class="fruit-grid">
+        <a class="fruit-card" href="plants/PSBP-00044-Star-Fruit.html">
+          <div class="fruit-icon">🌟</div>
+          <h3>Star Fruit</h3>
+          <p><em>Averrhoa carambola</em></p>
+          <div class="fruit-hint">View plant profile →</div>
+        </a>
+        <a class="fruit-card" href="plants/PSBP-00045-Dragon-Fruit.html">
+          <div class="fruit-icon">🐉</div>
+          <h3>Dragon Fruit</h3>
+          <p><em>Selenicereus undatus</em></p>
+          <div class="fruit-hint">View plant profile →</div>
+        </a>
+        <a class="fruit-card" href="plants/PSBP-00047-Jackfruit.html">
+          <div class="fruit-icon">🍈</div>
+          <h3>Jackfruit</h3>
+          <p><em>Artocarpus heterophyllus</em></p>
+          <div class="fruit-hint">View plant profile →</div>
+        </a>
+        <a class="fruit-card" href="plants/PSBP-00048-Surinam-Cherry.html">
+          <div class="fruit-icon">🍒</div>
+          <h3>Surinam Cherry</h3>
+          <p><em>Eugenia uniflora</em></p>
+          <div class="fruit-hint">View plant profile →</div>
+        </a>
+        <a class="fruit-card" href="plants/PSBP-00049-Lychee.html">
+          <div class="fruit-icon">🔴</div>
+          <h3>Lychee</h3>
+          <p><em>Litchi chinensis</em></p>
+          <div class="fruit-hint">View plant profile →</div>
+        </a>
+        <a class="fruit-card" href="plants/PSBP-00050-Sapodilla.html">
+          <div class="fruit-icon">🟤</div>
+          <h3>Sapodilla</h3>
+          <p><em>Manilkara zapota</em></p>
+          <div class="fruit-hint">View plant profile →</div>
+        </a>
+        <a class="fruit-card" href="plants/PSBP-00051-Tamarind.html">
+          <div class="fruit-icon">🍫</div>
+          <h3>Tamarind</h3>
+          <p><em>Tamarindus indica</em></p>
+          <div class="fruit-hint">View plant profile →</div>
+        </a>
+        <a class="fruit-card" href="plants/PSBP-00052-Sugar-Apple.html">
+          <div class="fruit-icon">🍏</div>
+          <h3>Sugar Apple</h3>
+          <p><em>Annona squamosa</em></p>
+          <div class="fruit-hint">View plant profile →</div>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- NURSERY -->
 <section class="bg-cream" id="nursery">
   <div class="section-inner">
     <div class="grid-2" style="gap:3rem;align-items:center">
@@ -111,11 +193,11 @@
         <span class="label">Hidden Garden Nursery</span>
         <h2 class="section-title">Plants grown right here</h2>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1.25rem">
-          Tucked near the west entrance, our volunteer-run nursery carries plants propagated directly from the collection. 
+          Tucked near the west entrance, our volunteer-run nursery carries plants propagated directly from the collection.
           Reasonable prices. 100% of sales benefit the park.
         </p>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1.5rem">
-          Looking for something specific? Call ahead. Volunteers know exactly what's rooted and ready — 
+          Looking for something specific? Call ahead. Volunteers know exactly what's rooted and ready —
           including Florida natives you won't find at a box store.
         </p>
         <div class="info-card">
@@ -127,6 +209,7 @@
   </div>
 </section>
 
+<!-- PHOTOGRAPHY + GROUP VISITS — PDFs open in viewer -->
 <section class="bg-white">
   <div class="section-inner">
     <div class="grid-2" style="gap:3rem;align-items:start">
@@ -134,21 +217,22 @@
         <span class="label">Photography</span>
         <h2 class="section-title">Capture what you find</h2>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1rem">
-          Personal photography is welcome and encouraged — especially if you're going to submit observations to iNaturalist. 
-          Tag us on social media and help spread the word about the park.
+          Personal photography is welcome and encouraged — especially if you're going to submit observations to iNaturalist.
+          Tag us on social media and help spread the word.
         </p>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1.5rem">
-          Professional, commercial, or media photography requires prior permission. Weddings and events have specific arrangements 
+          Professional, commercial, or media photography requires prior permission. Weddings and events have specific arrangements
           through venue rental.
         </p>
-        <a href="https://palmasolabp.org/wp-content/uploads/2024/08/Photo-Policy.pdf" target="_blank" rel="noopener" class="btn btn-green">Full Photo Policy (PDF) →</a>
+        <a href="viewer.html?url=https%3A%2F%2Fpalmasolabp.org%2Fwp-content%2Fuploads%2F2024%2F08%2FPhoto-Policy.pdf&title=Photo+Policy&back=visit.html"
+           class="btn btn-green">📄 Full Photo Policy →</a>
       </div>
       <div>
         <span class="label">Group Visits</span>
         <h2 class="section-title">Bring your group</h2>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1rem">
-          School groups, garden clubs, senior programs, and community organizations are welcome. 
-          For groups of 10 or more, we ask that you call ahead so we can accommodate everyone.
+          School groups, garden clubs, senior programs, and community organizations are welcome.
+          For groups of 10 or more, please call ahead so we can accommodate everyone.
         </p>
         <div class="info-card">
           <h3>Group Tours</h3>
@@ -167,8 +251,15 @@
 <div id="footer-placeholder"></div>
 <script src="js/site.js"></script>
 <script>
-injectShared({ inatBar: true });
-loadINat();
+injectShared({ inatBar: false });
+
+// Announcements bar
+const annBar = document.getElementById('announcements-bar');
+loadAnnouncements('announcementsList').then(() => {
+  if (document.getElementById('announcementsList')?.children.length) {
+    annBar.style.display = 'block';
+  }
+});
 </script>
 </body>
 </html>

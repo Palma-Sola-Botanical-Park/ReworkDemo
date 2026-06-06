@@ -5,6 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Volunteer · Palma Sola Botanical Park</title>
 <link rel="stylesheet" href="css/site.css">
+<style>
+/* ── Volunteer spotlight cycle ── */
+.vol-spotlight {
+  background: var(--green-deep);
+  border-radius: 16px;
+  padding: 2.5rem;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+}
+.vol-entry {
+  display: none;
+  animation: volFadeIn .8s ease both;
+}
+.vol-entry.active { display: block; }
+@keyframes volFadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+.vol-photo {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--green-mid);
+  border: 4px solid var(--gold);
+  margin: 0 auto 1.25rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+  overflow: hidden;
+  background-size: cover; background-position: center;
+}
+.vol-name   { color: var(--white); font-size: 1.4rem; margin-bottom: .2rem; text-align:center; }
+.vol-role   { color: var(--gold-light); font-size: .82rem; text-align:center; margin-bottom:1rem; }
+.vol-body   { color: rgba(255,255,255,.78); font-size: .95rem; line-height: 1.7; }
+.vol-pdf    { margin-top: 1rem; }
+
+.vol-dots {
+  display: flex; justify-content: center; gap: .5rem; margin-top: 1.25rem;
+}
+.vol-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,.25); cursor: pointer; transition: background .2s;
+  border: none; padding: 0;
+}
+.vol-dot.active { background: var(--gold-light); }
+
+/* ── Rare Fruit linked cards ── */
+.fruit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+  gap: 1rem;
+}
+.fruit-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 1.3rem;
+  border-top: 4px solid var(--green-mid);
+  box-shadow: 0 2px 10px rgba(0,0,0,.07);
+  text-decoration: none; color: inherit;
+  transition: transform .15s, box-shadow .15s;
+  display: block;
+}
+.fruit-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.12); text-decoration: none; }
+.fruit-card .fruit-icon { font-size: 2rem; margin-bottom: .6rem; }
+.fruit-card h3 { font-size: .95rem; color: var(--green-deep); margin-bottom: .2rem; }
+.fruit-card p  { font-size: .82rem; color: var(--text-soft); font-style: italic; margin: 0; }
+</style>
 </head>
 <body>
 <div id="nav-placeholder"></div>
@@ -19,35 +84,52 @@
   </div>
 </div>
 
-<!-- VOLUNTEER OF MONTH -->
+<!-- VOLUNTEER SPOTLIGHT — fully freeform, Bev manages via Google Sheet -->
 <section class="bg-cream">
   <div class="section-inner">
-    <div class="grid-2" style="gap:3rem;align-items:center">
-      <div style="background:var(--green-deep);border-radius:16px;padding:2.5rem;text-align:center;color:var(--white)">
-        <div style="width:80px;height:80px;border-radius:50%;background:var(--green-mid);margin:0 auto 1.25rem;display:flex;align-items:center;justify-content:center;font-size:2rem;border:4px solid var(--gold)">🌿</div>
-        <h3 id="volName" style="color:var(--white);font-size:1.4rem;margin-bottom:.3rem">Our Volunteers</h3>
-        <div style="color:var(--gold-light);font-size:.82rem;margin-bottom:1rem">Volunteer of the Month</div>
-        <p id="volBio" style="color:rgba(255,255,255,.72);font-size:.9rem;line-height:1.65">The people who make this park what it is.</p>
-        <div style="display:flex;justify-content:center;gap:2rem;margin-top:1.5rem">
-          <div style="text-align:center"><strong id="volHours" style="display:block;font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold-light)">—</strong><span style="font-size:.72rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.08em">hours</span></div>
-          <div style="text-align:center"><strong id="volYears" style="display:block;font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold-light)">—</strong><span style="font-size:.72rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.08em">seasons</span></div>
+    <div class="grid-2" style="gap:3rem;align-items:start">
+
+      <div>
+        <span class="label">Volunteer Spotlight</span>
+        <h2 class="section-title" style="margin-bottom:1.5rem">The people who make this work</h2>
+
+        <div class="vol-spotlight" id="volSpotlight">
+          <!-- Entries injected by JS below -->
+          <div class="vol-entry active" id="volDefault">
+            <div class="vol-photo" id="volDefaultPhoto">🌿</div>
+            <h3 class="vol-name">Our Volunteers</h3>
+            <div class="vol-role">Volunteer Spotlight</div>
+            <p class="vol-body">The people who make this park what it is — loading…</p>
+          </div>
+        </div>
+        <div class="vol-dots" id="volDots"></div>
+
+        <div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:.75rem">
+          <a href="viewer.html?url=https%3A%2F%2Fpalmasolabp.org%2Fwp-content%2Fuploads%2F2024%2F08%2FVolunteer-Application.pdf&title=Volunteer+Application&back=volunteer.html"
+             class="btn btn-gold">📄 Volunteer Application →</a>
+          <a href="viewer.html?url=https%3A%2F%2Fpalmasolabp.org%2Fwp-content%2Fuploads%2F2024%2F08%2FPhoto-Policy.pdf&title=Photo+Policy&back=volunteer.html"
+             class="btn btn-green">📄 Photo Policy →</a>
+        </div>
+
+        <div style="margin-top:1rem;font-size:.82rem;color:var(--text-soft);background:var(--sand);padding:.9rem;border-radius:7px">
+          🗂️ <strong>For staff:</strong> The Volunteer Spotlight is managed via the park's Google Sheet.
+          Each row = one spotlight entry. Add a title, body, optional photo URL, and optional PDF link.
+          Set display to <code>web</code> or <code>both</code>. Multiple active entries cycle automatically.
         </div>
       </div>
+
       <div>
         <span class="label">Why Volunteer</span>
         <h2 class="section-title">More than a garden task</h2>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1rem">
-          Volunteering at Palma Sola means being part of a place that's genuinely growing — in every sense. 
-          You'll learn plant names, observe wildlife, talk to visitors, and occasionally do unglamorous things like pulling wedelia 
+          Volunteering at Palma Sola means being part of a place that's genuinely growing — in every sense.
+          You'll learn plant names, observe wildlife, talk to visitors, and occasionally do unglamorous things like pulling wedelia
           out of the heliconia bed. All of it matters.
         </p>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1.5rem">
           Master Gardeners, retirees, families, people between jobs, people looking for community — everyone finds their rhythm here.
         </p>
-        <a href="https://palmasolabp.org/volunteer/" target="_blank" rel="noopener" class="btn btn-gold">Volunteer Application →</a>
-        <div style="margin-top:1rem;font-size:.82rem;color:var(--text-soft);background:var(--sand);padding:.9rem;border-radius:7px">
-          🗂️ <strong>For staff:</strong> Volunteer of the Month is managed via the park's Google Sheet (same one as the event calendar). Add a row with type "volunteer" to update this section automatically.
-        </div>
+        <a href="contact.html" class="btn btn-gold">Reach Out →</a>
       </div>
     </div>
   </div>
@@ -61,12 +143,12 @@
         <span class="label">Bright Futures Program</span>
         <h2 class="section-title">High school scholars</h2>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1rem">
-          High school students earn Florida Bright Futures scholarship hours through weekly sessions at Palma Sola. 
-          They plant, maintain, observe, and learn — and many leave with something harder to measure: a working 
+          High school students earn Florida Bright Futures scholarship hours through weekly sessions at Palma Sola.
+          They plant, maintain, observe, and learn — and many leave with something harder to measure: a working
           relationship with the natural world.
         </p>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1rem">
-          Students have planted the native Scorpion Tail along pond shores, maintained the Snake Plant patch near the front gate, 
+          Students have planted the native Scorpion Tail along pond shores, maintained the Snake Plant patch near the front gate,
           learned to distinguish Canna from Heliconia in the office bed, and submitted their own iNaturalist observations.
         </p>
         <p style="color:var(--text-soft);line-height:1.75;margin-bottom:1.5rem">
@@ -78,7 +160,7 @@
         <div class="info-card" style="border-top-color:var(--gold)">
           <div class="info-card-icon">🎓</div>
           <h3>Eligibility</h3>
-          <p>Any high school student pursuing Florida Bright Futures scholarship hours. No prior plant knowledge required — curiosity is enough.</p>
+          <p>Any high school student pursuing Florida Bright Futures scholarship hours. No prior plant knowledge required.</p>
         </div>
         <div class="info-card">
           <div class="info-card-icon">📱</div>
@@ -110,8 +192,60 @@
 <script src="js/site.js"></script>
 <script>
 injectShared({ inatBar: false });
-loadINat();
-loadVolunteerOfMonth();
+
+// Load volunteer spotlight entries — multiple entries cycle with fade
+async function loadVolSpotlight() {
+  try {
+    const rows = await fetchTab(TAB.volunteer);
+    const visible = rows.filter(r => isWebVisible(r));
+    if (!visible.length) return;
+
+    const spotlight = document.getElementById('volSpotlight');
+    const dotsEl    = document.getElementById('volDots');
+
+    // Build entries
+    spotlight.innerHTML = visible.map((v, i) => {
+      const photoStyle = v.photo_url
+        ? `background-image:url('${v.photo_url}');background-size:cover;background-position:center`
+        : '';
+      const photoContent = v.photo_url ? '' : '🌿';
+      const pdfBtn = v.pdf_url
+        ? `<div class="vol-pdf"><a href="viewer.html?url=${encodeURIComponent(v.pdf_url)}&title=${encodeURIComponent(v.title||'Document')}&back=volunteer.html" class="btn btn-sm btn-gold">📄 ${v.pdf_link_text||'Read More'}</a></div>`
+        : '';
+      return `<div class="vol-entry ${i===0?'active':''}" data-idx="${i}">
+        <div class="vol-photo" style="${photoStyle}">${photoContent}</div>
+        <h3 class="vol-name">${v.name||v.title||'Volunteer'}</h3>
+        <div class="vol-role">${v.role||v.title||'Volunteer Spotlight'}</div>
+        <p class="vol-body">${v.body||v.bio||''}</p>
+        ${pdfBtn}
+      </div>`;
+    }).join('');
+
+    // Dots
+    if (visible.length > 1) {
+      dotsEl.innerHTML = visible.map((_, i) =>
+        `<button class="vol-dot ${i===0?'active':''}" onclick="goVolEntry(${i})"></button>`
+      ).join('');
+    }
+
+    // Auto-cycle every 6 seconds
+    if (visible.length > 1) {
+      let cur = 0;
+      setInterval(() => {
+        cur = (cur + 1) % visible.length;
+        goVolEntry(cur);
+      }, 6000);
+    }
+
+  } catch(e) { /* silent fallback — default placeholder stays */ }
+}
+
+function goVolEntry(idx) {
+  document.querySelectorAll('.vol-entry').forEach((el,i) => el.classList.toggle('active', i===idx));
+  document.querySelectorAll('.vol-dot').forEach((el,i)  => el.classList.toggle('active', i===idx));
+}
+
+loadVolSpotlight();
 </script>
 </body>
 </html>

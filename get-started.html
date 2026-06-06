@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Started with iNaturalist · Palma Sola Botanical Park</title>
+<link rel="stylesheet" href="css/site.css">
+<style>
+.gs-hero {
+  background: var(--green-deep);
+  padding: 4rem 1.5rem 3.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.gs-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('images/Hamelia_patens.jpg') center/cover no-repeat;
+  opacity: .15;
+}
+.gs-hero > * { position: relative; z-index: 1; }
+.gs-hero h1 { color: var(--white); font-size: clamp(2rem,5vw,3rem); margin-bottom: .75rem; }
+.gs-hero p  { color: rgba(255,255,255,.78); font-size: 1.05rem; max-width: 560px; margin: 0 auto 2rem; line-height: 1.75; }
+
+.steps-big {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+.step-big {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+.step-num {
+  width: 36px; height: 36px;
+  background: var(--gold);
+  color: var(--green-deep);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1rem;
+  flex-shrink: 0;
+}
+.step-big h3 { font-size: 1.05rem; color: var(--green-deep); }
+.step-big p  { font-size: .92rem; color: var(--text-soft); line-height: 1.65; margin: 0; }
+
+.app-badges {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.app-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  background: var(--green-deep);
+  color: var(--white);
+  padding: .75rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: .95rem;
+  text-decoration: none;
+  transition: background .15s;
+}
+.app-badge:hover { background: var(--green-mid); text-decoration: none; color: var(--white); }
+.app-badge-icon { font-size: 1.4rem; }
+
+.tip-box {
+  background: var(--sand);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+.tip-box p { font-size: .92rem; color: var(--text-soft); line-height: 1.65; margin: 0; }
+.tip-box strong { color: var(--green-deep); }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<div class="gs-hero">
+  <div class="label label-light">Community Science</div>
+  <h1>Point your phone.<br>That's really it.</h1>
+  <p>iNaturalist turns any photo into a scientific record. Here's how to add your observations to the Palma Sola Botanical Park project in about two minutes.</p>
+</div>
+
+<!-- STEPS -->
+<section class="bg-cream">
+  <div class="section-inner">
+    <span class="label">How it works</span>
+    <h2 class="section-title">Five steps, once</h2>
+    <p class="section-sub">After this setup you just photograph and submit — no extra steps.</p>
+
+    <div class="steps-big">
+      <div class="step-big">
+        <div class="step-num">1</div>
+        <h3>Download the free app</h3>
+        <p>iNaturalist is free on iOS and Android. No subscription, no ads. Made by the California Academy of Sciences and National Geographic.</p>
+      </div>
+      <div class="step-big">
+        <div class="step-num">2</div>
+        <h3>Create a free account</h3>
+        <p>Takes about 60 seconds. You'll need an email address. Your username can be anything — many people use their first name.</p>
+      </div>
+      <div class="step-big">
+        <div class="step-num">3</div>
+        <h3>Allow location access</h3>
+        <p>This is the key step. When location is on, iNaturalist automatically knows your photo was taken at Palma Sola — no manual entry needed.</p>
+      </div>
+      <div class="step-big">
+        <div class="step-num">4</div>
+        <h3>Photograph anything</h3>
+        <p>Plants, birds, insects, lizards, fungi — anything alive. Even blurry photos count. The AI suggests an ID and the community confirms it.</p>
+      </div>
+      <div class="step-big">
+        <div class="step-num">5</div>
+        <h3>Add to our project</h3>
+        <p>Search for <strong>"Palma Sola Botanical Park"</strong> in Projects and join. Then your observations automatically appear in our record.</p>
+      </div>
+    </div>
+
+    <div class="app-badges">
+      <a class="app-badge" href="https://apps.apple.com/us/app/inaturalist/id421397028" target="_blank" rel="noopener">
+        <span class="app-badge-icon">🍎</span> Download on the App Store
+      </a>
+      <a class="app-badge" href="https://play.google.com/store/apps/details?id=org.inaturalist.android" target="_blank" rel="noopener">
+        <span class="app-badge-icon">▶</span> Get it on Google Play
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="bg-white">
+  <div class="section-inner">
+    <span class="label">Tips for the park</span>
+    <h2 class="section-title">A few things worth knowing</h2>
+
+    <div class="tip-box">
+      <p><strong>Mark cultivated plants correctly.</strong> Most plants in the collection were intentionally planted here. When submitting, tap "Is it wild?" and select <strong>No — it's captive or cultivated</strong>. This keeps our data honest.</p>
+    </div>
+    <div class="tip-box">
+      <p><strong>Wildlife observations don't need that tag.</strong> Birds, lizards, butterflies, and insects that just happen to be here are wild. Submit those normally.</p>
+    </div>
+    <div class="tip-box">
+      <p><strong>Take multiple photos.</strong> A close-up of the leaf, a shot of the whole plant, and the flower if there is one. More photos = faster, more accurate identification by the community.</p>
+    </div>
+    <div class="tip-box">
+      <p><strong>You don't need to know what it is.</strong> Submit anyway. The iNaturalist AI will make a suggestion and other users will confirm or correct it — sometimes within minutes.</p>
+    </div>
+
+    <div style="margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap">
+      <a href="https://www.inaturalist.org/projects/palma-sola-botanical-park" target="_blank" rel="noopener" class="btn btn-gold">View Our iNaturalist Project →</a>
+      <a href="nature.html" class="btn btn-green">← Back to Nature</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/site.js"></script>
+<script>
+injectShared({ inatBar: false });
+</script>
+</body>
+</html>
