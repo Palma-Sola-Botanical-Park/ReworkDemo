@@ -334,7 +334,7 @@ async function loadClasses(containerId) {
   }
 }
 
-// ── ANNOUNCEMENTS ─────────────────────────────────────────────
+// ── ANNOUNCEMENTS — slow-cycling, one at a time ───────────────
 async function loadAnnouncements(containerId) {
   const el = document.getElementById(containerId);
   if (!el) return;
@@ -342,18 +342,53 @@ async function loadAnnouncements(containerId) {
     const rows = await fetchTab(TAB.announcements);
     const visible = rows.filter(r => isWebVisible(r));
     if (!visible.length) { el.style.display='none'; return; }
-    el.innerHTML = visible.map(a => `
-      <div class="announcement-card">
-        ${a.emoji?`<span class="ann-emoji">${a.emoji}</span>`:''}
-        <div class="ann-body">
-          <strong>${a.title||''}</strong>
-          ${a.body?`<p>${a.body}</p>`:''}
-          ${a.link_url&&a.link_text?`<a href="${a.link_url}" target="_blank" rel="noopener" class="ann-link">${a.link_text} →</a>`:''}
-          ${a.pdf_url?`<a href="${a.pdf_url}" target="_blank" rel="noopener" class="ann-link">📄 Read More →</a>`:''}
+
+    // Show the bar
+    const bar = el.closest('#announcements-bar') || el.parentElement;
+    if (bar) bar.style.display = 'block';
+
+    // Build items — absolute positioned so they fade over each other
+    el.style.position = 'relative';
+    el.style.minHeight = '48px';
+
+    el.innerHTML = visible.map((a, i) => {
+      const pdfHref = a.pdf_url
+        ? `viewer.html?url=${encodeURIComponent(a.pdf_url)}&title=${encodeURIComponent(a.title||'')}&back=${encodeURIComponent(window.location.pathname.split('/').pop()||'index.html')}`
+        : '';
+      return `<div class="ann-cycle-item ${i===0?'active':''}" data-idx="${i}" style="
+        ${i===0 ? 'position:relative' : 'position:absolute;top:0;left:0;right:0'};
+        display:flex;align-items:center;gap:1rem;padding:.6rem 0;
+        opacity:${i===0?'1':'0'};transition:opacity 1.2s ease;pointer-events:${i===0?'auto':'none'}
+      ">
+        ${a.emoji?`<span style="font-size:1.4rem;flex-shrink:0">${a.emoji}</span>`:''}
+        <div style="flex:1">
+          <strong style="color:var(--white)">${a.title||''}</strong>
+          ${a.body?`<span style="color:rgba(255,255,255,.78);font-size:.9rem;margin-left:.5rem">${a.body}</span>`:''}
+          ${a.link_url&&a.link_text?`<a href="${a.link_url}" class="ann-link" style="margin-left:.75rem">${a.link_text} →</a>`:''}
+          ${a.pdf_url?`<a href="${pdfHref}" class="ann-link" style="margin-left:.75rem">📄 Read More →</a>`:''}
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
+
+    // Cycle if more than one
+    if (visible.length > 1) {
+      let cur = 0;
+      setInterval(() => {
+        const items = el.querySelectorAll('.ann-cycle-item');
+        // Fade out current
+        items[cur].style.opacity = '0';
+        items[cur].style.pointerEvents = 'none';
+        items[cur].style.position = 'absolute';
+        // Fade in next
+        cur = (cur + 1) % items.length;
+        items[cur].style.position = 'relative';
+        items[cur].style.opacity = '1';
+        items[cur].style.pointerEvents = 'auto';
+      }, 5000);
+    }
+
   } catch(e) {
-    el.style.display='none';
+    el.style.display = 'none';
   }
 }
 
