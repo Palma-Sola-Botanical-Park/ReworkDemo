@@ -21,9 +21,22 @@
   /* ── Plant page layout ─────────────────────────────────── */
   .plant-wrap {
     max-width: 430px;
-    margin: 0 auto;
+    margin: 2rem auto;
     background: #e8e3d8;
-    min-height: 100vh;
+    min-height: 80vh;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(26,46,26,0.13);
+  }
+
+  /* On phone, no card shadow or margin — fills the screen naturally */
+  @media (max-width: 480px) {
+    .plant-wrap {
+      margin: 0;
+      border-radius: 0;
+      box-shadow: none;
+      min-height: 100vh;
+    }
   }
 
   /* ── Hero ──────────────────────────────────────────────── */
