@@ -526,38 +526,4 @@ function clearFilters() {
   filterPlants();
 }
 
-function openPlantModal(id) {
-  const p = PLANTS.find(x=>x.id===id);
-  if (!p) return;
-  document.getElementById('modalContent').innerHTML = `
-    <h2 style="font-size:1.5rem;color:var(--green-deep);margin-bottom:.2rem">${p.common}</h2>
-    <div style="font-style:italic;font-size:.9rem;color:var(--text-soft);margin-bottom:.85rem">${p.sci} · ${p.family} · ${p.id}</div>
-    <div style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem">
-      ${p.native?'<span class="tag tag-native">🌿 Florida Native</span>':'<span class="tag tag-nonnative">Non-native</span>'}
-      ${p.butterfly?'<span class="tag tag-butterfly">🦋 Butterfly Plant</span>':''}
-      ${p.toxic?'<span class="tag tag-toxic">⚠️ Caution: Toxic</span>':''}
-      ${p.edible?'<span class="tag tag-edible">🍃 Edible (see notes)</span>':''}
-      ${p.invasive?'<span class="tag tag-invasive">🚫 Invasive Watch</span>':''}
-      ${p.wetland?'<span class="tag tag-wetland">💧 Wetland</span>':''}
-    </div>
-    <p style="font-size:.97rem;line-height:1.72;color:var(--text)">${p.quick}</p>
-    <div class="modal-grid">
-      <div class="modal-field"><div class="modal-lbl">Family</div><div class="modal-val">${p.family}</div></div>
-      <div class="modal-field"><div class="modal-lbl">Origin</div><div class="modal-val">${p.origin}</div></div>
-      <div class="modal-field"><div class="modal-lbl">Category</div><div class="modal-val">${p.cat}</div></div>
-      <div class="modal-field"><div class="modal-lbl">PSBP ID</div><div class="modal-val">${p.id}</div></div>
-    </div>`;
-  document.getElementById('plantModal').classList.add('open');
-}
-
-function closePlantModal(e) {
-  if (!e||e.target.id==='plantModal') document.getElementById('plantModal')?.classList.remove('open');
-}
-
-const MODAL_HTML = `
-<div class="modal-overlay" id="plantModal" onclick="closePlantModal(event)">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closePlantModal()">✕</button>
-    <div id="modalContent"></div>
-  </div>
-</div>`;
+// Plant modal removed — plant cards now link directly to full detail pages
