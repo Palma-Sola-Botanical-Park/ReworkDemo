@@ -215,16 +215,16 @@ section { padding: 4.5rem 1.5rem; }
 .page-hero {
   position: relative; overflow: hidden;
   background: var(--green-deep);
-  min-height: 520px; display: flex; align-items: center;
+  min-height: 280px; display: flex; align-items: center;
 }
 .page-hero-bg {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
   opacity: .35;
 }
-.page-hero-content { position: relative; z-index: 1; padding: 4rem 1.5rem; max-width: 720px; margin: 0 auto; }
-.page-hero h1 { color: var(--white); font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 1rem; }
-.page-hero p { color: rgba(255,255,255,.8); font-size: 1.1rem; line-height: 1.75; margin-bottom: 2rem; }
+.page-hero-content { position: relative; z-index: 1; padding: 3rem 1.5rem; max-width: 720px; margin: 0 auto; }
+.page-hero h1 { color: var(--white); font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: .6rem; }
+.page-hero p { color: rgba(255,255,255,.8); font-size: 1rem; line-height: 1.72; margin-bottom: 1.5rem; }
 
 /* ── INFO CARDS (visit page) ── */
 .info-card {
