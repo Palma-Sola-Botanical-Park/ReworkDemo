@@ -61,7 +61,7 @@ function isWebVisible(row) {
 const NAV_HTML = `
 <nav id="site-nav">
   <a href="index.html" class="nav-logo">
-    <img src="images/white_PSBP_logo.png" alt="Palma Sola Botanical Park">
+    <img src="images/psbp-logo.svg" alt="Palma Sola Botanical Park">
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -72,7 +72,6 @@ const NAV_HTML = `
     <li><a href="volunteer.html">Volunteer</a></li>
     <li><a href="members.html">Members</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="members.html#donate" class="nav-cta">Donate</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -87,7 +86,6 @@ const NAV_HTML = `
   <a href="volunteer.html">Volunteer</a>
   <a href="members.html">Members</a>
   <a href="contact.html">Contact</a>
-  <a href="members.html#donate" style="color:var(--gold-light)">Donate ❤️</a>
 </div>`;
 
 // ── FOOTER HTML ───────────────────────────────────────────────
