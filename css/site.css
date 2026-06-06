@@ -270,6 +270,9 @@ section { padding: 4.5rem 1.5rem; }
 .obs-card { cursor: pointer; }
 .obs-card-img { height: 160px; background-size: cover; background-position: center; }
 .obs-card-body { padding: .9rem; }
+
+/* ── Plant card photo hover ── */
+.plant-card:hover img { transform: scale(1.05); }
 .obs-species { font-size: .9rem; font-weight: 700; color: var(--green-deep); margin-bottom: .15rem; }
 .obs-by { font-size: .75rem; color: var(--text-soft); }
 .obs-date { font-size: .7rem; color: #aaa; }
