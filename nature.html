@@ -295,15 +295,10 @@
 <script>
 injectShared({ inatBar: false });
 renderPlants(PLANTS);
-document.body.insertAdjacentHTML('beforeend', MODAL_HTML);
+// modal removed — plant cards link directly to detail pages
 
-// Announcements bar
-const annBar = document.getElementById('announcements-bar');
-loadAnnouncements('announcementsList').then(() => {
-  if (document.getElementById('announcementsList')?.children.length) {
-    annBar.style.display = 'block';
-  }
-});
+// Announcements bar — cycling handled inside loadAnnouncements()
+loadAnnouncements('announcementsList');
 
 // Tab logic
 function showTab(name) {

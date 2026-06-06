@@ -254,12 +254,7 @@
 injectShared({ inatBar: false });
 
 // Announcements bar
-const annBar = document.getElementById('announcements-bar');
-loadAnnouncements('announcementsList').then(() => {
-  if (document.getElementById('announcementsList')?.children.length) {
-    annBar.style.display = 'block';
-  }
-});
+loadAnnouncements('announcementsList');
 </script>
 </body>
 </html>
