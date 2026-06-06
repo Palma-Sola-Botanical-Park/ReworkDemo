@@ -457,7 +457,9 @@ function plantCard(p) {
   // Derive photo filename from ID and common name:
   // PSBP-00002-Weeping-Bottlebrush → PSBP-00002_Weeping_Bottlebrush.jpg
   const slug = p.id + '-' + p.common.replace(/[^a-zA-Z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
-  const photoFile = slug.replace(/-/g, '_') + '.jpg';
+  // Photos: PSBP-00001_Tree_Crinum.jpg — ID keeps hyphens, name uses underscores
+  const namePart = p.common.replace(/[^a-zA-Z0-9]+/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+  const photoFile = p.id + '_' + namePart + '.jpg';
   const photoUrl  = 'plants/' + photoFile;
   const pageUrl   = 'plants/' + slug + '.html';
 
