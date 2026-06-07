@@ -7,6 +7,10 @@
 <link rel="stylesheet" href="css/site.css">
 <style>
 /* ── Nature-page specific ── */
+@media (max-width: 700px) {
+  #recentObsGrid { grid-template-columns: repeat(2,1fr) !important; }
+}
+
 .nature-hero {
   background: var(--green-deep);
   padding: 3rem 1.5rem;
@@ -243,11 +247,19 @@
         </div>
       </div>
 
-      <div class="obs-mosaic" id="recentObsGrid">
-        <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-soft)">Loading…</div>
+      <!-- Cycling 4-at-a-time observation display -->
+      <div id="recentObsWrap">
+        <div id="recentObsGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;transition:opacity .6s ease">
+          <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-soft);font-size:1rem">Loading recent observations…</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:1.25rem;margin-top:1.25rem">
+          <button id="obsPrev" onclick="stepObs(-1)" style="background:none;border:1.5px solid var(--border);border-radius:6px;padding:.4rem .9rem;cursor:pointer;font-size:1rem;color:var(--text-soft)">← Prev</button>
+          <span id="obsPageLabel" style="font-size:.9rem;color:var(--text-soft)"></span>
+          <button id="obsNext" onclick="stepObs(1)" style="background:none;border:1.5px solid var(--border);border-radius:6px;padding:.4rem .9rem;cursor:pointer;font-size:1rem;color:var(--text-soft)">Next →</button>
+        </div>
       </div>
 
-      <p style="font-size:.9rem;color:var(--text-soft);margin-top:1rem;font-style:italic;text-align:center">
+      <p style="font-size:1rem;color:var(--text-soft);margin-top:1.25rem;font-style:italic;text-align:center;line-height:1.6">
         Identifications shown are tentative — the community is still weighing in. That's how it works.
       </p>
     </div>
@@ -353,11 +365,67 @@ function showTab(name) {
   }
   if (name === 'recent' && !window._recentLoaded) {
     window._recentLoaded = true;
-    loadRecentObs({ count:16 }).then(obs => renderMosaic('recentObsGrid', obs));
+    loadRecentObs({ count:16 }).then(obs => {
+      window._recentObs = obs.filter(o => o.photos?.[0]?.url);
+      window._recentPage = 0;
+      renderRecentPage(0);
+    });
   }
 }
 
-// Small mosaic renderer with clear attribution — no outbound links as main CTA
+// ── Cycling 4-at-a-time recent observations ───────────────────
+const PER_PAGE = 4;
+
+function renderRecentPage(page) {
+  const obs   = window._recentObs || [];
+  const total = Math.ceil(obs.length / PER_PAGE);
+  const start = page * PER_PAGE;
+  const slice = obs.slice(start, start + PER_PAGE);
+  const grid  = document.getElementById('recentObsGrid');
+  const label = document.getElementById('obsPageLabel');
+  if (!grid) return;
+
+  // Fade out
+  grid.style.opacity = '0';
+  setTimeout(() => {
+    grid.innerHTML = slice.map(o => {
+      const url  = o.photos[0].url.replace('square', 'large');
+      const name = o.species_guess || o.taxon?.name || 'Unknown species';
+      const by   = o.user?.login || 'observer';
+      const raw  = o.observed_on || o.created_at?.slice(0,10);
+      const dt   = raw ? new Date(raw + 'T12:00') : null;
+      const dateStr = dt ? dt.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' }) : '';
+      return `<div style="border-radius:10px;overflow:hidden;background:var(--white);box-shadow:0 2px 12px rgba(0,0,0,.09)">
+        <div style="height:220px;background-image:url('${url}');background-size:cover;background-position:center"></div>
+        <div style="padding:1rem">
+          <div style="font-size:1.05rem;font-weight:700;color:var(--green-deep);line-height:1.3;margin-bottom:.3rem">${name}</div>
+          <div style="font-size:.95rem;color:var(--text-soft);margin-bottom:.25rem">📷 ${by}</div>
+          ${dateStr ? `<div style="font-size:.88rem;color:#aaa">${dateStr}</div>` : ''}
+          <div style="margin-top:.6rem;display:inline-block;background:var(--sand);border-radius:4px;padding:.2rem .6rem;font-size:.8rem;color:var(--text-soft);font-style:italic">Tentative ID</div>
+        </div>
+      </div>`;
+    }).join('');
+
+    if (label) label.textContent = `${page + 1} of ${total}`;
+    const prev = document.getElementById('obsPrev');
+    const next = document.getElementById('obsNext');
+    if (prev) prev.style.opacity = page === 0 ? '.3' : '1';
+    if (next) next.style.opacity = page >= total - 1 ? '.3' : '1';
+
+    // Fade in
+    grid.style.opacity = '1';
+  }, 300);
+}
+
+function stepObs(dir) {
+  const obs   = window._recentObs || [];
+  const total = Math.ceil(obs.length / PER_PAGE);
+  const next  = Math.max(0, Math.min(total - 1, (window._recentPage || 0) + dir));
+  window._recentPage = next;
+  renderRecentPage(next);
+}
+
+// Small mosaic renderer for wildlife tab
 function renderMosaic(containerId, obs) {
   const el = document.getElementById(containerId);
   if (!el) return;
@@ -367,7 +435,6 @@ function renderMosaic(containerId, obs) {
     if (!url) return '';
     const name = o.species_guess || o.taxon?.name || 'Unknown';
     const by   = o.user?.login || 'observer';
-    // Attribution shown, but link goes to our own inat section not directly to iNat
     return `<div class="obs-mosaic-card" title="${name} · photo by ${by}">
       <div class="obs-mosaic-img" style="background-image:url('${url}')"></div>
       <div class="obs-mosaic-label">${name}<em>📷 ${by}</em></div>
