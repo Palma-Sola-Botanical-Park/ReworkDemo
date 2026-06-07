@@ -6,43 +6,133 @@
 <title>Venue Rentals · Palma Sola Botanical Park</title>
 <link rel="stylesheet" href="css/site.css">
 <style>
-/* ── Photo placeholder slots ── */
-.photo-placeholder {
-  background: var(--sand);
-  border: 2px dashed rgba(90,122,74,0.35);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  color: var(--text-soft);
-  font-size: .82rem;
-  text-align: center;
-  padding: 1rem;
-}
-.photo-placeholder .ph-icon { font-size: 1.8rem; opacity: .45; }
-.photo-placeholder .ph-label { font-weight: 700; color: var(--green-mid); font-size: .78rem; letter-spacing: .05em; text-transform: uppercase; }
-.photo-placeholder .ph-hint  { font-size: .72rem; color: #aaa; }
-
-/* ── Venue photo gallery grid ── */
-.venue-gallery {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 260px 200px;
-  gap: .75rem;
+/* ── Venue type cards ── */
+.venue-cards { display: flex; flex-direction: column; gap: 2rem; }
+.venue-card {
+  background: var(--white);
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  border-left: 5px solid var(--green-mid);
 }
-.venue-gallery > * { border-radius: 8px; overflow: hidden; }
-.venue-gallery .main-photo { grid-row: 1 / 3; }
+.venue-card.wedding { border-left-color: var(--gold); }
+.venue-card.large   { border-left-color: var(--green-mid); }
+.venue-card.medium  { border-left-color: #4a9e56; }
+.venue-card.small   { border-left-color: #7ab87a; }
+.venue-card.pavilion{ border-left-color: #5b8db8; }
+.venue-card.board   { border-left-color: #9b7ab8; }
 
-/* ── Setup photo strip ── */
-.setup-strip {
+.venue-card-header {
+  background: var(--green-deep);
+  padding: 1.25rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: .75rem; cursor: pointer;
+  user-select: none;
+}
+.venue-card.wedding .venue-card-header { background: #2a1f0a; }
+.venue-card-header h3 { color: var(--white); font-size: 1.15rem; margin: 0; }
+.venue-card-subtitle { color: var(--gold-light); font-size: .82rem; font-weight: 600; }
+.venue-card-toggle { color: var(--gold-light); font-size: 1.2rem; transition: transform .25s; }
+.venue-card.open .venue-card-toggle { transform: rotate(180deg); }
+
+.venue-card-body { display: none; padding: 1.5rem; }
+.venue-card.open .venue-card-body { display: block; }
+
+/* ── Pricing table ── */
+.pricing-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+.pricing-block {
+  background: var(--sand);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+.pricing-block h4 {
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--green-mid);
+  margin-bottom: .65rem;
+}
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: .3rem 0;
+  border-bottom: 1px solid rgba(0,0,0,.07);
+  font-size: .9rem;
+}
+.price-row:last-child { border-bottom: none; }
+.price-day { color: var(--text-soft); }
+.price-amt { font-weight: 700; color: var(--green-deep); font-family: 'Playfair Display', serif; font-size: 1rem; }
+
+.venue-details { font-size: .92rem; color: var(--text-soft); line-height: 1.7; }
+.venue-details p { margin-bottom: .75rem; }
+.venue-details p:last-child { margin-bottom: 0; }
+.venue-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
   gap: .75rem;
-  margin-top: 2rem;
+  margin: 1rem 0;
+}
+.venue-detail-item {
+  background: var(--cream);
+  border-radius: 7px;
+  padding: .75rem 1rem;
+  font-size: .85rem;
+}
+.venue-detail-item strong { display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; color: var(--green-mid); margin-bottom: .2rem; }
+
+/* ── Photo strip ── */
+.venue-photo-strip {
+  display: flex;
+  gap: .6rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: .25rem;
+  margin: 1.5rem 0;
+}
+.venue-photo-strip::-webkit-scrollbar { display: none; }
+.venue-photo-strip img {
+  height: 180px;
+  width: auto;
+  flex-shrink: 0;
+  border-radius: 7px;
+  object-fit: cover;
+}
+
+/* ── Event types list ── */
+.event-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: 1rem 0;
+}
+.event-type-tag {
+  background: var(--green-pale);
+  color: var(--green-deep);
+  font-size: .78rem;
+  font-weight: 600;
+  padding: .3rem .75rem;
+  border-radius: 20px;
+}
+
+.note-box {
+  background: #fff9e6;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  padding: .75rem 1rem;
+  font-size: .85rem;
+  color: #5a3a00;
+  margin-top: .75rem;
+}
+
+@media (max-width: 600px) {
+  .pricing-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -50,132 +140,289 @@
 <div id="nav-placeholder"></div>
 
 <div class="page-hero">
-  <div class="page-hero-bg" style="background-image:url('images/Phoenix_reclinata.jpg')"></div>
+  <div class="page-hero-bg" style="background-image:url('https://palmasolabp.org/wp-content/uploads/2024/02/wedding2.jpg')"></div>
   <div class="page-hero-content" style="text-align:center;margin:0 auto">
     <div class="label label-light">Venue Rentals</div>
     <h1>Your event, in a living garden</h1>
-    <p>Weddings, workshops, community gatherings. A botanical backdrop unlike anything else in Bradenton — and every rental fee goes back into the park.</p>
-    <a href="tel:9417612866" class="btn btn-gold">📞 Call to Book</a>
+    <p>Weddings, birthdays, celebrations of life, corporate events, workshops. Ten acres of subtropical botanical park as your backdrop — and every rental fee goes back into the park.</p>
+    <a href="tel:9417612866" class="btn btn-gold">📞 (941) 761-2866</a>
   </div>
 </div>
 
-<!-- EVENT TYPES -->
-<section class="bg-cream">
+<!-- PHOTO STRIP -->
+<section class="bg-white" style="padding:2rem 1.5rem">
   <div class="section-inner">
-    <div class="grid-3">
-      <div class="card">
-        <!-- PHOTO SLOT: Wedding/ceremony setup photo — chairs, arch, pond backdrop -->
-        <div style="height:200px;position:relative">
-          <div class="photo-placeholder" style="height:100%;border-radius:0">
-            <div class="ph-icon">💍</div>
-            <div class="ph-label">Wedding Photo</div>
-            <div class="ph-hint">Replace with ceremony/setup shot<br>Ideal: chairs, arch, or pond backdrop</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <h3 style="font-size:1.1rem;color:var(--green-deep);margin-bottom:.5rem">Weddings & Ceremonies</h3>
-          <p style="font-size:.9rem;color:var(--text-soft);line-height:1.65">Exchange vows under a canopy of subtropical trees, beside the pond, or in the pavilion. We've hosted hundreds of ceremonies — intimate to full production. Call us.</p>
-        </div>
-      </div>
-      <div class="card">
-        <!-- PHOTO SLOT: Educational event — workshop tables, people learning -->
-        <div style="height:200px;position:relative">
-          <div class="photo-placeholder" style="height:100%;border-radius:0">
-            <div class="ph-icon">📚</div>
-            <div class="ph-label">Educational Event Photo</div>
-            <div class="ph-hint">Replace with workshop or class photo<br>Ideal: tables, participants, plants</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <h3 style="font-size:1.1rem;color:var(--green-deep);margin-bottom:.5rem">Educational Events</h3>
-          <p style="font-size:.9rem;color:var(--text-soft);line-height:1.65">Workshops, school programs, native plant talks, photography walks, master gardener sessions. If it involves learning and nature, this is your room.</p>
-        </div>
-      </div>
-      <div class="card">
-        <!-- PHOTO SLOT: Social gathering — tables set up, guests, casual -->
-        <div style="height:200px;position:relative">
-          <div class="photo-placeholder" style="height:100%;border-radius:0">
-            <div class="ph-icon">🎉</div>
-            <div class="ph-label">Social Event Photo</div>
-            <div class="ph-hint">Replace with party or gathering photo<br>Ideal: tables set up, guests, pavilion</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <h3 style="font-size:1.1rem;color:var(--green-deep);margin-bottom:.5rem">Social Gatherings</h3>
-          <p style="font-size:.9rem;color:var(--text-soft);line-height:1.65">Birthday parties, family reunions, corporate picnics. A botanical park setting makes any gathering more memorable. Nonprofit pricing available.</p>
-        </div>
-      </div>
+    <div class="venue-photo-strip">
+      <img src="https://palmasolabp.org/wp-content/uploads/2024/02/wedding1.jpg" alt="Wedding at PSBP">
+      <img src="https://palmasolabp.org/wp-content/uploads/2024/03/PB-652.jpg" alt="Event setup">
+      <img src="https://palmasolabp.org/wp-content/uploads/2023/09/253A0397-scaled-1.jpg" alt="Garden ceremony">
+      <img src="https://palmasolabp.org/wp-content/uploads/2024/02/wedding3.jpg" alt="Wedding reception">
+      <img src="https://palmasolabp.org/wp-content/uploads/2024/03/PB-354.jpg" alt="Park venue">
+      <img src="https://palmasolabp.org/wp-content/uploads/2023/09/253A9943-scaled-1.jpg" alt="Outdoor event">
+      <img src="https://palmasolabp.org/wp-content/uploads/2024/03/807.jpg" alt="Reception">
+      <img src="https://palmasolabp.org/wp-content/uploads/2024/03/PB-494.jpg" alt="Venue setup">
     </div>
+    <p style="font-size:.78rem;color:var(--text-soft);text-align:center">
+      Tours by appointment — call <a href="tel:9417612866">(941) 761-2866</a> to schedule. Check the <a href="events.html">calendar</a> for date availability.
+    </p>
+  </div>
+</section>
 
-    <div style="text-align:center;margin-top:2.5rem">
-      <p style="color:var(--text-soft);font-size:.95rem;margin-bottom:1.25rem">For availability and pricing, call or email us directly. We keep it personal.</p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-        <a href="tel:9417612866" class="btn btn-gold">📞 (941) 761-2866</a>
-        <a href="mailto:info@palmasolabp.org" class="btn btn-green">✉️ Email Us</a>
-      </div>
+<!-- EVENT TYPES -->
+<section class="bg-cream" style="padding:2rem 1.5rem">
+  <div class="section-inner">
+    <span class="label">What we host</span>
+    <h2 class="section-title" style="margin-bottom:1rem">Any occasion, any size</h2>
+    <div class="event-types">
+      <span class="event-type-tag">💍 Weddings</span>
+      <span class="event-type-tag">🎂 Birthdays</span>
+      <span class="event-type-tag">🎓 Graduations</span>
+      <span class="event-type-tag">👶 Baby Showers</span>
+      <span class="event-type-tag">💐 Wedding Showers</span>
+      <span class="event-type-tag">🕯️ Celebrations of Life</span>
+      <span class="event-type-tag">🌹 Anniversary Parties</span>
+      <span class="event-type-tag">🎉 Quinceañeras</span>
+      <span class="event-type-tag">✡️ Bar/Bat Mitzvahs</span>
+      <span class="event-type-tag">🎊 Sweet 16s</span>
+      <span class="event-type-tag">🏢 Corporate Events</span>
+      <span class="event-type-tag">🫖 Tea &amp; Garden Parties</span>
+      <span class="event-type-tag">🤝 Fundraisers</span>
+      <span class="event-type-tag">🏡 HOA Meetings</span>
+      <span class="event-type-tag">📚 Classes &amp; Workshops</span>
+      <span class="event-type-tag">🎄 Holiday Celebrations</span>
     </div>
   </div>
 </section>
 
-<!-- VENUE GALLERY — photo placeholder slots for real event photos -->
+<!-- PRICING CARDS -->
 <section class="bg-white">
   <div class="section-inner">
-    <span class="label">The Setting</span>
-    <h2 class="section-title" style="margin-bottom:1.5rem">See it for yourself</h2>
+    <span class="label">Pricing &amp; Details</span>
+    <h2 class="section-title" style="margin-bottom:.5rem">Choose your venue</h2>
+    <p class="section-sub" style="margin-bottom:2rem">Click any venue to see full details and pricing. All fees support the park's operations.</p>
 
-    <div class="venue-gallery">
-      <!-- MAIN PHOTO — largest slot, hero venue shot -->
-      <div class="main-photo">
-        <div class="photo-placeholder" style="height:100%">
-          <div class="ph-icon">📸</div>
-          <div class="ph-label">Main Venue Photo</div>
-          <div class="ph-hint">Replace with your best wide venue shot<br>Ideal: pavilion, garden, or pond view with event setup</div>
+    <div class="venue-cards">
+
+      <!-- WEDDINGS -->
+      <div class="venue-card wedding" id="card-wedding">
+        <div class="venue-card-header" onclick="toggleCard('wedding')">
+          <div>
+            <h3>💍 Weddings — Entire Park</h3>
+            <div class="venue-card-subtitle">9 hours · Up to 250 guests · From $1,250</div>
+          </div>
+          <span class="venue-card-toggle">▼</span>
+        </div>
+        <div class="venue-card-body">
+          <p class="venue-details">The entire grounds — Galleria building, covered deck, screened pavilion, bride's room with kitchenette, and multiple lawn venues. Galleria seats up to 160; full grounds accommodate 250. Set-up from 8am; ceremony start from 4pm; venue until 11pm. Includes tables and chairs for ~100 guests.</p>
+          <div class="venue-detail-grid">
+            <div class="venue-detail-item"><strong>Duration</strong>9 hours</div>
+            <div class="venue-detail-item"><strong>Capacity</strong>Up to 250 guests</div>
+            <div class="venue-detail-item"><strong>On-Site Manager</strong>$300 required</div>
+            <div class="venue-detail-item"><strong>Security Deposit</strong>$750</div>
+            <div class="venue-detail-item"><strong>Event Insurance</strong>Required (~$100–150)</div>
+            <div class="venue-detail-item"><strong>Vendors</strong>Your choice</div>
+          </div>
+          <div class="pricing-grid">
+            <div class="pricing-block">
+              <h4>🌴 Season (Oct – May)</h4>
+              <div class="price-row"><span class="price-day">Saturday</span><span class="price-amt">$3,850</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$2,750</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$2,250</span></div>
+            </div>
+            <div class="pricing-block">
+              <h4>☀️ Off Season (Jun – Sep)</h4>
+              <div class="price-row"><span class="price-day">Saturday</span><span class="price-amt">$2,500</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$1,750</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$1,250</span></div>
+            </div>
+          </div>
+          <p style="font-size:.82rem;color:var(--text-soft)">Half the venue fee + $750 deposit due at signing. Balance + manager fee + insurance due 60 days prior. 3% surcharge for card payments.</p>
         </div>
       </div>
-      <!-- SECONDARY PHOTOS -->
-      <div>
-        <div class="photo-placeholder" style="height:100%">
-          <div class="ph-icon">🌿</div>
-          <div class="ph-label">Garden Detail</div>
-          <div class="ph-hint">Ceremony arch, floral arrangement, or garden path</div>
+
+      <!-- LARGE EVENTS -->
+      <div class="venue-card large" id="card-large">
+        <div class="venue-card-header" onclick="toggleCard('large')">
+          <div>
+            <h3>🎉 Large Events — Entire Park</h3>
+            <div class="venue-card-subtitle">9 hours · Over 75 guests · From $1,250</div>
+          </div>
+          <span class="venue-card-toggle">▼</span>
+        </div>
+        <div class="venue-card-body">
+          <p class="venue-details">Same access as weddings — entire grounds including Galleria, deck, pavilion, bride's room, and lawn areas. Ideal for reunions, large birthday parties, galas, and corporate events. Set-up from 8am; event start from 4pm; venue until 11pm.</p>
+          <div class="venue-detail-grid">
+            <div class="venue-detail-item"><strong>Duration</strong>9 hours</div>
+            <div class="venue-detail-item"><strong>Capacity</strong>Over 75 guests</div>
+            <div class="venue-detail-item"><strong>On-Site Manager</strong>$300 required</div>
+            <div class="venue-detail-item"><strong>Security Deposit</strong>$750</div>
+            <div class="venue-detail-item"><strong>Event Insurance</strong>Required (~$100–150)</div>
+            <div class="venue-detail-item"><strong>Vendors</strong>Your choice</div>
+          </div>
+          <div class="pricing-grid">
+            <div class="pricing-block">
+              <h4>🌴 Season (Oct – May)</h4>
+              <div class="price-row"><span class="price-day">Saturday</span><span class="price-amt">$3,850</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$2,750</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$2,250</span></div>
+            </div>
+            <div class="pricing-block">
+              <h4>☀️ Off Season (Jun – Sep)</h4>
+              <div class="price-row"><span class="price-day">Saturday</span><span class="price-amt">$2,500</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$1,750</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$1,250</span></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="photo-placeholder" style="height:100%">
-          <div class="ph-icon">🌅</div>
-          <div class="ph-label">Atmosphere Shot</div>
-          <div class="ph-hint">Lighting, tables set, guests arriving</div>
+
+      <!-- MEDIUM EVENTS -->
+      <div class="venue-card medium" id="card-medium">
+        <div class="venue-card-header" onclick="toggleCard('medium')">
+          <div>
+            <h3>🌿 Medium Events — Galleria Building</h3>
+            <div class="venue-card-subtitle">6 hours · 25–75 guests · From $750</div>
+          </div>
+          <span class="venue-card-toggle">▼</span>
+        </div>
+        <div class="venue-card-body">
+          <p class="venue-details">Rental of the main Galleria building and adjacent half-covered deck with stunning views. Set-up and break-down included in your 6-hour window. Available 8am–11pm. Does not include wedding pricing.</p>
+          <div class="venue-detail-grid">
+            <div class="venue-detail-item"><strong>Duration</strong>6 hours</div>
+            <div class="venue-detail-item"><strong>Capacity</strong>25–75 guests</div>
+            <div class="venue-detail-item"><strong>On-Site Manager</strong>$200 required</div>
+            <div class="venue-detail-item"><strong>Security Deposit</strong>$500</div>
+            <div class="venue-detail-item"><strong>Event Insurance</strong>Required (~$100)</div>
+            <div class="venue-detail-item"><strong>Catering</strong>Your choice</div>
+          </div>
+          <div class="pricing-grid">
+            <div class="pricing-block">
+              <h4>🌴 Season (Oct – May)</h4>
+              <div class="price-row"><span class="price-day">Saturday*</span><span class="price-amt">$1,250</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$1,000</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$750</span></div>
+            </div>
+            <div class="pricing-block">
+              <h4>☀️ Off Season (Jun – Sep)</h4>
+              <div class="price-row"><span class="price-day">Saturday*</span><span class="price-amt">$1,000</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$750</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$750</span></div>
+            </div>
+          </div>
+          <div class="note-box">* Saturdays not reservable until 30 days prior due to wedding bookings.</div>
         </div>
       </div>
-    </div>
 
-    <!-- SETUP STRIP — four smaller slots -->
-    <div class="setup-strip">
-      <div class="photo-placeholder" style="height:160px">
-        <div class="ph-icon">🪑</div>
-        <div class="ph-label">Seating Setup</div>
-        <div class="ph-hint">Chairs, rows, or round tables</div>
+      <!-- SMALL EVENTS -->
+      <div class="venue-card small" id="card-small">
+        <div class="venue-card-header" onclick="toggleCard('small')">
+          <div>
+            <h3>🌱 Small Events — Galleria Building</h3>
+            <div class="venue-card-subtitle">5 hours · Up to 25 guests · From $600</div>
+          </div>
+          <span class="venue-card-toggle">▼</span>
+        </div>
+        <div class="venue-card-body">
+          <p class="venue-details">Rental of the Galleria building and adjacent covered deck for five hours between 8am and 11pm. Set-up and break-down included in your rental window.</p>
+          <div class="venue-detail-grid">
+            <div class="venue-detail-item"><strong>Duration</strong>5 hours</div>
+            <div class="venue-detail-item"><strong>Capacity</strong>Up to 25 guests</div>
+            <div class="venue-detail-item"><strong>On-Site Manager</strong>$200 required</div>
+            <div class="venue-detail-item"><strong>Security Deposit</strong>$250</div>
+            <div class="venue-detail-item"><strong>Event Insurance</strong>Required (~$100)</div>
+            <div class="venue-detail-item"><strong>Catering</strong>Your choice</div>
+          </div>
+          <div class="pricing-grid">
+            <div class="pricing-block">
+              <h4>🌴 Season (Oct – May)</h4>
+              <div class="price-row"><span class="price-day">Saturday*</span><span class="price-amt">$1,000</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$750</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$600</span></div>
+            </div>
+            <div class="pricing-block">
+              <h4>☀️ Off Season (Jun – Sep)</h4>
+              <div class="price-row"><span class="price-day">Saturday</span><span class="price-amt">$750</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$600</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$600</span></div>
+            </div>
+          </div>
+          <div class="note-box">* Saturdays not reservable until 30 days prior due to wedding bookings.</div>
+        </div>
       </div>
-      <div class="photo-placeholder" style="height:160px">
-        <div class="ph-icon">🌺</div>
-        <div class="ph-label">Floral / Décor</div>
-        <div class="ph-hint">Centerpieces or entrance décor</div>
-      </div>
-      <div class="photo-placeholder" style="height:160px">
-        <div class="ph-icon">🍽️</div>
-        <div class="ph-label">Reception Setup</div>
-        <div class="ph-hint">Catering tables, food display</div>
-      </div>
-      <div class="photo-placeholder" style="height:160px">
-        <div class="ph-icon">🌙</div>
-        <div class="ph-label">Evening / Lighting</div>
-        <div class="ph-hint">String lights, candles, dusk shot</div>
-      </div>
-    </div>
 
-    <p style="font-size:.78rem;color:#bbb;margin-top:1rem;text-align:center">
-      📌 <em>Staff: replace placeholder divs with &lt;img&gt; tags or background-image styles when real photos are available</em>
-    </p>
+      <!-- PAVILION -->
+      <div class="venue-card pavilion" id="card-pavilion">
+        <div class="venue-card-header" onclick="toggleCard('pavilion')">
+          <div>
+            <h3>🏕️ Covered Pavilion</h3>
+            <div class="venue-card-subtitle">4 hours · Up to 50 guests · From $100</div>
+          </div>
+          <span class="venue-card-toggle">▼</span>
+        </div>
+        <div class="venue-card-body">
+          <p class="venue-details">Screened-in pavilion with adjacent lawn area north of the pavilion (next to the royal palms). Includes six large picnic tables, lights, ceiling fans, and restroom access. Perfect for birthday parties, showers, picnics, and memorial gatherings. No weddings in the pavilion.</p>
+          <div class="venue-detail-grid">
+            <div class="venue-detail-item"><strong>Duration</strong>4 hours (AM or PM)</div>
+            <div class="venue-detail-item"><strong>Hours</strong>9am–1pm or 2pm–6pm</div>
+            <div class="venue-detail-item"><strong>Capacity</strong>Up to 50 guests</div>
+            <div class="venue-detail-item"><strong>Security Deposit</strong>$250</div>
+            <div class="venue-detail-item"><strong>Alcohol</strong>Not permitted</div>
+            <div class="venue-detail-item"><strong>No balloons, glitter, or confetti</strong></div>
+          </div>
+          <div class="pricing-grid">
+            <div class="pricing-block">
+              <h4>🌴 Season (Oct – May)</h4>
+              <div class="price-row"><span class="price-day">Saturday*</span><span class="price-amt">$250</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$200</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$150</span></div>
+            </div>
+            <div class="pricing-block">
+              <h4>☀️ Off Season (Jun – Sep)</h4>
+              <div class="price-row"><span class="price-day">Saturday</span><span class="price-amt">$200</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$150</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$100</span></div>
+            </div>
+          </div>
+          <div class="note-box">* Saturdays not reservable until 30 days prior due to wedding bookings.</div>
+        </div>
+      </div>
+
+      <!-- BOARD ROOM -->
+      <div class="venue-card board" id="card-board">
+        <div class="venue-card-header" onclick="toggleCard('board')">
+          <div>
+            <h3>🪑 Board Room</h3>
+            <div class="venue-card-subtitle">3 hours · Up to 15 people · From $150</div>
+          </div>
+          <span class="venue-card-toggle">▼</span>
+        </div>
+        <div class="venue-card-body">
+          <p class="venue-details">Intimate meeting room adjacent to the office. Includes tables, chairs, restroom, and kitchenette. Ideal for HOA meetings, small corporate gatherings, and private sessions. Available 8am–9pm.</p>
+          <div class="venue-detail-grid">
+            <div class="venue-detail-item"><strong>Duration</strong>3 hours</div>
+            <div class="venue-detail-item"><strong>Capacity</strong>Up to 15 people</div>
+            <div class="venue-detail-item"><strong>Hours</strong>8am–9pm</div>
+            <div class="venue-detail-item"><strong>Security Deposit</strong>$250</div>
+          </div>
+          <div class="pricing-grid">
+            <div class="pricing-block">
+              <h4>🌴 Season (Oct – May)</h4>
+              <div class="price-row"><span class="price-day">Saturday*</span><span class="price-amt">$300</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$250</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$200</span></div>
+            </div>
+            <div class="pricing-block">
+              <h4>☀️ Off Season (Jun – Sep)</h4>
+              <div class="price-row"><span class="price-day">Saturday*</span><span class="price-amt">$250</span></div>
+              <div class="price-row"><span class="price-day">Friday &amp; Sunday</span><span class="price-amt">$200</span></div>
+              <div class="price-row"><span class="price-day">Mon – Thu</span><span class="price-amt">$150</span></div>
+            </div>
+          </div>
+          <div class="note-box">* Saturdays not reservable until 30 days prior due to wedding bookings.</div>
+        </div>
+      </div>
+
+    </div><!-- /.venue-cards -->
   </div>
 </section>
 
@@ -195,11 +442,10 @@
         </p>
         <a href="https://palmasolabp.org/art-consignment-information/" target="_blank" rel="noopener" class="btn btn-green">Artists: Submit Your Work →</a>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
-        <div style="border-radius:8px;aspect-ratio:1;background-image:url('images/Trimezia_steyermarkii.jpg');background-size:cover"></div>
-        <div style="border-radius:8px;aspect-ratio:1;background-image:url('images/Ixora_coccinea.jpg');background-size:cover;margin-top:1rem"></div>
-        <div style="border-radius:8px;aspect-ratio:1;background-image:url('images/Sansevieria_trifasciata.jpg');background-size:cover;margin-top:-1rem"></div>
-        <div style="border-radius:8px;aspect-ratio:1;background-image:url('images/Clerodendrum_indicum.jpg');background-size:cover"></div>
+      <div style="border-radius:12px;overflow:hidden;height:320px">
+        <img src="https://palmasolabp.org/wp-content/uploads/2024/03/0Q1A7745.jpg"
+          alt="Event at Palma Sola Botanical Park"
+          style="width:100%;height:100%;object-fit:cover">
       </div>
     </div>
   </div>
@@ -207,12 +453,16 @@
 
 <section class="bg-deep">
   <div class="section-inner" style="max-width:680px;margin:0 auto;text-align:center">
-    <span class="label label-light">A note</span>
+    <span class="label label-light">Ready to book?</span>
     <h2 class="section-title" style="color:var(--white);margin-bottom:1rem">Every rental keeps the park free</h2>
-    <p style="color:rgba(255,255,255,.72);font-size:1.02rem;line-height:1.78">
+    <p style="color:rgba(255,255,255,.72);font-size:1.02rem;line-height:1.78;margin-bottom:2rem">
       We receive no government funding. Venue rentals, donations, memberships, and nursery sales are what keep 10 acres of botanical park
       open and free to the public 365 days a year. When you choose Palma Sola for your event, you're part of that.
     </p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="tel:9417612866" class="btn btn-gold">📞 (941) 761-2866</a>
+      <a href="mailto:info@palmasolabp.org" class="btn btn-outline">✉️ Email Us</a>
+    </div>
   </div>
 </section>
 
@@ -220,6 +470,16 @@
 <script src="js/site.js"></script>
 <script>
 injectShared({ inatBar: false });
+
+function toggleCard(id) {
+  const card = document.getElementById('card-' + id);
+  card.classList.toggle('open');
+}
+
+// Open weddings by default
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('card-wedding')?.classList.add('open');
+});
 </script>
 </body>
 </html>
