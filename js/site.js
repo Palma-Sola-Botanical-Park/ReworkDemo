@@ -91,7 +91,7 @@ const NAV_HTML = `
 // ── FOOTER HTML ───────────────────────────────────────────────
 const FOOTER_HTML = `
 <footer id="site-footer">
-  <div class="footer-inat">
+  <div class="footer-inat" id="footerInatStrip" style="display:none">
     <div class="footer-inat-stats">
       <div class="footer-inat-stat"><strong id="fTotal" class="pulse">—</strong><span>Observations</span></div>
       <div class="footer-inat-stat"><strong id="fSpecies" class="pulse">—</strong><span>Species</span></div>
@@ -195,6 +195,12 @@ function injectShared(opts = {}) {
 
   const footDiv = document.getElementById('footer-placeholder');
   if (footDiv) footDiv.outerHTML = fixPaths(FOOTER_HTML);
+
+  // Show footer iNat stats strip only on Nature and Home pages
+  if (opts.inatFooter) {
+    const strip = document.getElementById('footerInatStrip');
+    if (strip) strip.style.display = '';
+  }
 
   const path = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('#site-nav a, #navMobile a').forEach(a => {
