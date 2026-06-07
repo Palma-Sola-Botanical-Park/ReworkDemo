@@ -214,13 +214,42 @@
 
     <!-- ── RECENT OBSERVATIONS TAB ── -->
     <div class="tab-panel" id="panel-recent">
-      <p class="section-sub">
-        Plants and animals together — the complete recent record from our iNaturalist project.
-        Every photo was taken here and submitted by a community member.
-      </p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:2rem">
+        <div>
+          <h3 style="font-size:1.2rem;color:var(--green-deep);margin-bottom:.75rem">Raw data. Real people.</h3>
+          <p style="font-size:1rem;color:var(--text-soft);line-height:1.75;margin-bottom:.75rem">
+            What you're looking at below is <strong>tentative</strong> — observations submitted directly from phones in the field,
+            unverified and still being identified by the community. This is science as it happens.
+            Messy, exciting, and real.
+          </p>
+          <p style="font-size:1rem;color:var(--text-soft);line-height:1.75">
+            Once an observation is verified, our volunteers locate the plant in the park, match it to our collection,
+            and move it onto the website — with full photo credit to the person who discovered it.
+            Your name. Your photo. Permanently on the record.
+          </p>
+        </div>
+        <div style="background:var(--green-deep);border-radius:10px;padding:1.5rem;color:white">
+          <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-light);margin-bottom:.75rem">Want to join the effort?</div>
+          <p style="font-size:1rem;color:rgba(255,255,255,.85);line-height:1.7;margin-bottom:1.1rem">
+            We need people to help sift through incoming observations, verify identifications,
+            and connect discoveries to the park's plant collection. It's genuinely interesting work —
+            and you'll learn the park like nobody else does.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:.6rem">
+            <a href="volunteer.html" class="btn btn-gold btn-sm">Join the Volunteer Team →</a>
+            <a href="get-started.html" class="btn btn-outline btn-sm" style="border-color:rgba(255,255,255,.35)">Start Submitting Observations →</a>
+          </div>
+        </div>
+      </div>
+
       <div class="obs-mosaic" id="recentObsGrid">
         <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-soft)">Loading…</div>
       </div>
+
+      <p style="font-size:.9rem;color:var(--text-soft);margin-top:1rem;font-style:italic;text-align:center">
+        Identifications shown are tentative — the community is still weighing in. That's how it works.
+      </p>
     </div>
 
   </div>
