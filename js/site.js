@@ -61,7 +61,7 @@ function isWebVisible(row) {
 const NAV_HTML = `
 <nav id="site-nav">
   <a href="index.html" class="nav-logo">
-    <img src="images/psbp-logo-transparent.png" alt="Palma Sola Botanical Park">
+    <img src="images/white_PSBP_logo.png" alt="Palma Sola Botanical Park">
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -166,17 +166,19 @@ const INAT_BAR_HTML = `
 // ── INJECT SHARED ELEMENTS ────────────────────────────────────
 function injectShared(opts = {}) {
   // Detect if we're in a subfolder (e.g. /plants/) and prefix links accordingly
-  const depth = window.location.pathname.split('/').filter(Boolean).length;
-  const repoName = 'ReworkDemo';
   const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const repoName = 'ReworkDemo';
   const repoIdx = pathParts.indexOf(repoName);
+  // Only treat as subfolder if there's a directory segment between the repo and the file
+  // e.g. /ReworkDemo/plants/PSBP-00001.html → inSubfolder = true
+  // e.g. /ReworkDemo/nature.html → inSubfolder = false
   const inSubfolder = repoIdx >= 0 && pathParts.length > repoIdx + 2;
   const base = inSubfolder ? '../' : '';
 
   // Replace relative paths in NAV and FOOTER with correct base
   const fixPaths = html => html
-    .replace(/href="(?!http|#|\/\/|mailto:|tel:)([^"]+)"/g, (m, p) => `href="${base}${p}"`)
-    .replace(/src="(?!http|\/\/|data:)([^"]+)"/g, (m, p) => `src="${base}${p}"`);
+    .replace(/href="(?!http|#|\/\/|mailto:|tel:|\.\.\/|\/[^"])([^"]+)"/g, (m, p) => `href="${base}${p}"`)
+    .replace(/src="(?!http|\/\/|data:|\.\.\/|\/[^"])([^"]+)"/g, (m, p) => `src="${base}${p}"`);
 
   const link = document.createElement('link');
   link.rel = 'stylesheet';
