@@ -145,10 +145,18 @@
     <!-- ── PLANTS TAB ── -->
     <div class="tab-panel active" id="panel-plants">
       <div style="max-width:720px;margin-bottom:2rem">
-        <p class="section-sub" style="margin-bottom:1rem">
+        <p class="section-sub" style="margin-bottom:.75rem">
           Over 800 documented plant species across 10 acres. Tropical specimen trees, Florida natives, rare palms, edible plants, and a few invasives kept for education.
           Click any card for the full story — or scan the QR code at the plant's sign for the complete profile.
         </p>
+        <div style="background:var(--green-deep);border-radius:8px;padding:.9rem 1.1rem;display:inline-flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+          <span style="font-size:1.1rem">📷</span>
+          <span style="font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.5">
+            Every plant photo was contributed by our community through <strong style="color:var(--gold-light)">iNaturalist</strong>.
+            Photos are updated regularly — the best observations earn a spot here, with full credit to the photographer.
+            <a href="get-started.html" style="color:var(--gold-light);font-weight:700;white-space:nowrap">Get your name on a photo →</a>
+          </span>
+        </div>
       </div>
 
       <div class="filter-bar">
@@ -166,12 +174,6 @@
       <div class="grid-auto" id="plantGrid">
         <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-soft)">Loading…</div>
       </div>
-
-      <div style="margin-top:2rem;padding:1.25rem;background:var(--sand);border-radius:10px;font-size:.88rem;color:var(--text-soft)">
-        💡 Want to learn more about any plant? Scan the QR code on its sign, or
-        <a href="get-started.html" style="color:var(--green-mid);font-weight:700">get the iNaturalist app</a>
-        and photograph it — the community will help identify it.
-      </div>
     </div>
 
     <!-- ── WILDLIFE TAB ── -->
@@ -181,6 +183,14 @@
         Birds especially — but also reptiles, amphibians, and insects — are a permanent part of what lives here.
         These are some of the most-documented species from our iNaturalist project.
       </p>
+      <div style="background:var(--green-deep);border-radius:8px;padding:.9rem 1.1rem;display:inline-flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:1.5rem">
+        <span style="font-size:1.1rem">📷</span>
+        <span style="font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.5">
+          Every wildlife observation below was submitted by a community member through <strong style="color:var(--gold-light)">iNaturalist</strong>.
+          Photograph something at the park and it could appear here — with your name on it.
+          <a href="get-started.html" style="color:var(--gold-light);font-weight:700;white-space:nowrap">Get started →</a>
+        </span>
+      </div>
 
       <h3 style="font-size:1.2rem;color:var(--green-deep);margin-bottom:1.25rem">🐦 Documented at the park</h3>
       <div class="wildlife-grid" style="margin-bottom:3rem">
@@ -223,22 +233,26 @@
     <div class="inat-explain">
       <h3>iNaturalist is our field notebook.</h3>
       <p>
-        We're a park run by volunteers and community members who care about this place.
-        iNaturalist gives us the infrastructure to document everything — and a global network of experts to help identify it.
-        When we're not sure what something is, we post it and let the community weigh in. You can too.
+        We rely on iNaturalist for final species identifications. We're not scientists — we're enthusiasts, volunteers,
+        and community members who care about what lives here. iNaturalist gives us access to a global network of experts
+        who can confirm or correct our identifications. When we're not sure what something is, we post it and let the
+        community weigh in.
       </p>
       <p>
         The project is called <strong style="color:var(--gold-light)">Palma Sola Botanical Park Collection Project</strong>.
         Every observation in it was submitted by a person walking through the park with their phone.
+        If you think we've misidentified something — bring the debate to the project.
+        That's exactly how it's supposed to work.
       </p>
 
-      <!-- Stats appear here, after the explanation, not as a scoreboard at the top -->
+      <!-- Stats — framed as community progress, not a scoreboard -->
+      <div style="margin:1.25rem 0 .5rem;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)">What the community has found so far</div>
       <div class="inat-stats-row">
-        <div class="inat-stat"><strong id="statTotal" class="pulse">—</strong><span>Observations</span></div>
-        <div class="inat-stat"><strong id="statSpecies" class="pulse">—</strong><span>Species</span></div>
-        <div class="inat-stat"><strong id="statObservers" class="pulse">—</strong><span>Observers</span></div>
-        <div class="inat-stat"><strong id="statWeek" class="pulse">—</strong><span>Added This Week</span></div>
+        <div class="inat-stat"><strong id="statSpecies" class="pulse">—</strong><span>Species Identified</span></div>
+        <div class="inat-stat"><strong id="statObservers" class="pulse">—</strong><span>Contributors</span></div>
+        <div class="inat-stat"><strong id="statWeek" class="pulse">—</strong><span>New This Week</span></div>
       </div>
+      <div style="font-size:.75rem;color:rgba(255,255,255,.4);margin-top:.5rem;text-align:center">Updates live from iNaturalist</div>
 
       <div style="margin-top:1.75rem;display:flex;gap:1rem;flex-wrap:wrap">
         <a href="get-started.html" class="btn btn-gold">📱 How to Get Started →</a>
