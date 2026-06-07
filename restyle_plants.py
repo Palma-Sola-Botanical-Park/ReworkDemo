@@ -38,7 +38,7 @@ import glob
 PLANT_CSS = """
   /* ── Plant page layout ─────────────────────────────────── */
   .plant-wrap {
-    max-width: 430px;
+    max-width: 680px;
     margin: 2rem auto;
     background: #e8e3d8;
     min-height: 80vh;
