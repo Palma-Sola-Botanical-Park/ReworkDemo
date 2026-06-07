@@ -230,6 +230,12 @@ async function loadINat() {
     });
     set('barTotal', total); set('barSpecies', species); set('barWeek', week);
     set('fTotal', total); set('fSpecies', species); set('fObservers', observers); set('fWeek', week);
+    // Nature page stats — species, observers, week (total removed)
+    ['statSpecies','statObservers','statWeek'].forEach((id,i) => {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = [species,observers,week][i].toLocaleString(); el.classList.remove('pulse'); }
+    });
+    // Index page inline stats
     ['statTotal','statSpecies','statObservers','statWeek'].forEach((id,i) => {
       const el = document.getElementById(id);
       if (el) { el.textContent = [total,species,observers,week][i].toLocaleString(); el.classList.remove('pulse'); }
