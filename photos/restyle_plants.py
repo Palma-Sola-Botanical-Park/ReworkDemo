@@ -1,11 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fakahatchee Grass · Palma Sola Botanical Park</title>
-<link rel="stylesheet" href="../css/site.css">
-<style>
+#!/usr/bin/env python3
+"""
+restyle_plants.py
+=================
+Converts all original PSBP plant pages to the new site-integrated template.
+
+USAGE
+-----
+1. Place this script in the SAME folder as your plant HTML files
+   (i.e. inside the /plants/ directory of your repo).
+
+2. Run:
+       python3 restyle_plants.py
+
+3. It writes restyled files to a subfolder called  output/
+   inside the same directory.  Review them, then copy them
+   back over the originals when you're happy.
+
+WHAT IT DOES
+------------
+For each  PSBP-*.html  file it finds:
+  - Strips the original <head> and replaces it with the new one
+    (site.css link + plant.css inline styles)
+  - Replaces the old logo-bar header with <div id="nav-placeholder">
+  - Renames CSS classes to the new plant-prefixed versions
+  - Removes the outbound iNaturalist link
+  - Replaces the old "See All Plants" link with "Explore More Plants"
+    pointing to ../nature.html
+  - Adds the footer placeholder, site.js script, and injectShared() call
+  - Leaves all actual content (text, images, badges, sections) untouched
+"""
+
+import os
+import re
+import glob
+
+# ── Inline CSS to inject into every plant page ───────────────────────────────
+PLANT_CSS = """
   /* ── Plant page layout ─────────────────────────────────── */
   .plant-wrap {
     max-width: 430px;
@@ -130,75 +160,153 @@
   @media (prefers-reduced-motion:reduce) {
     .plant-section,.plant-more-info,.plant-toxic-section,.plant-safe-section,.plant-caution-section,.all-plants-link { animation:none; }
   }
-</style>
-</head>
-<body>
-<div id="nav-placeholder"></div>
+"""
 
-<div id="nav-placeholder"></div>
+# ── New <head> template ───────────────────────────────────────────────────────
+HEAD_TEMPLATE = """<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<link rel="stylesheet" href="../css/site.css">
+<style>{css}</style>
+</head>"""
 
-<div class="plant-wrap">
-<div class="plant-hero">
-  <img src="PSBP-00030_Fakahatchee_Grass.jpg" alt="Fakahatchee Grass at Palma Sola Botanical Park" loading="lazy">
-  <div class="plant-hero-overlay">
-    <div class="plant-hero-category">Plants to Watch and Invasive Awareness</div>
-    <div class="plant-hero-name">Fakahatchee Grass</div>
-  </div>
-</div>
-<div class="plant-sci-band">
-  <span class="plant-sci-name">Tripsacum dactyloides</span>
-  <a class="plant-family-tag" href="../nature.html?family=Poaceae">Poaceae</a>
-</div>
-<div class="plant-content">
-  <div class="plant-status-row"><span class="badge badge-native">🌿 Florida Native</span><span class="badge badge-green">✅ Not Invasive</span><span class="badge badge-safe">✅ Not Toxic</span></div>
-
-  <div class="plant-section">
-    <div class="plant-section-header"><span class="plant-section-icon">⚡</span><span class="plant-section-title">Quick Hits</span></div>
-    <ul class="quick-hits-list"><li>Fakahatchee Grass is in the same botanical subtribe as corn's wild ancestor — the two can hybridize. Its tiny seed spike looks strikingly similar to a miniature ear of early corn.</li><li>The popped seeds of Fakahatchee Grass are reportedly almost indistinguishable from open-pollinated strawberry popcorn — a fact that has interested researchers studying corn's origins.</li><li>It gets both its common names from the same place: the Fakahatchee Strand Preserve State Park in Collier County — <strong>one of Florida's most</strong> ecologically significant wild areas, about 150 miles south of our park.</li><li>The dense fibrous root system is so <strong>effective at preventing</strong> erosion that it is actively used in restoration projects along stream banks and wet slopes.</li></ul>
-  </div>
-
-  <div class="plant-section">
-    <div class="plant-section-header"><span class="plant-section-icon">🌍</span><span class="plant-section-title">Origin</span></div>
-    <div class="plant-section-body"><p>Native throughout Florida and the eastern United States, west to Kansas and south to northern South America. Found in moist to wet habitats — wet prairies, pond edges, stream banks, roadside ditches, and low woods. One of Florida's most widespread native grasses.</p></div>
-  </div>
-
-  <div class="plant-more-info"><div class="plant-section-header"><span class="plant-section-icon">🔍</span><span class="plant-section-title">More Information</span></div><ul class="more-info-list"><li>The corn connection is genuine but requires precision to explain correctly. Modern corn (Zea mays) descended from Teosinte — a group of wild Mexican grasses — through roughly 10,000 years of Indigenous agricultural selection. Fakahatchee Grass (Tripsacum) and corn's Teosinte ancestors belong to the same botanical subtribe, Tripsacinae, and the two genera can hybridize experimentally. The seed spike of Tripsacum looks strikingly like a miniature primitive corn ear — complete with the stacked kernel structure of early cultivated varieties. Indigenous peoples in the Southeast knew Tripsacum well and likely observed the resemblance; the seeds have been found in archaeological sites, though how they were used is not fully documented.</li><li>Researchers have noted that the popped kernels of Tripsacum dactyloides are almost indistinguishable from open-pollinated strawberry popcorn — adding a sensory dimension to the evolutionary story.</li><li>The name Fakahatchee comes from the Mikasuki language — the strand it names in Collier County is one of Florida's most important wild orchid habitats and home to the only wild population of the Royal Palm in the US. This plant shares its name with one of Florida's finest wild places.</li><li>A note on this plant's category: Fakahatchee Grass appears in the 'Plants to Watch and Invasive Awareness' section not because it is invasive or listed by FISC, but because it spreads aggressively at Palma Sola beyond where it was originally planted. This is worth noting for park management even though it poses no ecological threat to natural areas outside the park. Florida native, not on any invasive species list.</li></ul></div>
-
-  <div class="plant-section"><div class="plant-section-header"><span class="plant-section-icon">🦋</span><span class="plant-section-title">Wildlife Value</span></div><div class="plant-section-body"><p>Fakahatchee Grass is a valuable native grass for pond edges and wet margins at Palma Sola. The large seeds produced in late summer and fall are eaten by a range of birds and small mammals. The dense clumping form — with stems often bare in the center and arching outward — provides excellent ground-level cover and nesting structure for ground-feeding birds and small animals. The leaves are highly palatable to deer. The fibrous root mass stabilizes wet soil effectively and supports the soil invertebrate community. Several skipper butterfly species use native grasses in this genus as larval hosts.</p></div></div>
-
-  <div class="plant-section"><div class="plant-section-header"><span class="plant-section-icon">🏷️</span><span class="plant-section-title">Also Known As</span></div><div class="alias-list"><span class="alias-tag">Eastern Gamagrass</span><span class="alias-tag">Wild Corn</span><span class="alias-tag">Bullgrass</span></div></div>
-
-  <div class="plant-section"><div class="plant-section-header"><span class="plant-section-icon">🔬</span><span class="plant-section-title">Reproduction &amp; Identification</span></div><div class="repro-list"><div class="repro-item"><p>Warm-season perennial spreading by short, jointed rhizomes — forms clumps that are often bare in the center with stems arching outward.</p></div><div class="repro-item"><div class="repro-label">Flowers</div><p>Stout terminal and lateral spikes appearing from late spring through fall — white, pink, yellow, or rust colored. Male flowers (pollen-bearing) are borne in the upper portion of the spike; female flowers (seed-bearing) in the lower portion, maturing from top to bottom.</p></div><div class="repro-item"><div class="repro-label">Seeds</div><p>Relatively large, enclosed in a hard cupule — matures unevenly from top of spike downward. Seed yield is naturally low and seeds don't reseed readily from established stands.</p></div><div class="repro-item"><div class="repro-label">Seed spike</div><p>The defining identification feature — a cylindrical spike with distinct stacked segments that look remarkably like a tiny primitive corn ear.</p></div><div class="repro-item"><div class="repro-label">Leaves</div><p>3 to 6 feet long, flat and broad for a grass, dark green, slightly coarse to the touch.</p></div><div class="repro-item"><div class="repro-label">What to Look For</div><p>The large, arching clump with stems spreading outward from a bare center is distinctive. The cylindrical seed spikes rising above the foliage in summer and fall are the best identification feature — look for the corn-ear resemblance. The leaves are noticeably broader and coarser than most ornamental grasses.</p></div></div></div>
-
-  <div class="plant-section"><div class="plant-section-header"><span class="plant-section-icon">📐</span><span class="plant-section-title">Size &amp; Growing Conditions</span></div><div class="data-grid"><div class="data-item "><div class="data-label">Height</div><div class="data-value">4 to 8 feet at flowering</div></div><div class="data-item "><div class="data-label">Spread</div><div class="data-value">4 to 6 feet per clump</div></div><div class="data-item full-width"><div class="data-label">Habit</div><div class="data-value">clump-forming, warm-season perennial; stems arching outward from center; often bare in the middle of mature clumps</div></div><div class="data-item "><div class="data-label">Growth rate</div><div class="data-value">moderate</div></div><div class="data-item "><div class="data-label">Texture</div><div class="data-value">medium-coarse</div></div><div class="data-item "><div class="data-label">Light</div><div class="data-value">full sun to light shade</div></div><div class="data-item full-width"><div class="data-label">Soil tolerances</div><div class="data-value">moist to wet; dry to partially wet; standing water tolerated if it drains reasonably quickly</div></div><div class="data-item full-width"><div class="data-label">Drought tolerance</div><div class="data-value">moderate — rhizomes provide resilience</div></div><div class="data-item "><div class="data-label">Salt tolerance</div><div class="data-value">medium</div></div><div class="data-item full-width"><div class="data-label">Cold tolerance</div><div class="data-value">excellent; USDA zones 5–9</div></div><div class="data-item full-width"><div class="data-label">Note</div><div class="data-value">cut back in late winter; divides well; useful for erosion control on wet slopes and stream banks</div></div></div></div>
-
-  
-  
-  <div class="plant-section">
-    <div class="plant-section-header"><span class="plant-section-icon">📝</span><span class="plant-section-title">Notes</span></div>
-    <div class="plant-section-body"><p>NOMENCLATURE / RELATIONSHIP: Tripsacum belongs to the subtribe Tripsacinae alongside Zea (corn) and its wild ancestor teosinte; the genera can hybridize. Tripsacum is a very close relative of corn, not its direct ancestor.</p></div>
-  </div>
-
-  <div class="plant-safe-section">
-    <div class="plant-section-header"><span class="plant-section-icon">🌱</span><span class="plant-section-title">Edibility &amp; Toxicity</span></div>
-    <div class="plant-section-body"><p><strong>Edible.</strong> Not commonly eaten. Seeds eaten by wildlife. Historical records suggest seeds were used as food by Indigenous peoples — possibly popped. Seed protein content is notably high (over 27%).</p></div>
-  </div>
-
-  
-  <a class="all-plants-link" href="../nature.html">🌿 Explore More Plants</a>
-</div>
-</div><!-- /.plant-wrap -->
-
-<div id="footer-placeholder"></div>
-<script src="../js/site.js"></script>
-<script>
-injectShared({ inatBar: false });
-</script>
-
+# ── Closing template (footer + scripts) ──────────────────────────────────────
+CLOSING = """
 <div id="footer-placeholder"></div>
 <script src="../js/site.js"></script>
 <script>
 injectShared({ inatBar: false });
 </script>
 </body>
-</html>
+</html>"""
+
+
+def restyle(html: str) -> str:
+    # 1. Extract <title>
+    title_match = re.search(r'<title>(.*?)</title>', html, re.DOTALL)
+    title = title_match.group(1).strip() if title_match else 'Plant · Palma Sola Botanical Park'
+
+    # 2. Extract everything inside <body>...</body>
+    body_match = re.search(r'<body>(.*?)</body>', html, re.DOTALL)
+    if not body_match:
+        print("  WARNING: no <body> tag found, skipping")
+        return html
+    body = body_match.group(1)
+
+    # 3. Remove the old <header> block (logo bar)
+    body = re.sub(r'<header[^>]*>.*?</header>', '', body, flags=re.DOTALL)
+
+    # 4. Remove the old <footer> block
+    body = re.sub(r'<footer[^>]*>.*?</footer>', '', body, flags=re.DOTALL)
+
+    # 5. Remove the outbound iNaturalist link entirely
+    body = re.sub(r'<a\s+class="inat-link"[^>]*>.*?</a>', '', body, flags=re.DOTALL)
+
+    # 6. Replace "See All Plants" link with "Explore More Plants"
+    body = re.sub(
+        r'<a\s+class="all-plants-link"[^>]*>.*?</a>',
+        '<a class="all-plants-link" href="../nature.html">🌿 Explore More Plants</a>',
+        body, flags=re.DOTALL
+    )
+
+    # 7. Rename CSS classes: old → new
+    class_map = {
+        'class="hero"':              'class="plant-hero"',
+        'class="hero-overlay"':      'class="plant-hero-overlay"',
+        'class="hero-category"':     'class="plant-hero-category"',
+        'class="hero-common-name"':  'class="plant-hero-name"',
+        'class="scientific-band"':   'class="plant-sci-band"',
+        'class="scientific-name"':   'class="plant-sci-name"',
+        'class="family-tag"':        'class="plant-family-tag"',
+        'class="content"':           'class="plant-content"',
+        'class="status-row"':        'class="plant-status-row"',
+        'class="section"':           'class="plant-section"',
+        'class="more-info-section"': 'class="plant-more-info"',
+        'class="toxic-section"':     'class="plant-toxic-section"',
+        'class="safe-section"':      'class="plant-safe-section"',
+        'class="caution-section"':   'class="plant-caution-section"',
+        'class="section-header"':    'class="plant-section-header"',
+        'class="section-icon"':      'class="plant-section-icon"',
+        'class="section-title"':     'class="plant-section-title"',
+        'class="section-body"':      'class="plant-section-body"',
+    }
+    for old, new in class_map.items():
+        body = body.replace(old, new)
+
+    # 8. Convert family tag span into a link to nature.html?family=FAMILYNAME
+    body = re.sub(
+        r'<span class="plant-family-tag">([^<]+)</span>',
+        lambda m: f'<a class="plant-family-tag" href="../nature.html?family={m.group(1).strip()}">{m.group(1)}</a>',
+        body
+    )
+
+    # 9. Wrap body content in .plant-wrap if not already present
+    body = body.strip()
+    if 'class="plant-wrap"' not in body:
+        body = f'<div class="plant-wrap">\n{body}\n</div><!-- /.plant-wrap -->'
+
+    # 9. Build final document
+    head = HEAD_TEMPLATE.format(title=title, css=PLANT_CSS)
+    doc = f"""<!DOCTYPE html>
+<html lang="en">
+{head}
+<body>
+<div id="nav-placeholder"></div>
+
+{body}
+{CLOSING}"""
+
+    return doc
+
+
+def main():
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Look for PSBP files — could be in same dir or in plants/ subfolder
+    pattern = os.path.join(script_dir, 'PSBP-*.html')
+    files = sorted(glob.glob(pattern))
+
+    # If not found locally, try plants/ subfolder
+    if not files:
+        plants_dir = os.path.join(script_dir, 'plants')
+        pattern = os.path.join(plants_dir, 'PSBP-*.html')
+        files = sorted(glob.glob(pattern))
+        if files:
+            script_dir = plants_dir
+
+    if not files:
+        print("No PSBP-*.html files found.")
+        print(f"Looked in: {script_dir} and {os.path.join(script_dir, 'plants')}")
+        return
+
+    out_dir = os.path.join(script_dir, 'output')
+    os.makedirs(out_dir, exist_ok=True)
+
+    print(f"Found {len(files)} plant pages. Writing restyled versions to: {out_dir}/\n")
+
+    ok = 0
+    for path in files:
+        fname = os.path.basename(path)
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                html = f.read()
+            result = restyle(html)
+            out_path = os.path.join(out_dir, fname)
+            with open(out_path, 'w', encoding='utf-8') as f:
+                f.write(result)
+            print(f"  ✓ {fname}")
+            ok += 1
+        except Exception as e:
+            print(f"  ✗ {fname}  ERROR: {e}")
+
+    print(f"\nDone. {ok}/{len(files)} files converted.")
+    print(f"\nNext steps:")
+    print(f"  1. Open a few files from {out_dir}/ and spot-check them")
+    print(f"  2. When happy, copy them back over the originals:")
+    print(f"       cp output/*.html .")
+    print(f"  3. Commit and push to GitHub")
+
+
+if __name__ == '__main__':
+    main()
