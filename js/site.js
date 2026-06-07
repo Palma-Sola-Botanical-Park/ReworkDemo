@@ -553,18 +553,43 @@ function stepPlants(dir) {
 }
 
 function filterPlants() {
-  const q = (document.getElementById('plantSearch')?.value||'').toLowerCase();
-  const filtered = PLANTS.filter(p => {
-    const text = !q || [p.common,p.sci,p.family,p.cat,p.quick].some(s=>(s||'').toLowerCase().includes(q));
-    return text
-      && (!_activeFilters.has('native')    || p.native)
-      && (!_activeFilters.has('butterfly') || p.butterfly)
-      && (!_activeFilters.has('toxic')     || p.toxic)
-      && (!_activeFilters.has('edible')    || p.edible)
-      && (!_activeFilters.has('wetland')   || p.wetland)
-      && (!_activeFilters.has('invasive')  || p.invasive);
-  });
-  renderPlants(filtered);
+  const q = (document.getElementById('plantSearch')?.value||'').toLowerCase().trim();
+
+  // Apply tag filters first
+  let pool = PLANTS.filter(p =>
+    (!_activeFilters.has('native')    || p.native)
+    && (!_activeFilters.has('butterfly') || p.butterfly)
+    && (!_activeFilters.has('toxic')     || p.toxic)
+    && (!_activeFilters.has('edible')    || p.edible)
+    && (!_activeFilters.has('wetland')   || p.wetland)
+    && (!_activeFilters.has('invasive')  || p.invasive)
+  );
+
+  if (!q) { renderPlants(pool); return; }
+
+  // Score each plant — higher score = better match = shown first
+  const scored = pool.map(p => {
+    const common = (p.common||'').toLowerCase();
+    const sci    = (p.sci||'').toLowerCase();
+    const family = (p.family||'').toLowerCase();
+    const quick  = (p.quick||'').toLowerCase();
+    const more   = (p.more||p.origin||'').toLowerCase();
+
+    let score = 0;
+    if (common.startsWith(q))         score += 100; // starts with query — top priority
+    else if (common.includes(q))      score += 80;  // name contains query
+    if (sci.includes(q))              score += 60;  // scientific name
+    if (family.includes(q))           score += 40;  // family name
+    if (quick.includes(q))            score += 20;  // quick hits text
+    if (more.includes(q))             score += 10;  // more info text
+
+    return { p, score };
+  })
+  .filter(x => x.score > 0)
+  .sort((a, b) => b.score - a.score)
+  .map(x => x.p);
+
+  renderPlants(scored);
 }
 
 function toggleFilter(type) {
