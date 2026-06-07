@@ -173,10 +173,19 @@
         <button class="filter-btn"             data-filter="invasive"  onclick="toggleFilter('invasive')">🚫 Invasive</button>
         <button class="filter-btn" onclick="clearFilters()" style="border-color:var(--border)">Clear</button>
       </div>
-      <p style="font-size:.82rem;color:var(--text-soft);margin-bottom:1.5rem">Showing <strong id="plantCount">0</strong> plants</p>
+      <p style="font-size:1rem;color:var(--text-soft);margin-bottom:1.5rem">Showing <strong id="plantCount">0</strong> plants
+        <span id="plantPageInfo" style="font-size:.9rem;color:#aaa"></span>
+      </p>
 
       <div class="grid-auto" id="plantGrid">
         <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-soft)">Loading…</div>
+      </div>
+
+      <!-- Pagination controls -->
+      <div id="plantPagination" style="display:none;display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.5rem;flex-wrap:wrap">
+        <button id="plantPrev" onclick="stepPlants(-1)" style="background:var(--green-deep);color:white;border:none;border-radius:6px;padding:.6rem 1.2rem;cursor:pointer;font-size:1rem;font-weight:600">← Previous</button>
+        <span id="plantPageLabel" style="font-size:1rem;color:var(--text-soft)"></span>
+        <button id="plantNext" onclick="stepPlants(1)" style="background:var(--green-deep);color:white;border:none;border-radius:6px;padding:.6rem 1.2rem;cursor:pointer;font-size:1rem;font-weight:600">Next →</button>
       </div>
     </div>
 
