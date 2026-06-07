@@ -206,7 +206,7 @@ HEAD_TEMPLATE = """<head>
 # ── Closing template (footer + scripts) ──────────────────────────────────────
 CLOSING = """
 <!-- Floating back button — always visible, no scrolling needed -->
-<a class="plant-float-back" href="../nature.html#tabSection">
+<a class="plant-float-back" href="../nature.html#plants">
   🌿 All Plants
 </a>
 
@@ -243,7 +243,7 @@ def restyle(html: str) -> str:
     # 6. Replace "See All Plants" link with "Explore More Plants"
     body = re.sub(
         r'<a\s+class="all-plants-link"[^>]*>.*?</a>',
-        '<a class="all-plants-link" href="../nature.html#tabSection">🌿 Explore More Plants</a>',
+        '<a class="all-plants-link" href="../nature.html#plants">🌿 Explore More Plants</a>',
         body, flags=re.DOTALL
     )
 
