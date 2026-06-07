@@ -501,18 +501,60 @@ function plantCard(p) {
   </a>`;
 }
 
+// ── PLANT PAGINATION ─────────────────────────────────────────
+const PLANTS_PER_PAGE = 10;
+let _plantPage = 0;
+let _filteredPlants = [];
+
 function renderPlants(list) {
-  const grid = document.getElementById('plantGrid');
+  _filteredPlants = list;
+  _plantPage = 0;
+  renderPlantPage();
+}
+
+function renderPlantPage() {
+  const grid  = document.getElementById('plantGrid');
+  const ctr   = document.getElementById('plantCount');
+  const label = document.getElementById('plantPageLabel');
+  const prev  = document.getElementById('plantPrev');
+  const next  = document.getElementById('plantNext');
+  const pag   = document.getElementById('plantPagination');
+  const info  = document.getElementById('plantPageInfo');
   if (!grid) return;
-  const ctr = document.getElementById('plantCount');
-  if (ctr) ctr.textContent = list.length;
-  grid.innerHTML = list.length ? list.map(plantCard).join('') :
+
+  const total     = _filteredPlants.length;
+  const totalPages = Math.ceil(total / PLANTS_PER_PAGE);
+  const start     = _plantPage * PLANTS_PER_PAGE;
+  const slice     = _filteredPlants.slice(start, start + PLANTS_PER_PAGE);
+
+  if (ctr) ctr.textContent = total;
+  if (info && totalPages > 1) info.textContent = ` — page ${_plantPage + 1} of ${totalPages}`;
+  else if (info) info.textContent = '';
+
+  grid.innerHTML = slice.length ? slice.map(plantCard).join('') :
     '<p class="text-soft" style="grid-column:1/-1;padding:2rem;text-align:center">No plants match. Try clearing some filters.</p>';
+
+  // Show/hide pagination
+  if (pag) pag.style.display = totalPages > 1 ? 'flex' : 'none';
+  if (label) label.textContent = `${_plantPage + 1} of ${totalPages}`;
+  if (prev) prev.style.opacity = _plantPage === 0 ? '.3' : '1';
+  if (next) next.style.opacity = _plantPage >= totalPages - 1 ? '.3' : '1';
+
+  // Scroll to top of plant grid when page changes
+  if (_plantPage > 0) {
+    document.getElementById('tabSection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function stepPlants(dir) {
+  const total = Math.ceil(_filteredPlants.length / PLANTS_PER_PAGE);
+  _plantPage  = Math.max(0, Math.min(total - 1, _plantPage + dir));
+  renderPlantPage();
 }
 
 function filterPlants() {
   const q = (document.getElementById('plantSearch')?.value||'').toLowerCase();
-  renderPlants(PLANTS.filter(p => {
+  const filtered = PLANTS.filter(p => {
     const text = !q || [p.common,p.sci,p.family,p.cat,p.quick].some(s=>(s||'').toLowerCase().includes(q));
     return text
       && (!_activeFilters.has('native')    || p.native)
@@ -521,7 +563,8 @@ function filterPlants() {
       && (!_activeFilters.has('edible')    || p.edible)
       && (!_activeFilters.has('wetland')   || p.wetland)
       && (!_activeFilters.has('invasive')  || p.invasive);
-  }));
+  });
+  renderPlants(filtered);
 }
 
 function toggleFilter(type) {
