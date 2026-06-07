@@ -9,6 +9,13 @@
 /* ── Nature-page specific ── */
 @media (max-width: 700px) {
   #recentObsGrid { grid-template-columns: repeat(2,1fr) !important; }
+  /* Stack intro text and green banner vertically on phone */
+  #panel-plants > div:first-child,
+  #panel-wildlife > div:first-child { grid-template-columns: 1fr !important; }
+  /* On phone, collapse hero to minimal size when returning from plant page */
+  .nature-hero { padding: 1.5rem 1rem; }
+  .nature-hero h1 { font-size: 1.6rem; margin-bottom: .4rem; }
+  .nature-hero p { font-size: .95rem; margin-bottom: 1rem; }
 }
 
 .nature-hero {
@@ -177,6 +184,7 @@
         <span id="plantPageInfo" style="font-size:.9rem;color:#aaa"></span>
       </p>
 
+      <div id="plants"></div>
       <div class="grid-auto" id="plantGrid">
         <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-soft)">Loading…</div>
       </div>
@@ -364,14 +372,17 @@ if (_familyParam || _searchParam) {
   const searchEl = document.getElementById('plantSearch');
   if (searchEl) {
     searchEl.value = _familyParam || _searchParam;
-    // Show a friendly heading
-    const ctr = document.getElementById('plantCount');
-    if (_familyParam && ctr) {
-      const label = document.createElement('div');
-      label.style.cssText = 'font-size:1rem;color:var(--text-soft);margin-bottom:.5rem';
+    const label = document.createElement('div');
+    label.style.cssText = 'font-size:1rem;color:var(--text-soft);margin-bottom:.5rem';
+    if (_familyParam) {
       label.innerHTML = `Showing all <strong>${_familyParam}</strong> plants in the park &nbsp;<a href="nature.html" style="font-size:.9rem;color:var(--green-mid)">Clear →</a>`;
-      ctr.parentNode.insertBefore(label, ctr);
     }
+    const ctr = document.getElementById('plantCount');
+    if (ctr && _familyParam) ctr.parentNode.insertBefore(label, ctr);
+    // Scroll to plant grid after a moment to let plants load
+    setTimeout(() => {
+      document.getElementById('plants')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 800);
   }
 }
 
