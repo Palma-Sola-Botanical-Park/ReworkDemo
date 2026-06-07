@@ -346,7 +346,27 @@
 <script src="js/site.js"></script>
 <script>
 injectShared({ inatBar: false, inatFooter: true });
-loadPlants(); // fetches plants.json and renders all plants
+
+// Check for ?family= or ?search= URL parameter — pre-populate search
+const _urlParams = new URLSearchParams(window.location.search);
+const _familyParam = _urlParams.get('family');
+const _searchParam = _urlParams.get('search');
+if (_familyParam || _searchParam) {
+  const searchEl = document.getElementById('plantSearch');
+  if (searchEl) {
+    searchEl.value = _familyParam || _searchParam;
+    // Show a friendly heading
+    const ctr = document.getElementById('plantCount');
+    if (_familyParam && ctr) {
+      const label = document.createElement('div');
+      label.style.cssText = 'font-size:1rem;color:var(--text-soft);margin-bottom:.5rem';
+      label.innerHTML = `Showing all <strong>${_familyParam}</strong> plants in the park &nbsp;<a href="nature.html" style="font-size:.9rem;color:var(--green-mid)">Clear →</a>`;
+      ctr.parentNode.insertBefore(label, ctr);
+    }
+  }
+}
+
+loadPlants(); // fetches plants.json, renders all plants, then applies any URL filter
 // modal removed — plant cards link directly to detail pages
 
 // Announcements bar — cycling handled inside loadAnnouncements()
@@ -392,9 +412,9 @@ function renderRecentPage(page) {
       const url  = o.photos[0].url.replace('square', 'large');
       const name = o.species_guess || o.taxon?.name || 'Unknown species';
       const by   = o.user?.login || 'observer';
-      const raw  = o.observed_on || o.created_at?.slice(0,10);
+      const raw  = o.created_at?.slice(0,10);
       const dt   = raw ? new Date(raw + 'T12:00') : null;
-      const dateStr = dt ? dt.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' }) : '';
+      const dateStr = dt ? 'Added ' + dt.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' }) : '';
       return `<div style="border-radius:10px;overflow:hidden;background:var(--white);box-shadow:0 2px 12px rgba(0,0,0,.09)">
         <div style="height:220px;background-image:url('${url}');background-size:cover;background-position:center"></div>
         <div style="padding:1rem">
