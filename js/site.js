@@ -425,57 +425,42 @@ async function loadVolunteerOfMonth() {
   } catch(e) { /* silent */ }
 }
 
-// ── PLANT DATA ────────────────────────────────────────────────
-const PLANTS = [
-  {id:'PSBP-00001',common:'Tree Crinum',sci:'Crinum asiaticum',family:'Amaryllidaceae',origin:'Non-native',cat:'Flowering Shrubs & Vines',native:false,butterfly:false,toxic:true,edible:false,invasive:false,wetland:false,quick:'One of the largest bulbs on earth — up to 40 lbs. Night-blooming for Sphinx moths. Nicknamed cemetery lily for its near-immortal constitution.'},
-  {id:'PSBP-00002',common:'Weeping Bottlebrush',sci:'Melaleuca viminalis',family:'Myrtaceae',origin:'Non-native',cat:'Flowering Shrubs & Vines',native:false,butterfly:true,toxic:false,edible:false,invasive:false,wetland:false,quick:'That red brush is stamens, not petals. Crush a leaf for citrus. Hummingbirds, butterflies, and bees swarm it year-round.'},
-  {id:'PSBP-00003',common:'Buccaneer Palm',sci:'Pseudophoenix sargentii',family:'Arecaceae',origin:'Native',cat:'Native Palms & Cycads',native:true,butterfly:false,toxic:false,edible:false,invasive:false,wetland:false,quick:'Fewer than 50 wild specimens survive in Florida. Blue-gray fronds shimmer silver. Every cultivated specimen is a conservation choice.'},
-  {id:'PSBP-00004',common:'Silk Floss Tree',sci:'Ceiba speciosa',family:'Malvaceae',origin:'Non-native',cat:'Tropical Specimen Trees',native:false,butterfly:false,toxic:false,edible:false,invasive:false,wetland:false,quick:'Trunk spines may be defenses against extinct megafauna. Green bark photosynthesizes. One study found 80 insect species on a single tree.'},
-  {id:'PSBP-00006',common:'Peregrina',sci:'Jatropha integerrima',family:'Euphorbiaceae',origin:'Non-native',cat:'Flowering Shrubs & Vines',native:false,butterfly:true,toxic:true,edible:false,invasive:false,wetland:false,quick:'Every part is toxic yet butterflies and hummingbirds love it. Find three different leaf shapes on the same branch.'},
-  {id:'PSBP-00007',common:'Jacaranda',sci:'Jacaranda mimosifolia',family:'Bignoniaceae',origin:'Non-native',cat:'Tropical Specimen Trees',native:false,butterfly:true,toxic:false,edible:false,invasive:false,wetland:false,quick:'The entire canopy turns purple before a single leaf appears. Vulnerable in wild Argentina, planted on every tropical boulevard on Earth.'},
-  {id:'PSBP-00008',common:'Beach Sunflower',sci:'Helianthus debilis',family:'Asteraceae',origin:'Native',cat:'Native Wildflowers',native:true,butterfly:true,toxic:false,edible:true,invasive:false,wetland:false,quick:"Florida's own native sunflower. Seeds feed migrating painted buntings and goldfinches each fall. Thrives in pure coastal sand."},
-  {id:'PSBP-00010',common:'Geiger Tree',sci:'Cordia sebestena',family:'Boraginaceae',origin:'Native',cat:'Tropical Specimen Trees',native:true,butterfly:true,toxic:false,edible:true,invasive:false,wetland:false,quick:"Audubon painted it in Key West. Blooms nearly year-round. Host plant for the federally endangered Schaus' swallowtail butterfly."},
-  {id:'PSBP-00011',common:'African Baobab',sci:'Adansonia digitata',family:'Malvaceae',origin:'Non-native',cat:'Tropical Specimen Trees',native:false,butterfly:false,toxic:false,edible:true,invasive:false,wetland:false,quick:'Can live 1,000+ years. Fruit has 6× more vitamin C than oranges. Elephants tear open the trunk for water during drought.'},
-  {id:'PSBP-00012',common:'Peacock Flower',sci:'Caesalpinia pulcherrima',family:'Fabaceae',origin:'Non-native',cat:'Flowering Shrubs & Vines',native:false,butterfly:true,toxic:true,edible:false,invasive:false,wetland:false,quick:'National flower of Barbados. Linnaeus named it "most beautiful." Butterflies and hummingbirds fight over the near-constant blooms.'},
-  {id:'PSBP-00013',common:'Sunshine Mimosa',sci:'Mimosa strigillosa',family:'Fabaceae',origin:'Native',cat:'Native Wildflowers',native:true,butterfly:true,toxic:false,edible:false,invasive:false,wetland:true,quick:'Touch the leaves — they fold shut in seconds. Fixes nitrogen in the soil. Larval host for the Little Sulphur butterfly.'},
-  {id:'PSBP-00015',common:'Coral Bean',sci:'Erythrina herbacea',family:'Fabaceae',origin:'Native',cat:'Native Trees & Shrubs',native:true,butterfly:true,toxic:true,edible:false,invasive:false,wetland:false,quick:'Spring flowers timed perfectly for Ruby-throated Hummingbird migration. Brilliant red seeds — beautiful and seriously toxic.'},
-  {id:'PSBP-00017',common:'Paurotis Palm',sci:'Acoelorrhaphe wrightii',family:'Arecaceae',origin:'Native',cat:'Native Palms & Cycads',native:true,butterfly:false,toxic:false,edible:false,invasive:false,wetland:true,quick:'The Everglades Palm — the only species in its genus. Dense colonies shelter wading birds and anchor the pond edge.'},
-  {id:'PSBP-00018',common:'Gumbo Limbo',sci:'Bursera simaruba',family:'Burseraceae',origin:'Native',cat:'Native Trees & Shrubs',native:true,butterfly:true,toxic:false,edible:false,invasive:false,wetland:false,quick:'The Tourist Tree — bark is always red and peeling. Stick a branch in the ground; it roots. Hurricane-resistant.'},
-  {id:'PSBP-00023',common:'Bald Cypress',sci:'Taxodium distichum',family:'Cupressaceae',origin:'Native',cat:'Native Wetland',native:true,butterfly:false,toxic:false,edible:false,invasive:false,wetland:true,quick:'The oldest in eastern North America is 2,624 years old. One of the few deciduous conifers. The knees still puzzle scientists.'},
-  {id:'PSBP-00024',common:'Coontie Palm',sci:'Zamia integrifolia',family:'Zamiaceae',origin:'Native',cat:'Native Palms & Cycads',native:true,butterfly:true,toxic:true,edible:false,invasive:false,wetland:false,quick:"Florida's only native cycad. Sole host plant for the Atala butterfly — once thought extinct in Florida."},
-  {id:'PSBP-00025',common:'Dahoon Holly',sci:'Ilex cassine',family:'Aquifoliaceae',origin:'Native',cat:'Native Trees & Shrubs',native:true,butterfly:false,toxic:true,edible:false,invasive:false,wetland:true,quick:'Berries toxic to people, safe for birds. Overripe berries ferment — Cedar Waxwings have been documented intoxicated after feeding.'},
-  {id:'PSBP-00027',common:'Live Oak',sci:'Quercus virginiana',family:'Fagaceae',origin:'Native',cat:'Native Trees & Shrubs',native:true,butterfly:true,toxic:false,edible:true,invasive:false,wetland:false,quick:'500+ caterpillar species. USS Constitution cannonballs bounced off it. Less a tree than an entire ecosystem.'},
-  {id:'PSBP-00028',common:'Red Mangrove',sci:'Rhizophora mangle',family:'Rhizophoraceae',origin:'Native',cat:'Native Wetland',native:true,butterfly:false,toxic:false,edible:false,invasive:false,wetland:true,quick:"Seeds float for a year before rooting. Prop roots nurse Florida's seafood industry. Protected by state law."},
-  {id:'PSBP-00029',common:'Alligator Flag',sci:'Thalia geniculata',family:'Marantaceae',origin:'Native',cat:'Native Wetland',native:true,butterfly:true,toxic:false,edible:true,invasive:false,wetland:true,quick:'Leaves wave when an alligator swims through. Seminoles ate the roots. Larval host for the Brazilian Skipper butterfly.'},
-  {id:'PSBP-00030',common:'Fakahatchee Grass',sci:'Tripsacum dactyloides',family:'Poaceae',origin:'Native',cat:'Native Wetland',native:true,butterfly:false,toxic:false,edible:false,invasive:false,wetland:true,quick:'Same botanical subtribe as corn — they can hybridize. Seed spike looks exactly like a miniature primitive corn ear.'},
-  {id:'PSBP-00032',common:'Mahogany',sci:'Swietenia mahagoni',family:'Meliaceae',origin:'Native',cat:'Native Trees & Shrubs',native:true,butterfly:false,toxic:false,edible:false,invasive:false,wetland:false,quick:"The original mahogany — Chippendale's furniture came from this exact species. Threatened in Florida."},
-  {id:'PSBP-00033',common:'Wild Lime',sci:'Zanthoxylum fagara',family:'Rutaceae',origin:'Native',cat:'Native Trees & Shrubs',native:true,butterfly:true,toxic:false,edible:true,invasive:false,wetland:false,quick:"Host plant for Florida's largest butterfly — the Giant Swallowtail. Crush a leaf: instant citrus."},
-  {id:'PSBP-00034',common:'Golden Canna',sci:'Canna flaccida',family:'Cannaceae',origin:'Native',cat:'Native Wetland',native:true,butterfly:true,toxic:false,edible:true,invasive:false,wetland:true,quick:"Florida's only native Canna. Seeds viable after 600 years. Recovering at the pond edge after hurricane flooding."},
-  {id:'PSBP-00035',common:'Royal Palm',sci:'Roystonea regia',family:'Arecaceae',origin:'Native',cat:'Native Palms & Cycads',native:true,butterfly:false,toxic:false,edible:false,invasive:false,wetland:false,quick:"Pollen release looks like a snowstorm. Cuba's national tree. One of few non-legumes proven to fix atmospheric nitrogen."},
-  {id:'PSBP-00036',common:'Royal Poinciana',sci:'Delonix regia',family:'Fabaceae',origin:'Non-native',cat:'Tropical Specimen Trees',native:false,butterfly:true,toxic:false,edible:false,invasive:false,wetland:false,quick:'Wild homeland unknown to science for 400 years. Entire canopy disappears under orange-red blooms. Endangered in Madagascar.'},
-  {id:'PSBP-00037',common:'Umbrella Tree',sci:'Schefflera actinophylla',family:'Sapindaceae',origin:'Non-native',cat:'Invasive Watch',native:false,butterfly:false,toxic:true,edible:false,invasive:true,wetland:false,quick:'FISC Category I invasive. Germinates in tree crotches and strangles the host. Kept as educational specimen.'},
-  {id:'PSBP-00038',common:'Mexican Petunia',sci:'Ruellia simplex',family:'Acanthaceae',origin:'Non-native',cat:'Invasive Watch',native:false,butterfly:true,toxic:false,edible:false,invasive:true,wetland:true,quick:'Beautiful and aggressively invasive. Seed capsules launch seeds when wetted. FISC Category I since 2001.'},
-  {id:'PSBP-00039',common:'Giant Milkweed',sci:'Calotropis gigantea',family:'Apocynaceae',origin:'Non-native',cat:'Tropical Foliage',native:false,butterfly:true,toxic:true,edible:false,invasive:false,wetland:false,quick:'Monarch and Queen butterfly host. Silver-grey leaves visible from the parking lot. Hawaiian queens strung the flowers into leis.'},
-  {id:'PSBP-00040',common:'Century Plant',sci:'Agave americana',family:'Asparagaceae',origin:'Non-native',cat:'Culturally Significant',native:false,butterfly:false,toxic:false,edible:true,invasive:false,wetland:false,quick:'Lives 10–30 years, blooms once and dies. The cactus garden shows all three life stages at once.'},
-  {id:'PSBP-00042',common:'Scorpion Tail',sci:'Heliotropium angiospermum',family:'Boraginaceae',origin:'Native',cat:'Native Wildflowers',native:true,butterfly:true,toxic:true,edible:false,invasive:false,wetland:true,quick:"Flower spike coils like a scorpion's tail and slowly uncurls. Being planted along pond shores under two estuary grants."},
-  {id:'PSBP-00043',common:'African Iris',sci:'Dietes bicolor',family:'Iridaceae',origin:'Non-native',cat:'Tropical Foliage',native:false,butterfly:false,toxic:true,edible:false,invasive:false,wetland:false,quick:'Blooms in fortnightly flushes. Each flower lasts one day. Never cut the spent stalks — the plant reblooms from them.'},
-  {id:'PSBP-00046',common:'Snake Plant',sci:'Dracaena trifasciata',family:'Asparagaceae',origin:'Non-native',cat:'Tropical Foliage',native:false,butterfly:false,toxic:true,edible:false,invasive:false,wetland:false,quick:'Reclassified by DNA in 2017. A patch was planted by Bright Futures high school volunteers just past the front gate.'},
-  {id:'PSBP-00057',common:'Wax Myrtle',sci:'Morella cerifera',family:'Myricaceae',origin:'Native',cat:'Native Trees & Shrubs',native:true,butterfly:true,toxic:false,edible:true,invasive:false,wetland:true,quick:"Colonial Americans boiled the berries for bayberry candles. Yellow-rumped Warblers eat them exclusively. Nobody stops at the sign — but it's doing more than most trees here."},
-  {id:'PSBP-00059',common:'Beautyberry',sci:'Callicarpa americana',family:'Lamiaceae',origin:'Native',cat:'Native Trees & Shrubs',native:true,butterfly:false,toxic:false,edible:false,invasive:false,wetland:false,quick:'That saturated purple is real. Crush a leaf — USDA confirmed it repels mosquitoes as effectively as DEET. 40+ bird species eat the berries.'},
-];
+// ── PLANT DATA — loaded from plants.json ─────────────────────
+// plants.json is generated by generate_plants_json.py
+// Run that script any time plant pages are added or updated.
+let PLANTS = [];
+
+async function loadPlants() {
+  const grid = document.getElementById('plantGrid');
+  const ctr  = document.getElementById('plantCount');
+  if (!grid) return;
+
+  try {
+    // Determine correct path based on subfolder depth
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const repoIdx   = pathParts.indexOf('ReworkDemo');
+    const inSubfolder = repoIdx >= 0 && pathParts.length > repoIdx + 2;
+    const base = inSubfolder ? '../' : '';
+
+    const resp = await fetch(base + 'plants.json');
+    if (!resp.ok) throw new Error('plants.json not found');
+    PLANTS = await resp.json();
+    if (ctr) ctr.textContent = PLANTS.length;
+    renderPlants(PLANTS);
+  } catch(e) {
+    console.warn('Could not load plants.json — falling back to empty list.', e);
+    if (grid) grid.innerHTML = '<p class="text-soft" style="grid-column:1/-1;padding:2rem;text-align:center">Plant data unavailable. Please try again.</p>';
+  }
+}
 
 // ── PLANT FILTER ENGINE ───────────────────────────────────────
 let _activeFilters = new Set();
 
 function plantCard(p) {
-  // Derive photo filename from ID and common name:
-  // PSBP-00002-Weeping-Bottlebrush → PSBP-00002_Weeping_Bottlebrush.jpg
+  // Support both old hardcoded format and new JSON format
   const slug = p.id + '-' + p.common.replace(/[^a-zA-Z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
-  // Photos: PSBP-00001_Tree_Crinum.jpg — ID keeps hyphens, name uses underscores
-  const namePart = p.common.replace(/[^a-zA-Z0-9]+/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
-  const photoFile = p.id + '_' + namePart + '.jpg';
-  const photoUrl  = 'plants/' + photoFile;
-  const pageUrl   = 'plants/' + slug + '.html';
+  const photoUrl = p.photo || ('plants/' + p.id + '_' + p.common.replace(/[^a-zA-Z0-9]+/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '') + '.jpg');
+  const pageUrl  = p.page  || ('plants/' + slug + '.html');
 
   return `<a class="card plant-card" href="${pageUrl}" style="text-decoration:none;display:block">
     <div style="height:160px;overflow:hidden;position:relative;background:var(--sand)">
@@ -515,7 +500,7 @@ function renderPlants(list) {
 function filterPlants() {
   const q = (document.getElementById('plantSearch')?.value||'').toLowerCase();
   renderPlants(PLANTS.filter(p => {
-    const text = !q || [p.common,p.sci,p.family,p.cat,p.quick].some(s=>s.toLowerCase().includes(q));
+    const text = !q || [p.common,p.sci,p.family,p.cat,p.quick].some(s=>(s||'').toLowerCase().includes(q));
     return text
       && (!_activeFilters.has('native')    || p.native)
       && (!_activeFilters.has('butterfly') || p.butterfly)
