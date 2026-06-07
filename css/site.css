@@ -21,7 +21,7 @@ body {
   background: var(--cream);
   color: var(--text);
   line-height: 1.7;
-  padding-top: 64px;
+  padding-top: 72px;
 }
 
 h1, h2, h3, h4 {
@@ -52,14 +52,14 @@ section { padding: 4.5rem 1.5rem; }
 /* ── NAV ── */
 #site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-  height: 64px;
+  height: 72px;
   background: var(--green-deep);
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 1.5rem;
   box-shadow: 0 2px 16px rgba(0,0,0,.35);
 }
 .nav-logo { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
-.nav-logo img { height: 44px; filter: invert(1); }
+.nav-logo img { height: 58px; filter: none; }
 .nav-logo span {
   color: var(--white);
   font-family: 'Playfair Display', serif;
@@ -233,8 +233,8 @@ section { padding: 4.5rem 1.5rem; }
   box-shadow: 0 2px 10px rgba(0,0,0,.07);
 }
 .info-card-icon { font-size: 1.6rem; margin-bottom: .6rem; }
-.info-card h3 { font-size: .95rem; color: var(--green-deep); margin-bottom: .4rem; }
-.info-card p, .info-card li { font-size: .9rem; color: var(--text-soft); line-height: 1.6; }
+.info-card h3 { font-size: 1rem; color: var(--green-deep); margin-bottom: .4rem; }
+.info-card p, .info-card li { font-size: 1rem; color: var(--text-soft); line-height: 1.65; }
 .info-card ul { padding-left: 1.1rem; }
 
 /* ── EVENT CARDS ── */
@@ -254,8 +254,8 @@ section { padding: 4.5rem 1.5rem; }
 }
 .event-datebox .mo { font-size: .65rem; text-transform: uppercase; letter-spacing: .08em; color: var(--gold-light); }
 .event-datebox .dy { font-family: 'Playfair Display', serif; font-size: 1.7rem; line-height: 1; }
-.event-info h4 { font-size: .97rem; margin-bottom: .2rem; color: var(--green-deep); }
-.event-info p { font-size: .84rem; color: var(--text-soft); }
+.event-info h4 { font-size: 1rem; margin-bottom: .2rem; color: var(--green-deep); }
+.event-info p { font-size: .9rem; color: var(--text-soft); }
 .event-type {
   display: inline-block; margin-top: .4rem;
   font-size: .68rem; font-weight: 700; text-transform: uppercase;
@@ -273,9 +273,9 @@ section { padding: 4.5rem 1.5rem; }
 
 /* ── Plant card photo hover ── */
 .plant-card:hover img { transform: scale(1.05); }
-.obs-species { font-size: .9rem; font-weight: 700; color: var(--green-deep); margin-bottom: .15rem; }
-.obs-by { font-size: .75rem; color: var(--text-soft); }
-.obs-date { font-size: .7rem; color: #aaa; }
+.obs-species { font-size: 1rem; font-weight: 700; color: var(--green-deep); margin-bottom: .15rem; }
+.obs-by { font-size: .82rem; color: var(--text-soft); }
+.obs-date { font-size: .78rem; color: #aaa; }
 
 /* ── MODAL ── */
 .modal-overlay {
