@@ -224,14 +224,14 @@ function injectShared(opts = {}) {
     if (href.endsWith(path)) a.classList.add('active');
   });
 
-  // Defer hamburger setup slightly to ensure DOM is ready after outerHTML replacement
-  setTimeout(() => {
-    const btn = document.getElementById('navHamburger');
-    const mob = document.getElementById('navMobile');
-    if (btn && mob) {
-      btn.addEventListener('click', () => mob.classList.toggle('open'));
+  // Use document-level delegation for hamburger — works regardless of DOM timing
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('#navHamburger');
+    if (btn) {
+      const mob = document.getElementById('navMobile');
+      if (mob) mob.classList.toggle('open');
     }
-  }, 50);
+  });
 }
 
 // ── INAT API ──────────────────────────────────────────────────
