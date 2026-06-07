@@ -130,9 +130,43 @@
   @media (prefers-reduced-motion:reduce) {
     .plant-section,.plant-more-info,.plant-toxic-section,.plant-safe-section,.plant-caution-section,.all-plants-link { animation:none; }
   }
+
+  /* ── Floating back button ──────────────────────────────── */
+  .plant-float-back {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--moss,#2d4a2d);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    z-index: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background .2s, transform .2s;
+    white-space: nowrap;
+  }
+  .plant-float-back:hover {
+    background: var(--forest,#1a2e1a);
+    transform: translateX(-50%) translateY(-2px);
+    text-decoration: none;
+    color: #fff;
+  }
+  /* On desktop where card floats, pin button to card width */
+  @media (min-width: 481px) {
+    .plant-float-back { bottom: 32px; }
+  }
 </style>
 </head>
 <body>
+<div id="nav-placeholder"></div>
+
 <div id="nav-placeholder"></div>
 
 <div id="nav-placeholder"></div>
@@ -194,7 +228,7 @@ PLACEMENT: Front Pond, a continuous row about 10 yards long between a bench and 
   </div>
 
   
-  <a class="all-plants-link" href="../nature.html">🌿 Explore More Plants</a>
+  <a class="all-plants-link" href="../nature.html#tabSection">🌿 Explore More Plants</a>
 </div>
 </div><!-- /.plant-wrap -->
 <div id="footer-placeholder"></div>
@@ -202,6 +236,17 @@ PLACEMENT: Front Pond, a continuous row about 10 yards long between a bench and 
 <script>
 injectShared({ inatBar: false });
 </script>
+
+<div id="footer-placeholder"></div>
+<script src="../js/site.js"></script>
+<script>
+injectShared({ inatBar: false });
+</script>
+
+<!-- Floating back button — always visible, no scrolling needed -->
+<a class="plant-float-back" href="../nature.html#tabSection">
+  🌿 All Plants
+</a>
 
 <div id="footer-placeholder"></div>
 <script src="../js/site.js"></script>
