@@ -457,6 +457,9 @@ async function loadPlants() {
     PLANTS = await resp.json();
     if (ctr) ctr.textContent = PLANTS.length;
     renderPlants(PLANTS);
+    // Apply any URL search/family filter after load
+    const searchEl = document.getElementById('plantSearch');
+    if (searchEl && searchEl.value) filterPlants();
   } catch(e) {
     console.warn('Could not load plants.json — falling back to empty list.', e);
     if (grid) grid.innerHTML = '<p class="text-soft" style="grid-column:1/-1;padding:2rem;text-align:center">Plant data unavailable. Please try again.</p>';
