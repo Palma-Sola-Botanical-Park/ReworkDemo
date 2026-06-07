@@ -461,6 +461,9 @@ async function loadPlants() {
     if (!resp.ok) throw new Error('plants.json not found');
     PLANTS = await resp.json();
     if (ctr) ctr.textContent = PLANTS.length;
+    // Update the collection count in the intro text
+    const collectionCount = document.getElementById('plantCollectionCount');
+    if (collectionCount) collectionCount.textContent = PLANTS.length + '+';
     renderPlants(PLANTS);
     // Apply any URL search/family filter after load
     const searchEl = document.getElementById('plantSearch');
