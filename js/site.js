@@ -61,7 +61,7 @@ function isWebVisible(row) {
 const NAV_HTML = `
 <nav id="site-nav">
   <a href="index.html" class="nav-logo">
-    <img src="images/black_and_white_PSBP_logo_extra.png" alt="Palma Sola Botanical Park">
+    <img src="images/white_PSBP_logo.png" alt="Palma Sola Botanical Park">
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -165,25 +165,39 @@ const INAT_BAR_HTML = `
 
 // ── INJECT SHARED ELEMENTS ────────────────────────────────────
 function injectShared(opts = {}) {
+  // Detect if we're in a subfolder (e.g. /plants/) and prefix links accordingly
+  const depth = window.location.pathname.split('/').filter(Boolean).length;
+  const repoName = 'ReworkDemo';
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const repoIdx = pathParts.indexOf(repoName);
+  const inSubfolder = repoIdx >= 0 && pathParts.length > repoIdx + 2;
+  const base = inSubfolder ? '../' : '';
+
+  // Replace relative paths in NAV and FOOTER with correct base
+  const fixPaths = html => html
+    .replace(/href="(?!http|#|\/\/|mailto:|tel:)([^"]+)"/g, (m, p) => `href="${base}${p}"`)
+    .replace(/src="(?!http|\/\/|data:)([^"]+)"/g, (m, p) => `src="${base}${p}"`);
+
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap';
   document.head.appendChild(link);
 
   const navDiv = document.getElementById('nav-placeholder');
-  if (navDiv) navDiv.outerHTML = NAV_HTML;
+  if (navDiv) navDiv.outerHTML = fixPaths(NAV_HTML);
 
   if (opts.inatBar) {
     const barDiv = document.getElementById('inat-bar-placeholder');
-    if (barDiv) barDiv.outerHTML = INAT_BAR_HTML;
+    if (barDiv) barDiv.outerHTML = fixPaths(INAT_BAR_HTML);
   }
 
   const footDiv = document.getElementById('footer-placeholder');
-  if (footDiv) footDiv.outerHTML = FOOTER_HTML;
+  if (footDiv) footDiv.outerHTML = fixPaths(FOOTER_HTML);
 
   const path = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('#site-nav a, #navMobile a').forEach(a => {
-    if (a.getAttribute('href') === path) a.classList.add('active');
+    const href = a.getAttribute('href') || '';
+    if (href.endsWith(path)) a.classList.add('active');
   });
 
   const btn = document.getElementById('navHamburger');
