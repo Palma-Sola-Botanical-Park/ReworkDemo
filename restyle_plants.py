@@ -160,6 +160,38 @@ PLANT_CSS = """
   @media (prefers-reduced-motion:reduce) {
     .plant-section,.plant-more-info,.plant-toxic-section,.plant-safe-section,.plant-caution-section,.all-plants-link { animation:none; }
   }
+
+  /* ── Floating back button ──────────────────────────────── */
+  .plant-float-back {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--moss,#2d4a2d);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    z-index: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background .2s, transform .2s;
+    white-space: nowrap;
+  }
+  .plant-float-back:hover {
+    background: var(--forest,#1a2e1a);
+    transform: translateX(-50%) translateY(-2px);
+    text-decoration: none;
+    color: #fff;
+  }
+  /* On desktop where card floats, pin button to card width */
+  @media (min-width: 481px) {
+    .plant-float-back { bottom: 32px; }
+  }
 """
 
 # ── New <head> template ───────────────────────────────────────────────────────
@@ -173,6 +205,11 @@ HEAD_TEMPLATE = """<head>
 
 # ── Closing template (footer + scripts) ──────────────────────────────────────
 CLOSING = """
+<!-- Floating back button — always visible, no scrolling needed -->
+<a class="plant-float-back" href="../nature.html#tabSection">
+  🌿 All Plants
+</a>
+
 <div id="footer-placeholder"></div>
 <script src="../js/site.js"></script>
 <script>
@@ -206,7 +243,7 @@ def restyle(html: str) -> str:
     # 6. Replace "See All Plants" link with "Explore More Plants"
     body = re.sub(
         r'<a\s+class="all-plants-link"[^>]*>.*?</a>',
-        '<a class="all-plants-link" href="../nature.html">🌿 Explore More Plants</a>',
+        '<a class="all-plants-link" href="../nature.html#tabSection">🌿 Explore More Plants</a>',
         body, flags=re.DOTALL
     )
 
@@ -262,12 +299,22 @@ def restyle(html: str) -> str:
 
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Look for PSBP files — could be in same dir or in plants/ subfolder
     pattern = os.path.join(script_dir, 'PSBP-*.html')
     files = sorted(glob.glob(pattern))
 
+    # If not found locally, try plants/ subfolder
     if not files:
-        print("No PSBP-*.html files found in the same directory as this script.")
-        print(f"Looking in: {script_dir}")
+        plants_dir = os.path.join(script_dir, 'plants')
+        pattern = os.path.join(plants_dir, 'PSBP-*.html')
+        files = sorted(glob.glob(pattern))
+        if files:
+            script_dir = plants_dir
+
+    if not files:
+        print("No PSBP-*.html files found.")
+        print(f"Looked in: {script_dir} and {os.path.join(script_dir, 'plants')}")
         return
 
     out_dir = os.path.join(script_dir, 'output')
