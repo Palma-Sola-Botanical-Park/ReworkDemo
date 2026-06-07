@@ -187,7 +187,15 @@ function injectShared(opts = {}) {
   document.head.appendChild(link);
 
   const navDiv = document.getElementById('nav-placeholder');
-  if (navDiv) navDiv.outerHTML = fixPaths(NAV_HTML);
+  if (navDiv) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = fixPaths(NAV_HTML);
+    // Insert all nav children before the placeholder then remove it
+    while (tmp.firstChild) {
+      navDiv.parentNode.insertBefore(tmp.firstChild, navDiv);
+    }
+    navDiv.parentNode.removeChild(navDiv);
+  }
 
   if (opts.inatBar) {
     const barDiv = document.getElementById('inat-bar-placeholder');
@@ -195,7 +203,14 @@ function injectShared(opts = {}) {
   }
 
   const footDiv = document.getElementById('footer-placeholder');
-  if (footDiv) footDiv.outerHTML = fixPaths(FOOTER_HTML);
+  if (footDiv) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = fixPaths(FOOTER_HTML);
+    while (tmp.firstChild) {
+      footDiv.parentNode.insertBefore(tmp.firstChild, footDiv);
+    }
+    footDiv.parentNode.removeChild(footDiv);
+  }
 
   // Show footer iNat stats strip only on Nature and Home pages
   if (opts.inatFooter) {
