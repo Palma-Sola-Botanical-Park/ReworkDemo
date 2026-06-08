@@ -235,11 +235,6 @@
         <span id="wildPageLabel" style="font-size:1rem;color:var(--text-soft)"></span>
         <button id="wildNext" onclick="stepWild(1)" style="background:var(--green-deep);color:white;border:none;border-radius:6px;padding:.6rem 1.2rem;cursor:pointer;font-size:1rem;font-weight:600">Next →</button>
       </div>
-
-      <h3 style="font-size:1.2rem;color:var(--green-deep);margin:3rem 0 1rem">Recent wildlife sightings</h3>
-      <div class="obs-mosaic" id="wildlifeObsGrid">
-        <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-soft)">Loading…</div>
-      </div>
     </div>
 
     <!-- ── RECENT OBSERVATIONS TAB ── -->
@@ -413,7 +408,6 @@ function showTab(name) {
   if (name === 'wildlife' && !window._wildlifeLoaded) {
     window._wildlifeLoaded = true;
     loadWildlife(); // fetches wildlife.json, renders grid + category buttons
-    loadRecentObs({ iconicTaxon:'Aves,Reptilia,Amphibia,Insecta,Arachnida', count:12 }).then(obs => renderMosaic('wildlifeObsGrid', obs));
   }
   if (name === 'recent' && !window._recentLoaded) {
     window._recentLoaded = true;
@@ -475,23 +469,6 @@ function stepObs(dir) {
   const next  = Math.max(0, Math.min(total - 1, (window._recentPage || 0) + dir));
   window._recentPage = next;
   renderRecentPage(next);
-}
-
-// Small mosaic renderer for wildlife tab
-function renderMosaic(containerId, obs) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  if (!obs.length) { el.innerHTML='<p class="text-soft" style="grid-column:1/-1;padding:2rem;text-align:center">No observations loaded.</p>'; return; }
-  el.innerHTML = obs.map(o => {
-    const url = o.photos?.[0]?.url?.replace('square','medium');
-    if (!url) return '';
-    const name = o.species_guess || o.taxon?.name || 'Unknown';
-    const by   = o.user?.login || 'observer';
-    return `<div class="obs-mosaic-card" title="${name} · photo by ${by}">
-      <div class="obs-mosaic-img" style="background-image:url('${url}')"></div>
-      <div class="obs-mosaic-label">${name}<em>📷 ${by}</em></div>
-    </div>`;
-  }).join('');
 }
 
 // Wildlife URL params — pre-fill the wildlife search and open that tab.
