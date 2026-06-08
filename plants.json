@@ -2024,23 +2024,6 @@
   },
   {
     "id": "PSBP-00120",
-    "common": "Croton",
-    "sci": "Codiaeum variegatum",
-    "family": "Euphorbiaceae",
-    "cat": "Park Collection",
-    "origin": "Non-native",
-    "native": false,
-    "butterfly": false,
-    "toxic": true,
-    "edible": false,
-    "invasive": false,
-    "wetland": false,
-    "photo": "photos/PSBP-00120-Croton.jpg",
-    "page": "plants/PSBP-00120-Croton.html",
-    "quick": "The color range of the Garden Croton is extraordinary by ornamental plant standards — a single leaf can include red, orange, yellow, green, and purple simultaneously, and no two plants look alike."
-  },
-  {
-    "id": "PSBP-00120",
     "common": "Garden Croton",
     "sci": "Codiaeum variegatum",
     "family": "Euphorbiaceae",
