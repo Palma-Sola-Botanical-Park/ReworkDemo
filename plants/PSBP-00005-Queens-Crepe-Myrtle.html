@@ -61,6 +61,9 @@
   .plant-more-info { margin:12px 12px 0;background:var(--forest,#1a2e1a);border-radius:10px;overflow:hidden;box-shadow:0 3px 12px rgba(26,46,26,0.25); }
   .plant-more-info .plant-section-header { background:rgba(255,255,255,0.07);border-bottom:2px solid var(--gold,#b8942a); }
   .plant-more-info .plant-section-title { color:var(--gold-light,#d4aa40); }
+  /* prose paragraphs inside the dark card need the light text color too */
+  .plant-more-info .plant-section-body p { color:rgba(245,240,232,0.92);font-size:17px;line-height:1.7; }
+  .plant-more-info .plant-section-body em { color:#e9e3d6; }
   .more-info-list { list-style:none;padding:0; }
   .more-info-list li { font-size:17px;line-height:1.7;color:rgba(245,240,232,0.92);padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.08); }
   .more-info-list li:last-child { border-bottom:none; }
@@ -153,7 +156,12 @@
   </div>
   <div class="plant-more-info">
     <div class="plant-section-header"><span class="plant-section-icon">🔍</span><span class="plant-section-title">More Information</span></div>
-    <div class="plant-section-body"><p>This is one of the more medicinally significant trees in Asian traditional medicine: its leaves contain corosolic acid, studied in clinical trials for lowering blood sugar in Type II diabetics, and leaf tea is a traditional treatment in the Philippines and India. The wood is very strong — ranked second only to teak in parts of Asia — and has long been used for houses, boats, and railroad ties. It is a fast grower that blooms young, so you don’t wait decades for the show, and its bark peels in gray and tan patches like a sycamore. Each flower carries two kinds of pollen at once: a generous offering of nutritious yellow pollen that exists only to reward visiting bees, and a small hidden batch of fertile blue-green pollen that does the actual reproductive work — the tree feeds the bees while quietly getting pollinated. Maharashtra, India, names it the official state flower, and one of its close relatives, the common crepe myrtle (<em>Lagerstroemia indica</em>), is among the most planted street trees in the American South. In Theravada Buddhism the tree is linked with enlightenment, and in Hindu tradition its flowers are associated with Lord Brahma and taken as a sign of household prosperity. It carries dozens of names across its range.</p></div>
+    <ul class="more-info-list">
+    <li>Its leaves contain corosolic acid, studied in clinical trials for lowering blood sugar in Type II diabetics, and leaf tea is a traditional treatment in the Philippines and India — one reason it is among the more medicinally significant trees in Asian traditional medicine.</li>
+    <li>The wood is very strong, ranked second only to teak in parts of Asia, and has long been used for houses, boats, and railroad ties. It is a fast grower that blooms young, so you don’t wait decades for the show, and its bark peels in gray and tan patches like a sycamore.</li>
+    <li>Each flower carries two kinds of pollen at once: a generous offering of nutritious yellow pollen that exists only to reward visiting bees, and a small hidden batch of fertile blue-green pollen that does the actual reproductive work. The tree feeds the bees while quietly getting pollinated.</li>
+    <li>Maharashtra, India, names it the official state flower, and a close relative, the common crepe myrtle (<em>Lagerstroemia indica</em>), is among the most planted street trees in the American South. In Theravada Buddhism the tree is linked with enlightenment, and in Hindu tradition its flowers are associated with Lord Brahma and taken as a sign of household prosperity. It carries dozens of names across its range.</li>
+    </ul>
   </div>
   <div class="plant-section">
     <div class="plant-section-header"><span class="plant-section-icon">🦋</span><span class="plant-section-title">Wildlife Value</span></div>

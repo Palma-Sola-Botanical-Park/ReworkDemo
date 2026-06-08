@@ -61,6 +61,9 @@
   .plant-more-info { margin:12px 12px 0;background:var(--forest,#1a2e1a);border-radius:10px;overflow:hidden;box-shadow:0 3px 12px rgba(26,46,26,0.25); }
   .plant-more-info .plant-section-header { background:rgba(255,255,255,0.07);border-bottom:2px solid var(--gold,#b8942a); }
   .plant-more-info .plant-section-title { color:var(--gold-light,#d4aa40); }
+  /* prose paragraphs inside the dark card need the light text color too */
+  .plant-more-info .plant-section-body p { color:rgba(245,240,232,0.92);font-size:17px;line-height:1.7; }
+  .plant-more-info .plant-section-body em { color:#e9e3d6; }
   .more-info-list { list-style:none;padding:0; }
   .more-info-list li { font-size:17px;line-height:1.7;color:rgba(245,240,232,0.92);padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.08); }
   .more-info-list li:last-child { border-bottom:none; }
@@ -153,7 +156,12 @@
   </div>
   <div class="plant-more-info">
     <div class="plant-section-header"><span class="plant-section-icon">🔍</span><span class="plant-section-title">More Information</span></div>
-    <div class="plant-section-body"><p>The silky floss in the seed pods is buoyant and water-resistant, close enough to true kapok that it has been used to stuff pillows and upholstery; true kapok, from the related <em>Ceiba pentandra</em>, filled U.S. Navy life jackets through both World Wars. The wood is light enough for canoes, and the seed oils have culinary and industrial uses. In young trees the green bark holds enough chlorophyll to photosynthesize even after the leaves drop, which helps the tree feed itself during its leafless flowering season; older bark turns gray, as on this specimen. The conical spines on younger trunks are thought to be defenses against now-extinct South American megafauna — giant ground sloths and elephant-like gomphotheres that disappeared around ten thousand years ago. Its close relatives include the Kapok and the African Baobab, both also growing here, giving Palma Sola three of the most unusual trunk forms in the plant kingdom.</p></div>
+    <ul class="more-info-list">
+    <li>The silky floss in the seed pods is buoyant and water-resistant, close enough to true kapok that it has been used to stuff pillows and upholstery; true kapok, from the related <em>Ceiba pentandra</em>, filled U.S. Navy life jackets through both World Wars. The wood is light enough for canoes, and the seed oils have culinary and industrial uses.</li>
+    <li>In young trees the green bark holds enough chlorophyll to photosynthesize even after the leaves drop, which helps the tree feed itself during its leafless flowering season; older bark turns gray, as on this specimen.</li>
+    <li>The conical spines on younger trunks are thought to be defenses against now-extinct South American megafauna — giant ground sloths and elephant-like gomphotheres that disappeared around ten thousand years ago.</li>
+    <li>Its close relatives include the Kapok and the African Baobab, both also growing here, giving Palma Sola three of the most unusual trunk forms in the plant kingdom.</li>
+    </ul>
   </div>
   <div class="plant-section">
     <div class="plant-section-header"><span class="plant-section-icon">🦋</span><span class="plant-section-title">Wildlife Value</span></div>
