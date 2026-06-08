@@ -128,7 +128,7 @@ def extract_animal(html_path):
         'aliases':  aliases,
         'tags':     tags,
         'credit':   credit,
-        'photo':    f"wildlife/{jpg_name}",
+        'photo':    f"photos/{jpg_name}",
         'page':     f"wildlife/{filename}",
     }
 
