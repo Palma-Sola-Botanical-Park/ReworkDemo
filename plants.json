@@ -1679,24 +1679,6 @@
     "quick": "The flower opens once, at night, and is gone by morning. It is among the largest cactus flowers in the world — up to a foot across — white, fragrant, and pollinated by bats and moths while most visitors are asleep."
   },
   {
-    "id": "PSBP-00080",
-    "common": "Night-blooming Cereus / Dragon Fruit",
-    "sci": "Selenicereus undatus",
-    "family": "Cactaceae",
-    "aliases": [],
-    "cat": "Park Collection",
-    "origin": "Non-native",
-    "native": false,
-    "butterfly": false,
-    "toxic": true,
-    "edible": false,
-    "invasive": true,
-    "wetland": false,
-    "photo": "photos/PSBP-00080-Night-blooming-Cereus.jpg",
-    "page": "plants/PSBP-00080-Night-blooming-Cereus.html",
-    "quick": "The flower opens once, at night, and is gone by morning. It is among the largest cactus flowers in the world — up to a foot across — white, fragrant, and pollinated by bats and moths while most visitors are asleep."
-  },
-  {
     "id": "PSBP-00081",
     "common": "Ball Moss",
     "sci": "Tillandsia recurvata",
@@ -1796,24 +1778,6 @@
     "photo": "photos/PSBP-00085-Little-Lady-Palm.jpg",
     "page": "plants/PSBP-00085-Little-Lady-Palm.html",
     "quick": "One of the most shade-tolerant palms in cultivation — grows under closed forest canopy in its native range in southern China, which makes it genuinely useful for shaded positions where most palms fail."
-  },
-  {
-    "id": "PSBP-00086",
-    "common": "Moringa / Drumstick Tree",
-    "sci": "Moringa oleifera",
-    "family": "Moringaceae",
-    "aliases": [],
-    "cat": "Park Collection",
-    "origin": "Non-native",
-    "native": false,
-    "butterfly": false,
-    "toxic": true,
-    "edible": false,
-    "invasive": true,
-    "wetland": false,
-    "photo": "photos/PSBP-00086-Moringa-Drumstick-Tree.jpg",
-    "page": "plants/PSBP-00086-Moringa-Drumstick-Tree.html",
-    "quick": "The leaves contain more vitamin C than oranges, more calcium than milk, more iron than spinach, and more potassium than bananas — gram for gram. This is not marketing; it is documented nutritional analysis used in international food security programs."
   },
   {
     "id": "PSBP-00086",
