@@ -19,7 +19,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00001-Tree-Crinum.jpg",
     "page": "plants/PSBP-00001-Tree-Crinum.html",
-    "quick": "One of the largest true bulbs in the plant kingdom — a single underground bulb can weigh up to 40 pounds."
+    "quick": "Grows from one of the largest true bulbs in the plant kingdom."
   },
   {
     "id": "PSBP-00002",
@@ -27,11 +27,11 @@
     "sci": "Melaleuca viminalis",
     "family": "Myrtaceae",
     "aliases": [
+      "Callistemon viminalis (former name)",
       "Creek Bottlebrush",
       "Drooping Bottlebrush",
       "Crimson Bottlebrush",
-      "Red Bottlebrush",
-      "Callistemon viminalis"
+      "Red Bottlebrush"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
@@ -39,11 +39,11 @@
     "butterfly": true,
     "toxic": true,
     "edible": false,
-    "invasive": true,
+    "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00002-Weeping-Bottlebrush.jpg",
     "page": "plants/PSBP-00002-Weeping-Bottlebrush.html",
-    "quick": "Those showy red bristles are not petals — they are stamens, the pollen-bearing male organs of the flower."
+    "quick": "The red “bottlebrush” isn’t petals — it’s a dense cluster of pollen-bearing stamens."
   },
   {
     "id": "PSBP-00003",
@@ -55,19 +55,20 @@
       "Florida Cherry Palm",
       "Sargent's Cherry Palm",
       "Hog Palm",
+      "Hog Palmetto",
       "Datelet"
     ],
     "cat": "Native Palms & Cycads",
     "origin": "Native",
     "native": true,
     "butterfly": false,
-    "toxic": false,
+    "toxic": true,
     "edible": false,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00003-Buccaneer-Palm.jpg",
     "page": "plants/PSBP-00003-Buccaneer-Palm.html",
-    "quick": "One of the rarest palms in the United States — only three unassisted wild adult specimens were found in Florida in a 2015 survey."
+    "quick": "One of the rarest palms in the United States — the Elliott Key population — the last in Florida — numbers fewer than 50 individuals."
   },
   {
     "id": "PSBP-00004",
@@ -78,33 +79,34 @@
       "Floss Silk Tree",
       "Palo Borracho",
       "Toborochi",
-      "Chorisia speciosa"
+      "Chorisia speciosa (former botanical name, still widely used in horticulture)"
     ],
     "cat": "Tropical Specimen Trees",
     "origin": "Non-native",
     "native": false,
-    "butterfly": true,
+    "butterfly": false,
     "toxic": true,
     "edible": false,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00004-Silk-Floss-Tree.jpg",
     "page": "plants/PSBP-00004-Silk-Floss-Tree.html",
-    "quick": "Those fierce conical trunk spines are hypothesized to be relics of defenses against giant ground sloths that vanished 10,000 years ago."
+    "quick": "The conical spines on the trunk are thought to be defenses left over from now-extinct South American megafauna — giant ground sloths and gomphotheres."
   },
   {
     "id": "PSBP-00005",
-    "common": "Queen's Crepe Myrtle",
+    "common": "Queen’s Crepe Myrtle",
     "sci": "Lagerstroemia speciosa",
     "family": "Lythraceae",
     "aliases": [
       "Giant Crape Myrtle",
       "Pride of India",
-      "Queen's Flower",
-      "Banabá Plant",
-      "Jarul",
-      "Inthanin",
-      "Bungur"
+      "Queen’s Flower",
+      "Banabá Plant (Philippines)",
+      "Jarul (India/Bangladesh)",
+      "Tamhan (Maharashtra)",
+      "Inthanin (Thailand)",
+      "Bungur (Malaysia/Indonesia)"
     ],
     "cat": "Culturally & Historically Significant",
     "origin": "Non-native",
@@ -116,7 +118,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00005-Queens-Crepe-Myrtle.jpg",
     "page": "plants/PSBP-00005-Queens-Crepe-Myrtle.html",
-    "quick": "Leaf tea is a traditional diabetes treatment across the Philippines and India — clinical trials confirm it lowers blood sugar."
+    "quick": "Its leaves contain corosolic acid, studied for lowering blood sugar; leaf tea is a traditional diabetes remedy in the Philippines and India, where the plant is called Banabá."
   },
   {
     "id": "PSBP-00006",
@@ -157,13 +159,13 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
-    "invasive": true,
+    "toxic": false,
+    "edible": true,
+    "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00007-Jacaranda.jpg",
     "page": "plants/PSBP-00007-Jacaranda.html",
-    "quick": "When a Jacaranda blooms, it doesn't hold anything back — entire canopy goes purple-blue before a single leaf appears, creating one of the most theatrical flowering displays in the botanical world."
+    "quick": "When a Jacaranda blooms, it doesn't hold anything back — the entire canopy goes purple-blue before a single leaf appears, creating one of the most theatrical flowering displays in the botanical world."
   },
   {
     "id": "PSBP-00008",
@@ -215,8 +217,6 @@
     "sci": "Cordia sebestena",
     "family": "Boraginaceae",
     "aliases": [
-      "Geiger Tree",
-      "Scarlet Cordia",
       "Sebesten Plum (for fruit)"
     ],
     "cat": "Tropical Specimen Trees",
@@ -246,8 +246,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00011-Baobab.jpg",
@@ -394,12 +394,9 @@
     "sci": "Bursera simaruba",
     "family": "Burseraceae",
     "aliases": [
-      "Tourist Tree",
-      "Copperwood",
-      "Chaca",
-      "West Indian Birch"
+      "Tourist Tree · Copperwood · Chaca · West Indian Birch"
     ],
-    "cat": "Native Trees and Large Shrubs",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": true,
@@ -417,16 +414,14 @@
     "sci": "Hyophorbe lagenicaulis",
     "family": "Arecaceae",
     "aliases": [
-      "Palmiste Gargoulette",
-      "Champagne Palm",
-      "Pig Nut Palm"
+      "Palmiste Gargoulette · Champagne Palm · Pig Nut Palm"
     ],
-    "cat": "Tropical and Exotic Palms",
+    "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00019-Bottle-Palm.jpg",
@@ -460,10 +455,9 @@
     "sci": "Ravenala madagascariensis",
     "family": "Strelitziaceae",
     "aliases": [
-      "Traveler's Tree",
-      "Ravenala"
+      "Traveler's Tree · Ravenala"
     ],
-    "cat": "Tropical and Exotic Palms",
+    "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -503,17 +497,14 @@
     "sci": "Taxodium distichum",
     "family": "Cupressaceae",
     "aliases": [
-      "Swamp Cypress",
-      "Southern Cypress",
-      "Red Cypress",
-      "Tidewater Red Cypress"
+      "Swamp Cypress · Southern Cypress · Red Cypress · Tidewater Red Cypress"
     ],
-    "cat": "Native Wetland and Pond Edge",
+    "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
     "native": true,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00023-Bald-Cypress.jpg",
@@ -526,11 +517,9 @@
     "sci": "Zamia integrifolia",
     "family": "Zamiaceae",
     "aliases": [
-      "Florida Arrowroot",
-      "Comptie",
-      "Koonti"
+      "Florida Arrowroot · Comptie · Koonti"
     ],
-    "cat": "Native Palms and Cycads",
+    "cat": "Native Palms & Cycads",
     "origin": "Native",
     "native": true,
     "butterfly": true,
