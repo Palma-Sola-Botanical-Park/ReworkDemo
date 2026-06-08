@@ -15,6 +15,38 @@ const TAB = {
 // display filter: which values should appear on the website
 const WEB_DISPLAY = new Set(['web', 'both']);
 
+// ── FEATURED ORDER ────────────────────────────────────────────
+// The "biggies" that lead the default (un-searched) grid, in this order.
+// Everything else follows in PSBP-ID order. List PSBP IDs exactly.
+// Searching or filtering uses relevance instead — featured items just
+// float to the top of whatever pool is showing.
+// Leave an array empty to fall back to plain ID order.
+const FEATURED_PLANTS = [
+  'PSBP-00011', // Baobab
+  'PSBP-00004', // Silk Floss Tree
+  'PSBP-00003', // Buccaneer Palm
+  'PSBP-00007', // Jacaranda
+  'PSBP-00001', // Tree Crinum
+];
+const FEATURED_WILDLIFE = [
+  'PSBP-99983', // Bald Eagle
+  'PSBP-99987', // Roseate Spoonbill
+  'PSBP-99982', // Osprey
+  'PSBP-99971', // Florida Zebra Longwing (state butterfly)
+  'PSBP-99977', // Yellow-crowned Night Heron
+];
+
+// Float featured IDs to the front of a list, in the order listed above.
+// Unknown IDs are ignored; non-featured items keep their existing order.
+function orderByFeatured(list, featuredIds) {
+  const rank = new Map(featuredIds.map((id, i) => [id, i]));
+  return list.slice().sort((a, b) => {
+    const ra = rank.has(a.id) ? rank.get(a.id) : Infinity;
+    const rb = rank.has(b.id) ? rank.get(b.id) : Infinity;
+    return ra - rb; // stable sort keeps non-featured in their original order
+  });
+}
+
 // ── SHEET FETCH HELPER ────────────────────────────────────────
 async function fetchTab(gid) {
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
@@ -464,7 +496,7 @@ async function loadPlants() {
     // Update the collection count in the intro text
     const collectionCount = document.getElementById('plantCollectionCount');
     if (collectionCount) collectionCount.textContent = PLANTS.length + '+';
-    renderPlants(PLANTS);
+    renderPlants(orderByFeatured(PLANTS, FEATURED_PLANTS));
     // Apply any URL search/family filter after load
     const searchEl = document.getElementById('plantSearch');
     if (searchEl && searchEl.value) filterPlants();
@@ -510,7 +542,7 @@ function plantCard(p) {
 }
 
 // ── PLANT PAGINATION ─────────────────────────────────────────
-const PLANTS_PER_PAGE = 10;
+const PLANTS_PER_PAGE = 8;
 let _plantPage = 0;
 let _filteredPlants = [];
 
@@ -573,7 +605,7 @@ function filterPlants() {
     && (!_activeFilters.has('invasive')  || p.invasive)
   );
 
-  if (!q) { renderPlants(pool); return; }
+  if (!q) { renderPlants(orderByFeatured(pool, FEATURED_PLANTS)); return; }
 
   // Score each plant — higher score = better match = shown first
   const scored = pool.map(p => {
@@ -655,7 +687,7 @@ async function loadWildlife() {
     if (collectionCount) collectionCount.textContent = WILDLIFE.length + '+';
 
     renderWildFilterButtons();
-    renderWildlife(WILDLIFE);
+    renderWildlife(orderByFeatured(WILDLIFE, FEATURED_WILDLIFE));
 
     // Apply any URL search filter after load
     const searchEl = document.getElementById('wildSearch');
@@ -703,7 +735,7 @@ function wildCard(w) {
 }
 
 // ── WILDLIFE PAGINATION ───────────────────────────────────────
-const WILD_PER_PAGE = 10;
+const WILD_PER_PAGE = 8;
 let _wildPage = 0;
 let _filteredWild = [];
 
@@ -765,7 +797,7 @@ function filterWildlife() {
     ? WILDLIFE.filter(w => _wildFilters.has(w.theme))
     : WILDLIFE.slice();
 
-  if (!q) { renderWildlife(pool); return; }
+  if (!q) { renderWildlife(orderByFeatured(pool, FEATURED_WILDLIFE)); return; }
 
   // Score each animal — higher score = better match = shown first
   const scored = pool.map(w => {
