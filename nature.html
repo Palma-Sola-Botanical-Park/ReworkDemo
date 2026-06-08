@@ -202,8 +202,8 @@
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:1.5rem">
         <p class="section-sub" style="margin:0">
           The park sits on Palma Sola Bay, surrounded by wetlands and a productive pond system.
-          Birds especially — but also reptiles, amphibians, and insects — are a permanent part of what lives here.
-          These are some of the most-documented species from our iNaturalist project.
+          <span id="wildCollectionCount">Dozens</span> of birds, butterflies, reptiles, and more — each with a full profile
+          documented through our iNaturalist project. Click any card for the whole story: how to spot it, what it eats, and where to find it in the park.
         </p>
         <div style="background:var(--green-deep);border-radius:8px;padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem">
           <span style="font-size:1.4rem;flex-shrink:0">📷</span>
@@ -215,19 +215,28 @@
         </div>
       </div>
 
-      <h3 style="font-size:1.2rem;color:var(--green-deep);margin-bottom:1.25rem">🐦 Documented at the park</h3>
-      <div class="wildlife-grid" style="margin-bottom:3rem">
-        <div class="wildlife-card"><div class="icon">🦅</div><h4>Pileated Woodpecker</h4><p>Dramatic red-crested woodpecker seen on the Bald Cypress. The project's banner bird.</p><div class="obs-count">Documented on iNat</div></div>
-        <div class="wildlife-card"><div class="icon">🦢</div><h4>White Ibis</h4><p>Wades the pond edge probing for invertebrates.</p><div class="obs-count">10 observations</div></div>
-        <div class="wildlife-card"><div class="icon">🐦</div><h4>Anhinga</h4><p>Spreads wings to dry after diving — one of the park's most photogenic birds.</p><div class="obs-count">10 observations</div></div>
-        <div class="wildlife-card"><div class="icon">🐦</div><h4>Common Gallinule</h4><p>Red-fronted, green-legged, and utterly at home on the pond.</p><div class="obs-count">9 observations</div></div>
-        <div class="wildlife-card"><div class="icon">🦅</div><h4>Great Egret</h4><p>Tall, patient, and spectacular. Forages the shallows year-round.</p><div class="obs-count">5 observations</div></div>
-        <div class="wildlife-card" style="border-left-color:var(--gold)"><div class="icon">🦎</div><h4>Brown Anole</h4><p>Most-documented animal in the project. They're everywhere.</p><div class="obs-count">23 observations</div></div>
-        <div class="wildlife-card" style="border-left-color:#6a1f9a"><div class="icon">🦋</div><h4>Butterfly Community</h4><p>Monarch, Queen, Zebra Longwing, Gulf Fritillary, Giant Swallowtail — all documented.</p><div class="obs-count">Multiple species</div></div>
-        <div class="wildlife-card"><div class="icon">🐸</div><h4>Frogs & Reptiles</h4><p>The pond margins support a healthy amphibian and reptile community. Night visits especially rewarding.</p><div class="obs-count">Ongoing</div></div>
+      <div id="wildlife"></div>
+      <div class="filter-bar">
+        <input type="search" id="wildSearch" placeholder="Search by name, family, or keyword…" oninput="filterWildlife()">
+        <span id="wildFilterButtons" style="display:contents"></span>
+        <button class="filter-btn" onclick="clearWildFilters()" style="border-color:var(--border)">Clear</button>
+      </div>
+      <p style="font-size:1rem;color:var(--text-soft);margin-bottom:1.5rem">Showing <strong id="wildCount">0</strong> animals
+        <span id="wildPageInfo" style="font-size:.9rem;color:#aaa"></span>
+      </p>
+
+      <div class="grid-auto" id="wildGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-soft)">Loading…</div>
       </div>
 
-      <h3 style="font-size:1.2rem;color:var(--green-deep);margin-bottom:1rem">Recent wildlife sightings</h3>
+      <!-- Pagination controls -->
+      <div id="wildPagination" style="display:none;display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.5rem;flex-wrap:wrap">
+        <button id="wildPrev" onclick="stepWild(-1)" style="background:var(--green-deep);color:white;border:none;border-radius:6px;padding:.6rem 1.2rem;cursor:pointer;font-size:1rem;font-weight:600">← Previous</button>
+        <span id="wildPageLabel" style="font-size:1rem;color:var(--text-soft)"></span>
+        <button id="wildNext" onclick="stepWild(1)" style="background:var(--green-deep);color:white;border:none;border-radius:6px;padding:.6rem 1.2rem;cursor:pointer;font-size:1rem;font-weight:600">Next →</button>
+      </div>
+
+      <h3 style="font-size:1.2rem;color:var(--green-deep);margin:3rem 0 1rem">Recent wildlife sightings</h3>
       <div class="obs-mosaic" id="wildlifeObsGrid">
         <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-soft)">Loading…</div>
       </div>
@@ -368,6 +377,8 @@ injectShared({ inatBar: false, inatFooter: true });
 const _urlParams = new URLSearchParams(window.location.search);
 const _familyParam = _urlParams.get('family');
 const _searchParam = _urlParams.get('search');
+const _wFamilyParam = _urlParams.get('wfamily');
+const _wSearchParam = _urlParams.get('wsearch');
 if (_familyParam || _searchParam) {
   const searchEl = document.getElementById('plantSearch');
   if (searchEl) {
@@ -401,6 +412,7 @@ function showTab(name) {
 
   if (name === 'wildlife' && !window._wildlifeLoaded) {
     window._wildlifeLoaded = true;
+    loadWildlife(); // fetches wildlife.json, renders grid + category buttons
     loadRecentObs({ iconicTaxon:'Aves,Reptilia,Amphibia,Insecta,Arachnida', count:12 }).then(obs => renderMosaic('wildlifeObsGrid', obs));
   }
   if (name === 'recent' && !window._recentLoaded) {
@@ -480,6 +492,26 @@ function renderMosaic(containerId, obs) {
       <div class="obs-mosaic-label">${name}<em>📷 ${by}</em></div>
     </div>`;
   }).join('');
+}
+
+// Wildlife URL params — pre-fill the wildlife search and open that tab.
+// loadWildlife() applies the filter automatically once wildlife.json arrives.
+if (_wFamilyParam || _wSearchParam) {
+  const wSearchEl = document.getElementById('wildSearch');
+  if (wSearchEl) {
+    wSearchEl.value = _wFamilyParam || _wSearchParam;
+    if (_wFamilyParam) {
+      const label = document.createElement('div');
+      label.style.cssText = 'font-size:1rem;color:var(--text-soft);margin-bottom:.5rem';
+      label.innerHTML = `Showing all <strong>${_wFamilyParam}</strong> wildlife in the park &nbsp;<a href="nature.html#wildlife" style="font-size:.9rem;color:var(--green-mid)">Clear →</a>`;
+      const ctr = document.getElementById('wildCount');
+      if (ctr) ctr.parentNode.insertBefore(label, ctr);
+    }
+  }
+  showTab('wildlife');
+  setTimeout(() => {
+    document.getElementById('wildlife')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 800);
 }
 
 if (window.location.hash === '#wildlife') showTab('wildlife');
