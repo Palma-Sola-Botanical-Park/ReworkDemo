@@ -581,10 +581,9 @@
     "sci": "Quercus virginiana",
     "family": "Fagaceae",
     "aliases": [
-      "Southern Live Oak",
-      "Virginia Live Oak"
+      "Southern Live Oak · Virginia Live Oak"
     ],
-    "cat": "Native Trees and Large Shrubs",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": false,
@@ -602,16 +601,14 @@
     "sci": "Rhizophora mangle",
     "family": "Rhizophoraceae",
     "aliases": [
-      "American Mangrove",
-      "Mangle",
-      "Walking Tree"
+      "American Mangrove · Mangle · Walking Tree"
     ],
-    "cat": "Native Wetland and Pond Edge",
+    "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
     "native": true,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00028-Red-Mangrove.jpg",
@@ -688,16 +685,14 @@
     "sci": "Swietenia mahagoni",
     "family": "Meliaceae",
     "aliases": [
-      "West Indian Mahogany",
-      "Cuban Mahogany",
-      "Small-leaved Mahogany"
+      "West Indian Mahogany · Cuban Mahogany · Small-leaved Mahogany"
     ],
-    "cat": "Native Trees and Large Shrubs",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00032-Mahogany.jpg",
@@ -710,7 +705,7 @@
     "sci": "Zanthoxylum fagara",
     "family": "Rutaceae",
     "aliases": [],
-    "cat": "Native Trees and Large Shrubs",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": true,
@@ -755,7 +750,7 @@
       "Roystonea elata",
       "Oreodoxa regia"
     ],
-    "cat": "Native Palms and Cycads",
+    "cat": "Native Palms & Cycads",
     "origin": "Native",
     "native": true,
     "butterfly": false,
@@ -777,8 +772,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00036-Royal-Poinciana.jpg",
@@ -833,18 +828,15 @@
     "sci": "Calotropis gigantea",
     "family": "Apocynaceae",
     "aliases": [
-      "Crown Flower",
-      "Bowstring Hemp",
-      "Arka",
-      "(Hawaiian: Pua Kalaunu)"
+      "Crown Flower · Bowstring Hemp · Arka · (Hawaiian: Pua Kalaunu)"
     ],
-    "cat": "Tropical Foliage and Accent Plants",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
     "toxic": true,
     "edible": false,
-    "invasive": true,
+    "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00039-Giant-Milkweed.jpg",
     "page": "plants/PSBP-00039-Giant-Milkweed.html",
@@ -856,11 +848,9 @@
     "sci": "Agave americana",
     "family": "Asparagaceae",
     "aliases": [
-      "Maguey",
-      "American Aloe",
-      "American Century Plant"
+      "Maguey · American Aloe · American Century Plant"
     ],
-    "cat": "Culturally and Historically Significant",
+    "cat": "Culturally & Historically Significant",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -946,12 +936,9 @@
     "sci": "Pandanus utilis",
     "family": "Pandanaceae",
     "aliases": [
-      "Common Screwpine",
-      "Screw Palm",
-      "Pandanus",
-      "Pimento Thatch"
+      "Common Screwpine · Screw Palm · Pandanus · Pimento Thatch"
     ],
-    "cat": "Tropical and Exotic Palms",
+    "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1157,7 +1144,7 @@
     "aliases": [
       "Eve's Umbrella - Tin Roof Tree"
     ],
-    "cat": "Tropical Foliage and Accent Plants",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -1251,7 +1238,7 @@
     "sci": "Callicarpa americana",
     "family": "Lamiaceae",
     "aliases": [],
-    "cat": "Native Trees and Large Shrubs",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": false,
@@ -1428,13 +1415,9 @@
     "sci": "Ficus aurea",
     "family": "Moraceae",
     "aliases": [
-      "Also called golden fig",
-      "higueron",
-      "or simply strangler fig. Florida's Native peoples are documented to have used the latex sap for chewing gum and the stems and roots for tools",
-      "cordage",
-      "and medicine."
+      "Also called golden fig, higueron, or simply strangler fig. Florida's Native peoples are documented to have used the latex sap for chewing gum and the stems and roots for tools, cordage, and medicine."
     ],
-    "cat": "Native Trees and Large Shrubs",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": false,
@@ -1495,15 +1478,9 @@
     "sci": "Cordyline fruticosa",
     "family": "Asparagaceae",
     "aliases": [
-      "Also called Hawaiian ti",
-      "ti plant",
-      "good luck plant",
-      "and ki or la'i (Hawaiian). Formerly known as Cordyline terminalis and",
-      "earlier",
-      "Convallaria fruticosa; older references place it in the lily family (Liliaceae) or in Agavaceae. Not to be confused with the unrelated Cordyline australis",
-      "the New Zealand \"cabbage tree.\""
+      "Also called Hawaiian ti, good luck plant, and ki or la'i (Hawaiian). Formerly known as Cordyline terminalis and, earlier, Convallaria fruticosa; older references place it in the lily family (Liliaceae) or in Agavaceae. Not to be confused with the unrelated Cordyline australis, the New Zealand \"cabbage tree.\""
     ],
-    "cat": "Culturally and Historically Significant",
+    "cat": "Culturally & Historically Significant",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1571,21 +1548,14 @@
     "sci": "Hamelia patens",
     "family": "Rubiaceae",
     "aliases": [
-      "Also called firebush",
-      "hummingbird bush",
-      "scarlet bush",
-      "redhead",
-      "and (in Belize) Ix Canaan",
-      "\"Guardian of the Forest.\" The Florida native is Hamelia patens var. patens. Frequently confused with — and often sold as — the non-native Hamelia patens var. glabra (\"African",
-      "\" \"Dwarf",
-      "\" or \"Compacta\" firebush) and Hamelia cuprea (\"Bahama\" or Antillean firebush); a native compact cultivar"
+      "Also called firebush, hummingbird bush, scarlet bush, redhead, and (in Belize) Ix Canaan, \"Guardian of the Forest.\" The Florida native is Hamelia patens var. patens. Frequently confused with — and often sold as — the non-native Hamelia patens var. glabra (\"African,\" \"Dwarf,\" or \"Compacta\" firebush) and Hamelia cuprea (\"Bahama\" or Antillean firebush); a native compact cultivar, 'Calusa,' is the recommended small-size alternative. Florida growers call this look-alike problem \"The Hamelia Mess.\""
     ],
-    "cat": "Native Trees and Large Shrubs",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00074-Firebush.jpg",
@@ -1598,12 +1568,9 @@
     "sci": "Aristolochia gigantea",
     "family": "Aristolochiaceae",
     "aliases": [
-      "Giant Dutchman's Pipe",
-      "Giant Pelican Flower",
-      "Giant Pipevine",
-      "Brazilian Dutchman's Pipe"
+      "Giant Dutchman's Pipe · Giant Pelican Flower · Giant Pipevine"
     ],
-    "cat": "Flowering Shrubs and Vines",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -1679,12 +1646,12 @@
     "sci": "Carica papaya",
     "family": "Caricaceae",
     "aliases": [],
-    "cat": "Tropical Fruits & Edibles",
+    "cat": "Tropical Specimen Trees",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": false,
-    "edible": true,
+    "toxic": true,
+    "edible": false,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00079-Papaya.jpg",
@@ -1699,7 +1666,7 @@
     "aliases": [
       "Night-blooming Cereus"
     ],
-    "cat": "Tropical Fruits & Edibles",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1774,11 +1741,9 @@
     "sci": "Pachypodium lamerei",
     "family": "Apocynaceae",
     "aliases": [
-      "Madagascar Palm",
-      "Club Foot",
-      "(genus 'Pachypodium' = 'thick foot')"
+      "Madagascar Palm · Club Foot · (genus 'Pachypodium' = 'thick foot')"
     ],
-    "cat": "Tropical and Exotic Palms",
+    "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1848,6 +1813,26 @@
     "wetland": false,
     "photo": "photos/PSBP-00086-Moringa-Drumstick-Tree.jpg",
     "page": "plants/PSBP-00086-Moringa-Drumstick-Tree.html",
+    "quick": "The leaves contain more vitamin C than oranges, more calcium than milk, more iron than spinach, and more potassium than bananas — gram for gram. This is not marketing; it is documented nutritional analysis used in international food security programs."
+  },
+  {
+    "id": "PSBP-00086",
+    "common": "Moringa",
+    "sci": "Moringa oleifera",
+    "family": "Moringaceae",
+    "aliases": [
+      "Drumstick Tree"
+    ],
+    "cat": "Tropical Specimen Trees",
+    "origin": "Non-native",
+    "native": false,
+    "butterfly": false,
+    "toxic": true,
+    "edible": false,
+    "invasive": true,
+    "wetland": false,
+    "photo": "photos/PSBP-00086-Moringa.jpg",
+    "page": "plants/PSBP-00086-Moringa.html",
     "quick": "The leaves contain more vitamin C than oranges, more calcium than milk, more iron than spinach, and more potassium than bananas — gram for gram. This is not marketing; it is documented nutritional analysis used in international food security programs."
   },
   {
