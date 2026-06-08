@@ -92,8 +92,8 @@ def extract_plant(html_path):
     
     # ── Photo filename ───────────────────────────────────────────
     # Convention: PSBP-00002_Weeping_Bottlebrush.jpg
-    name_part = common.replace(' ', '_')
-    photo = f"{psbp_id}_{name_part}.jpg"
+    name_part = common.replace(' ', '-')
+    photo = f"{psbp_id}-{name_part}.jpg"
     
     # ── Page URL ─────────────────────────────────────────────────
     page = f"plants/{filename}"
@@ -111,7 +111,7 @@ def extract_plant(html_path):
         'edible':    edible,
         'invasive':  invasive,
         'wetland':   wetland,
-        'photo':     f"plants/{photo}",
+        'photo':     f"photos/{photo}",
         'page':      page,
         'quick':     quick,
     }
