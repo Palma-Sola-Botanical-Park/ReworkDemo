@@ -614,10 +614,12 @@ function filterPlants() {
     const family = (p.family||'').toLowerCase();
     const quick  = (p.quick||'').toLowerCase();
     const more   = (p.more||p.origin||'').toLowerCase();
+    const aliases = (p.aliases||[]).join(' ').toLowerCase();
 
     let score = 0;
     if (common.startsWith(q))         score += 100; // starts with query — top priority
     else if (common.includes(q))      score += 80;  // name contains query
+    if (aliases.includes(q))          score += 70;  // alternate names
     if (sci.includes(q))              score += 60;  // scientific name
     if (family.includes(q))           score += 40;  // family name
     if (quick.includes(q))            score += 20;  // quick hits text
