@@ -3,116 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Document Viewer · Palma Sola Botanical Park</title>
+<title>Document · Palma Sola Botanical Park</title>
+
+<!-- Shared styles (same path events.html uses) -->
 <link rel="stylesheet" href="css/site.css">
+
+<!-- PDF.js: renders the PDF as clean content, no browser thumbnails/toolbar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
 <style>
-.viewer-wrap {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 0 1.5rem 4rem;
-}
-.viewer-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding: 1rem 0 1.25rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 1.5rem;
-}
-.viewer-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  color: var(--green-deep);
-}
-.viewer-back {
-  font-size: .88rem;
-  font-weight: 700;
-  color: var(--green-mid);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: .4rem;
-}
-.viewer-back:hover { text-decoration: underline; }
-.viewer-frame {
-  width: 100%;
-  height: 82vh;
-  min-height: 500px;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 4px 24px rgba(0,0,0,.12);
-  display: block;
-}
-.viewer-fallback {
-  display: none;
-  background: var(--sand);
-  border-radius: 10px;
-  padding: 3rem 2rem;
-  text-align: center;
-}
-.viewer-fallback p {
-  color: var(--text-soft);
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-  line-height: 1.7;
-}
+  /* Swap these for your site.css variables if the names differ */
+  .doc-banner{
+    background: var(--green, #173a1f);
+    color: #fff;
+    padding: 30px 24px;
+    text-align: center;
+    position: relative;
+  }
+  .doc-banner h1{ margin:0; font-size:2rem; line-height:1.2; color:#fff; }
+  .doc-banner .doc-sub{ margin-top:6px; font-size:1rem; color:#e7eee7; opacity:.9; }
+
+  .doc-back{
+    position:absolute; left:24px; top:50%; transform:translateY(-50%);
+    display:inline-flex; align-items:center; gap:6px;
+    background:rgba(255,255,255,.12); color:#fff;
+    border:1px solid rgba(255,255,255,.35); border-radius:8px;
+    padding:8px 14px; font-size:1rem; cursor:pointer; text-decoration:none;
+  }
+  .doc-back:hover{ background:rgba(255,255,255,.22); }
+
+  .doc-open{
+    position:absolute; right:24px; top:50%; transform:translateY(-50%);
+    color:#e7eee7; font-size:.95rem; text-decoration:none; opacity:.85;
+  }
+  .doc-open:hover{ opacity:1; text-decoration:underline; }
+
+  .pdf-stage{ background: var(--cream, #f5f1e6); padding:32px 16px 64px; min-height:60vh; }
+  #pdfPages{ max-width:900px; margin:0 auto; }
+  .pdf-page{
+    margin:0 auto 24px; background:#fff; width:max-content; max-width:100%;
+    box-shadow:0 2px 14px rgba(0,0,0,.18);
+  }
+  .pdf-page canvas{ display:block; max-width:100%; height:auto; }
+  #pdfStatus{ text-align:center; font-size:1.05rem; color:#4a4a4a; padding:40px 16px; }
+
+  @media (max-width:640px){
+    .doc-banner h1{ font-size:1.4rem; }
+    .doc-back{ left:12px; padding:7px 10px; font-size:.95rem; }
+    .doc-open{ display:none; }
+  }
 </style>
 </head>
 <body>
 <div id="nav-placeholder"></div>
+<div id="inat-bar-placeholder"></div>
 
-<div class="viewer-wrap">
-  <div class="viewer-topbar">
-    <a class="viewer-back" id="backLink" href="javascript:history.back()">← Back</a>
-    <div class="viewer-title" id="viewerTitle">Document</div>
-    <a class="btn btn-green btn-sm" id="downloadLink" href="#" target="_blank" rel="noopener">⬇ Open in new tab</a>
-  </div>
+<!-- Green banner the PDF tucks in under -->
+<section class="doc-banner">
+  <a href="#" class="doc-back" id="backBtn">&larr; Back</a>
+  <h1 id="docTitle">Document</h1>
+  <div class="doc-sub">Palma Sola Botanical Park</div>
+  <a href="#" class="doc-open" id="openBtn" target="_blank" rel="noopener">Open / Download &darr;</a>
+</section>
 
-  <iframe class="viewer-frame" id="viewerFrame" title="Document viewer"></iframe>
-
-  <div class="viewer-fallback" id="viewerFallback">
-    <p>Your browser couldn't display this document inline.<br>Use the button above to open it directly.</p>
-  </div>
+<!-- Clean rendered PDF -->
+<div class="pdf-stage">
+  <div id="pdfStatus">Loading document…</div>
+  <div id="pdfPages"></div>
 </div>
 
 <div id="footer-placeholder"></div>
+
 <script src="js/site.js"></script>
 <script>
 injectShared({ inatBar: false });
 
-// Read ?url= and ?title= from the query string
-const params  = new URLSearchParams(window.location.search);
-const pdfUrl  = params.get('url')  || '';
-const title   = params.get('title') || 'Document';
-const back    = params.get('back')  || '';
+(function(){
+  var params  = new URLSearchParams(location.search);
+  var fileUrl = params.get('url');
+  var title   = params.get('title') || 'Document';
+  var backUrl = params.get('back') || '';
 
-// Set title
-document.title = title + ' · Palma Sola Botanical Park';
-document.getElementById('viewerTitle').textContent = title;
+  document.getElementById('docTitle').textContent = title;
+  document.title = title + ' · Palma Sola Botanical Park';
 
-// Set download link
-const dlLink = document.getElementById('downloadLink');
-dlLink.href = pdfUrl;
+  document.getElementById('backBtn').addEventListener('click', function(e){
+    e.preventDefault();
+    if (backUrl)                { location.href = backUrl; }
+    else if (history.length > 1){ history.back(); }
+    else                        { location.href = 'events.html'; }
+  });
 
-// Optional explicit back link
-if (back) document.getElementById('backLink').href = back;
+  var openBtn = document.getElementById('openBtn');
+  if (fileUrl) openBtn.href = fileUrl;
 
-// Load into iframe
-if (pdfUrl) {
-  const frame = document.getElementById('viewerFrame');
-  frame.src = pdfUrl;
-  frame.onerror = () => {
-    frame.style.display = 'none';
-    document.getElementById('viewerFallback').style.display = 'block';
-  };
-} else {
-  document.getElementById('viewerFrame').style.display = 'none';
-  document.getElementById('viewerFallback').style.display = 'block';
-  document.getElementById('viewerFallback').querySelector('p').textContent =
-    'No document URL was provided.';
-}
+  var pagesEl  = document.getElementById('pdfPages');
+  var statusEl = document.getElementById('pdfStatus');
+
+  if (!fileUrl){ statusEl.textContent = 'No document specified.'; return; }
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  pdfjsLib.getDocument(fileUrl).promise.then(function(pdf){
+    statusEl.style.display = 'none';
+    var dpr  = window.devicePixelRatio || 1;
+    var colW = pagesEl.clientWidth;
+
+    function renderPage(n){
+      return pdf.getPage(n).then(function(page){
+        var base = page.getViewport({ scale: 1 });
+        var cssScale = Math.min(colW / base.width, 1.6);
+        var viewport = page.getViewport({ scale: cssScale * dpr });
+
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        canvas.width  = Math.floor(viewport.width);
+        canvas.height = Math.floor(viewport.height);
+        canvas.style.width  = Math.floor(viewport.width / dpr) + 'px';
+        canvas.style.height = Math.floor(viewport.height / dpr) + 'px';
+
+        var wrap = document.createElement('div');
+        wrap.className = 'pdf-page';
+        wrap.appendChild(canvas);
+        pagesEl.appendChild(wrap);
+
+        return page.render({ canvasContext: ctx, viewport: viewport }).promise;
+      });
+    }
+
+    var chain = Promise.resolve();
+    for (var n = 1; n <= pdf.numPages; n++){
+      (function(p){ chain = chain.then(function(){ return renderPage(p); }); })(n);
+    }
+  }).catch(function(err){
+    statusEl.textContent = 'Sorry — this document could not be loaded.';
+    console.error(err);
+  });
+})();
 </script>
 </body>
 </html>
