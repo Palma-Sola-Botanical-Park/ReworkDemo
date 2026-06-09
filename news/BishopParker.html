@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A New Deck, Thanks to the Bishop Parker Foundation · Palma Sola Botanical Park</title>
+<!-- Lives in /news/ (one level deep, like /plants/ and /wildlife/) → shared assets use ../ -->
+<link rel="stylesheet" href="../css/site.css">
+<style>
+  .article { max-width: 760px; margin: 0 auto; }
+  .article .back-row { margin-bottom: 1.75rem; }
+  .article .back-row a {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 1rem; color: var(--green-mid); text-decoration: none; font-weight: 600;
+  }
+  .article .back-row a:hover { text-decoration: underline; }
+  .article .dateline {
+    font-size: .82rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .1em; color: var(--green-mid); margin-bottom: 1.25rem;
+  }
+  .article p { color: var(--text); line-height: 1.85; font-size: 1.08rem; margin-bottom: 1.25rem; }
+  .article figure { margin: 2.25rem 0; }
+  .article figure img {
+    width: 100%; border-radius: 14px; display: block;
+    box-shadow: 0 6px 22px rgba(0,0,0,.14);
+  }
+  .article figcaption {
+    font-size: .9rem; color: var(--text-soft); text-align: center;
+    margin-top: .7rem; font-style: italic;
+  }
+  .thanks-card {
+    background: var(--green-pale); border-left: 5px solid var(--gold);
+    border-radius: 0 10px 10px 0; padding: 1.4rem 1.6rem; margin: 2rem 0;
+  }
+  .thanks-card p { margin: 0; font-size: 1.08rem; line-height: 1.8; color: var(--text); }
+  .thanks-card strong { color: var(--green-deep); }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- Photo hero: site.css lays the image at 35% opacity over deep green.
+     If bishop-parker-deck.jpg isn't in /news/ yet, the hero just shows deep green. -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('bishop-parker-deck.jpg')"></div>
+  <div class="page-hero-content" style="text-align:center;margin:0 auto">
+    <div class="label label-light">Park News</div>
+    <h1>A new deck, thanks to the Bishop Parker Foundation</h1>
+    <p>A generous grant has given the park a beautiful, lasting place to gather.</p>
+  </div>
+</div>
+
+<section class="bg-cream">
+  <div class="section-inner">
+    <div class="article">
+
+      <div class="back-row"><a href="#" id="backLink">← Back</a></div>
+
+      <div class="dateline">Park News · 2026</div>
+
+      <p>
+        Some of the best things at Palma Sola happen because someone in our community decides to give. This is one of them.
+      </p>
+
+      <p>
+        Thanks to a generous grant from the <strong>Bishop Parker Foundation</strong>, the park's gathering deck has been
+        completely rebuilt. The old boards have been replaced with durable composite decking — the kind that shrugs off
+        Florida sun and summer rain, stays cooler underfoot, and will hold up beautifully for years without the constant
+        upkeep that wood demands.
+      </p>
+
+      <figure>
+        <img src="bishop-parker-deck.jpg" alt="The park's new composite deck overlooking the gardens"
+             onerror="this.closest('figure').style.display='none'">
+        <figcaption>The park's new composite deck — ready for weddings, classes, and quiet mornings outdoors.</figcaption>
+      </figure>
+
+      <p>
+        If you've been to a wedding here, taken a class in the shade, or just stood at the rail watching the gardens wake up
+        in the morning, you know this spot. It's one of the places the park feels most like a gathering place — and now it's
+        ready for many more years of them.
+      </p>
+
+      <div class="thanks-card">
+        <p>
+          <strong>Thank you, Bishop Parker Foundation.</strong> Gifts like this are what keep ten acres of botanical park
+          open, free, and growing for everyone in Manatee County. We're grateful — and we can't wait to welcome you out to
+          see it.
+        </p>
+      </div>
+
+      <p>
+        Every event hosted on this deck helps support the park that stays free to the public, 365 days a year. Come see
+        what's new — and stay a while.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="../js/site.js"></script>
+<script>
+injectShared({ inatBar: false });
+document.getElementById('backLink').addEventListener('click', function(e){
+  e.preventDefault();
+  if (document.referrer && history.length > 1) { history.back(); }
+  else { location.href = '../index.html'; }
+});
+</script>
+</body>
+</html>
