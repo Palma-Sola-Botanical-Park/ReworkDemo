@@ -395,6 +395,32 @@ async function loadClasses(containerId) {
   }
 }
 
+// Announcement link behavior, driven by the `link_type` column:
+//   "External site" → opens in a NEW tab
+//   "Internal page" → same-tab navigation to a page on this site (e.g. get-started.html)
+//   "PDF"           → opens inside viewer.html, staying in context
+// If link_type is blank it degrades gracefully: a pdf_url is treated as PDF,
+// otherwise a link_url opens externally in a new tab.
+function annButton(a){
+  const url = (a.link_url || a.pdf_url || '').trim();
+  if (!url) return '';
+  const type  = (a.link_type || '').toLowerCase();
+  const label = a.link_text || (type.includes('pdf') ? 'Read More' : 'Learn more');
+  const css   = 'class="ann-link" style="margin-left:.75rem"';
+
+  // PDF → wrap in the in-site viewer (same window, with Back button)
+  if (type.includes('pdf') || (!type && a.pdf_url)) {
+    const href = `viewer.html?url=${encodeURIComponent(url)}&title=${encodeURIComponent(a.title||'')}&back=${encodeURIComponent(location.pathname.split('/').pop()||'index.html')}`;
+    return `<a href="${href}" ${css}>📄 ${label} →</a>`;
+  }
+  // Internal page on this site → same window, no new tab
+  if (type.includes('internal')) {
+    return `<a href="${url}" ${css}>${label} →</a>`;
+  }
+  // External site (default) → new tab
+  return `<a href="${url}" target="_blank" rel="noopener" ${css}>${label} →</a>`;
+}
+
 // ── ANNOUNCEMENTS — slow-cycling, one at a time ───────────────
 async function loadAnnouncements(containerId) {
   const el = document.getElementById(containerId);
@@ -413,9 +439,6 @@ async function loadAnnouncements(containerId) {
     el.style.minHeight = '48px';
 
     el.innerHTML = visible.map((a, i) => {
-      const pdfHref = a.pdf_url
-        ? `viewer.html?url=${encodeURIComponent(a.pdf_url)}&title=${encodeURIComponent(a.title||'')}&back=${encodeURIComponent(window.location.pathname.split('/').pop()||'index.html')}`
-        : '';
       return `<div class="ann-cycle-item ${i===0?'active':''}" data-idx="${i}" style="
         ${i===0 ? 'position:relative' : 'position:absolute;top:0;left:0;right:0'};
         display:flex;align-items:center;gap:1rem;padding:.6rem 0;
@@ -425,8 +448,7 @@ async function loadAnnouncements(containerId) {
         <div style="flex:1">
           <strong style="color:var(--white)">${a.title||''}</strong>
           ${a.body?`<span style="color:rgba(255,255,255,.78);font-size:.9rem;margin-left:.5rem">${a.body}</span>`:''}
-          ${a.link_url&&a.link_text?`<a href="${a.link_url}" class="ann-link" style="margin-left:.75rem">${a.link_text} →</a>`:''}
-          ${a.pdf_url?`<a href="${pdfHref}" class="ann-link" style="margin-left:.75rem">📄 Read More →</a>`:''}
+          ${annButton(a)}
         </div>
       </div>`;
     }).join('');
