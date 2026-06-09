@@ -425,10 +425,9 @@
     "sci": "Phoenix canariensis",
     "family": "Arecaceae",
     "aliases": [
-      "CIDP",
-      "Canary Palm"
+      "CIDP · Canary Palm"
     ],
-    "cat": "Tropical and Exotic Palms",
+    "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -466,11 +465,9 @@
     "sci": "Strelitzia nicolai",
     "family": "Strelitziaceae",
     "aliases": [
-      "Giant Bird of Paradise",
-      "Wild Banana",
-      "Natal Wild Banana"
+      "Giant Bird of Paradise · Wild Banana · Natal Wild Banana"
     ],
-    "cat": "Tropical Foliage and Accent Plants",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -497,7 +494,7 @@
     "toxic": false,
     "edible": true,
     "invasive": true,
-    "wetland": false,
+    "wetland": true,
     "photo": "photos/PSBP-00023-Bald-Cypress.jpg",
     "page": "plants/PSBP-00023-Bald-Cypress.html",
     "quick": "The oldest known Bald Cypress — and the oldest living tree in eastern North America — is 2,624 years old, growing along the Black River in North Carolina."
@@ -528,10 +525,9 @@
     "sci": "Ilex cassine",
     "family": "Aquifoliaceae",
     "aliases": [
-      "Cassine",
-      "Christmas Holly"
+      "Cassine · Christmas Holly"
     ],
-    "cat": "Native Trees and Large Shrubs",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": false,
@@ -549,19 +545,16 @@
     "sci": "Muhlenbergia capillaris",
     "family": "Poaceae",
     "aliases": [
-      "Pink Muhly Grass",
-      "Pink Hair Grass",
-      "Gulf Muhly",
-      "Hairawn Muhly"
+      "Pink Muhly Grass · Pink Hair Grass · Gulf Muhly · Hairawn Muhly"
     ],
-    "cat": "Native Wetland and Pond Edge",
+    "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
     "native": true,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
-    "wetland": false,
+    "wetland": true,
     "photo": "photos/PSBP-00026-Muhly-Grass.jpg",
     "page": "plants/PSBP-00026-Muhly-Grass.html",
     "quick": "Every October, Muhly Grass produces a cloud of pink-purple seed plumes so fine they seem to float — the effect is stunning enough that highway departments plant it in miles of roadside medians across Florida."
@@ -601,7 +594,7 @@
     "toxic": false,
     "edible": true,
     "invasive": true,
-    "wetland": false,
+    "wetland": true,
     "photo": "photos/PSBP-00028-Red-Mangrove.jpg",
     "page": "plants/PSBP-00028-Red-Mangrove.html",
     "quick": "The seeds germinate on the tree and fall into the water as fully developed torpedo-shaped seedlings up to 12 inches long — they can float for over a year before taking root, crossing entire ocean basins."
@@ -612,18 +605,16 @@
     "sci": "Thalia geniculata",
     "family": "Marantaceae",
     "aliases": [
-      "Fire Flag",
-      "Bent Alligator Flag",
-      "Arrowroot"
+      "Fire Flag · Bent Alligator Flag · Arrowroot"
     ],
-    "cat": "Native Wetland and Pond Edge",
+    "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
     "native": true,
     "butterfly": true,
     "toxic": true,
     "edible": false,
     "invasive": true,
-    "wetland": false,
+    "wetland": true,
     "photo": "photos/PSBP-00029-Alligator-Flag.jpg",
     "page": "plants/PSBP-00029-Alligator-Flag.html",
     "quick": "The name is literal — when an alligator swims through a stand of Alligator Flag in the Everglades, the tall waving leaves trace its path through the marsh. Wildlife trackers read the flag."
@@ -658,7 +649,7 @@
     "aliases": [
       "Florida Elm"
     ],
-    "cat": "Native Trees and Large Shrubs",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": true,
@@ -714,14 +705,14 @@
     "sci": "Canna flaccida",
     "family": "Cannaceae",
     "aliases": [],
-    "cat": "Native Wetland and Pond Edge",
+    "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
     "native": true,
     "butterfly": true,
     "toxic": true,
     "edible": false,
     "invasive": true,
-    "wetland": false,
+    "wetland": true,
     "photo": "photos/PSBP-00034-Golden-Canna.jpg",
     "page": "plants/PSBP-00034-Golden-Canna.html",
     "quick": "Florida's only native Canna, this wetland wildflower produces large yellow blooms almost cartoonishly tropical for a plant that evolved right here."
@@ -795,18 +786,14 @@
     "sci": "Ruellia simplex",
     "family": "Acanthaceae",
     "aliases": [
-      "Britton's Wild Petunia",
-      "Mexican Bluebell",
-      "(also sold as Ruellia brittoniana",
-      "R. tweediana",
-      "R. caerulea)"
+      "Britton's Wild Petunia · Mexican Bluebell · (also sold as Ruellia brittoniana, R. tweediana, R. caerulea)"
     ],
-    "cat": "Plants to Watch and Invasive Awareness",
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00038-Mexican-Petunia.jpg",
@@ -856,20 +843,17 @@
   {
     "id": "PSBP-00041",
     "common": "Canna Lilies",
-    "sci": "Canna indica",
+    "sci": "Canna × generalis",
     "family": "Cannaceae",
     "aliases": [
-      "Indian Shot",
-      "Canna Lily",
-      "Garden Canna",
-      "(hybrids often sold as Canna x generalis)"
+      "Indian Shot · Canna Lily · Garden Canna · (hybrids often sold as Canna x generalis)"
     ],
-    "cat": "Culturally and Historically Significant",
+    "cat": "Culturally & Historically Significant",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00041-Canna-Lilies.jpg",
@@ -904,12 +888,9 @@
     "sci": "Dietes bicolor",
     "family": "Iridaceae",
     "aliases": [
-      "Fortnight Lily",
-      "Butterfly Iris",
-      "Yellow Wild Iris",
-      "Peacock Flower"
+      "Fortnight Lily · Butterfly Iris · Yellow Wild Iris · Peacock Flower"
     ],
-    "cat": "Tropical Foliage and Accent Plants",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -1160,7 +1141,7 @@
     "toxic": true,
     "edible": false,
     "invasive": true,
-    "wetland": false,
+    "wetland": true,
     "photo": "photos/PSBP-00055-Mauve-Indian-Mallow.jpg",
     "page": "plants/PSBP-00055-Mauve-Indian-Mallow.html",
     "quick": "A Florida native — and the original type specimen that first gave this plant its scientific identity was collected from Tampa Bay in the 1840s by a US Army surgeon named Hulse. The species is named for him."
@@ -1218,7 +1199,7 @@
     "toxic": true,
     "edible": false,
     "invasive": true,
-    "wetland": false,
+    "wetland": true,
     "photo": "photos/PSBP-00058-Giant-Leather-Fern.jpg",
     "page": "plants/PSBP-00058-Giant-Leather-Fern.html",
     "quick": "The largest fern in Florida, and found only in Florida among the 50 states — its cold sensitivity limits it to the peninsula and the Keys."
@@ -1373,7 +1354,7 @@
     "toxic": true,
     "edible": false,
     "invasive": true,
-    "wetland": false,
+    "wetland": true,
     "photo": "photos/PSBP-00066-Lanceleaf-Arrowhead.jpg",
     "page": "plants/PSBP-00066-Lanceleaf-Arrowhead.html",
     "quick": "The genus name Sagittaria comes from the Latin for arrow — named for the unmistakable arrowhead shape of the leaves. The shape is so distinctive that it has been the identifying feature of this plant since before botanical Latin was invented."
