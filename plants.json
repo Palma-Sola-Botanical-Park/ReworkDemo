@@ -1535,8 +1535,10 @@
     "common": "Great Bougainvillea",
     "sci": "Bougainvillea spectabilis",
     "family": "Nyctaginaceae",
-    "aliases": [],
-    "cat": "Park Collection",
+    "aliases": [
+      "Paper Flower · Paperflower"
+    ],
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -1546,7 +1548,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00076-Great-Bougainvillea.jpg",
     "page": "plants/PSBP-00076-Great-Bougainvillea.html",
-    "quick": "The showy color is not the flower — it is the bract, a modified leaf surrounding the tiny actual flower inside. The real flowers are inconspicuous cream-white tubes at the bract center."
+    "quick": "The showy color is not the flower — it is the bract, a modified leaf surrounding the tiny actual flower inside. The real flowers are inconspicuous cream-white tubes at the bract center. The papery texture of the bracts is why the plant is called paper flower around the world."
   },
   {
     "id": "PSBP-00077",
@@ -1576,17 +1578,17 @@
     "sci": "Asclepias incarnata",
     "family": "Apocynaceae",
     "aliases": [],
-    "cat": "Native Wildflowers & Groundcovers",
+    "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
     "native": true,
     "butterfly": true,
     "toxic": true,
     "edible": false,
     "invasive": false,
-    "wetland": false,
+    "wetland": true,
     "photo": "photos/PSBP-00078-Swamp-Milkweed.jpg",
     "page": "plants/PSBP-00078-Swamp-Milkweed.html",
-    "quick": "A Florida native milkweed and a documented Monarch butterfly host plant. The caterpillars eat the leaves exclusively and sequester the toxic cardiac glycosides into their own bodies — making the adult butterflies toxic to birds, which learn to avoid them."
+    "quick": "A Florida native milkweed and a documented Monarch butterfly host plant. The caterpillars eat the leaves exclusively and sequester the toxic cardiac glycosides into their own bodies — making the adult butterflies poisonous to birds, which learn to avoid them."
   },
   {
     "id": "PSBP-00079",
@@ -1650,20 +1652,19 @@
     "sci": "Caryota mitis",
     "family": "Arecaceae",
     "aliases": [
-      "Clustered Fishtail Palm",
-      "Tufted Fishtail Palm"
+      "Clustered Fishtail Palm · Tufted Fishtail Palm"
     ],
-    "cat": "Palms & Cycads",
+    "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
     "toxic": true,
     "edible": false,
-    "invasive": false,
+    "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00082-Burmese-Fishtail-Palm.jpg",
     "page": "plants/PSBP-00082-Burmese-Fishtail-Palm.html",
-    "quick": "The leaflets look like the ragged end of a torn piece of paper — or, if you squint, like the tail of a fish. No other palm has quite this leaf texture, making identification easy even from a distance."
+    "quick": "The leaflets look like the ragged end of a torn piece of paper — or, if you squint, like the tail of a fish. No other palm has quite this leaf texture, which makes identification easy even from a distance."
   },
   {
     "id": "PSBP-00083",
@@ -1691,10 +1692,9 @@
     "sci": "Phoenix reclinata",
     "family": "Arecaceae",
     "aliases": [
-      "Senegal Date Palm",
-      "Wild Date Palm"
+      "Senegal Date Palm · Wild Date Palm"
     ],
-    "cat": "Park Collection",
+    "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1712,15 +1712,14 @@
     "sci": "Rhapis excelsa",
     "family": "Arecaceae",
     "aliases": [
-      "Bamboo Palm",
-      "Broadleaf Lady Palm"
+      "Bamboo Palm · Broadleaf Lady Palm"
     ],
-    "cat": "Park Collection",
+    "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00085-Little-Lady-Palm.jpg",
@@ -1790,24 +1789,23 @@
   },
   {
     "id": "PSBP-00088",
-    "common": "Blue Porterweed / Rattail",
+    "common": "Blue Porterweed",
     "sci": "Stachytarpheta cayennensis",
     "family": "Verbenaceae",
     "aliases": [
-      "Rattail",
-      "Porterweed"
+      "Rattail · Porterweed"
     ],
-    "cat": "Park Collection",
-    "origin": "Native",
-    "native": true,
+    "cat": "Flowering Shrubs & Vines",
+    "origin": "Non-native",
+    "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00088-Blue-Porterweed.jpg",
     "page": "plants/PSBP-00088-Blue-Porterweed.html",
-    "quick": "A Florida native wildflower and one of the more productive butterfly plants in the collection. The small blue-purple tubular flowers are produced continuously along the elongating spike, and butterflies — especially skippers — work the spikes methodically from bottom to top."
+    "quick": "The name Porterweed comes from the Caribbean tradition of boiling and fermenting the leaves into a dark, foaming medicinal brew — the resulting liquid resembled a British Porter ale so closely that the name stuck."
   },
   {
     "id": "PSBP-00089",
@@ -1815,10 +1813,9 @@
     "sci": "Guilandina bonduc",
     "family": "Fabaceae",
     "aliases": [
-      "Nickerbean",
-      "Fever Bean"
+      "Nickerbean · Fever Bean"
     ],
-    "cat": "Park Collection",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": true,
@@ -1854,12 +1851,12 @@
     "sci": "Calliandra tergemina",
     "family": "Fabaceae",
     "aliases": [],
-    "cat": "Park Collection",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00091-Pink-Powderpuff.jpg",
@@ -1893,7 +1890,7 @@
     "sci": "Bougainvillea glabra",
     "family": "Nyctaginaceae",
     "aliases": [],
-    "cat": "Park Collection",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -1907,15 +1904,13 @@
   },
   {
     "id": "PSBP-00094",
-    "common": "Butterfly Pea / Blue Pea",
+    "common": "Butterfly Pea",
     "sci": "Clitoria ternatea",
     "family": "Fabaceae",
     "aliases": [
-      "Blue Pea",
-      "Asiatic Pigeonwings",
-      "Cordofan Pea"
+      "Blue Pea · Asiatic Pigeonwings · Cordofan Pea"
     ],
-    "cat": "Park Collection",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
