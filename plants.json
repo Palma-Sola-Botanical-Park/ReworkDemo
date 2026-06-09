@@ -928,12 +928,9 @@
     "sci": "Plumbago auriculata",
     "family": "Plumbaginaceae",
     "aliases": [
-      "Cape Plumbago",
-      "Cape Leadwort",
-      "Blue Plumbago",
-      "Skyflower"
+      "Cape Plumbago · Cape Leadwort · Blue Plumbago · Skyflower"
     ],
-    "cat": "Flowering Shrubs and Vines",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -951,12 +948,9 @@
     "sci": "Dracaena trifasciata",
     "family": "Asparagaceae",
     "aliases": [
-      "Mother-in-Law's Tongue",
-      "Viper's Bowstring Hemp",
-      "Saint George's Sword",
-      "(formerly Sansevieria trifasciata)"
+      "Mother-in-Law's Tongue · Viper's Bowstring Hemp · Saint George's Sword · (formerly Sansevieria trifasciata)"
     ],
-    "cat": "Tropical Foliage and Accent Plants",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -976,12 +970,12 @@
     "aliases": [
       "Elkhorn Fern"
     ],
-    "cat": "Tropical Foliage and Accent Plants",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00047-Staghorn-Fern.jpg",
@@ -996,7 +990,7 @@
     "aliases": [
       "Formerly classified as Philodendron xanadu"
     ],
-    "cat": "Tropical Foliage and Accent Plants",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1072,11 +1066,9 @@
     "sci": "Pseudogynoxys chenopodioides",
     "family": "Asteraceae",
     "aliases": [
-      "Orange Glow Vine",
-      "Senecio confusus (former botanical name",
-      "still widely used)"
+      "Orange Glow Vine · Senecio confusus (former botanical name, still widely used)"
     ],
-    "cat": "Flowering Shrubs and Vines",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -1094,14 +1086,14 @@
     "sci": "Pentas lanceolata",
     "family": "Rubiaceae",
     "aliases": [
-      "Egyptian Starcluster - Starflower"
+      "Egyptian Starcluster · Starflower"
     ],
-    "cat": "Flowering Shrubs and Vines",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00053-Pentas.jpg",
@@ -1134,12 +1126,12 @@
     "sci": "Abutilon hulseanum",
     "family": "Malvaceae",
     "aliases": [],
-    "cat": "Native Wetland and Pond Edge",
+    "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
     "native": true,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": true,
     "photo": "photos/PSBP-00055-Mauve-Indian-Mallow.jpg",
@@ -1154,12 +1146,12 @@
     "aliases": [
       "Parakeetflower"
     ],
-    "cat": "Tropical Foliage and Accent Plants",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00056-Parrots-Beak.jpg",
@@ -1174,7 +1166,7 @@
     "aliases": [
       "Southern Bayberry; Formerly classified as Myrica cerifera"
     ],
-    "cat": "Native Trees and Large Shrubs",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": true,
@@ -1192,12 +1184,12 @@
     "sci": "Acrostichum danaeifolium",
     "family": "Pteridaceae",
     "aliases": [],
-    "cat": "Native Wetland and Pond Edge",
+    "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
     "native": true,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": true,
     "photo": "photos/PSBP-00058-Giant-Leather-Fern.jpg",
@@ -1246,7 +1238,7 @@
     "sci": "Trimezia steyermarkii",
     "family": "Iridaceae",
     "aliases": [],
-    "cat": "Tropical Foliage and Accent Plants",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1264,11 +1256,9 @@
     "sci": "Senna alata",
     "family": "Fabaceae",
     "aliases": [
-      "Ringworm Bush",
-      "Emperor's Candlesticks",
-      "Christmas Candle"
+      "Ringworm Bush · Emperor's Candlesticks · Christmas Candle"
     ],
-    "cat": "Park Collection",
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -1306,12 +1296,12 @@
     "sci": "Ixora coccinea",
     "family": "Rubiaceae",
     "aliases": [],
-    "cat": "Flowering Shrubs and Vines",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00064-Ixora-Maui-Yellow.jpg",
@@ -1324,9 +1314,9 @@
     "sci": "Nandina domestica",
     "family": "Berberidaceae",
     "aliases": [
-      "Also known as sacred bamboo or nanten. Not a true bamboo despite the common name — it is a member of the barberry family."
+      "Also known as sacred bamboo or nanten. Not a true bamboo despite the common name · it is a member of the barberry family."
     ],
-    "cat": "Flowering Shrubs and Vines",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1344,15 +1334,14 @@
     "sci": "Sagittaria lancifolia",
     "family": "Alismataceae",
     "aliases": [
-      "Also called bulltongue arrowhead and duck potato. Sometimes treated as subspecies or varieties (for example subsp. media). Carries many historical scientific synonyms",
-      "including Sagittaria angustifolia and Sagittaria ovata."
+      "Also called bulltongue arrowhead and duck potato. Sometimes treated as subspecies or varieties (for example subsp. media). Carries many historical scientific synonyms, including Sagittaria angustifolia and Sagittaria ovata."
     ],
-    "cat": "Native Wetland and Pond Edge",
+    "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
     "native": true,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": true,
     "photo": "photos/PSBP-00066-Lanceleaf-Arrowhead.jpg",
@@ -1409,7 +1398,7 @@
     "aliases": [
       "One of Florida's three classic scrub oaks. Belongs to the red oak group. Can be confused with the closely related Florida scrub oak (Quercus inopina) and Chapman's oak (Quercus chapmanii)."
     ],
-    "cat": "Native Trees and Large Shrubs",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": false,
@@ -1427,12 +1416,9 @@
     "sci": "Clerodendrum indicum",
     "family": "Lamiaceae",
     "aliases": [
-      "Also called tube flower",
-      "tubeflower",
-      "cathedral bells",
-      "and skyrocket. Originally described under the basionym Siphonanthus indicus and formerly placed in the family Verbenaceae; once carried the synonym Clerodendrum siphonanthus. Can be confused with other white-flowered Clerodendrum species."
+      "Also called tube flower, tubeflower, cathedral bells, and skyrocket. Originally described under the basionym Siphonanthus indicus and formerly placed in the family Verbenaceae; once carried the synonym Clerodendrum siphonanthus. Can be confused with other white-flowered Clerodendrum species."
     ],
-    "cat": "Plants to Watch and Invasive Awareness",
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -1442,7 +1428,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00070-Turks-Turban.jpg",
     "page": "plants/PSBP-00070-Turks-Turban.html",
-    "quick": "The flower is not the attraction — it is small and inconspicuous. What follows the flower is: a large, waxy, inflated calyx in deep red-purple that persists and inflates as the true fruit develops inside. The calyx is the show, not the flower."
+    "quick": "The real attraction is not the flower but what follows it — a large, waxy, inflated calyx in deep red-purple that persists and swells as the fruit develops inside. The calyx is the show."
   },
   {
     "id": "PSBP-00071",
@@ -1470,13 +1456,7 @@
     "sci": "Tecoma stans",
     "family": "Bignoniaceae",
     "aliases": [
-      "Also called yellow elder",
-      "yellow bells",
-      "yellow trumpetbush",
-      "esperanza",
-      "and ginger-thomas. Carries old scientific synonyms including Bignonia stans (its original Linnaean name)",
-      "Stenolobium stans",
-      "and Gelseminum stans. Its native-vs-introduced status in Florida is disputed. Can be confused with other yellow-flowered Bignoniaceae and with the unrelated Tabebuia and Handroanthus trumpet trees."
+      "Also called yellow elder, yellow bells, yellow trumpetbush, esperanza, and ginger-thomas. Carries old scientific synonyms including Bignonia stans (its original Linnaean name), Stenolobium stans, and Gelseminum stans. Its native-vs-introduced status in Florida is disputed. Can be confused with other yellow-flowered Bignoniaceae and with the unrelated Tabebuia and Handroanthus trumpet trees."
     ],
     "cat": "Tropical Specimen Trees",
     "origin": "Native",
@@ -1496,18 +1476,14 @@
     "sci": "Thunbergia erecta",
     "family": "Acanthaceae",
     "aliases": [
-      "Also called King's mantle",
-      "bush clockvine (or bush clock vine)",
-      "and potato bush; a white-flowered cultivar exists. It is the shrubby",
-      "non-climbing member of a mostly vining genus and should not be confused with its climbing relatives",
-      "such as Thunbergia alata (black-eyed Susan vine) or the rampant Thunbergia grandiflora (Bengal trumpet / sky vine)."
+      "Also called King's mantle, bush clockvine (or bush clock vine), and potato bush; a white-flowered cultivar exists. It is the shrubby, non-climbing member of a mostly vining genus and should not be confused with its climbing relatives, such as Thunbergia alata (black-eyed Susan vine) or the rampant Thunbergia grandiflora (Bengal trumpet / sky vine)."
     ],
-    "cat": "Flowering Shrubs and Vines",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00073-Kings-Mantle.jpg",

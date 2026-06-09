@@ -6,192 +6,127 @@
 <title>Lanceleaf Arrowhead · Palma Sola Botanical Park</title>
 <link rel="stylesheet" href="../css/site.css">
 <style>
-  /* ── Plant page layout ─────────────────────────────────── */
-  .plant-wrap {
-    max-width: 680px;
-    margin: 2rem auto;
-    background: #e8e3d8;
-    min-height: 80vh;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 32px rgba(26,46,26,0.13);
-  }
-  /* On phone, fill the screen naturally */
-  @media (max-width: 480px) {
-    .plant-wrap {
-      margin: 0;
-      border-radius: 0;
-      box-shadow: none;
-      min-height: 100vh;
-    }
-  }
+  /* Plant page layout */
+  .plant-wrap { max-width:680px;margin:2rem auto;background:#e8e3d8;min-height:80vh;border-radius:12px;overflow:hidden;box-shadow:0 4px 32px rgba(26,46,26,0.13); }
+  @media (max-width:480px){ .plant-wrap{margin:0;border-radius:0;box-shadow:none;min-height:100vh;} }
 
-  /* ── Hero ──────────────────────────────────────────────── */
-  .plant-hero { position: relative; height: 310px; overflow: hidden; }
-  .plant-hero img { width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block; }
-  .plant-hero-overlay {
-    position: absolute; bottom:0; left:0; right:0;
-    background: linear-gradient(transparent 0%, rgba(10,25,10,0.70) 40%, rgba(10,25,10,0.92) 100%);
-    padding: 60px 18px 0;
-  }
+  /* Hero -- tap the photo to open the full image in /photos/ */
+  .plant-hero { position:relative;height:310px;overflow:hidden; }
+  .plant-hero-link { display:block;width:100%;height:100%; }
+  /* object-position center center is the neutral default; override per-plant
+     (e.g. 'center 30%') only if a specific photo crops poorly */
+  .plant-hero img { width:100%;height:100%;object-fit:cover;object-position:center center;display:block; }
+  .plant-hero-overlay { position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent 0%, rgba(10,25,10,0.70) 40%, rgba(10,25,10,0.92) 100%);padding:60px 18px 0;pointer-events:none; }
   .plant-hero-category { font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light,#d4aa40);margin-bottom:5px; }
   .plant-hero-name { font-family:'Playfair Display',Georgia,serif;font-size:38px;font-weight:700;color:#fff;line-height:1.05;margin-bottom:12px; }
 
-  /* ── Scientific band ───────────────────────────────────── */
+  /* Scientific band */
   .plant-sci-band { background:var(--moss,#2d4a2d);padding:11px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid var(--gold,#b8942a); }
   .plant-sci-name { font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:19px;color:#fff;flex:1;text-shadow:0 1px 3px rgba(0,0,0,0.3); }
   .plant-family-tag { font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--forest,#1a2e1a);background:var(--gold-light,#d4aa40);padding:5px 12px;border-radius:4px;text-decoration:none;transition:background .2s; }
   .plant-family-tag:hover { background:#c49a20; }
 
-  /* ── Content area ──────────────────────────────────────── */
-  .plant-content { padding: 12px 0 48px; }
+  /* Photo credit line -- sits directly under the photo */
+  .plant-credit { font-size:12.5px;color:#5b6b73;font-style:italic;padding:7px 16px;background:var(--cream,#f5f0e8);border-bottom:1px solid rgba(90,122,74,0.12);text-align:right; }
+  .plant-credit strong { font-style:normal;color:var(--moss,#2d4a2d); }
 
-  /* ── Status badges ─────────────────────────────────────── */
+  .plant-content { padding:12px 0 56px; }
+
+  /* Status badges */
   .plant-status-row { display:flex;gap:7px;padding:12px 14px;flex-wrap:wrap;background:var(--cream,#f5f0e8);border-bottom:1px solid rgba(90,122,74,0.15); }
   .badge { font-size:12px;font-weight:700;padding:5px 13px;border-radius:20px;letter-spacing:0.3px; }
-  .badge-neutral  { background:var(--parchment,#e8dfc8);color:var(--text-mid,#2e2e1e);border:1.5px solid rgba(90,122,74,0.3); }
-  .badge-green    { background:#d8eed8;color:#1a4a1a;border:1.5px solid rgba(45,74,45,0.35); }
-  .badge-native   { background:#d0e8ff;color:#0a2a5a;border:1.5px solid rgba(10,42,90,0.3); }
-  .badge-safe     { background:var(--safe-light,#edf7ed);color:var(--safe-dark,#1a5c1a);border:1.5px solid rgba(26,92,26,0.3); }
-  .badge-warn     { background:#fff3d8;color:#6a3a00;border:1.5px solid rgba(180,120,0,0.3); }
-  .badge-danger   { background:var(--danger-light,#fff0f0);color:var(--danger,#8b2020);border:1.5px solid rgba(139,32,32,0.3); }
+  .badge-neutral { background:var(--parchment,#e8dfc8);color:var(--text-mid,#2e2e1e);border:1.5px solid rgba(90,122,74,0.3); }
+  .badge-green { background:#d8eed8;color:#1a4a1a;border:1.5px solid rgba(45,74,45,0.35); }
+  .badge-native { background:#d0e8ff;color:#0a2a5a;border:1.5px solid rgba(10,42,90,0.3); }
+  .badge-safe { background:var(--safe-light,#edf7ed);color:var(--safe-dark,#1a5c1a);border:1.5px solid rgba(26,92,26,0.3); }
+  .badge-warn { background:#fff3d8;color:#6a3a00;border:1.5px solid rgba(180,120,0,0.3); }
+  .badge-danger { background:var(--danger-light,#fff0f0);color:var(--danger,#8b2020);border:1.5px solid rgba(139,32,32,0.3); }
 
-  /* ── Cards / sections ──────────────────────────────────── */
+  /* Cards / sections */
   .plant-section { margin:12px 12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(26,46,26,0.10);border:1px solid rgba(90,122,74,0.1); }
   .plant-section-header { background:var(--moss,#2d4a2d);padding:12px 16px;display:flex;align-items:center;gap:10px; }
-  .plant-section-icon  { font-size:18px;line-height:1; }
+  .plant-section-icon { font-size:18px;line-height:1; }
   .plant-section-title { font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#fff; }
-  .plant-section-body  { padding:16px; }
+  .plant-section-body { padding:16px; }
   .plant-section-body p { font-size:17px;line-height:1.7;color:var(--text-mid,#2e2e1e); }
   .plant-section-body p + p { margin-top:10px; }
 
-  /* ── Quick hits ────────────────────────────────────────── */
-  .quick-hits-list { list-style:none;padding:14px 16px; }
-  .quick-hits-list li { font-size:17px;line-height:1.6;color:var(--text-mid,#2e2e1e);padding:10px 0 10px 22px;position:relative;border-bottom:1px solid rgba(90,122,74,0.1); }
+  /* Quick hits -- one fact per row, key phrase bolded, space between topics */
+  .quick-hits-list { list-style:none;padding:6px 16px 10px; }
+  .quick-hits-list li { font-size:17px;line-height:1.65;color:var(--text-mid,#2e2e1e);padding:13px 0 13px 22px;position:relative;border-bottom:1px solid rgba(90,122,74,0.12); }
   .quick-hits-list li:last-child { border-bottom:none; }
-  .quick-hits-list li::before { content:'';position:absolute;left:0;top:19px;width:8px;height:8px;background:var(--gold,#b8942a);border-radius:50%; }
+  .quick-hits-list li::before { content:'';position:absolute;left:0;top:21px;width:8px;height:8px;background:var(--gold,#b8942a);border-radius:50%; }
 
-  /* ── More info (dark card) ─────────────────────────────── */
+  /* More info (dark card) */
   .plant-more-info { margin:12px 12px 0;background:var(--forest,#1a2e1a);border-radius:10px;overflow:hidden;box-shadow:0 3px 12px rgba(26,46,26,0.25); }
   .plant-more-info .plant-section-header { background:rgba(255,255,255,0.07);border-bottom:2px solid var(--gold,#b8942a); }
-  .plant-more-info .plant-section-title  { color:var(--gold-light,#d4aa40); }
+  .plant-more-info .plant-section-title { color:var(--gold-light,#d4aa40); }
+  /* prose paragraphs inside the dark card need the light text color too */
+  .plant-more-info .plant-section-body p { color:rgba(245,240,232,0.92);font-size:17px;line-height:1.7; }
+  .plant-more-info .plant-section-body em { color:#e9e3d6; }
   .more-info-list { list-style:none;padding:0; }
   .more-info-list li { font-size:17px;line-height:1.7;color:rgba(245,240,232,0.92);padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.08); }
   .more-info-list li:last-child { border-bottom:none; }
 
-  /* ── Toxicity / safety cards ───────────────────────────── */
-  .plant-toxic-section   { margin:12px 12px 0;background:var(--danger-light,#fff0f0);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(26,46,26,0.10);border:1.5px solid rgba(139,32,32,0.25); }
-  .plant-toxic-section   .plant-section-header { background:var(--danger,#8b2020); }
-  .plant-toxic-section   .plant-section-body p { font-size:17px;line-height:1.7;color:#4a0a0a;font-weight:500; }
-  .plant-safe-section    { margin:12px 12px 0;background:var(--safe-light,#edf7ed);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(26,46,26,0.10);border:1.5px solid rgba(26,92,26,0.2); }
-  .plant-safe-section    .plant-section-header { background:var(--safe-dark,#1a5c1a); }
-  .plant-safe-section    .plant-section-body p { font-size:17px;line-height:1.7;color:#0a2a0a; }
+  /* Toxicity / safety cards */
+  .plant-toxic-section { margin:12px 12px 0;background:var(--danger-light,#fff0f0);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(26,46,26,0.10);border:1.5px solid rgba(139,32,32,0.25); }
+  .plant-toxic-section .plant-section-header { background:var(--danger,#8b2020); }
+  .plant-toxic-section .plant-section-body p { font-size:17px;line-height:1.7;color:#4a0a0a;font-weight:500; }
+  .plant-safe-section { margin:12px 12px 0;background:var(--safe-light,#edf7ed);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(26,46,26,0.10);border:1.5px solid rgba(26,92,26,0.2); }
+  .plant-safe-section .plant-section-header { background:var(--safe-dark,#1a5c1a); }
+  .plant-safe-section .plant-section-body p { font-size:17px;line-height:1.7;color:#0a2a0a; }
   .plant-caution-section { margin:12px 12px 0;background:#fffbf0;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(26,46,26,0.10);border:1.5px solid rgba(180,120,0,0.25); }
   .plant-caution-section .plant-section-header { background:#7a5000; }
   .plant-caution-section .plant-section-body p { font-size:17px;line-height:1.7;color:#3a2000; }
 
-  /* ── Data grid ─────────────────────────────────────────── */
+  /* Data grid -- slightly larger labels/values for phone readability */
   .data-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px; }
   .data-item { background:var(--parchment,#e8dfc8);border-radius:8px;padding:11px 13px;border:1px solid rgba(90,122,74,0.15); }
-  .data-label { font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--sage,#4a6a3a);margin-bottom:4px; }
-  .data-value { font-size:15px;color:var(--text-dark,#1a1a14);font-weight:600;line-height:1.4; }
+  .data-label { font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--sage,#4a6a3a);margin-bottom:4px; }
+  .data-value { font-size:16px;color:var(--text-dark,#1a1a14);font-weight:600;line-height:1.4; }
   .data-item.full-width { grid-column:1/-1; }
 
-  /* ── Reproduction list ─────────────────────────────────── */
+  /* Reproduction list */
   .repro-list { padding:14px 16px; }
   .repro-item { padding:10px 0;border-bottom:1px solid rgba(90,122,74,0.1); }
   .repro-item:last-child { border-bottom:none;padding-bottom:0; }
   .repro-label { font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--sage,#4a6a3a);margin-bottom:4px; }
   .repro-item p { font-size:16px;line-height:1.65;color:var(--text-mid,#2e2e1e); }
 
-  /* ── Also known as / wildlife tags ────────────────────── */
+  /* Also known as */
   .alias-list { display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px; }
   .alias-tag { background:var(--parchment,#e8dfc8);border:1.5px solid rgba(90,122,74,0.25);border-radius:6px;padding:6px 14px;font-size:15px;color:var(--text-mid,#2e2e1e);font-style:italic;font-weight:500; }
-  .wildlife-tags { display:flex;flex-wrap:wrap;gap:8px;margin-top:14px; }
-  .wildlife-tag { background:rgba(74,106,58,0.12);border:1.5px solid rgba(74,106,58,0.3);border-radius:6px;padding:6px 13px;font-size:14px;color:var(--moss,#2d4a2d);font-weight:600; }
 
-  /* ── Back to plants link ───────────────────────────────── */
+  /* Back to plants link */
   .all-plants-link { margin:10px 12px 0;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--parchment,#e8dfc8);border-radius:10px;padding:14px 18px;text-decoration:none;border:1.5px solid rgba(90,122,74,0.25);color:var(--moss,#2d4a2d);font-weight:700;font-size:15px;transition:background 0.4s ease; }
   .all-plants-link:hover { background:var(--cream,#f5f0e8); }
 
-  /* ── Fade-in animation ─────────────────────────────────── */
+  /* Fade-in animation */
   .plant-section,.plant-more-info,.plant-toxic-section,.plant-safe-section,.plant-caution-section,.all-plants-link { animation:plantFadeUp 0.6s ease both; }
-  .plant-section:nth-child(1)  { animation-delay:0.05s; }
-  .plant-section:nth-child(2)  { animation-delay:0.10s; }
-  .plant-section:nth-child(3)  { animation-delay:0.15s; }
-  .plant-section:nth-child(4)  { animation-delay:0.20s; }
-  .plant-section:nth-child(5)  { animation-delay:0.25s; }
-  .plant-section:nth-child(6)  { animation-delay:0.30s; }
-  .plant-section:nth-child(7)  { animation-delay:0.35s; }
-  .plant-more-info             { animation-delay:0.22s; }
-  .plant-safe-section,.plant-toxic-section,.plant-caution-section { animation-delay:0.38s; }
-  .all-plants-link             { animation-delay:0.42s; }
+  .plant-section:nth-child(1){animation-delay:.05s} .plant-section:nth-child(2){animation-delay:.10s}
+  .plant-section:nth-child(3){animation-delay:.15s} .plant-section:nth-child(4){animation-delay:.20s}
+  .plant-section:nth-child(5){animation-delay:.25s} .plant-section:nth-child(6){animation-delay:.30s}
+  .plant-section:nth-child(7){animation-delay:.35s} .plant-more-info{animation-delay:.22s}
+  .plant-safe-section,.plant-toxic-section,.plant-caution-section{animation-delay:.38s} .all-plants-link{animation-delay:.42s}
   @keyframes plantFadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-  @media (prefers-reduced-motion:reduce) {
-    .plant-section,.plant-more-info,.plant-toxic-section,.plant-safe-section,.plant-caution-section,.all-plants-link { animation:none; }
-  }
+  @media (prefers-reduced-motion:reduce){ .plant-section,.plant-more-info,.plant-toxic-section,.plant-safe-section,.plant-caution-section,.all-plants-link{animation:none} }
 
-  /* ── Floating back button ──────────────────────────────── */
-  .plant-float-back {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--moss,#2d4a2d);
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    padding: 10px 22px;
-    border-radius: 30px;
-    text-decoration: none;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-    z-index: 800;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background .2s, transform .2s;
-    white-space: nowrap;
-  }
-  .plant-float-back:hover {
-    background: var(--forest,#1a2e1a);
-    transform: translateX(-50%) translateY(-2px);
-    text-decoration: none;
-    color: #fff;
-  }
-  /* On desktop where card floats, pin button to card width */
-  @media (min-width: 481px) {
-    .plant-float-back { bottom: 32px; }
-  }
+  /* Floating back button */
+  .plant-float-back { position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--moss,#2d4a2d);color:#fff;font-size:15px;font-weight:700;padding:10px 22px;border-radius:30px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.25);z-index:800;display:flex;align-items:center;gap:8px;transition:background .2s,transform .2s;white-space:nowrap; }
+  .plant-float-back:hover { background:var(--forest,#1a2e1a);transform:translateX(-50%) translateY(-2px);text-decoration:none;color:#fff; }
+  @media (min-width:481px){ .plant-float-back{bottom:32px} }
 </style>
 </head>
 <body>
 <div id="nav-placeholder"></div>
 
-<div id="nav-placeholder"></div>
-
-<div id="nav-placeholder"></div>
-
-<div id="nav-placeholder"></div>
-
-<div id="nav-placeholder"></div>
-
-<div id="nav-placeholder"></div>
-
-<div id="nav-placeholder"></div>
-
-<div id="nav-placeholder"></div>
-
-<div id="nav-placeholder"></div>
-
-<div id="nav-placeholder"></div>
-
-<div id="nav-placeholder"></div>
-
 <div class="plant-wrap">
 <div class="plant-hero">
-  <img src="PSBP-00066_Lanceleaf_Arrowhead.jpg" alt="Lanceleaf Arrowhead at Palma Sola Botanical Park" loading="lazy">
+  <a class="plant-hero-link" href="../photos/PSBP-00066-Lanceleaf-Arrowhead.jpg" target="_blank" rel="noopener">
+    <img src="../photos/PSBP-00066-Lanceleaf-Arrowhead.jpg" alt="Lanceleaf Arrowhead at Palma Sola Botanical Park" loading="lazy">
+  </a>
   <div class="plant-hero-overlay">
-    <div class="plant-hero-category">Native Wetland and Pond Edge</div>
+    <div class="plant-hero-category">Native Wetland &amp; Pond Edge</div>
     <div class="plant-hero-name">Lanceleaf Arrowhead</div>
   </div>
 </div>
@@ -199,44 +134,67 @@
   <span class="plant-sci-name">Sagittaria lancifolia</span>
   <a class="plant-family-tag" href="../nature.html?family=Alismataceae">Alismataceae</a>
 </div>
+<div class="plant-credit">📷 Photo by <strong>Randall Carter</strong> · CC BY-NC · via iNaturalist</div>
 <div class="plant-content">
-  <div class="plant-status-row"><span class="badge badge-native">🌿 Florida Native</span><span class="badge badge-green">✅ Not Invasive</span><span class="badge badge-safe">✅ Not Toxic</span></div>
-
+  <div class="plant-status-row">
+    <span class="badge badge-native">🌿 Florida Native</span>
+    <span class="badge badge-green">✅ Not Invasive</span>
+    <span class="badge badge-safe">✅ Edible &amp; Safe</span>
+  </div>
   <div class="plant-section">
     <div class="plant-section-header"><span class="plant-section-icon">⚡</span><span class="plant-section-title">Quick Hits</span></div>
-    <ul class="quick-hits-list"><li>The genus name Sagittaria comes from the Latin for arrow — <strong>named for the unmistakable</strong> arrowhead shape of the leaves. The shape is so distinctive that it has been the identifying feature of this plant since before botanical Latin was invented.</li><li>The starchy underground tubers — <strong>duck potatoes — were</strong> a staple food for Indigenous peoples across the southeastern United States and were gathered and traded widely. Ducks and muskrats eat them too, which is where the folk name comes from.</li><li>An emergent aquatic native — <strong>grows with its roots</strong> in the water and its foliage above the surface. Stabilizes shallow pond banks by rhizome.</li><li>The flowers are three-petaled and white with a yellow center — <strong>simple, clean, and worth</strong> a look up close.</li></ul>
+    <ul class="quick-hits-list">
+    <li>The genus name Sagittaria comes from the Latin for arrow — named for the unmistakable arrowhead shape of the leaves. The shape is so distinctive that it has been the identifying feature of this plant since before botanical Latin was invented.</li>
+    <li>The starchy underground tubers — duck potatoes — were a staple food for Indigenous peoples across the southeastern United States and were gathered and traded widely. Ducks and muskrats eat them too, which is where the folk name comes from.</li>
+    <li>An emergent aquatic native — grows with its roots in the water and its foliage above the surface. Stabilizes shallow pond banks by rhizome.</li>
+    <li>The flowers are three-petaled and white with a yellow center — simple, clean, and worth a look up close.</li>
+    </ul>
   </div>
-
   <div class="plant-section">
     <div class="plant-section-header"><span class="plant-section-icon">🌍</span><span class="plant-section-title">Origin</span></div>
     <div class="plant-section-body"><p>Native to the southeastern United States and tropical America. Common in Florida freshwater marshes, pond edges, and slow-moving water. Member of Alismataceae — the water-plantain family.</p></div>
   </div>
-
-  <div class="plant-more-info"><div class="plant-section-header"><span class="plant-section-icon">🔍</span><span class="plant-section-title">More Information</span></div><ul class="more-info-list"><li>Lanceleaf Arrowhead is one of the more historically significant plants at the water's edge. The tubers — called duck potatoes — were a reliable starchy food source for Indigenous peoples across the Southeast, harvested by wading into shallow water and loosening them from the mud with their feet or toes. The tubers float to the surface once freed. They were eaten roasted or boiled and were traded between communities. European settlers adopted the same practice.</li><li>The plant is doing active ecological work in the ponds. The rhizome network stabilizes the shallow bank zone, and the emergent foliage creates habitat structure at the water surface used by fish, frogs, aquatic insects, and wading birds. Ducks and muskrats eat the tubers; blackbirds and other waterbirds eat the seeds.</li><li>The arrowhead leaf shape is one of the more distinctive silhouettes in the Florida wetland plant palette — recognizable at a distance, unambiguous up close.</li></ul></div>
-
-  <div class="plant-section"><div class="plant-section-header"><span class="plant-section-icon">🦋</span><span class="plant-section-title">Wildlife Value</span></div><div class="plant-section-body"><p>The tubers are eaten by ducks, muskrats, and other wetland mammals. Seeds eaten by blackbirds and waterbirds. The emergent foliage creates surface habitat structure for fish, frogs, aquatic insects, and wading birds foraging at the water edge.</p><p>The rhizome network contributes to shallow bank stabilization — relevant to the park's ongoing pond erosion prevention work.</p></div></div>
-
-  <div class="plant-section"><div class="plant-section-header"><span class="plant-section-icon">🏷️</span><span class="plant-section-title">Also Known As</span></div><div class="alias-list"><span class="alias-tag">Also called bulltongue arrowhead and duck potato. Sometimes treated as subspecies or varieties (for example subsp. media). Carries many historical scientific synonyms</span><span class="alias-tag">including Sagittaria angustifolia and Sagittaria ovata.</span></div></div>
-
-  <div class="plant-section"><div class="plant-section-header"><span class="plant-section-icon">🔬</span><span class="plant-section-title">Reproduction &amp; Identification</span></div><div class="repro-list"><div class="repro-item"><p>Reproduction and Identification</p></div><div class="repro-item"><p>Flowers — Three white petals with a yellow center, on branched stalks rising above the foliage. Male and female flowers sometimes on separate stalks on the same plant. Clean and simple up close.</p></div><div class="repro-item"><p>Fruit and Seeds — Rounded heads of small flattened seeds eaten by waterbirds.</p></div><div class="repro-item"><p>Tubers — Starchy underground tubers (duck potatoes) along the rhizomes. Edible — historically roasted or boiled. Eaten by ducks, muskrats, and other wetland wildlife.</p></div><div class="repro-item"><p>Leaves — Strongly arrowhead-shaped (sagittate), on long petioles rising from the water. Very variable in size. The shape is the definitive identification feature.</p></div><div class="repro-item"><p>Form — Emergent aquatic perennial, 2 to 5 feet above water. Spreads by rhizomes to form colonies in shallow water and saturated soil.</p></div><div class="repro-item"><div class="repro-label">What to Look For</div><p>The arrowhead leaf shape is unmistakable — no other plant at the pond edge has quite that silhouette. White three-petaled flowers on tall stalks above the foliage when in bloom.</p></div></div></div>
-
-  <div class="plant-section"><div class="plant-section-header"><span class="plant-section-icon">📐</span><span class="plant-section-title">Size &amp; Growing Conditions</span></div><div class="data-grid"><div class="data-item full-width"><div class="data-value">An emergent aquatic perennial, typically 3 to 5 feet tall (occasionally taller), forming clumps 1 to 3 feet wide. The smooth, lance-shaped leaf blades can reach about 10 inches long.</div></div><div class="data-item full-width"><div class="data-value">Wants full sun and shallow standing water or consistently saturated soil — it grows along pond and lake edges, in freshwater and brackish marshes, and at muddy stream margins. It should not be allowed to dry out, and it has little tolerance for direct salt spray. A classic choice for water gardens, rain gardens, and wetland restoration.</div></div></div></div>
-
-  
-  
-
+  <div class="plant-more-info">
+    <div class="plant-section-header"><span class="plant-section-icon">🔍</span><span class="plant-section-title">More Information</span></div>
+    <ul class="more-info-list">
+    <li>Lanceleaf Arrowhead is one of the more historically significant plants at the water's edge. The tubers — called duck potatoes — were a reliable starchy food source for Indigenous peoples across the Southeast, harvested by wading into shallow water and loosening them from the mud with their feet or toes.</li>
+    <li>The tubers float to the surface once freed. They were eaten roasted or boiled and were traded between communities.</li>
+    <li>European settlers adopted the same practice.</li>
+    <li>The plant is doing active ecological work in the ponds. The rhizome network stabilizes the shallow bank zone, and the emergent foliage creates habitat structure at the water surface used by fish, frogs, aquatic insects, and wading birds.</li>
+    <li>Ducks and muskrats eat the tubers; blackbirds and other waterbirds eat the seeds.</li>
+    <li>The arrowhead leaf shape is one of the more distinctive silhouettes in the Florida wetland plant palette — recognizable at a distance, unambiguous up close.</li>
+    </ul>
+  </div>
+  <div class="plant-section">
+    <div class="plant-section-header"><span class="plant-section-icon">🦋</span><span class="plant-section-title">Wildlife Value</span></div>
+    <div class="plant-section-body"><p>The tubers are eaten by ducks, muskrats, and other wetland mammals. Seeds eaten by blackbirds and waterbirds. The emergent foliage creates surface habitat structure for fish, frogs, aquatic insects, and wading birds foraging at the water edge.</p><p>The rhizome network contributes to shallow bank stabilization — relevant to the park's ongoing pond erosion prevention work.</p></div>
+  </div>
+  <div class="plant-section">
+    <div class="plant-section-header"><span class="plant-section-icon">🔬</span><span class="plant-section-title">Reproduction &amp; Identification</span></div>
+    <div class="repro-list">
+<div class="repro-item"><div class="repro-label">What to Look For</div><p>The arrowhead leaf shape is unmistakable — no other plant at the pond edge has quite that silhouette. White three-petaled flowers on tall stalks above the foliage when in bloom.</p></div>
+    </div>
+  </div>
+  <div class="plant-section">
+    <div class="plant-section-header"><span class="plant-section-icon">📐</span><span class="plant-section-title">Size &amp; Growing Conditions</span></div>
+    <div class="data-grid">
+    <div class="data-item full-width"><div class="data-label">Size</div><div class="data-value">An emergent aquatic perennial, typically 3 to 5 feet tall (occasionally taller), forming clumps 1 to 3 feet wide. The smooth, lance-shaped leaf blades can reach about 10 inches long</div></div>
+    <div class="data-item full-width"><div class="data-label">Growing Conditions</div><div class="data-value">Wants full sun and shallow standing water or consistently saturated soil — it grows along pond and lake edges, in freshwater and brackish marshes, and at muddy stream margins. It should not be allowed to dry out, and it has little tolerance for direct salt spray. A classic choice for water gardens, rain gardens, and wetland restoration</div></div>
+    </div>
+  </div>
   <div class="plant-safe-section">
-    <div class="plant-section-header"><span class="plant-section-icon">🌱</span><span class="plant-section-title">Edibility &amp; Toxicity</span></div>
-    <div class="plant-section-body"><p><strong>Edible.</strong> Tubers edible — historically eaten roasted or boiled by Indigenous peoples of the southeastern United States. Not a casual trail snack; harvest requires wading.</p></div>
+    <div class="plant-section-header"><span class="plant-section-icon">✅</span><span class="plant-section-title">Edibility &amp; Toxicity</span></div>
+    <div class="plant-section-body"><p>Tubers edible — historically eaten roasted or boiled by Indigenous peoples of the southeastern United States. Not a casual trail snack; harvest requires wading.</p><p>No known toxicity to people. No known toxicity to dogs.</p></div>
+  </div>
+  <div class="plant-section">
+    <div class="plant-section-header"><span class="plant-section-icon">🏷️</span><span class="plant-section-title">Also Known As</span></div>
+    <div class="alias-list"><span class="alias-tag">Also called bulltongue arrowhead and duck potato. Sometimes treated as subspecies or varieties (for example subsp. media). Carries many historical scientific synonyms, including Sagittaria angustifolia and Sagittaria ovata.</span></div>
   </div>
 
-  
   <a class="all-plants-link" href="../nature.html#plants">🌿 Explore More Plants</a>
 </div>
 </div><!-- /.plant-wrap -->
-<a class="plant-float-back" href="../nature.html#plants">
-  🌿 All Plants
-</a>
+<a class="plant-float-back" href="../nature.html#plants">🌿 All Plants</a>
 
 <div id="footer-placeholder"></div>
 <script src="../js/site.js"></script>
