@@ -80,9 +80,20 @@ injectShared({ inatBar: false });
 
 (function(){
   var params  = new URLSearchParams(location.search);
-  var fileUrl = params.get('url');
+  var rawUrl  = params.get('url') || '';
   var title   = params.get('title') || 'Document';
   var backUrl = params.get('back') || '';
+
+  // Resolve the PDF location. Accepts a full https:// URL, a site-relative
+  // path ("docs/Newsletters/x.pdf"), or a leading-slash path ("/docs/.../x.pdf").
+  // A leading slash would otherwise point at the domain root and drop the
+  // "/ReworkDemo/" project folder, so we strip it and resolve against this page.
+  function resolveUrl(u){
+    if (!u) return '';
+    if (/^(https?:|blob:|data:)/i.test(u)) return u;
+    return new URL(u.replace(/^\/+/, ''), document.baseURI).href;
+  }
+  var fileUrl = resolveUrl(rawUrl);
 
   document.getElementById('docTitle').textContent = title;
   document.title = title + ' · Palma Sola Botanical Park';
