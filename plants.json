@@ -19,7 +19,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00001-Tree-Crinum.jpg",
     "page": "plants/PSBP-00001-Tree-Crinum.html",
-    "quick": "Grows from one of the largest true bulbs in the plant kingdom."
+    "quick": "One of the largest true bulbs in the plant kingdom — a single underground bulb can weigh up to 40 pounds."
   },
   {
     "id": "PSBP-00002",
@@ -27,11 +27,12 @@
     "sci": "Melaleuca viminalis",
     "family": "Myrtaceae",
     "aliases": [
-      "Callistemon viminalis (former name)",
+      "Callistemon viminalis (former botanical name, still widely used)",
       "Creek Bottlebrush",
       "Drooping Bottlebrush",
       "Crimson Bottlebrush",
-      "Red Bottlebrush"
+      "Red Bottlebrush",
+      "Prickly Bottlebrush (rare)"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
@@ -43,7 +44,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00002-Weeping-Bottlebrush.jpg",
     "page": "plants/PSBP-00002-Weeping-Bottlebrush.html",
-    "quick": "The red “bottlebrush” isn’t petals — it’s a dense cluster of pollen-bearing stamens."
+    "quick": "The showy red \"bottlebrush\" is not made of petals — it's a burst of pollen-bearing stamens."
   },
   {
     "id": "PSBP-00003",
@@ -95,13 +96,13 @@
   },
   {
     "id": "PSBP-00005",
-    "common": "Queen’s Crepe Myrtle",
+    "common": "Queen's Crepe Myrtle",
     "sci": "Lagerstroemia speciosa",
     "family": "Lythraceae",
     "aliases": [
       "Giant Crape Myrtle",
       "Pride of India",
-      "Queen’s Flower",
+      "Queen's Flower",
       "Banabá Plant (Philippines)",
       "Jarul (India/Bangladesh)",
       "Tamhan (Maharashtra)",
@@ -118,7 +119,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00005-Queens-Crepe-Myrtle.jpg",
     "page": "plants/PSBP-00005-Queens-Crepe-Myrtle.html",
-    "quick": "Its leaves contain corosolic acid, studied for lowering blood sugar; leaf tea is a traditional diabetes remedy in the Philippines and India, where the plant is called Banabá."
+    "quick": "Its leaves contain corosolic acid, a compound shown in clinical studies to lower blood sugar — making leaf tea a traditional diabetes treatment across the Philippines and India, where it's known as the Banabá plant."
   },
   {
     "id": "PSBP-00006",
@@ -129,7 +130,7 @@
       "Spicy Jatropha",
       "Firecracker Jatropha",
       "Rose-Flowered Jatropha",
-      "Jatropha pandurifolia"
+      "Jatropha pandurifolia (former botanical name, still widely used)"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
@@ -141,7 +142,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00006-Peregrina.jpg",
     "page": "plants/PSBP-00006-Peregrina.html",
-    "quick": "Every single part is poisonous — yet it's one of the most widely planted ornamentals in South Florida."
+    "quick": "Every part of this plant is poisonous, yet it's one of the most widely planted ornamentals in South Florida — the red flowers bloom almost continuously and butterflies can't resist them."
   },
   {
     "id": "PSBP-00007",
@@ -203,8 +204,8 @@
     "origin": "Native",
     "native": true,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00009-Firewheel.jpg",
@@ -256,11 +257,11 @@
   },
   {
     "id": "PSBP-00012",
-    "common": "Peacock Flower",
+    "common": "Dwarf Poinciana",
     "sci": "Caesalpinia pulcherrima",
     "family": "Fabaceae",
     "aliases": [
-      "Dwarf Poinciana",
+      "Peacock Flower",
       "Pride of Barbados",
       "Flamboyant-de-Jardin",
       "Red Bird of Paradise"
@@ -273,8 +274,8 @@
     "edible": false,
     "invasive": true,
     "wetland": false,
-    "photo": "photos/PSBP-00012-Peacock-Flower.jpg",
-    "page": "plants/PSBP-00012-Peacock-Flower.html",
+    "photo": "photos/PSBP-00012-Dwarf-Poinciana.jpg",
+    "page": "plants/PSBP-00012-Dwarf-Poinciana.html",
     "quick": "Carl Linnaeus thought it was so beautiful he gave it the species name pulcherrima — Latin for 'most beautiful.'"
   },
   {
@@ -283,15 +284,14 @@
     "sci": "Mimosa strigillosa",
     "family": "Fabaceae",
     "aliases": [
-      "Powderpuff",
-      "Sensitive Plant"
+      "Powderpuff · Sensitive Plant"
     ],
     "cat": "Native Groundcovers & Wildflowers",
     "origin": "Native",
     "native": true,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00013-Sunshine-Mimosa.jpg",
@@ -304,18 +304,14 @@
     "sci": "Petrea volubilis",
     "family": "Verbenaceae",
     "aliases": [
-      "Tropical Wisteria",
-      "Sandpaper Vine",
-      "Purple Wreath",
-      "Bluebird Vine",
-      "Fleur de Dieu"
+      "Tropical Wisteria · Sandpaper Vine · Purple Wreath · Bluebird Vine · Fleur de Dieu"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00014-Queens-Wreath.jpg",
@@ -351,14 +347,12 @@
     "sci": "Acalypha wilkesiana",
     "family": "Euphorbiaceae",
     "aliases": [
-      "Jacob's Coat",
-      "Copper Plant",
-      "Fire Dragon"
+      "Jacob's Coat · Copper Plant · Fire Dragon"
     ],
     "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
-    "butterfly": true,
+    "butterfly": false,
     "toxic": true,
     "edible": false,
     "invasive": true,
@@ -1821,6 +1815,26 @@
     "quick": "The fragrance of plumeria flowers is one of the most recognizable scents in the tropical world — the base of Hawaiian lei culture, a fixture in tropical perfumery, and the scent most visitors associate with warm-climate vacations."
   },
   {
+    "id": "PSBP-00087",
+    "common": "Mexican Plumeria",
+    "sci": "Plumeria rubra",
+    "family": "Apocynaceae",
+    "aliases": [
+      "Frangipani"
+    ],
+    "cat": "Flowering Shrubs & Vines",
+    "origin": "Non-native",
+    "native": false,
+    "butterfly": false,
+    "toxic": true,
+    "edible": false,
+    "invasive": true,
+    "wetland": false,
+    "photo": "photos/PSBP-00087-Mexican-Plumeria.jpg",
+    "page": "plants/PSBP-00087-Mexican-Plumeria.html",
+    "quick": "The fragrance of plumeria flowers is one of the most recognizable scents in the tropical world — the base of Hawaiian lei culture, a fixture in tropical perfumery, and the scent most visitors associate with warm-climate vacations."
+  },
+  {
     "id": "PSBP-00088",
     "common": "Blue Porterweed / Rattail",
     "sci": "Stachytarpheta cayennensis",
@@ -1868,7 +1882,7 @@
     "sci": "Mangifera indica",
     "family": "Anacardiaceae",
     "aliases": [],
-    "cat": "Park Collection",
+    "cat": "Tropical Specimen Trees",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -2008,13 +2022,13 @@
     "sci": "Clerodendrum quadriloculare",
     "family": "Lamiaceae",
     "aliases": [],
-    "cat": "Park Collection",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
     "toxic": true,
     "edible": false,
-    "invasive": true,
+    "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00097-Starburst-Bush.jpg",
     "page": "plants/PSBP-00097-Starburst-Bush.html",
@@ -2104,7 +2118,7 @@
     "sci": "Bombax ceiba",
     "family": "Malvaceae",
     "aliases": [],
-    "cat": "Park Collection",
+    "cat": "Tropical Specimen Trees",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -2304,7 +2318,7 @@
       "Mountain Ebony",
       "Camel's Foot Tree"
     ],
-    "cat": "Park Collection",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
