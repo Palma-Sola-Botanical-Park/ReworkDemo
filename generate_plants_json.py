@@ -91,7 +91,7 @@ def extract_plant(html_path):
         badge_html = badge_m.group(1)
         # Native: look for "Florida Native" badge, NOT "Non-native"
         native    = bool(re.search(r'Florida Native', badge_html))
-        invasive  = bool(re.search(r'[Ii]nvasive', badge_html))
+        invasive  = ('🚫' in badge_html) or ('Watch List' in badge_html) or bool(re.search(r'(?<!Not )Invasive', badge_html))
         toxic     = bool(re.search(r'[Tt]oxic|[Hh]andle with [Cc]are|[Cc]aution', badge_html))
         edible    = bool(re.search(r'[Ee]dible', badge_html))
         wetland   = bool(re.search(r'[Ww]etland', badge_html))
