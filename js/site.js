@@ -351,7 +351,7 @@ async function loadEvents(containerId, maxItems=8) {
 
     el.innerHTML = upcoming.map(e => {
       const d = new Date(e.date+'T12:00');
-      const pdfBtn = e.pdf_url ? `<a href="${e.pdf_url}" target="_blank" rel="noopener" class="btn btn-sm btn-gold" style="margin-top:.6rem">📄 Event Details</a>` : '';
+      const pdfBtn = e.pdf_url ? `<a href="viewer.html?url=${encodeURIComponent(e.pdf_url)}&title=${encodeURIComponent(e.title||'Event Details')}&back=${encodeURIComponent(location.pathname.split('/').pop()||'events.html')}" rel="noopener" class="btn btn-sm btn-gold" style="margin-top:.6rem">📄 Event Details</a>` : '';
       return `<div class="event-card">
         <div class="event-datebox">
           <div class="mo">${d.toLocaleDateString('en-US',{month:'short'}).toUpperCase()}</div>
@@ -387,7 +387,7 @@ async function loadClasses(containerId) {
         <h4>${c.title||''}</h4>
         ${c.instructor?`<div class="class-instructor">with ${c.instructor}</div>`:''}
         ${c.description?`<p>${c.description}</p>`:''}
-        ${c.pdf_url?`<a href="${c.pdf_url}" target="_blank" rel="noopener" class="btn btn-sm btn-green" style="margin-top:.5rem">📄 Details</a>`:''}
+        ${c.pdf_url?`<a href="viewer.html?url=${encodeURIComponent(c.pdf_url)}&title=${encodeURIComponent(c.title||'Details')}&back=${encodeURIComponent(location.pathname.split('/').pop()||'events.html')}" rel="noopener" class="btn btn-sm btn-green" style="margin-top:.5rem">📄 Details</a>`:''}
         ${c.registration_url?`<a href="${c.registration_url}" target="_blank" rel="noopener" class="btn btn-sm btn-gold" style="margin-top:.5rem">Register →</a>`:''}
       </div>`).join('');
   } catch(e) {
