@@ -3,77 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Newsletters · Palma Sola Botanical Park</title>
+<title>Newsletters &amp; News · Palma Sola Botanical Park</title>
 <link rel="stylesheet" href="css/site.css">
 <style>
-.nl-grid {
+/* ── Newsletter archive cards ── */
+.news-archive {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.25rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
 }
-.nl-card {
+.news-card {
   background: var(--white);
-  border-radius: 10px;
-  padding: 1.4rem 1.5rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,.07);
-  border-top: 4px solid var(--green-mid);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  border-left: 5px solid var(--gold);
+  padding: 1.5rem 1.5rem 1.6rem;
   display: flex;
   flex-direction: column;
-  gap: .6rem;
 }
-.nl-date {
-  font-size: .75rem;
+.news-card .news-date {
+  font-size: .8rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .1em;
-  color: var(--gold);
+  letter-spacing: .08em;
+  color: var(--green-mid);
+  margin-bottom: .4rem;
 }
-.nl-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
+.news-card h3 {
+  font-size: 1.2rem;
+  margin: 0 0 .55rem;
   color: var(--green-deep);
-  line-height: 1.3;
 }
-.nl-desc {
-  font-size: .9rem;
+.news-card p {
+  font-size: 1rem;
   color: var(--text-soft);
   line-height: 1.6;
+  margin: 0 0 1.15rem;
   flex: 1;
 }
-.nl-read {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  font-size: .85rem;
-  font-weight: 700;
-  color: var(--green-mid);
-  text-decoration: none;
-  margin-top: .25rem;
+.news-card .btn { align-self: flex-start; }
+
+/* ── "Coming soon" callout ── */
+.news-callout {
+  background: #fff9e6;
+  border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
 }
-.nl-read:hover { text-decoration: underline; }
+.news-callout h3 {
+  font-size: 1.05rem;
+  color: var(--green-deep);
+  margin: 0 0 .5rem;
+}
+.news-callout p {
+  font-size: 1rem;
+  color: #5a3a00;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Darkened flame-vine hero so the light text stays readable */
+.news-hero-bg {
+  background-image:
+    linear-gradient(rgba(18,38,23,.66), rgba(18,38,23,.66)),
+    url('images/PSBP-00052-Mexican-Flame-Vine.jpg');
+  background-size: cover;
+  background-position: center;
+}
 </style>
 </head>
 <body>
 <div id="nav-placeholder"></div>
 
-<div class="page-hero" style="min-height:280px">
-  <div class="page-hero-bg" style="background-image:url('images/Wax_Myrtle.jpg')"></div>
+<div class="page-hero">
+  <div class="page-hero-bg news-hero-bg"></div>
   <div class="page-hero-content" style="text-align:center;margin:0 auto">
-    <div class="label label-light">Stay Connected</div>
-    <h1>Newsletters</h1>
-    <p>What's blooming, what's been planted, what's coming up — straight from the park.</p>
+    <div class="label label-light">Newsletters &amp; News</div>
+    <h1>Catch up on park life</h1>
+    <p>Every newsletter we've sent, gathered in one place. Not on our mailing list yet? No problem — read back through the stories, events, and milestones any time, right here.</p>
   </div>
 </div>
 
+<!-- WELCOME / INTRO -->
 <section class="bg-cream">
-  <div class="section-inner">
-    <span class="label">Archive</span>
-    <h2 class="section-title">All newsletters</h2>
-    <p class="section-sub">Most recent first. Each one opens in our document viewer so you never leave the site.</p>
+  <div class="section-inner" style="max-width:760px;margin:0 auto;text-align:center">
+    <span class="label">Welcome</span>
+    <h2 class="section-title" style="margin-bottom:1rem">Every issue, in one place</h2>
+    <p style="color:var(--text-soft);line-height:1.78;font-size:1.05rem">
+      We've started collecting our past newsletters here so anyone can catch up on what's been blooming, who's been
+      recognized, the grants we've landed, and the events that filled the gardens. Browse back through — think of it as a
+      little scrapbook of everything happening at Palma Sola.
+    </p>
 
-    <div class="nl-grid" id="nlGrid">
-      <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-soft)">Loading newsletters…</div>
+    <div class="news-callout" style="text-align:left">
+      <h3>📰 Coming soon: news all month long</h3>
+      <p>
+        Soon we'll be posting news right here on the website as it happens — short updates, happy announcements, and the
+        occasional surprise. This page will gather those moments together month by month and toss in a few extra goodies
+        worth sharing. The newsletter, but always on. Let's roll.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PAST NEWSLETTERS -->
+<section class="bg-white">
+  <div class="section-inner">
+    <span class="label">The Archive</span>
+    <h2 class="section-title" style="margin-bottom:.5rem">Past newsletters</h2>
+    <p class="section-sub" style="margin-bottom:2rem">Newest first. Each one opens right here on the site — no download needed.</p>
+
+    <div id="newsletterList" class="news-archive">
+      <p class="text-soft" style="padding:1rem">Loading newsletters…</p>
+    </div>
+
+    <p style="margin-top:1.75rem;font-size:.84rem;color:var(--text-soft);background:var(--sand);padding:1rem;border-radius:8px;line-height:1.65">
+      📬 <strong>Managed by the park director.</strong> This archive updates automatically from Google Sheets — add a row to the Newsletters tab and it appears here.
+    </p>
+  </div>
+</section>
+
+<!-- JOIN THE LIST CTA -->
+<section class="bg-deep">
+  <div class="section-inner" style="max-width:680px;margin:0 auto;text-align:center">
+    <span class="label label-light">Want it in your inbox?</span>
+    <h2 class="section-title" style="color:var(--white);margin-bottom:1rem">Join the mailing list</h2>
+    <p style="color:rgba(255,255,255,.72);font-size:1.02rem;line-height:1.78;margin-bottom:2rem">
+      Get the newsletter delivered, plus first word on events, classes, and what's blooming. We'd love to have you along.
+    </p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="contact.html" class="btn btn-gold">Get on the list →</a>
+      <a href="events.html" class="btn btn-outline">See what's coming up</a>
     </div>
   </div>
 </section>
@@ -83,59 +144,45 @@
 <script>
 injectShared({ inatBar: false });
 
-// Newsletter tab GID — add this tab to the Google Sheet
-// Columns (row 1 = section title, row 2 = headers, row 3 = notes, row 4+ = data):
-//   date | title | description | pdf_url | display
-const NL_GID = 1749891854; // ← UPDATE THIS after Bev creates the tab
-
-async function loadNewsletters() {
-  const grid = document.getElementById('nlGrid');
+// Pull the archive from the Newsletters tab (uses the shared fetchTab + TAB from site.js)
+(async function loadNewsletters() {
+  const el = document.getElementById('newsletterList');
+  if (!el) return;
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${NL_GID}`;
-    const resp = await fetch(url);
-    if (!resp.ok) throw new Error('Sheet fetch failed');
-    const text = await resp.text();
-    const lines = text.trim().split('\n');
-    const headers = parseCSVLine(lines[1]).map(h => h.trim().toLowerCase().replace(/\s+/g,'_'));
-    const rows = lines.slice(3)
-      .map(line => {
-        const vals = parseCSVLine(line);
-        const obj = {};
-        headers.forEach((h,i) => obj[h] = (vals[i]||'').trim());
-        return obj;
-      })
-      .filter(r => Object.values(r).some(v => v))
-      .filter(r => isWebVisible(r))
-      // Most recent first
-      .sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
+    const rows = await fetchTab(TAB.newsletters);
+    const visible = rows
+      .filter(r => { const d = (r.display || 'both').toLowerCase(); return d === 'both' || d === 'web'; })
+      .filter(r => r.title || r.pdf_url)
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    if (!rows.length) {
-      grid.innerHTML = '<p class="text-soft" style="grid-column:1/-1;text-align:center;padding:2rem">No newsletters available yet. Check back soon.</p>';
+    if (!visible.length) {
+      el.innerHTML = '<p class="text-soft" style="padding:1rem">Newsletters are on the way — check back soon.</p>';
       return;
     }
 
-    grid.innerHTML = rows.map(nl => {
-      const d = nl.date ? new Date(nl.date+'T12:00') : null;
-      const dateStr = d ? d.toLocaleDateString('en-US',{month:'long',year:'numeric'}) : '';
-      // All PDFs open in viewer.html — keeps users on site
-      const readHref = nl.pdf_url
-        ? `viewer.html?url=${encodeURIComponent(nl.pdf_url)}&title=${encodeURIComponent(nl.title)}&back=newsletters.html`
-        : '#';
-      return `<div class="nl-card">
-        ${dateStr ? `<div class="nl-date">${dateStr}</div>` : ''}
-        <div class="nl-title">${nl.title||'Newsletter'}</div>
-        ${nl.description ? `<div class="nl-desc">${nl.description}</div>` : ''}
-        ${nl.pdf_url ? `<a class="nl-read" href="${readHref}">📄 Read →</a>` : ''}
+    el.innerHTML = visible.map(n => {
+      const d = n.date ? new Date(n.date + 'T12:00') : null;
+      const dateLabel = (d && !isNaN(d))
+        ? d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+        : (n.date || '');
+      const href = n.pdf_url
+        ? `viewer.html?url=${encodeURIComponent(n.pdf_url)}&title=${encodeURIComponent(n.title || 'Newsletter')}&back=${encodeURIComponent(location.pathname.split('/').pop() || 'newsletters.html')}`
+        : '';
+      const btn = href
+        ? `<a href="${href}" class="btn btn-gold btn-sm">📄 Read Newsletter →</a>`
+        : '';
+      return `<div class="news-card">
+        <div class="news-date">${dateLabel}</div>
+        <h3>${n.title || 'Newsletter'}</h3>
+        <p>${n.description || ''}</p>
+        ${btn}
       </div>`;
     }).join('');
-
-  } catch(e) {
-    grid.innerHTML = '<p class="text-soft" style="grid-column:1/-1;text-align:center;padding:2rem">Could not load newsletters. Please try again later.</p>';
-    console.warn('Newsletter load error:', e);
+  } catch (err) {
+    el.innerHTML = '<p class="text-soft" style="padding:1rem">Could not load newsletters right now. Please try again later.</p>';
+    console.error(err);
   }
-}
-
-loadNewsletters();
+})();
 </script>
 </body>
 </html>
