@@ -152,7 +152,7 @@ const FOOTER_HTML = `
         <li><a href="nature.html">Nature at PSBP</a></li>
         <li><a href="nature.html#plants">Plant Collection</a></li>
         <li><a href="nature.html#wildlife">Wildlife</a></li>
-        <li><a href="nature.html#inat">iNaturalist Project</a></li>
+        <li><a href="newsletters.html">Park News</a></li>
         <li><a href="visit.html#nursery">Hidden Garden Nursery</a></li>
       </ul>
     </div>
