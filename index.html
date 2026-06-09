@@ -386,50 +386,7 @@ setInterval(() => {
   slides[cur].classList.add('on');
 }, 5000);
 
-// Announcements — slow-cycling one at a time
-async function loadHomepageAnnouncements() {
-  try {
-    const rows = await fetchTab(TAB.announcements);
-    const visible = rows.filter(r => isWebVisible(r));
-    if (!visible.length) return;
-
-    const bar  = document.getElementById('announcements-bar');
-    const wrap = document.getElementById('annCycleWrap');
-    bar.style.display = 'block';
-
-    if (visible.length === 1) {
-      // Single announcement — just show it
-      const a = visible[0];
-      wrap.innerHTML = `<div class="ann-cycle-item active" style="position:relative">
-        ${a.emoji ? `<span style="font-size:1.4rem">${a.emoji}</span>` : ''}
-        <div><strong style="color:var(--white)">${a.title||''}</strong>
-        ${a.body ? `<span style="color:rgba(255,255,255,.78);font-size:.9rem;margin-left:.5rem">${a.body}</span>` : ''}
-        ${annButton(a)}
-        </div>
-      </div>`;
-      return;
-    }
-
-    // Multiple — build all items, cycle with slow fade
-    wrap.innerHTML = visible.map((a, i) => `
-      <div class="ann-cycle-item ${i===0?'active':''}" data-idx="${i}">
-        ${a.emoji ? `<span style="font-size:1.4rem">${a.emoji}</span>` : ''}
-        <div><strong style="color:var(--white)">${a.title||''}</strong>
-        ${a.body ? `<span style="color:rgba(255,255,255,.78);font-size:.9rem;margin-left:.5rem">${a.body}</span>` : ''}
-        ${annButton(a)}
-        </div>
-      </div>`).join('');
-
-    let annCur = 0;
-    setInterval(() => {
-      const items = wrap.querySelectorAll('.ann-cycle-item');
-      items[annCur].classList.remove('active');
-      annCur = (annCur + 1) % items.length;
-      items[annCur].classList.add('active');
-    }, 5000);
-
-  } catch(e) { /* silent */ }
-}
+// Announcements now use the shared loadAnnouncements() from site.js (see call below)
 
 // iNat mosaic — attribution shown, no outbound links
 loadINat().then(async data => {
@@ -460,7 +417,7 @@ loadINat().then(async data => {
   }).join('');
 });
 
-loadHomepageAnnouncements();
+loadAnnouncements('annCycleWrap');
 loadEvents('homeEvents', 4);
 </script>
 </body>
