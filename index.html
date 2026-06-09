@@ -404,8 +404,7 @@ async function loadHomepageAnnouncements() {
         ${a.emoji ? `<span style="font-size:1.4rem">${a.emoji}</span>` : ''}
         <div><strong style="color:var(--white)">${a.title||''}</strong>
         ${a.body ? `<span style="color:rgba(255,255,255,.78);font-size:.9rem;margin-left:.5rem">${a.body}</span>` : ''}
-        ${a.link_url && a.link_text ? `<a href="${a.link_url}" class="ann-link" style="margin-left:.75rem">${a.link_text} →</a>` : ''}
-        ${a.pdf_url ? `<a href="viewer.html?url=${encodeURIComponent(a.pdf_url)}&title=${encodeURIComponent(a.title||'')}&back=index.html" class="ann-link" style="margin-left:.75rem">📄 Read More →</a>` : ''}
+        ${annButton(a)}
         </div>
       </div>`;
       return;
@@ -417,8 +416,7 @@ async function loadHomepageAnnouncements() {
         ${a.emoji ? `<span style="font-size:1.4rem">${a.emoji}</span>` : ''}
         <div><strong style="color:var(--white)">${a.title||''}</strong>
         ${a.body ? `<span style="color:rgba(255,255,255,.78);font-size:.9rem;margin-left:.5rem">${a.body}</span>` : ''}
-        ${a.link_url && a.link_text ? `<a href="${a.link_url}" class="ann-link" style="margin-left:.75rem">${a.link_text} →</a>` : ''}
-        ${a.pdf_url ? `<a href="viewer.html?url=${encodeURIComponent(a.pdf_url)}&title=${encodeURIComponent(a.title||'')}&back=index.html" class="ann-link" style="margin-left:.75rem">📄 Read More →</a>` : ''}
+        ${annButton(a)}
         </div>
       </div>`).join('');
 
