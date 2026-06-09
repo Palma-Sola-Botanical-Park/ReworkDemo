@@ -23,19 +23,24 @@
 .vol-entry.active { display: block; }
 @keyframes volFadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
+/* Header row: circle on the left, name + role stacked to its right */
+.vol-head {
+  display: flex; align-items: center; gap: 1.1rem; margin-bottom: 1.1rem;
+}
 .vol-photo {
-  width: 80px; height: 80px;
+  width: 72px; height: 72px;
   border-radius: 50%;
   background: var(--green-mid);
   border: 4px solid var(--gold);
-  margin: 0 auto 1.25rem;
+  flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 2rem;
+  font-size: 1.9rem;
   overflow: hidden;
   background-size: cover; background-position: center;
 }
-.vol-name   { color: var(--white); font-size: 1.4rem; margin-bottom: .2rem; text-align:center; }
-.vol-role   { color: var(--gold-light); font-size: .82rem; text-align:center; margin-bottom:1rem; }
+.vol-head-text { min-width: 0; }
+.vol-name   { color: var(--white); font-size: 1.4rem; margin: 0 0 .15rem; text-align: left; }
+.vol-role   { color: var(--gold-light); font-size: .82rem; text-align: left; margin: 0; }
 .vol-body   { color: rgba(255,255,255,.78); font-size: .95rem; line-height: 1.7; }
 .vol-pdf    { margin-top: 1rem; }
 
@@ -95,21 +100,25 @@
 
         <div class="vol-spotlight" id="volSpotlight">
           <div class="vol-entry active" id="volDefault">
-            <div class="vol-photo" id="volDefaultPhoto">🌿</div>
-            <h3 class="vol-name">Our Volunteers</h3>
-            <div class="vol-role">Volunteer Spotlight</div>
+            <div class="vol-head">
+              <div class="vol-photo" id="volDefaultPhoto">🌿</div>
+              <div class="vol-head-text">
+                <h3 class="vol-name">Our Volunteers</h3>
+                <div class="vol-role">Volunteer Spotlight</div>
+              </div>
+            </div>
             <p class="vol-body">The people who make this park what it is — loading…</p>
           </div>
         </div>
         <div class="vol-dots" id="volDots"></div>
 
         <!-- Fill left column with supporting content -->
-        <div style="margin-top:1.75rem;background:var(--green-deep);border-radius:12px;padding:1.75rem;color:white">
+        <div style="margin-top:1.75rem;background:var(--white);border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:1.75rem;box-shadow:0 2px 12px rgba(0,0,0,.06)">
           <div style="font-size:2rem;margin-bottom:.75rem">🌿</div>
-          <p style="font-size:1.2rem;font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,.9);line-height:1.65;margin-bottom:1.1rem">
+          <p style="font-size:1.2rem;font-family:'Playfair Display',serif;font-style:italic;color:var(--green-deep);line-height:1.65;margin-bottom:1.1rem">
             "Many hands make light work."
           </p>
-          <p style="font-size:1rem;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:1.4rem">
+          <p style="font-size:1rem;color:var(--text-soft);line-height:1.7;margin-bottom:1.4rem">
             Some volunteers come every week. Some come once a month. Some just show up when they feel like it.
             All of it counts. All of it matters. The gate is always open.
           </p>
@@ -263,9 +272,13 @@ async function loadVolSpotlight() {
         ? `<div class="vol-pdf"><a href="viewer.html?url=${encodeURIComponent(v.pdf_url)}&title=${encodeURIComponent(v.title||'Document')}&back=volunteer.html" class="btn btn-sm btn-gold">📄 ${v.pdf_link_text||'Read More'}</a></div>`
         : '';
       return `<div class="vol-entry ${i===0?'active':''}" data-idx="${i}">
-        <div class="vol-photo" style="${photoStyle}">${photoContent}</div>
-        <h3 class="vol-name">${v.name||v.title||'Volunteer'}</h3>
-        <div class="vol-role">${v.role||v.title||'Volunteer Spotlight'}</div>
+        <div class="vol-head">
+          <div class="vol-photo" style="${photoStyle}">${photoContent}</div>
+          <div class="vol-head-text">
+            <h3 class="vol-name">${v.name||v.title||'Volunteer'}</h3>
+            <div class="vol-role">${v.role||v.title||'Volunteer Spotlight'}</div>
+          </div>
+        </div>
         <p class="vol-body">${v.body||v.bio||''}</p>
         ${pdfBtn}
       </div>`;
