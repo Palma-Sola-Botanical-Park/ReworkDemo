@@ -492,6 +492,15 @@ async function loadPlants() {
     const resp = await fetch(base + 'plants.json');
     if (!resp.ok) throw new Error('plants.json not found');
     PLANTS = await resp.json();
+    // Precompute lowercased search fields ONCE on load, so each keystroke is a
+    // cheap lookup instead of re-lowercasing every field of every plant.
+    PLANTS.forEach(p => {
+      p._common  = (p.common  || '').toLowerCase();
+      p._sci     = (p.sci     || '').toLowerCase();
+      p._family  = (p.family  || '').toLowerCase();
+      p._quick   = (p.quick   || '').toLowerCase();
+      p._aliases = (p.aliases || []).join(' ').toLowerCase();
+    });
     if (ctr) ctr.textContent = PLANTS.length;
     // Update the collection count in the intro text
     const collectionCount = document.getElementById('plantCollectionCount');
@@ -607,23 +616,16 @@ function filterPlants() {
 
   if (!q) { renderPlants(orderByFeatured(pool, FEATURED_PLANTS)); return; }
 
-  // Score each plant — higher score = better match = shown first
+  // Score each plant — higher score = better match = shown first.
+  // Fields were lowercased once at load (see loadPlants), so this is cheap.
   const scored = pool.map(p => {
-    const common = (p.common||'').toLowerCase();
-    const sci    = (p.sci||'').toLowerCase();
-    const family = (p.family||'').toLowerCase();
-    const quick  = (p.quick||'').toLowerCase();
-    const more   = (p.more||p.origin||'').toLowerCase();
-    const aliases = (p.aliases||[]).join(' ').toLowerCase();
-
     let score = 0;
-    if (common.startsWith(q))         score += 100; // starts with query — top priority
-    else if (common.includes(q))      score += 80;  // name contains query
-    if (aliases.includes(q))          score += 70;  // alternate names
-    if (sci.includes(q))              score += 60;  // scientific name
-    if (family.includes(q))           score += 40;  // family name
-    if (quick.includes(q))            score += 20;  // quick hits text
-    if (more.includes(q))             score += 10;  // more info text
+    if (p._common.startsWith(q))      score += 100; // starts with query — top priority
+    else if (p._common.includes(q))   score += 80;  // name contains query
+    if (p._aliases.includes(q))       score += 70;  // alternate names
+    if (p._sci.includes(q))           score += 60;  // scientific name
+    if (p._family.includes(q))        score += 40;  // family name
+    if (p._quick.includes(q))         score += 20;  // quick hits text
 
     return { p, score };
   })
