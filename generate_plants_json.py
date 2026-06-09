@@ -96,6 +96,10 @@ def extract_plant(html_path):
         edible    = bool(re.search(r'[Ee]dible', badge_html))
         wetland   = bool(re.search(r'[Ww]etland', badge_html))
 
+    # Fallback: derive wetland from the plant's Category (authoritative signal)
+    if not wetland and 'wetland' in (cat or '').lower():
+        wetland = True
+
     # Check full page for butterfly references
     butterfly = bool(re.search(r'[Bb]utterfl', html))
 
