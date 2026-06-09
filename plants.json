@@ -1424,7 +1424,7 @@
     "butterfly": true,
     "toxic": true,
     "edible": false,
-    "invasive": false,
+    "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00070-Turks-Turban.jpg",
     "page": "plants/PSBP-00070-Turks-Turban.html",
