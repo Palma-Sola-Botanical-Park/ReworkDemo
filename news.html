@@ -15,7 +15,7 @@
 }
 
 /* ── News zone: reader (left) + squares (right) ── */
-.news-layout { display: grid; grid-template-columns: 1.55fr 1fr; gap: 2.5rem; align-items: start; }
+.news-layout { display: grid; grid-template-columns: 2.2fr 1fr; gap: 2.5rem; align-items: start; }
 @media (max-width: 880px) { .news-layout { grid-template-columns: 1fr; gap: 1.75rem; } }
 
 .news-reader { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 3px 18px rgba(0,0,0,.09); }
@@ -74,9 +74,6 @@
 <!-- NEWS ZONE -->
 <section class="bg-cream">
   <div class="section-inner">
-    <span class="label">Latest</span>
-    <h2 class="section-title" style="margin-bottom:1.75rem">Park news</h2>
-
     <div class="news-layout">
       <!-- Left: reader pane -->
       <div class="news-reader" id="newsReader">
