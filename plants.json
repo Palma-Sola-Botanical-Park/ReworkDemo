@@ -979,8 +979,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": false,
-    "edible": true,
+    "toxic": true,
+    "edible": false,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00047-Staghorn-Fern.jpg",
@@ -1073,7 +1073,8 @@
     "sci": "Pseudogynoxys chenopodioides",
     "family": "Asteraceae",
     "aliases": [
-      "Orange Glow Vine · Senecio confusus (former botanical name, still widely used)"
+      "Orange Glow Vine",
+      "Senecio confusus (former botanical name, still widely used)"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
@@ -1093,14 +1094,15 @@
     "sci": "Pentas lanceolata",
     "family": "Rubiaceae",
     "aliases": [
-      "Egyptian Starcluster · Starflower"
+      "Egyptian Starcluster",
+      "Starflower"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": false,
-    "edible": true,
+    "toxic": true,
+    "edible": false,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00053-Pentas.jpg",
@@ -1113,7 +1115,8 @@
     "sci": "Coccoloba pubescens",
     "family": "Polygonaceae",
     "aliases": [
-      "Eve's Umbrella - Tin Roof Tree"
+      "Eve's Umbrella",
+      "Tin Roof Tree"
     ],
     "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
@@ -1157,8 +1160,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": false,
-    "edible": true,
+    "toxic": true,
+    "edible": false,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00056-Parrots-Beak.jpg",
@@ -1265,7 +1268,9 @@
     "sci": "Senna alata",
     "family": "Fabaceae",
     "aliases": [
-      "Ringworm Bush · Emperor's Candlesticks · Christmas Candle"
+      "Ringworm Bush",
+      "Emperor's Candlesticks",
+      "Christmas Candle"
     ],
     "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
@@ -1287,12 +1292,12 @@
     "aliases": [
       "Pagoda Clerodendrum"
     ],
-    "cat": "Park Collection",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00063-Pagoda-Flower.jpg",
@@ -1309,8 +1314,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": false,
-    "edible": true,
+    "toxic": true,
+    "edible": false,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00064-Ixora-Maui-Yellow.jpg",
@@ -1323,7 +1328,8 @@
     "sci": "Nandina domestica",
     "family": "Berberidaceae",
     "aliases": [
-      "Also known as sacred bamboo or nanten. Not a true bamboo despite the common name · it is a member of the barberry family."
+      "Also known as sacred bamboo or nanten. Not a true bamboo despite the common name",
+      "it is a member of the barberry family."
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
@@ -1367,7 +1373,7 @@
       "Rosy Periwinkle",
       "Old Maid"
     ],
-    "cat": "Park Collection",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -1433,7 +1439,7 @@
     "butterfly": true,
     "toxic": true,
     "edible": false,
-    "invasive": true,
+    "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00070-Turks-Turban.jpg",
     "page": "plants/PSBP-00070-Turks-Turban.html",
@@ -1545,7 +1551,8 @@
     "sci": "Bougainvillea spectabilis",
     "family": "Nyctaginaceae",
     "aliases": [
-      "Paper Flower · Paperflower"
+      "Paper Flower",
+      "Paperflower"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
@@ -1569,12 +1576,12 @@
       "Blue Trumpet Vine",
       "Laurel Clock Vine"
     ],
-    "cat": "Park Collection",
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00077-Bengal-Trumpet.jpg",
@@ -1643,7 +1650,7 @@
     "sci": "Tillandsia recurvata",
     "family": "Bromeliaceae",
     "aliases": [],
-    "cat": "Native Epiphytes & Air Plants",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Native",
     "native": true,
     "butterfly": false,
@@ -1661,7 +1668,8 @@
     "sci": "Caryota mitis",
     "family": "Arecaceae",
     "aliases": [
-      "Clustered Fishtail Palm · Tufted Fishtail Palm"
+      "Clustered Fishtail Palm",
+      "Tufted Fishtail Palm"
     ],
     "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
@@ -1701,7 +1709,8 @@
     "sci": "Phoenix reclinata",
     "family": "Arecaceae",
     "aliases": [
-      "Senegal Date Palm · Wild Date Palm"
+      "Senegal Date Palm",
+      "Wild Date Palm"
     ],
     "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
@@ -1721,14 +1730,15 @@
     "sci": "Rhapis excelsa",
     "family": "Arecaceae",
     "aliases": [
-      "Bamboo Palm · Broadleaf Lady Palm"
+      "Bamboo Palm",
+      "Broadleaf Lady Palm"
     ],
     "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": false,
-    "edible": true,
+    "toxic": true,
+    "edible": false,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00085-Little-Lady-Palm.jpg",
@@ -1802,14 +1812,15 @@
     "sci": "Stachytarpheta cayennensis",
     "family": "Verbenaceae",
     "aliases": [
-      "Rattail · Porterweed"
+      "Rattail",
+      "Porterweed"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": false,
-    "edible": true,
+    "toxic": true,
+    "edible": false,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00088-Blue-Porterweed.jpg",
@@ -1822,7 +1833,8 @@
     "sci": "Guilandina bonduc",
     "family": "Fabaceae",
     "aliases": [
-      "Nickerbean · Fever Bean"
+      "Nickerbean",
+      "Fever Bean"
     ],
     "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
@@ -1864,8 +1876,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": false,
-    "edible": true,
+    "toxic": true,
+    "edible": false,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00091-Pink-Powderpuff.jpg",
@@ -1879,9 +1891,9 @@
     "family": "Commelinaceae",
     "aliases": [
       "Purple Secretia",
-      "Wandering Jew (outdated)"
+      "Wandering Dude"
     ],
-    "cat": "Park Collection",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1917,7 +1929,9 @@
     "sci": "Clitoria ternatea",
     "family": "Fabaceae",
     "aliases": [
-      "Blue Pea · Asiatic Pigeonwings · Cordofan Pea"
+      "Blue Pea",
+      "Asiatic Pigeonwings",
+      "Cordofan Pea"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
@@ -1940,7 +1954,7 @@
       "Oyster Plant",
       "Boat Lily"
     ],
-    "cat": "Park Collection",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1975,6 +1989,28 @@
     "quick": "One of the richest natural sources of vitamin C known — a single Acerola cherry contains approximately 65 times more vitamin C than an orange of similar weight. This is not approximate; it is documented nutritional analysis."
   },
   {
+    "id": "PSBP-00096",
+    "common": "Barbados Cherry",
+    "sci": "Malpighia emarginata",
+    "family": "Malpighiaceae",
+    "aliases": [
+      "Acerola",
+      "West Indian Cherry",
+      "Cereza (Puerto Rico)"
+    ],
+    "cat": "Rare Fruit Collection",
+    "origin": "Non-native",
+    "native": false,
+    "butterfly": false,
+    "toxic": false,
+    "edible": true,
+    "invasive": false,
+    "wetland": false,
+    "photo": "photos/PSBP-00096-Barbados-Cherry.jpg",
+    "page": "plants/PSBP-00096-Barbados-Cherry.html",
+    "quick": "One of the richest natural sources of vitamin C known — a single Acerola cherry contains approximately 65 times more vitamin C than an orange of similar weight. This is not approximate; it is documented nutritional analysis."
+  },
+  {
     "id": "PSBP-00097",
     "common": "Starburst Bush",
     "sci": "Clerodendrum quadriloculare",
@@ -2001,7 +2037,7 @@
       "Silverbush",
       "Silky Sophora"
     ],
-    "cat": "Park Collection",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": true,
@@ -2022,7 +2058,7 @@
       "Rain Lily",
       "Zephyr Lily"
     ],
-    "cat": "Park Collection",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -2040,10 +2076,10 @@
     "sci": "Crotalaria spectabilis",
     "family": "Fabaceae",
     "aliases": [],
-    "cat": "Park Collection",
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
     "native": false,
-    "butterfly": false,
+    "butterfly": true,
     "toxic": true,
     "edible": false,
     "invasive": true,
@@ -2058,7 +2094,7 @@
     "sci": "Lantana strigocamara",
     "family": "Verbenaceae",
     "aliases": [],
-    "cat": "Park Collection",
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -2090,6 +2126,27 @@
   },
   {
     "id": "PSBP-00103",
+    "common": "Dollarweed",
+    "sci": "Hydrocotyle verticillata",
+    "family": "Araliaceae",
+    "aliases": [
+      "Whorled Pennywort",
+      "Water Pennywort"
+    ],
+    "cat": "Native Wetland & Pond Edge",
+    "origin": "Native",
+    "native": true,
+    "butterfly": false,
+    "toxic": true,
+    "edible": false,
+    "invasive": false,
+    "wetland": true,
+    "photo": "photos/PSBP-00103-Dollarweed.jpg",
+    "page": "plants/PSBP-00103-Dollarweed.html",
+    "quick": "An aquatic or semi-aquatic native creeping plant that forms dense mats at pond edges and in moist soil. The round penny-shaped leaves are arranged in whorls around the stem — the source of both common names."
+  },
+  {
+    "id": "PSBP-00103",
     "common": "Whorled Pennywort",
     "sci": "Hydrocotyle verticillata",
     "family": "Araliaceae",
@@ -2115,7 +2172,7 @@
     "sci": "Psychotria nervosa",
     "family": "Rubiaceae",
     "aliases": [],
-    "cat": "Park Collection",
+    "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
     "butterfly": true,
@@ -2133,9 +2190,9 @@
     "sci": "Spermacoce verticillata",
     "family": "Rubiaceae",
     "aliases": [],
-    "cat": "Park Collection",
-    "origin": "Native",
-    "native": true,
+    "cat": "Plants to Watch & Invasive Awareness",
+    "origin": "Non-native",
+    "native": false,
     "butterfly": false,
     "toxic": true,
     "edible": false,
@@ -2143,18 +2200,18 @@
     "wetland": false,
     "photo": "photos/PSBP-00105-Shrubby-False-Buttonweed.jpg",
     "page": "plants/PSBP-00105-Shrubby-False-Buttonweed.html",
-    "quick": "A small native groundcover found throughout Florida in disturbed areas, lawns, and roadsides. The tiny white star-shaped flowers are produced in clusters and are a nectar source for small native bees and other insects."
+    "quick": "A small non-native groundcover, naturalized throughout Florida in disturbed areas, lawns, and roadsides. The tiny white star-shaped flowers cluster in tight whorls where the leaves meet the stem and feed small native bees and other insects."
   },
   {
     "id": "PSBP-00106",
-    "common": "Four-o-clock / Marvel of Peru",
+    "common": "Four-o-clock",
     "sci": "Mirabilis jalapa",
     "family": "Nyctaginaceae",
     "aliases": [
       "Marvel of Peru",
       "Belle de Nuit"
     ],
-    "cat": "Park Collection",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -2188,22 +2245,44 @@
     "quick": "One of the most recognizable groundcovers in Florida — the yellow daisy flowers and creeping mat habit are everywhere in landscaping, medians, and disturbed areas."
   },
   {
+    "id": "PSBP-00107",
+    "common": "Wedelia",
+    "sci": "Sphagneticola trilobata",
+    "family": "Asteraceae",
+    "aliases": [
+      "Trailing Daisy",
+      "Bay Biscayne Creeper",
+      "Orange Daisy"
+    ],
+    "cat": "Plants to Watch & Invasive Awareness",
+    "origin": "Non-native",
+    "native": false,
+    "butterfly": true,
+    "toxic": true,
+    "edible": false,
+    "invasive": true,
+    "wetland": false,
+    "photo": "photos/PSBP-00107-Wedelia.jpg",
+    "page": "plants/PSBP-00107-Wedelia.html",
+    "quick": "One of the most recognizable groundcovers in Florida — the yellow daisy flowers and creeping mat habit are everywhere in landscaping, medians, and disturbed areas."
+  },
+  {
     "id": "PSBP-00108",
     "common": "Largeflower Pusley",
     "sci": "Richardia grandiflora",
     "family": "Rubiaceae",
     "aliases": [],
-    "cat": "Park Collection",
-    "origin": "Native",
-    "native": true,
-    "butterfly": false,
+    "cat": "Plants to Watch & Invasive Awareness",
+    "origin": "Non-native",
+    "native": false,
+    "butterfly": true,
     "toxic": true,
     "edible": false,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00108-Largeflower-Pusley.jpg",
     "page": "plants/PSBP-00108-Largeflower-Pusley.html",
-    "quick": "A low-growing native groundcover with cheerful white to pale pink flowers. Often dismissed as a lawn weed, it is technically native to Florida and provides nectar to small native bees and other insects."
+    "quick": "A low-growing groundcover with cheerful white to pale-pink, star-shaped flowers, often dismissed as a lawn weed. It belongs to the coffee family (Rubiaceae) and is widely called Florida snow for the way its blooms can cover a lawn, and Mexican clover."
   },
   {
     "id": "PSBP-00109",
@@ -2214,7 +2293,7 @@
       "Centipede Orchid",
       "Grounded Orchid"
     ],
-    "cat": "Park Collection",
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -2232,21 +2311,21 @@
     "sci": "Crotalaria pallida",
     "family": "Fabaceae",
     "aliases": [],
-    "cat": "Park Collection",
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
     "native": false,
-    "butterfly": false,
+    "butterfly": true,
     "toxic": true,
     "edible": false,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00110-Smooth-Rattlebox.jpg",
     "page": "plants/PSBP-00110-Smooth-Rattlebox.html",
-    "quick": "Similar to the Showy Rattlebox in that the seeds rattle in dried pods and the plant is a documented toxicity concern. The smooth rattlebox (Crotalaria pallida) is a FISC Category II invasive in Florida — slightly less aggressively ranked than the Showy Rattlebox but still a concern."
+    "quick": "The seeds rattle in the dry pods — hence the name. As the bean-like pods mature they inflate like small balloons and the loose seeds inside turn the plant into a natural maraca. A delightful sound for something so toxic."
   },
   {
     "id": "PSBP-00111",
-    "common": "Cranberry Hibiscus / False Roselle",
+    "common": "Cranberry Hibiscus",
     "sci": "Hibiscus acetosella",
     "family": "Malvaceae",
     "aliases": [
@@ -2254,12 +2333,12 @@
       "African Rosemallow",
       "Hibiscus acetosella"
     ],
-    "cat": "Park Collection",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00111-Cranberry-Hibiscus.jpg",
@@ -2297,12 +2376,12 @@
       "Capeweed",
       "Frogfruit"
     ],
-    "cat": "Park Collection",
+    "cat": "Native Groundcovers & Wildflowers",
     "origin": "Native",
     "native": true,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00113-Turkey-Tangle-Frogfruit.jpg",
@@ -2318,7 +2397,7 @@
       "Napoleon's Plume",
       "Single-stamen Orchid Tree"
     ],
-    "cat": "Park Collection",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -2336,7 +2415,7 @@
     "sci": "Youngia japonica",
     "family": "Asteraceae",
     "aliases": [],
-    "cat": "Park Collection",
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -2370,6 +2449,27 @@
     "quick": "A Florida native coastal shrub that most visitors have seen along roadsides and waterways without knowing its name. The late-fall fluffy white seed heads — covering female plants in cotton-like masses — are how most people first notice it."
   },
   {
+    "id": "PSBP-00116",
+    "common": "Saltbush",
+    "sci": "Baccharis halimifolia",
+    "family": "Asteraceae",
+    "aliases": [
+      "Groundsel Tree",
+      "Sea Myrtle"
+    ],
+    "cat": "Native Trees & Large Shrubs",
+    "origin": "Native",
+    "native": true,
+    "butterfly": true,
+    "toxic": false,
+    "edible": true,
+    "invasive": false,
+    "wetland": false,
+    "photo": "photos/PSBP-00116-Saltbush.jpg",
+    "page": "plants/PSBP-00116-Saltbush.html",
+    "quick": "A Florida native coastal shrub that most visitors have seen along roadsides and waterways without knowing its name. The late-fall fluffy white seed heads — covering female plants in cotton-like masses — are how most people first notice it."
+  },
+  {
     "id": "PSBP-00117",
     "common": "Southern Seaside Goldenrod",
     "sci": "Solidago mexicana",
@@ -2379,8 +2479,8 @@
     "origin": "Native",
     "native": true,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00117-Southern-Seaside-Goldenrod.jpg",
@@ -2396,7 +2496,7 @@
       "Coralbush",
       "Gout Plant"
     ],
-    "cat": "Tropical Foliage & Accent Plants",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -2414,7 +2514,7 @@
     "sci": "Viburnum odoratissimum",
     "family": "Viburnaceae",
     "aliases": [],
-    "cat": "Flowering Shrubs & Vines",
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
@@ -2468,5 +2568,27 @@
     "photo": "photos/PSBP-00121-Amazon-Lily.jpg",
     "page": "plants/PSBP-00121-Amazon-Lily.html",
     "quick": "Low in the middle of Bird of Paradise Island, beneath the towering birds, sits the most historically precious plant in the park: an Amazon Lily handed down through the Baden family since the 1880s."
+  },
+  {
+    "id": "PSBP-00122",
+    "common": "Walter's Viburnum",
+    "sci": "Viburnum obovatum",
+    "family": "Viburnaceae",
+    "aliases": [
+      "Small Viburnum",
+      "Small-leaf Arrowwood",
+      "Walter Viburnum"
+    ],
+    "cat": "Native Trees & Large Shrubs",
+    "origin": "Native",
+    "native": true,
+    "butterfly": true,
+    "toxic": true,
+    "edible": false,
+    "invasive": false,
+    "wetland": false,
+    "photo": "photos/PSBP-00122-Walters-Viburnum.jpg",
+    "page": "plants/PSBP-00122-Walters-Viburnum.html",
+    "quick": "A Florida native shrub or small tree that earns its keep year-round. In late winter and early spring it covers itself in small white flower clusters, locally nicknamed Florida snow, that draw bees and butterflies."
   }
 ]
