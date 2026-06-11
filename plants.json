@@ -1190,13 +1190,15 @@
     "common": "Giant Leather Fern",
     "sci": "Acrostichum danaeifolium",
     "family": "Pteridaceae",
-    "aliases": [],
+    "aliases": [
+      "Inland Leather Fern"
+    ],
     "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
     "native": true,
     "butterfly": true,
-    "toxic": false,
-    "edible": true,
+    "toxic": true,
+    "edible": false,
     "invasive": false,
     "wetland": true,
     "photo": "photos/PSBP-00058-Giant-Leather-Fern.jpg",
