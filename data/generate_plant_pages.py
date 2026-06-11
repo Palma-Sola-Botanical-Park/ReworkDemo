@@ -240,13 +240,20 @@ def credit_line(crow):
         return f'📷 Photo by <strong>{esc(name)}</strong>'
     return f'📷 Photo by <strong>{esc(name)}</strong> · {esc(lic)} · via iNaturalist'
 
-def li_list(text, dark=False):
+def md_bold(s):
+    # convert **anchor** markers (authored in the master) into <strong> tags.
+    # esc() runs first and leaves * untouched, so markers survive escaping.
+    return re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
+
+def li_list(text, dark=False, bold=False):
     out = []
     for sub, body in segments(text):
+        b = md_bold(esc(body)) if bold else esc(body)
         if sub:
-            out.append(f"    <li><strong>{esc(sub)}</strong> {esc(body)}</li>")
+            s = md_bold(esc(sub)) if bold else esc(sub)
+            out.append(f"    <li><strong>{s}</strong> {b}</li>")
         else:
-            out.append(f"    <li>{esc(body)}</li>")
+            out.append(f"    <li>{b}</li>")
     return "\n".join(out)
 
 def p_list(text):
@@ -283,7 +290,7 @@ def build(row, crow, head):
     parts = re.split(r"\n| · | — | - |·", raw) if raw and raw != "nan" else []
     aliases = [a.strip() for a in parts
                if a.strip() and a.strip() != "nan" and a.strip().lower() != common.lower()]
-    alias_html = ('<span class="alias-tag">' + " · ".join(esc(a) for a in aliases) + "</span>") if aliases else ""
+    alias_html = "".join(f'<span class="alias-tag">{esc(a)}</span>' for a in aliases)
 
     # notes
     notes = str(row.get("Other Notes", "")).strip()
@@ -311,15 +318,27 @@ def build(row, crow, head):
     head = head.replace("Buccaneer Palm · Palma Sola Botanical Park",
                         f"{common} · Palma Sola Botanical Park")
 
+    # Placeholder-aware hero/credit: a "Photo Coming Soon" plant gets no image
+    # link (clicking a placeholder is pointless) and no credit line (the hero
+    # graphic already says Coming Soon).
+    cl = credit_line(crow)
+    is_placeholder = "Coming Soon" in cl
+    if is_placeholder:
+        hero_media = f'  <img src="../photos/{stem}.jpg" alt="{esc(common)} at Palma Sola Botanical Park" loading="lazy">'
+        credit_block = ""
+    else:
+        hero_media = (f'  <a class="plant-hero-link" href="../photos/{stem}.jpg" target="_blank" rel="noopener">\n'
+                      f'    <img src="../photos/{stem}.jpg" alt="{esc(common)} at Palma Sola Botanical Park" loading="lazy">\n'
+                      f'  </a>')
+        credit_block = f'<div class="plant-credit">{cl}</div>\n'
+
     body = f'''</head>
 <body>
 <div id="nav-placeholder"></div>
 
 <div class="plant-wrap">
 <div class="plant-hero">
-  <a class="plant-hero-link" href="../photos/{stem}.jpg" target="_blank" rel="noopener">
-    <img src="../photos/{stem}.jpg" alt="{esc(common)} at Palma Sola Botanical Park" loading="lazy">
-  </a>
+{hero_media}
   <div class="plant-hero-overlay">
     <div class="plant-hero-category">{esc(category)}</div>
     <div class="plant-hero-name">{esc(common)}</div>
@@ -329,15 +348,14 @@ def build(row, crow, head):
   <span class="plant-sci-name">{esc(sci)}</span>
   <a class="plant-family-tag" href="../nature.html?family={esc(family)}">{esc(family)}</a>
 </div>
-<div class="plant-credit">{credit_line(crow)}</div>
-<div class="plant-content">
+{credit_block}<div class="plant-content">
   <div class="plant-status-row">
     {badges}
   </div>
   <div class="plant-section">
     <div class="plant-section-header"><span class="plant-section-icon">⚡</span><span class="plant-section-title">Quick Hits</span></div>
     <ul class="quick-hits-list">
-{li_list(row.get("Quick Hits", ""))}
+{li_list(row.get("Quick Hits", ""), bold=True)}
     </ul>
   </div>
   <div class="plant-section">
