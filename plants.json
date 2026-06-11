@@ -1033,9 +1033,11 @@
     "sci": "Acalypha hispida",
     "family": "Euphorbiaceae",
     "aliases": [
-      "Love-Lies-Bleeding"
+      "Red Hot Cat's Tail",
+      "Foxtail",
+      "Philippine Medusa"
     ],
-    "cat": "Flowering Shrubs and Vines",
+    "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1045,7 +1047,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00050-Chenille-Plant.jpg",
     "page": "plants/PSBP-00050-Chenille-Plant.html",
-    "quick": "The drooping red flower spikes — up to 18 inches long, soft as velvet — are entirely composed of tiny individual flowers with no petals at all; the color comes from massed red stamens."
+    "quick": "The velvety red spikes — up to 18 inches long — have no petals at all; their color comes from masses of tiny red female flowers."
   },
   {
     "id": "PSBP-00051",
