@@ -875,7 +875,7 @@
       "Scorpion's Tail",
       "Butterfly Heliotrope"
     ],
-    "cat": "Native Groundcovers and Wildflowers",
+    "cat": "Native Groundcovers & Wildflowers",
     "origin": "Native",
     "native": true,
     "butterfly": true,
@@ -1009,13 +1009,13 @@
   },
   {
     "id": "PSBP-00049",
-    "common": "Spath Lilly",
+    "common": "Peace Lily",
     "sci": "Spathiphyllum spp",
     "family": "Araceae",
     "aliases": [
-      "Peace Lily"
+      "Spath Lily"
     ],
-    "cat": "Tropical Foliage and Accent Plants",
+    "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -1023,8 +1023,8 @@
     "edible": false,
     "invasive": false,
     "wetland": false,
-    "photo": "photos/PSBP-00049-Spath-Lilly.jpg",
-    "page": "plants/PSBP-00049-Spath-Lilly.html",
+    "photo": "photos/PSBP-00049-Peace-Lily.jpg",
+    "page": "plants/PSBP-00049-Peace-Lily.html",
     "quick": "Not a true lily — the name is a coincidence of appearance. It belongs to the aroid family, alongside philodendrons, anthuriums, and the park's own Xanadu."
   },
   {
