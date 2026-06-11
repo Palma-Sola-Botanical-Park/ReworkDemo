@@ -630,7 +630,7 @@
       "Wild Corn",
       "Bullgrass"
     ],
-    "cat": "Plants to Watch and Invasive Awareness",
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Native",
     "native": true,
     "butterfly": true,
@@ -640,7 +640,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00030-Fakahatchee-Grass.jpg",
     "page": "plants/PSBP-00030-Fakahatchee-Grass.html",
-    "quick": "Fakahatchee Grass is in the same botanical subtribe as corn's wild ancestor — the two can hybridize. Its tiny seed spike looks strikingly similar to a miniature ear of early corn."
+    "quick": "Fakahatchee Grass shares a botanical subtribe with corn's wild ancestor, and the two can hybridize — its tiny seed spike looks like a miniature ear of early corn."
   },
   {
     "id": "PSBP-00031",
@@ -767,9 +767,13 @@
     "id": "PSBP-00037",
     "common": "Umbrella Tree",
     "sci": "Schefflera actinophylla",
-    "family": "Sapindaceae",
-    "aliases": [],
-    "cat": "Plants to Watch and Invasive Awareness",
+    "family": "Araliaceae",
+    "aliases": [
+      "Octopus Tree",
+      "Queensland Umbrella Tree",
+      "Australian Umbrella Tree"
+    ],
+    "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
@@ -779,7 +783,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00037-Umbrella-Tree.jpg",
     "page": "plants/PSBP-00037-Umbrella-Tree.html",
-    "quick": "The Umbrella Tree earned its spot on Florida's invasive species watch list the hard way — birds eat the red berries and deposit seeds in hammocks, where seedlings establish quickly and can eventually strangle and overtop native trees."
+    "quick": "One of Florida's problem invaders: birds eat the red berries and drop the seeds in wild hammocks, where a seedling can take root high in a native tree and slowly strangle it."
   },
   {
     "id": "PSBP-00038",
