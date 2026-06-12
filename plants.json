@@ -1499,14 +1499,15 @@
     "sci": "Thunbergia erecta",
     "family": "Acanthaceae",
     "aliases": [
-      "Also called King's mantle, bush clockvine (or bush clock vine), and potato bush; a white-flowered cultivar exists. It is the shrubby, non-climbing member of a mostly vining genus and should not be confused with its climbing relatives, such as Thunbergia alata (black-eyed Susan vine) or the rampant Thunbergia grandiflora (Bengal trumpet / sky vine)."
+      "Bush Clockvine",
+      "Potato Bush"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": false,
-    "edible": true,
+    "toxic": true,
+    "edible": false,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00073-Kings-Mantle.jpg",
@@ -1519,7 +1520,10 @@
     "sci": "Hamelia patens",
     "family": "Rubiaceae",
     "aliases": [
-      "Also called firebush, hummingbird bush, scarlet bush, redhead, and (in Belize) Ix Canaan, \"Guardian of the Forest.\" The Florida native is Hamelia patens var. patens. Frequently confused with — and often sold as — the non-native Hamelia patens var. glabra (\"African,\" \"Dwarf,\" or \"Compacta\" firebush) and Hamelia cuprea (\"Bahama\" or Antillean firebush); a native compact cultivar, 'Calusa,' is the recommended small-size alternative. Florida growers call this look-alike problem \"The Hamelia Mess.\""
+      "Hummingbird Bush",
+      "Scarlet Bush",
+      "Redhead",
+      "Ix Canaan"
     ],
     "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
@@ -1531,7 +1535,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00074-Firebush.jpg",
     "page": "plants/PSBP-00074-Firebush.html",
-    "quick": "Firebush is one of the most important native plants in South Florida for wildlife — hummingbirds, butterflies, and over 25 species of birds use it for nectar, fruit, or cover through the entire year."
+    "quick": "Firebush is one of the most important native plants in South Florida for wildlife — hummingbirds, butterflies, and more than two dozen bird species use it for nectar, fruit, or cover through the entire year."
   },
   {
     "id": "PSBP-00075",
