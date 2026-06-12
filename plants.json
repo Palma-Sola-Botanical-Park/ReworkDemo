@@ -1349,7 +1349,8 @@
     "sci": "Sagittaria lancifolia",
     "family": "Alismataceae",
     "aliases": [
-      "Also called bulltongue arrowhead and duck potato. Sometimes treated as subspecies or varieties (for example subsp. media). Carries many historical scientific synonyms, including Sagittaria angustifolia and Sagittaria ovata."
+      "Bulltongue Arrowhead",
+      "Duck Potato"
     ],
     "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
@@ -1361,7 +1362,7 @@
     "wetland": true,
     "photo": "photos/PSBP-00066-Lanceleaf-Arrowhead.jpg",
     "page": "plants/PSBP-00066-Lanceleaf-Arrowhead.html",
-    "quick": "The genus name Sagittaria comes from the Latin for arrow — named for the unmistakable arrowhead shape of the leaves. The shape is so distinctive that it has been the identifying feature of this plant since before botanical Latin was invented."
+    "quick": "The genus name Sagittaria comes from the Latin for arrow — named for the distinctive arrowhead shape of the leaves."
   },
   {
     "id": "PSBP-00067",
@@ -1383,7 +1384,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00067-Madagascar-Periwinkle.jpg",
     "page": "plants/PSBP-00067-Madagascar-Periwinkle.html",
-    "quick": "One of the most medically significant plants in the world. Two alkaloids from this plant — vincristine and vinblastine — are used in chemotherapy for leukemia and Hodgkin's lymphoma. Madagascar periwinkle essentially transformed childhood leukemia from nearly always fatal to largely treatable."
+    "quick": "One of the most medically significant plants in the world — the source of vincristine and vinblastine, chemotherapy drugs used against leukemia and Hodgkin's lymphoma."
   },
   {
     "id": "PSBP-00068",
