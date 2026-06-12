@@ -1411,9 +1411,7 @@
     "common": "Myrtle Oak",
     "sci": "Quercus myrtifolia",
     "family": "Fagaceae",
-    "aliases": [
-      "One of Florida's three classic scrub oaks. Belongs to the red oak group. Can be confused with the closely related Florida scrub oak (Quercus inopina) and Chapman's oak (Quercus chapmanii)."
-    ],
+    "aliases": [],
     "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
     "native": true,
@@ -1424,7 +1422,7 @@
     "wetland": false,
     "photo": "photos/PSBP-00069-Myrtle-Oak.jpg",
     "page": "plants/PSBP-00069-Myrtle-Oak.html",
-    "quick": "One of Florida's three classic scrub oaks, and the smallest. In scrub habitat it regenerates from underground stems after fire — the above-ground plant burns, the root system survives, and new shoots emerge within weeks."
+    "quick": "One of Florida's three classic scrub oaks, and the one with the smallest leaves. In scrub habitat it regenerates from underground stems after fire — the above-ground plant burns, the root system survives, and new shoots emerge within weeks."
   },
   {
     "id": "PSBP-00070",
