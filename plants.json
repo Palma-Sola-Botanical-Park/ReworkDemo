@@ -1430,7 +1430,9 @@
     "sci": "Clerodendrum indicum",
     "family": "Lamiaceae",
     "aliases": [
-      "Also called tube flower, tubeflower, cathedral bells, and skyrocket. Originally described under the basionym Siphonanthus indicus and formerly placed in the family Verbenaceae; once carried the synonym Clerodendrum siphonanthus. Can be confused with other white-flowered Clerodendrum species."
+      "Tube Flower",
+      "Cathedral Bells",
+      "Skyrocket"
     ],
     "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
@@ -1438,7 +1440,7 @@
     "butterfly": true,
     "toxic": true,
     "edible": false,
-    "invasive": false,
+    "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00070-Turks-Turban.jpg",
     "page": "plants/PSBP-00070-Turks-Turban.html",
