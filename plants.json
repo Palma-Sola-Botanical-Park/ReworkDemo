@@ -1779,27 +1779,6 @@
   },
   {
     "id": "PSBP-00087",
-    "common": "Frangipani / Mexican Plumeria",
-    "sci": "Plumeria rubra",
-    "family": "Apocynaceae",
-    "aliases": [
-      "Frangipani",
-      "Temple Tree"
-    ],
-    "cat": "Park Collection",
-    "origin": "Non-native",
-    "native": false,
-    "butterfly": false,
-    "toxic": true,
-    "edible": false,
-    "invasive": false,
-    "wetland": false,
-    "photo": "photos/PSBP-00087-Frangipani.jpg",
-    "page": "plants/PSBP-00087-Frangipani.html",
-    "quick": "The fragrance of plumeria flowers is one of the most recognizable scents in the tropical world — the base of Hawaiian lei culture, a fixture in tropical perfumery, and the scent most visitors associate with warm-climate vacations."
-  },
-  {
-    "id": "PSBP-00087",
     "common": "Mexican Plumeria",
     "sci": "Plumeria rubra",
     "family": "Apocynaceae",
@@ -1980,28 +1959,6 @@
   },
   {
     "id": "PSBP-00096",
-    "common": "Acerola / Barbados Cherry",
-    "sci": "Malpighia emarginata",
-    "family": "Malpighiaceae",
-    "aliases": [
-      "Barbados Cherry",
-      "West Indian Cherry",
-      "Cereza (Puerto Rico)"
-    ],
-    "cat": "Park Collection",
-    "origin": "Non-native",
-    "native": false,
-    "butterfly": false,
-    "toxic": true,
-    "edible": false,
-    "invasive": false,
-    "wetland": false,
-    "photo": "photos/PSBP-00096-Acerola.jpg",
-    "page": "plants/PSBP-00096-Acerola.html",
-    "quick": "One of the richest natural sources of vitamin C known — a single Acerola cherry contains approximately 65 times more vitamin C than an orange of similar weight. This is not approximate; it is documented nutritional analysis."
-  },
-  {
-    "id": "PSBP-00096",
     "common": "Barbados Cherry",
     "sci": "Malpighia emarginata",
     "family": "Malpighiaceae",
@@ -2158,27 +2115,6 @@
     "quick": "An aquatic or semi-aquatic native creeping plant that forms dense mats at pond edges and in moist soil. The round penny-shaped leaves are arranged in whorls around the stem — the source of both common names."
   },
   {
-    "id": "PSBP-00103",
-    "common": "Whorled Pennywort",
-    "sci": "Hydrocotyle verticillata",
-    "family": "Araliaceae",
-    "aliases": [
-      "Water Pennywort",
-      "Dollarweed"
-    ],
-    "cat": "Park Collection",
-    "origin": "Native",
-    "native": true,
-    "butterfly": false,
-    "toxic": true,
-    "edible": false,
-    "invasive": false,
-    "wetland": false,
-    "photo": "photos/PSBP-00103-Whorled-Pennywort.jpg",
-    "page": "plants/PSBP-00103-Whorled-Pennywort.html",
-    "quick": "An aquatic or semi-aquatic native creeping plant that forms dense mats at pond edges and in moist soil. The round penny-shaped leaves are arranged in whorls around the stem — the source of both common names."
-  },
-  {
     "id": "PSBP-00104",
     "common": "Shiny-leaved Wild Coffee",
     "sci": "Psychotria nervosa",
@@ -2234,27 +2170,6 @@
     "photo": "photos/PSBP-00106-Four-o-clock.jpg",
     "page": "plants/PSBP-00106-Four-o-clock.html",
     "quick": "Opens at four in the afternoon. Closes the next morning. The name is precise — it is one of the more reliable plant clocks in horticulture, triggered by declining light intensity rather than temperature."
-  },
-  {
-    "id": "PSBP-00107",
-    "common": "Trailing Daisy / Wedelia",
-    "sci": "Sphagneticola trilobata",
-    "family": "Asteraceae",
-    "aliases": [
-      "Bay Biscayne Creeper",
-      "Orange Daisy"
-    ],
-    "cat": "Park Collection",
-    "origin": "Non-native",
-    "native": false,
-    "butterfly": false,
-    "toxic": true,
-    "edible": false,
-    "invasive": true,
-    "wetland": false,
-    "photo": "photos/PSBP-00107-Trailing-Daisy.jpg",
-    "page": "plants/PSBP-00107-Trailing-Daisy.html",
-    "quick": "One of the most recognizable groundcovers in Florida — the yellow daisy flowers and creeping mat habit are everywhere in landscaping, medians, and disturbed areas."
   },
   {
     "id": "PSBP-00107",
@@ -2438,27 +2353,6 @@
     "photo": "photos/PSBP-00115-Oriental-False-Hawksbeard.jpg",
     "page": "plants/PSBP-00115-Oriental-False-Hawksbeard.html",
     "quick": "A small Asian composite weed — one of the smallest-flowered plants in the park, naturalized in disturbed soil and path edges. The tiny yellow flowers on thin branching stems are easy to overlook."
-  },
-  {
-    "id": "PSBP-00116",
-    "common": "Groundsel Tree / Saltbush",
-    "sci": "Baccharis halimifolia",
-    "family": "Asteraceae",
-    "aliases": [
-      "Sea Myrtle",
-      "Saltbush"
-    ],
-    "cat": "Park Collection",
-    "origin": "Native",
-    "native": true,
-    "butterfly": true,
-    "toxic": true,
-    "edible": false,
-    "invasive": false,
-    "wetland": false,
-    "photo": "photos/PSBP-00116-Groundsel-Tree-Saltbush.jpg",
-    "page": "plants/PSBP-00116-Groundsel-Tree-Saltbush.html",
-    "quick": "A Florida native coastal shrub that most visitors have seen along roadsides and waterways without knowing its name. The late-fall fluffy white seed heads — covering female plants in cotton-like masses — are how most people first notice it."
   },
   {
     "id": "PSBP-00116",
