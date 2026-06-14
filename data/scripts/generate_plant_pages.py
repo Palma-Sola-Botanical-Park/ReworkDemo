@@ -151,6 +151,11 @@ def parse_repro(text):
         "\n" + t,
     )
     items = []
+    # If the text starts with unlabeled prose (no "Label:" pattern),
+    # keep it with a default heading so it is not silently dropped.
+    lead = re.sub(r"\s+", " ", chunks[0]).strip() if chunks else ""
+    if lead:
+        items.append(("Reproduction", lead))
     it = iter(chunks[1:])
     for label, body in zip(it, it):
         body = re.sub(r"\s+", " ", body).strip()
@@ -407,6 +412,42 @@ injectShared({{ inatBar: false }});
 </html>'''
     return stem, head + body
 
+
+# ── Cell-level sanitization ──────────────────────────────────────────
+# Applied once to every cell in the master spreadsheet immediately after
+# loading.  Fixes invisible Unicode gremlins introduced by different
+# Claude sessions writing to the same Google Sheet.
+_SANITIZE_MAP = str.maketrans({
+    "\u2018": "'",   # left single curly  -> straight
+    "\u2019": "'",   # right single curly -> straight (apostrophe)
+    "\u201C": '"',   # left double curly  -> straight
+    "\u201D": '"',   # right double curly -> straight
+    "\u00A0": " ",   # non-breaking space -> normal space
+    "\u200B": "",    # zero-width space   -> remove
+    "\u200C": "",    # zero-width non-joiner -> remove
+    "\u200D": "",    # zero-width joiner  -> remove
+    "\uFEFF": "",    # byte-order mark    -> remove
+    "\u00AD": "",    # soft hyphen        -> remove
+})
+
+def sanitize_cell(val):
+    """Normalise a single cell value from the master spreadsheet."""
+    if pd.isna(val):
+        return val
+    s = str(val)
+    s = s.translate(_SANITIZE_MAP)
+    # U+2028/2029 line/para separators -> real newlines
+    s = s.replace("\u2028", "\n").replace("\u2029", "\n")
+    # Collapse runs of 3+ blank lines into 2
+    s = re.sub(r"\n{3,}", "\n\n", s)
+    return s
+
+def sanitize_df(df):
+    """Clean every string cell in the dataframe in place."""
+    for col in df.columns:
+        df[col] = df[col].map(sanitize_cell)
+    return df
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("ids", nargs="*")
@@ -414,6 +455,7 @@ def main():
     args = ap.parse_args()
 
     df = pd.read_excel(MASTER, sheet_name="PSBP_Plants", dtype=str)
+    sanitize_df(df)
     cr = pd.read_csv(CREDITS, dtype=str)
     cr = cr[cr["Primary"] == "Yes"].set_index("PSBP ID")
     head = open(REF).read()
