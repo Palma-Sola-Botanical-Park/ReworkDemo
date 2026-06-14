@@ -47,6 +47,13 @@
   .pdf-page canvas{ display:block; max-width:100%; height:auto; }
   #pdfStatus{ text-align:center; font-size:1.05rem; color:#4a4a4a; padding:40px 16px; }
 
+  /* Embedded web document (Google Doc, etc.) — same white-sheet look as a PDF page */
+  .doc-frame{
+    display:block; width:100%; max-width:900px; height:82vh;
+    margin:0 auto; border:0; background:#fff;
+    box-shadow:0 2px 14px rgba(0,0,0,.18);
+  }
+
   @media (max-width:640px){
     .doc-banner h1{ font-size:1.4rem; }
     .doc-back{ left:12px; padding:7px 10px; font-size:.95rem; }
@@ -113,6 +120,33 @@ injectShared({ inatBar: false });
 
   if (!fileUrl){ statusEl.textContent = 'No document specified.'; return; }
 
+  // ── Route by type ──────────────────────────────────────────────
+  // PDFs go through PDF.js (below). Anything else (a published Google
+  // Doc, or another embeddable web page) renders in an iframe so it
+  // still lives inside the site, under the banner, with the Back button.
+  var isPdf = /\.pdf($|\?)/i.test(fileUrl);
+
+  if (!isPdf){
+    var embedUrl = fileUrl;
+    // A published Google Doc/Sheet/Slide needs ?embedded=true to drop
+    // Google's own header/footer so only the document body shows.
+    if (/docs\.google\.com/i.test(fileUrl) && !/[?&]embedded=true/i.test(fileUrl)){
+      embedUrl += (fileUrl.indexOf('?') === -1 ? '?' : '&') + 'embedded=true';
+    }
+    // "Open / Download" link opens the clean (non-embedded) version in a new tab.
+    openBtn.href = fileUrl;
+
+    statusEl.style.display = 'none';
+    var frame = document.createElement('iframe');
+    frame.className = 'doc-frame';
+    frame.src = embedUrl;
+    frame.title = title;
+    frame.setAttribute('loading', 'lazy');
+    pagesEl.appendChild(frame);
+    return;
+  }
+
+  // ── PDF path (unchanged) ───────────────────────────────────────
   pdfjsLib.GlobalWorkerOptions.workerSrc =
     'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
