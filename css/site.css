@@ -43,7 +43,7 @@ img { max-width: 100%; display: block; }
 
 /* ── LAYOUT ── */
 .container { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
-section { padding: 4.5rem 1.5rem; }
+section { padding: 3.375rem 1.5rem; }
 .section-inner { max-width: 1160px; margin: 0 auto; }
 
 .section-title { font-size: clamp(1.7rem, 3vw, 2.6rem); color: var(--green-deep); margin-bottom: .75rem; }
@@ -383,7 +383,7 @@ section { padding: 4.5rem 1.5rem; }
 @media (max-width: 560px) {
   .footer-grid { grid-template-columns: 1fr; }
   .inat-bar-stat { min-width: 60px; }
-  section { padding: 3rem 1rem; }
+  section { padding: 2.25rem 1rem; }
 }
 
 /* ── CLASSES ── */
