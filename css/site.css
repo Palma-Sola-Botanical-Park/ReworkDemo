@@ -404,11 +404,11 @@ section { padding: 4.5rem 1.5rem; }
 /* ── ANNOUNCEMENTS ── */
 #announcements-bar {
   background: var(--green-mid);
-  padding: .45rem 1.5rem;
+  padding: .25rem 1.5rem;
 }
 .announcement-card {
   display: flex; align-items: center; gap: .75rem;
-  padding: .35rem .75rem;
+  padding: .18rem .75rem;
   background: rgba(255,255,255,.08); border-radius: 6px;
   margin-bottom: .4rem; color: var(--white);
 }
@@ -417,7 +417,7 @@ section { padding: 4.5rem 1.5rem; }
 .ann-body strong { display: inline; font-size: 1rem; }
 .ann-body p { display: inline; font-size: 1.05rem; color: rgba(255,255,255,.78); line-height: 1.4; margin-left: .35rem; }
 .ann-link {
-  display: inline-block; margin-top: .4rem;
+  display: inline-block; margin-top: .15rem;
   color: var(--gold-light); font-size: 1rem; font-weight: 700;
   text-decoration: none;
 }
