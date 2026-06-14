@@ -21,7 +21,7 @@ body {
   background: var(--cream);
   color: var(--text);
   line-height: 1.7;
-  padding-top: 72px;
+  padding-top: 64px;
 }
 
 h1, h2, h3, h4 {
@@ -52,14 +52,14 @@ section { padding: 4.5rem 1.5rem; }
 /* ── NAV ── */
 #site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-  height: 72px;
+  height: 64px;
   background: var(--green-deep);
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 1.5rem;
   box-shadow: 0 2px 16px rgba(0,0,0,.35);
 }
 .nav-logo { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
-.nav-logo img { height: 58px; filter: none; }
+.nav-logo img { height: 50px; filter: none; }
 .nav-logo span {
   color: var(--white);
   font-family: 'Playfair Display', serif;
@@ -215,14 +215,14 @@ section { padding: 4.5rem 1.5rem; }
 .page-hero {
   position: relative; overflow: hidden;
   background: var(--green-deep);
-  min-height: 280px; display: flex; align-items: center;
+  min-height: 170px; display: flex; align-items: center;
 }
 .page-hero-bg {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
   opacity: .35;
 }
-.page-hero-content { position: relative; z-index: 1; padding: 3rem 1.5rem; max-width: 720px; margin: 0 auto; }
+.page-hero-content { position: relative; z-index: 1; padding: 1.75rem 1.5rem; max-width: 720px; margin: 0 auto; }
 .page-hero h1 { color: var(--white); font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: .6rem; }
 .page-hero p { color: rgba(255,255,255,.8); font-size: 1rem; line-height: 1.72; margin-bottom: 1.5rem; }
 
