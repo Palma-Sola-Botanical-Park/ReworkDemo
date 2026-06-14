@@ -175,7 +175,7 @@ const NAV_HTML = `
     <li><a href="venue.html">Venue</a></li>
     <li><a href="volunteer.html">Volunteer</a></li>
     <li><a href="members.html">Members</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html">About</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -189,7 +189,7 @@ const NAV_HTML = `
   <a href="venue.html">Venue</a>
   <a href="volunteer.html">Volunteer</a>
   <a href="members.html">Members</a>
-  <a href="contact.html">Contact</a>
+  <a href="contact.html">About</a>
 </div>`;
 
 // ── FOOTER HTML ───────────────────────────────────────────────
@@ -243,7 +243,7 @@ const FOOTER_HTML = `
         <li><a href="members.html#donate">Donate</a></li>
         <li><a href="members.html">Membership</a></li>
         <li><a href="volunteer.html">Volunteer</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="contact.html">About</a></li>
         <li><a href="https://palmasolabp.org/wp-content/uploads/2024/08/Photo-Policy.pdf" target="_blank" rel="noopener">Photo Policy</a></li>
       </ul>
     </div>

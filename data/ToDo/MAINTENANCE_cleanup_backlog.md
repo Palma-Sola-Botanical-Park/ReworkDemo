@@ -127,10 +127,8 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Effort:** Medium — responsive pass on the events/classes grid + a copy/density rework toward more prose, fewer boxes.
 - **Steps:** 1) Fix the responsive breakpoints (the events list + classes sidebar grid). 2) Reduce block density — convert some cards to flowing text. 3) Test on a real phone width.
 
-### D10. News article hero images
-- **Issue:** Each News article should show a **hero image at the top, slightly large**. The `news.html` reader pane already has a `hero_image` field in the data shape — this may be mostly a styling tweak to render it bigger/more prominent rather than net-new structure.
-- **Criticality:** Low — visual polish.
-- **Effort:** Low — adjust the reader-pane hero CSS; confirm the `hero_image` column is populated in the News tab.
+### ✅ D10. News article hero images — COMPLETE (2026-06-14)
+- Reader-pane article hero enlarged/made more prominent in `news.html`. (`hero_image` field already in the data shape; sized up in the News reader CSS.)
 
 ### D11. About content → Sheet-managed tab (persistent "News"-style)
 - **Issue:** About content (history, mission, staff, eventually **Board of Directors**) is currently **hardcoded** in `contact.html` (merged there 2026-06-14 — the right step 1). Phase 2: make it **Sheet-driven** like News, but for *evergreen* content — a reader-pane layout (right-side clickable items, left-side text, reader picks what to read). Reuse the existing `news.html` reader+squares pattern. Lets Bev edit About content (and add Board members) without touching code.
@@ -173,10 +171,8 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Criticality:** Low — housekeeping.
 - **Effort:** Low — archive *after* they reply (and point them at the live page going forward).
 
-### D8. Nav/footer label: "Contact" → "About" or "About & Contact"
-- **Issue:** `contact.html` now leads with About content, but the nav/footer label (injected from `site.js`) still says "Contact." Update `NAV_HTML`/`FOOTER_HTML` in `site.js` so the menu matches the page. Filename stays `contact.html` (don't break links).
-- **Criticality:** Low — cosmetic; link works either way.
-- **Effort:** Low — one or two string edits in `site.js`.
+### ✅ D8. Nav/footer label: "Contact" → "About" — COMPLETE (2026-06-14)
+- Merged Contact+About page now reads as an About page, so the label was renamed **everywhere** it names the page: `site.js` `NAV_HTML` (desktop + mobile) and `FOOTER_HTML` → "About"; `contact.html` `<title>` → "About · Palma Sola Botanical Park". Filename stays `contact.html` (no links broken). Action CTAs that point at the page ("Reach Out", "Send a Message", "Get on the list") left as-is — they're actions, not the page name.
 
 ---
 
