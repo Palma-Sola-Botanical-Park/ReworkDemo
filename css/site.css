@@ -169,13 +169,15 @@ section { padding: 3.375rem 1.5rem; }
   padding: .18rem .55rem; border-radius: 12px;
   letter-spacing: .04em; white-space: nowrap;
 }
-.tag-native    { background: #fde8e8; color: #b52a2a; }
-.tag-nonnative { background: #e8f0fd; color: #1a4ea6; }
-.tag-butterfly { background: #f0e6ff; color: #6a1f9a; }
-.tag-toxic     { background: #fff3e0; color: #a04000; }
-.tag-edible    { background: #e6f7ee; color: #1a6e3a; }
-.tag-invasive  { background: #fdecec; color: #8b1a1a; }
-.tag-wetland   { background: #e0f0fb; color: #1256a0; }
+/* Brand earth-tones, intuitive semantics (green=good, sand=neutral, gold=caution, clay=warning).
+   Subtle inset ring matches the detail-page badges without adding layout-shifting borders. */
+.tag-native    { background: #dde9d6; color: #1f4d28; box-shadow: inset 0 0 0 1px rgba(45,106,53,.22); }
+.tag-nonnative { background: #ece3d2; color: #5c4a2c; box-shadow: inset 0 0 0 1px rgba(120,100,60,.22); }
+.tag-butterfly { background: #e7e1ee; color: #5c4a74; box-shadow: inset 0 0 0 1px rgba(91,74,114,.22); }
+.tag-toxic     { background: #f4e7c6; color: #6f5210; box-shadow: inset 0 0 0 1px rgba(197,146,42,.30); }
+.tag-edible    { background: #e7f1dc; color: #3a6a1e; box-shadow: inset 0 0 0 1px rgba(74,124,30,.22); }
+.tag-invasive  { background: #ecdacf; color: #8a3a22; box-shadow: inset 0 0 0 1px rgba(138,58,34,.22); }
+.tag-wetland   { background: #dbe8e3; color: #2d5e50; box-shadow: inset 0 0 0 1px rgba(45,94,80,.22); }
 .tag-bird      { background: #e8f5e9; color: #1b5e20; }
 .tag-reptile   { background: #fef9e7; color: #7d6608; }
 .tag-insect    { background: #fce4ec; color: #880e4f; }
