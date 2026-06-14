@@ -4,7 +4,7 @@ Refreshed running list for the ReworkDemo site + plant/wildlife catalog.
 Supersedes the 2026-06-08 version. Items ranked by **Criticality** (do-it-now → polish)
 and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 
-**Last updated: 2026-06-14 (rev 7)**
+**Last updated: 2026-06-14 (rev 8)**
 
 ---
 
@@ -188,6 +188,7 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Scripts live only in `data/scripts/`** — never in asset or page folders.
 - **Single source of truth:** derive everything from the master sheet / JSON; never scrape rendered HTML.
 - **PDFs that render in-site must be same-origin or a published Google Doc.** `viewer.html` uses PDF.js, which *fetches* the file with JS — subject to CORS. Third-party hosts (Mailchimp `mcusercontent.com`, random file hosts) serve for direct download but block cross-origin JS reads, so they render blank in-site even though the raw link works. Fix: host embeddable PDFs in the repo (e.g. `docs/news/`) or use a published Google Doc. (Incident 2026-06-14: a Mailchimp-hosted Horticulture PDF wouldn't embed; rehosted into the repo, fixed.)
+- **`news.html` carries intentional page-specific hero overrides — by design, not drift.** Its `<style>` block deliberately overrides the shared `site.css` hero for News only: a more compact `.page-hero` (smaller padding/min-height), a bigger/brighter orange article date (`#ffb02e`), and a shorter `.news-reader-hero` article image band (165px). These are deliberate tuning for News's editorial layout — **do NOT "standardize" them to match other pages or assume they're a mistake.** (The shared hero height across the *other* pages was already reconciled 2026-06-14 by removing rogue inline overrides on events/contact.)
 
 ---
 
