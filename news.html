@@ -55,8 +55,18 @@
 .show-more { display: block; margin: 1.1rem auto 0; }
 
 /* ── Newsletter archive ── */
-.news-archive { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-.nl-card { background: var(--white); border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.07); border-left: 5px solid var(--gold); padding: 1.5rem 1.5rem 1.6rem; display: flex; flex-direction: column; }
+.news-archive {
+  display: flex; gap: 1.25rem;
+  overflow-x: auto;
+  padding: .25rem .25rem 1.1rem;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.news-archive::-webkit-scrollbar { height: 9px; }
+.news-archive::-webkit-scrollbar-track { background: var(--sand); border-radius: 5px; }
+.news-archive::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 5px; }
+.news-archive { scrollbar-color: var(--gold) var(--sand); scrollbar-width: thin; }
+.nl-card { flex: 0 0 280px; scroll-snap-align: start; background: var(--white); border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.07); border-left: 5px solid var(--gold); padding: 1.5rem 1.5rem 1.6rem; display: flex; flex-direction: column; }
 .nl-card .nl-date { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--green-mid); margin-bottom: .4rem; }
 .nl-card h3 { font-size: 1.2rem; margin: 0 0 .55rem; color: var(--green-deep); }
 .nl-card p { font-size: 1rem; color: var(--text-soft); line-height: 1.6; margin: 0 0 1.15rem; flex: 1; }
@@ -99,7 +109,7 @@
   <div class="section-inner">
     <span class="label">The Archive</span>
     <h2 class="section-title" style="margin-bottom:.5rem">Past newsletters</h2>
-    <p class="section-sub" style="margin-bottom:2rem">Our monthly roundups, newest first. Each opens right here on the site.</p>
+    <p class="section-sub" style="margin-bottom:2rem">Our monthly roundups, newest first — scroll sideways to browse them all. Each opens right here on the site.</p>
 
     <div id="newsletterList" class="news-archive">
       <p class="text-soft" style="padding:1rem">Loading newsletters…</p>
@@ -107,7 +117,7 @@
     <button class="btn btn-outline btn-sm show-more" id="nlMore" style="display:none">Show more newsletters</button>
 
     <p style="margin-top:1.75rem;font-size:.84rem;color:var(--text-soft);background:var(--sand);padding:1rem;border-radius:8px;line-height:1.65">
-      📬 <strong>Managed by the park director.</strong> News and newsletters update automatically from Google Sheets.
+      🌿 <strong>Have a park story to share?</strong> Spotted something blooming, snapped a great photo, or got news worth celebrating? Email <a href="mailto:info@palmasolabp.org">info@palmasolabp.org</a> — we love featuring our volunteers and visitors.
     </p>
   </div>
 </section>
@@ -245,9 +255,8 @@ async function loadNewsletters(){
     nlItems = rows.filter(isWebVisible).filter(r => r.title || PSBP.rowLink(r).url)
                   .sort((a,b) => new Date(b.date) - new Date(a.date));
     if (!nlItems.length) { nlEl.innerHTML = '<p class="text-soft" style="padding:1rem">Newsletters are on the way — check back soon.</p>'; return; }
-    nlShown = Math.min(NL_STEP, nlItems.length);
+    nlShown = nlItems.length;
     renderNL();
-    nlMore.addEventListener('click', () => { nlShown = Math.min(nlShown + NL_STEP, nlItems.length); renderNL(); });
   } catch (e) { nlEl.innerHTML = '<p class="text-soft" style="padding:1rem">Could not load newsletters right now.</p>'; console.error(e); }
 }
 
