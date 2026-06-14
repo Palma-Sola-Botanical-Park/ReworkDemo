@@ -4,30 +4,7 @@ Refreshed running list for the ReworkDemo site + plant/wildlife catalog.
 Supersedes the 2026-06-08 version. Items ranked by **Criticality** (do-it-now → polish)
 and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 
-**Last updated: 2026-06-14 (rev 8)**
-
----
-
-## ✅ Recently completed (this session — for the record)
-
-- Duplicate plant pages (renamed-file orphans) deleted: 00010, 00087, 00096, 00103, 00107, 00116. **Catalog reconciled and verified** — `comm` diff of pages vs photos returns zero mismatches end to end.
-- Dead iNaturalist bar markup + wasted `loadINat()` removed from `events.html` and `viewer.html`.
-- `data/` folder restructured into `sources/ scripts/ archive/`; scattered duplicate scripts (`restyle_plants.py` ×3, `check_wildlife_photos.py`) consolidated/removed.
-- `plants/`, `wildlife/`, `photos/` swept to pure content (HTML pages / HTML pages / JPGs only).
-- Legacy hardcoded gallery (`plants/index.html`) + stale `output/` folder retired to archive.
-- Placeholder masters established: `PLACEHOLDER-plant-green.jpg` + `PLACEHOLDER-bird-blue.jpg`; convention documented.
-- `newsletters.html` consolidated into `news.html` (archive scroll); old file archived.
-- Dev `README.md` written (architecture + sheet ID/GID migration checklist + placeholder convention).
-
----
-
-## 🔴 Do now — pending actions (live data slightly out of sync until done)
-
-### ✅ A1. Regenerate `plants.json` / `wildlife.json` — COMPLETE (2026-06-14)
-Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clean.
-
-### ✅ A2. Confirm `photos/` has no stray script — COMPLETE (2026-06-14)
-`photos/` is JPG-only.
+**Last updated: 2026-06-14 (rev 9)**
 
 ---
 
@@ -51,8 +28,6 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Effort:** Medium — careful, row-by-row, no fabrication.
 - **Steps:** 1) Normalize N/O to canonical labels: Light, Soil tolerances, Drought, Salt, Wind, Cold tolerance, USDA zones (+Note). 2) Inline rows convert losslessly (labels exist); prose rows — extract only what's stated, flag blanks for Randy, do NOT fabricate. 3) Collapse Alternate-Names separators to one style. 4) Strip citation markers / Unicode separators from source. 5) Regenerate + spot-check.
 
----
-
 ### B6. Multiple photos per species (aspect photos) — LOGGED, deferred
 - **Issue:** Currently **one species = one photo** (a single hero). But a species genuinely has many meaningful views — leaf, flower, fruit, bark, seedling — and for butterfly host/nectar plants, life-cycle stages (egg, caterpillar, chrysalis, adult). One photo can't carry that. Want eventually: per-species **aspect photos**, each labeled by role, each with its own credit.
 - **The pattern (note for whoever builds it):** this is the **third "1-vs-many" tension** in the project, same shape as B4 (species→instances) and species→observations. Same guardrail: **PSBP species ID stays the anchor; the many things hang off it as children.** Don't deepen the single-item assumption. Target data shape: a `photos` **array** (not one `photo` field), each entry carrying a **role** (`leaf` / `flower` / `fruit` / `bark` / `caterpillar` / `adult` / …) + its own attribution.
@@ -60,15 +35,6 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Naming extends cleanly:** the hyphenated convention has room for a role suffix, e.g. `PSBP-00047-Staghorn-Fern-leaf.jpg`, `-fruit.jpg`.
 - **Criticality:** Low / deferred. Single hero is fine for the sign rollout. **Content can accumulate before display exists** — volunteers shooting leaves/flowers/caterpillars (post-June-17) gather the raw material regardless; wire up the gallery when ready.
 - **Effort:** Medium–High when built (data shape + credits schema + generator + a page gallery UI). None now.
-
-### B5. Harden Google Sheet tabs against structural breakage (prevention + resilience)
-- **Issue:** Live-tab feeds break if the sheet's **structure** shifts — not its content. Real incident (2026-06-14): the News range got wrapped in a Google Sheets **"Table" (`Table1`)**, which injected a structural row, pushed the header/data down, and the whole news feed went dark ("come back shortly") because `fetchTab()` expects the header on a fixed row. Editing cell *values* is safe; inserting rows above the data, deleting the header row, or converting to a Table is what breaks it.
-- **Criticality:** Medium — silent, total-feed failure mode; invisible until a feed goes dark. Affects every live tab (events/classes/announcements/volunteer/newsletters/news).
-- **Effort:** Low–Medium (split across two fixes).
-- **Two layers:**
-  - **Prevention (in the Sheet):** (a) Remove the `Table1` Table wrapper — revert to a plain range (Tables are more fragile for CSV-export fetch). (b) **Protected ranges** (Data → Protect sheets and ranges) on rows 1–3 (title + header) so they can't be edited/deleted. (c) Document the rule for Bev: *edit cell values freely; never insert/delete rows above the data, never touch the header row, never convert to a Table.* Intended layout: rows 1–3 fixed (title/header), **data starts row 4**.
-  - **Resilience (in code — the better fix):** make `fetchTab()` **find the header row by detecting known column names** (`display`, `date`, `headline`, …) instead of assuming a fixed row index. Then a shifted/inserted row self-corrects instead of killing the feed. One change protects all tabs.
-- **Note:** This is also strong evidence for **B2** (nightly JSON bake + fallback) — with a snapshot floor, this incident would've shown slightly stale news instead of an empty feed. And the Bev-facing rule belongs in the CONTENT-GUIDE rewrite.
 
 ### B4. Species vs. instance data model + iNaturalist linkage (LOGGED — deferred, architecture already in place)
 - **Issue:** One HTML page = one *species* profile, but a species can have **multiple physical instances** in the park (e.g. 4 Staghorn Ferns). Each instance gets its own QR sign, so instance-awareness matters for the eventual map/wayfinding layer.
@@ -82,10 +48,6 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 ---
 
 ## 🟡 Medium — correctness & content
-
-### ✅ C4. Merge About page into Contact — COMPLETE (2026-06-14)
-- Folded rescued WordPress "About" content into `contact.html` → one "About & Contact" page: full history (Timucuan/Spanish heritage, Bradenton Herald, Galleria + Baden buildings, frost-free micro-climate, 2008 Rare Fruit Council), Mission + 3 pillars, Staff (Beverly, Jennifer), mailing address (P.O. Box 14214), recognition block. Board roster intentionally omitted (volatile). Hero swapped off invasive Nandina → native Ficus aurea.
-- **Follow-ups:** (a) partner **logos** still need migrating into `images/` (currently a text placeholder — don't hotlink palmasolabp.org). (b) Consider updating nav/footer label in `site.js` from "Contact" → "About" / "About & Contact" to match the page.
 
 ### C5. Migrate "Mark Boehmig" park video off legacy pages → News tab + pinning
 - **Issue:** A YouTube video about the park (`youtube.com/watch?v=f3zfcUHm0k4`) sits hardcoded at the bottom of the legacy WordPress About/Contact pages. It should become a **News row** in the Google Sheet (link to the video), not live in page HTML. Raises a real feature need: `news.html` sorts newest-first by date, so an evergreen 2023 video would sink forever.
@@ -112,11 +74,6 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Effort:** Low — a paragraph in the README architecture notes.
 - **Steps:** 1) Add to README. 2) Treat as a rule for any future generator/filter work.
 
-### ✅ C3. Small naming / data verifications — COMPLETE (2026-06-14)
-- 00049 "Spath Lilly" typo: resolved (page renamed to Peace Lily; typo gone as a side effect).
-- 00121 Amazon Lily: confirmed rendering correctly with photo; consistent with generator output.
-- Observation-URL back-fill: NOT a 00121 nit — relocated to **B4** (catalog-wide schema decision tied to signage).
-
 ---
 
 ## 🟢 Low — polish & design decisions (whenever)
@@ -126,9 +83,6 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Criticality:** Low–**Medium for the mobile half** — a page that breaks on phones matters for the sign-scanning audience.
 - **Effort:** Medium — responsive pass on the events/classes grid + a copy/density rework toward more prose, fewer boxes.
 - **Steps:** 1) Fix the responsive breakpoints (the events list + classes sidebar grid). 2) Reduce block density — convert some cards to flowing text. 3) Test on a real phone width.
-
-### ✅ D10. News article hero images — COMPLETE (2026-06-14)
-- Reader-pane article hero enlarged/made more prominent in `news.html`.
 
 ### D11. About content → Sheet-managed tab (persistent "News"-style)
 - **Issue:** About content (history, mission, staff, eventually **Board of Directors**) is currently **hardcoded** in `contact.html` (merged there 2026-06-14 — the right step 1). Phase 2: make it **Sheet-driven** like News, but for *evergreen* content — a reader-pane layout (right-side clickable items, left-side text, reader picks what to read). Reuse the existing `news.html` reader+squares pattern. Lets Bev edit About content (and add Board members) without touching code.
@@ -141,10 +95,11 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Criticality:** Low — current filter works; this is UX refinement.
 - **Effort:** Medium — UI rebuild in `site.js` + flags sourced from master/category (not scraped — see C2).
 
-### D2. Card badge restyle (off-brand pills)
-- **Issue:** Search-result card pills (`.tag-*` in `site.css`) use a generic blue/purple/red/saturated-yellow palette that clashes with the moss/gold/cream brand; Native reads red while Non-native reads blue (feels crossed); louder than the elegant detail-page badges.
+### D2. Card + detail badge restyle (off-brand pills) — IN PROGRESS
+- **Issue:** Card pills (`.tag-*`) clashed (Native read red, Non-native blue); plant detail pages drift too (`badge-native` was blue; pages use local `--moss/--gold/--cream` constants slightly off the brand tokens).
+- **Done:** `site.css` `.tag-*` retuned to brand earth-tones (green = belongs/safe, sand = neutral, gold = caution, clay = warning) — shipped.
+- **Remaining (to close):** the detail `.badge-*` CSS lives in the **reference page `PSBP-00003-Buccaneer-Palm.html`** — the generator copies its `<head>` into every page (`head = open(REF).read()`). Swap the `.badge-*` block there → re-run `generate_plant_pages.py` to repaint all ~122 pages. Optional: align the pages' local `--moss/--gold/--cream` fallbacks to the brand tokens.
 - **Criticality:** Low — cosmetic.
-- **Effort:** Low–Medium — retune `.tag-*` to brand earth-tones; match detail-page badge style. Needs `site.css`.
 
 ### D3. Curated hero images
 - **Issue:** Page-hero backgrounds in `images/` were an arbitrary grab (e.g. Nandina — an invasive — on the contact hero). Replace with a deliberate set of park-meaningful, photogenic, signature species; standardize naming.
@@ -156,10 +111,6 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Criticality:** Low — a deliberate decision, not a bug.
 - **Effort:** Low.
 
-### ✅ D5. `get-started.html` — reworked; "heft" was a false alarm (2026-06-14)
-- Layout + copy pass: relocated the iNaturalist icon (now over the 2|3 step gap); floated the pull-quote and the green payoff callout ~1/3 right with steps/tips wrapping left + below; punched up the "Be an Identifier" intro; expanded identifier step 1 (project link + Join-button guidance + "tracks what still needs ID"); reframed "fun" → "rewarding". Rendered/verified desktop + mobile.
-- **Not actually heavy.** Measured: ~104 KB total, but ~90 KB (86%) is just 3 base64-embedded images (iNat icon + 2 store badges); only ~14 KB is real HTML/CSS/text. Loads fine on mobile — no performance concern. Inline images are cosmetic clutter only (noisy diffs, no separate caching). Optional housekeeping, NOT heft: extract the 3 images into `images/` files whenever convenient. Concern closed.
-
 ### D6. Deferred style decisions
 - **Issue:** (a) Quick Hits bolding — generator output is unbolded; decide whether to auto-bold. (b) Own-photo credit style — `OWN_PHOTO_PLAIN` flag for a plain "Photo by Randall Carter" credit.
 - **Criticality:** Low.
@@ -169,9 +120,6 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Issue:** Superseded by live `venue.html`, but left in place so Bev/Jenny's review-email link still works.
 - **Criticality:** Low — housekeeping.
 - **Effort:** Low — archive *after* they reply (and point them at the live page going forward).
-
-### ✅ D8. Nav/footer label: "Contact" → "About" — COMPLETE (2026-06-14)
-- Renamed everywhere it names the page: `site.js` nav (desktop + mobile) and footer → "About"; `contact.html` `<title>` → "About". Filename stays `contact.html`. Hero `<h1>` later set to "Palma Sola Botanical Park" per Randy.
 
 ---
 
@@ -187,10 +135,46 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 
 ---
 
-## Sequence suggestion
+## ✅ Completed
 
-1. **Now:** A1 (regenerate JSON), A2 (stray script check).
-2. **Next focused session:** B1 (Google account migration) — absorbs the display.html + CONTENT-GUIDE fixes.
-3. **If going JSON-exclusive:** B3 (clean master) is step one; then B2 (nightly bake + fallback) extends the pattern to all tabs.
-4. **Ongoing:** C1 wishlist after June 17 training.
-5. **Whenever:** the D-tier polish, in any order.
+*Newest work folded in here; tap a tier above for what's still open.*
+
+### ✅ A1. Regenerate `plants.json` / `wildlife.json` — COMPLETE (2026-06-14)
+Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clean.
+
+### ✅ A2. Confirm `photos/` has no stray script — COMPLETE (2026-06-14)
+`photos/` is JPG-only.
+
+### ✅ B5. Harden Google Sheet tabs against structural breakage — COMPLETE (2026-06-14)
+- **Code:** `fetchTab()` now locates the header row by detecting known column names (with a fallback to the documented layout) and reads data two rows below it — a shifted/inserted row self-corrects instead of killing the feed. Covers all live tabs; verified vs News (normal + row-injected), Wedding, Volunteer shapes.
+- **Sheet:** protected ranges applied on rows 1–3 (restricted to Randy) across the live tabs. (Protection blocks editing those cells but not row-insert / "Convert to table" — code fix is the backstop.)
+- **Carryover for CONTENT-GUIDE:** *edit cell values freely; never insert/delete rows above the data; never convert a range to a Table.*
+
+### ✅ C3. Small naming / data verifications — COMPLETE (2026-06-14)
+- 00049 "Spath Lilly" typo: resolved (page renamed to Peace Lily; typo gone as a side effect).
+- 00121 Amazon Lily: confirmed rendering correctly with photo; consistent with generator output.
+- Observation-URL back-fill: NOT a 00121 nit — relocated to **B4** (catalog-wide schema decision tied to signage).
+
+### ✅ C4. Merge About page into Contact — COMPLETE (2026-06-14)
+- Folded rescued WordPress "About" content into `contact.html` → one "About & Contact" page: full history (Timucuan/Spanish heritage, Bradenton Herald, Galleria + Baden buildings, frost-free micro-climate, 2008 Rare Fruit Council), Mission + 3 pillars, Staff (Beverly, Jennifer), mailing address (P.O. Box 14214), recognition block. Board roster intentionally omitted (volatile). Hero swapped off invasive Nandina → native Ficus aurea.
+- **Follow-ups:** (a) partner **logos** still need migrating into `images/` (currently a text placeholder — don't hotlink palmasolabp.org). (b) Consider updating nav/footer label in `site.js` from "Contact" → "About" / "About & Contact" to match the page.
+
+### ✅ D5. `get-started.html` — reworked; "heft" was a false alarm (2026-06-14)
+- Layout + copy pass (icon balance, floated quote/payoff, punchier identifier intro, step-1 project-link + Join guidance, "fun"→"rewarding"). Measured ~104 KB but ~90 KB (86%) is just 3 base64 images; only ~14 KB is real content — no perf issue. Optional housekeeping: extract the 3 images to `images/`.
+
+### ✅ D8. Nav/footer label: "Contact" → "About" — COMPLETE (2026-06-14)
+- Renamed in `site.js` nav (desktop + mobile) and footer, plus `contact.html` `<title>`. Filename unchanged.
+
+### ✅ D10. News article hero images — COMPLETE (2026-06-14)
+- Reader-pane article hero enlarged in `news.html`.
+
+**Earlier (prior session):**
+
+- Duplicate plant pages (renamed-file orphans) deleted: 00010, 00087, 00096, 00103, 00107, 00116. **Catalog reconciled and verified** — `comm` diff of pages vs photos returns zero mismatches end to end.
+- Dead iNaturalist bar markup + wasted `loadINat()` removed from `events.html` and `viewer.html`.
+- `data/` folder restructured into `sources/ scripts/ archive/`; scattered duplicate scripts (`restyle_plants.py` ×3, `check_wildlife_photos.py`) consolidated/removed.
+- `plants/`, `wildlife/`, `photos/` swept to pure content (HTML pages / HTML pages / JPGs only).
+- Legacy hardcoded gallery (`plants/index.html`) + stale `output/` folder retired to archive.
+- Placeholder masters established: `PLACEHOLDER-plant-green.jpg` + `PLACEHOLDER-bird-blue.jpg`; convention documented.
+- `newsletters.html` consolidated into `news.html` (archive scroll); old file archived.
+- Dev `README.md` written (architecture + sheet ID/GID migration checklist + placeholder convention).
