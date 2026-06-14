@@ -4,7 +4,7 @@ Refreshed running list for the ReworkDemo site + plant/wildlife catalog.
 Supersedes the 2026-06-08 version. Items ranked by **Criticality** (do-it-now → polish)
 and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 
-**Last updated: 2026-06-14 (rev 6)**
+**Last updated: 2026-06-14 (rev 7)**
 
 ---
 
@@ -52,6 +52,14 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Steps:** 1) Normalize N/O to canonical labels: Light, Soil tolerances, Drought, Salt, Wind, Cold tolerance, USDA zones (+Note). 2) Inline rows convert losslessly (labels exist); prose rows — extract only what's stated, flag blanks for Randy, do NOT fabricate. 3) Collapse Alternate-Names separators to one style. 4) Strip citation markers / Unicode separators from source. 5) Regenerate + spot-check.
 
 ---
+
+### B6. Multiple photos per species (aspect photos) — LOGGED, deferred
+- **Issue:** Currently **one species = one photo** (a single hero). But a species genuinely has many meaningful views — leaf, flower, fruit, bark, seedling — and for butterfly host/nectar plants, life-cycle stages (egg, caterpillar, chrysalis, adult). One photo can't carry that. Want eventually: per-species **aspect photos**, each labeled by role, each with its own credit.
+- **The pattern (note for whoever builds it):** this is the **third "1-vs-many" tension** in the project, same shape as B4 (species→instances) and species→observations. Same guardrail: **PSBP species ID stays the anchor; the many things hang off it as children.** Don't deepen the single-item assumption. Target data shape: a `photos` **array** (not one `photo` field), each entry carrying a **role** (`leaf` / `flower` / `fruit` / `bark` / `caterpillar` / `adult` / …) + its own attribution.
+- **Compounds with the credits pipeline:** each aspect photo needs its own credit → the photo-credits CSV gains a **photo-role** dimension (keyed by species *and* aspect), and `generate_plant_pages.py` would render a small labeled gallery instead of a single hero.
+- **Naming extends cleanly:** the hyphenated convention has room for a role suffix, e.g. `PSBP-00047-Staghorn-Fern-leaf.jpg`, `-fruit.jpg`.
+- **Criticality:** Low / deferred. Single hero is fine for the sign rollout. **Content can accumulate before display exists** — volunteers shooting leaves/flowers/caterpillars (post-June-17) gather the raw material regardless; wire up the gallery when ready.
+- **Effort:** Medium–High when built (data shape + credits schema + generator + a page gallery UI). None now.
 
 ### B5. Harden Google Sheet tabs against structural breakage (prevention + resilience)
 - **Issue:** Live-tab feeds break if the sheet's **structure** shifts — not its content. Real incident (2026-06-14): the News range got wrapped in a Google Sheets **"Table" (`Table1`)**, which injected a structural row, pushed the header/data down, and the whole news feed went dark ("come back shortly") because `fetchTab()` expects the header on a fixed row. Editing cell *values* is safe; inserting rows above the data, deleting the header row, or converting to a Table is what breaks it.
