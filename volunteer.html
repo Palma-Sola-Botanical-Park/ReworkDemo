@@ -268,9 +268,16 @@ async function loadVolSpotlight() {
         ? `background-image:url('${v.photo_url}');background-size:cover;background-position:center`
         : '';
       const photoContent = v.photo_url ? '' : '🌿';
-      const pdfBtn = v.pdf_url
-        ? `<div class="vol-pdf"><a href="viewer.html?url=${encodeURIComponent(v.pdf_url)}&title=${encodeURIComponent(v.title||'Document')}&back=volunteer.html" class="btn btn-sm btn-gold">📄 ${v.pdf_link_text||'Read More'}</a></div>`
-        : '';
+      let pdfBtn = '';
+      if (v.pdf_url) {
+        const docUrl = v.pdf_url.trim();
+        const isPdf  = /\.pdf($|\?)/i.test(docUrl);   // local or remote .pdf file
+        const href   = isPdf
+          ? `viewer.html?url=${encodeURIComponent(docUrl)}&title=${encodeURIComponent(v.title||'Document')}&back=volunteer.html`
+          : docUrl;                                    // Google Doc / anything else — open directly
+        const newTab = isPdf ? '' : ' target="_blank" rel="noopener"';
+        pdfBtn = `<div class="vol-pdf"><a href="${href}"${newTab} class="btn btn-sm btn-gold">📄 ${v.pdf_link_text||'Read More'}</a></div>`;
+      }
       return `<div class="vol-entry ${i===0?'active':''}" data-idx="${i}">
         <div class="vol-head">
           <div class="vol-photo" style="${photoStyle}">${photoContent}</div>
