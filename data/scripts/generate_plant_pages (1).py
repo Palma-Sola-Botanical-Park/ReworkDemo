@@ -140,6 +140,18 @@ def parse_kv(text, default_label="Detail"):
         out.append((m.group(1).strip(), val))
     return out
 
+def count_text_blocks(raw):
+    """Count non-empty text blocks separated by any style of line break.
+    Normalises every known separator first so the count is break-agnostic."""
+    if not raw or str(raw).strip().lower() in ("", "nan"):
+        return 0
+    t = str(raw)
+    # Normalise every line-break variant to \n
+    for ch in ("\u2028", "\u2029", "\r\n", "\r"):
+        t = t.replace(ch, "\n")
+    blocks = [b.strip() for b in re.split(r"\n\s*\n", t) if b.strip()]
+    return len(blocks)
+
 def parse_repro(text):
     """Split 'Label: body' or 'Label - body' segments (bodies may run
     multiple sentences).  Normalises Unicode line/para separators first
@@ -296,6 +308,14 @@ def build(row, crow, head):
         f'<div class="repro-item"><div class="repro-label">{esc(l)}</div><p>{esc(b)}</p></div>'
         for l, b in repro_items
     )
+    # Block-count sanity check: did we lose any sections?
+    repro_raw = row.get("Reproduction and Identification", "")
+    expected_blocks = count_text_blocks(repro_raw)
+    actual_sections = len(repro_items)
+    if expected_blocks and actual_sections < expected_blocks:
+        print(f"  ⚠️  {pid} Repro: {expected_blocks} text blocks in spreadsheet "
+              f"but only {actual_sections} sections parsed — check for dropped content")
+
 
     # aliases
     raw = str(row.get("Alternate Names", ""))

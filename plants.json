@@ -262,7 +262,10 @@
     "sci": "Caesalpinia pulcherrima",
     "family": "Fabaceae",
     "aliases": [
-      "Peacock Flower · Pride of Barbados · Flamboyant-de-Jardin · Red Bird of Paradise"
+      "Peacock Flower",
+      "Pride of Barbados",
+      "Flamboyant-de-Jardin",
+      "Red Bird of Paradise"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
@@ -282,7 +285,8 @@
     "sci": "Mimosa strigillosa",
     "family": "Fabaceae",
     "aliases": [
-      "Powderpuff · Sensitive Plant"
+      "Powderpuff",
+      "Sensitive Plant"
     ],
     "cat": "Native Groundcovers & Wildflowers",
     "origin": "Native",
@@ -302,7 +306,11 @@
     "sci": "Petrea volubilis",
     "family": "Verbenaceae",
     "aliases": [
-      "Tropical Wisteria · Sandpaper Vine · Purple Wreath · Bluebird Vine · Fleur de Dieu"
+      "Tropical Wisteria",
+      "Sandpaper Vine",
+      "Purple Wreath",
+      "Bluebird Vine",
+      "Fleur de Dieu"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
@@ -345,7 +353,9 @@
     "sci": "Acalypha wilkesiana",
     "family": "Euphorbiaceae",
     "aliases": [
-      "Jacob's Coat · Copper Plant · Fire Dragon"
+      "Jacob's Coat",
+      "Copper Plant",
+      "Fire Dragon"
     ],
     "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
@@ -372,8 +382,8 @@
     "origin": "Native",
     "native": true,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00017-Paurotis-Palm.jpg",
@@ -386,7 +396,10 @@
     "sci": "Bursera simaruba",
     "family": "Burseraceae",
     "aliases": [
-      "Tourist Tree · Copperwood · Chaca · West Indian Birch"
+      "Tourist Tree",
+      "Copperwood",
+      "Chaca",
+      "West Indian Birch"
     ],
     "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
@@ -406,7 +419,9 @@
     "sci": "Hyophorbe lagenicaulis",
     "family": "Arecaceae",
     "aliases": [
-      "Palmiste Gargoulette · Champagne Palm · Pig Nut Palm"
+      "Palmiste Gargoulette",
+      "Champagne Palm",
+      "Pig Nut Palm"
     ],
     "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
@@ -426,7 +441,8 @@
     "sci": "Phoenix canariensis",
     "family": "Arecaceae",
     "aliases": [
-      "CIDP · Canary Palm"
+      "CIDP",
+      "Canary Palm"
     ],
     "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
@@ -446,7 +462,8 @@
     "sci": "Ravenala madagascariensis",
     "family": "Strelitziaceae",
     "aliases": [
-      "Traveler's Tree · Ravenala"
+      "Traveler's Tree",
+      "Ravenala"
     ],
     "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
@@ -466,7 +483,9 @@
     "sci": "Strelitzia nicolai",
     "family": "Strelitziaceae",
     "aliases": [
-      "Giant Bird of Paradise · Wild Banana · Natal Wild Banana"
+      "Giant Bird of Paradise",
+      "Wild Banana",
+      "Natal Wild Banana"
     ],
     "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
@@ -486,7 +505,10 @@
     "sci": "Taxodium distichum",
     "family": "Cupressaceae",
     "aliases": [
-      "Swamp Cypress · Southern Cypress · Red Cypress · Tidewater Red Cypress"
+      "Swamp Cypress",
+      "Southern Cypress",
+      "Red Cypress",
+      "Tidewater Red Cypress"
     ],
     "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
@@ -506,7 +528,9 @@
     "sci": "Zamia integrifolia",
     "family": "Zamiaceae",
     "aliases": [
-      "Florida Arrowroot · Comptie · Koonti"
+      "Florida Arrowroot",
+      "Comptie",
+      "Koonti"
     ],
     "cat": "Native Palms & Cycads",
     "origin": "Native",
@@ -526,7 +550,8 @@
     "sci": "Ilex cassine",
     "family": "Aquifoliaceae",
     "aliases": [
-      "Cassine · Christmas Holly"
+      "Cassine",
+      "Christmas Holly"
     ],
     "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
@@ -546,7 +571,10 @@
     "sci": "Muhlenbergia capillaris",
     "family": "Poaceae",
     "aliases": [
-      "Pink Muhly Grass · Pink Hair Grass · Gulf Muhly · Hairawn Muhly"
+      "Pink Muhly Grass",
+      "Pink Hair Grass",
+      "Gulf Muhly",
+      "Hairawn Muhly"
     ],
     "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
@@ -566,7 +594,8 @@
     "sci": "Quercus virginiana",
     "family": "Fagaceae",
     "aliases": [
-      "Southern Live Oak · Virginia Live Oak"
+      "Southern Live Oak",
+      "Virginia Live Oak"
     ],
     "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
@@ -586,7 +615,9 @@
     "sci": "Rhizophora mangle",
     "family": "Rhizophoraceae",
     "aliases": [
-      "American Mangrove · Mangle · Walking Tree"
+      "American Mangrove",
+      "Mangle",
+      "Walking Tree"
     ],
     "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
@@ -606,7 +637,9 @@
     "sci": "Thalia geniculata",
     "family": "Marantaceae",
     "aliases": [
-      "Fire Flag · Bent Alligator Flag · Arrowroot"
+      "Fire Flag",
+      "Bent Alligator Flag",
+      "Arrowroot"
     ],
     "cat": "Native Wetland & Pond Edge",
     "origin": "Native",
@@ -634,8 +667,8 @@
     "origin": "Native",
     "native": true,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00030-Fakahatchee-Grass.jpg",
@@ -668,7 +701,9 @@
     "sci": "Swietenia mahagoni",
     "family": "Meliaceae",
     "aliases": [
-      "West Indian Mahogany · Cuban Mahogany · Small-leaved Mahogany"
+      "West Indian Mahogany",
+      "Cuban Mahogany",
+      "Small-leaved Mahogany"
     ],
     "cat": "Native Trees & Large Shrubs",
     "origin": "Native",
@@ -791,7 +826,9 @@
     "sci": "Ruellia simplex",
     "family": "Acanthaceae",
     "aliases": [
-      "Britton's Wild Petunia · Mexican Bluebell · (also sold as Ruellia brittoniana, R. tweediana, R. caerulea)"
+      "Britton's Wild Petunia",
+      "Mexican Bluebell",
+      "(also sold as Ruellia brittoniana, R. tweediana, R. caerulea)"
     ],
     "cat": "Plants to Watch & Invasive Awareness",
     "origin": "Non-native",
@@ -811,7 +848,10 @@
     "sci": "Calotropis gigantea",
     "family": "Apocynaceae",
     "aliases": [
-      "Crown Flower · Bowstring Hemp · Arka · (Hawaiian: Pua Kalaunu)"
+      "Crown Flower",
+      "Bowstring Hemp",
+      "Arka",
+      "(Hawaiian: Pua Kalaunu)"
     ],
     "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
@@ -831,7 +871,9 @@
     "sci": "Agave americana",
     "family": "Asparagaceae",
     "aliases": [
-      "Maguey · American Aloe · American Century Plant"
+      "Maguey",
+      "American Aloe",
+      "American Century Plant"
     ],
     "cat": "Culturally & Historically Significant",
     "origin": "Non-native",
@@ -851,7 +893,10 @@
     "sci": "Canna × generalis",
     "family": "Cannaceae",
     "aliases": [
-      "Indian Shot · Canna Lily · Garden Canna · (hybrids often sold as Canna x generalis)"
+      "Indian Shot",
+      "Canna Lily",
+      "Garden Canna",
+      "(hybrids often sold as Canna x generalis)"
     ],
     "cat": "Culturally & Historically Significant",
     "origin": "Non-native",
@@ -893,7 +938,10 @@
     "sci": "Dietes bicolor",
     "family": "Iridaceae",
     "aliases": [
-      "Fortnight Lily · Butterfly Iris · Yellow Wild Iris · Peacock Flower"
+      "Fortnight Lily",
+      "Butterfly Iris",
+      "Yellow Wild Iris",
+      "Peacock Flower"
     ],
     "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
@@ -913,7 +961,10 @@
     "sci": "Pandanus utilis",
     "family": "Pandanaceae",
     "aliases": [
-      "Common Screwpine · Screw Palm · Pandanus · Pimento Thatch"
+      "Common Screwpine",
+      "Screw Palm",
+      "Pandanus",
+      "Pimento Thatch"
     ],
     "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
@@ -933,7 +984,10 @@
     "sci": "Plumbago auriculata",
     "family": "Plumbaginaceae",
     "aliases": [
-      "Cape Plumbago · Cape Leadwort · Blue Plumbago · Skyflower"
+      "Cape Plumbago",
+      "Cape Leadwort",
+      "Blue Plumbago",
+      "Skyflower"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
@@ -953,7 +1007,10 @@
     "sci": "Dracaena trifasciata",
     "family": "Asparagaceae",
     "aliases": [
-      "Mother-in-Law's Tongue · Viper's Bowstring Hemp · Saint George's Sword · (formerly Sansevieria trifasciata)"
+      "Mother-in-Law's Tongue",
+      "Viper's Bowstring Hemp",
+      "Saint George's Sword",
+      "(formerly Sansevieria trifasciata)"
     ],
     "cat": "Tropical Foliage & Accent Plants",
     "origin": "Non-native",
@@ -979,8 +1036,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00047-Staghorn-Fern.jpg",
@@ -1101,8 +1158,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00053-Pentas.jpg",
@@ -1160,8 +1217,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00056-Parrots-Beak.jpg",
@@ -1200,8 +1257,8 @@
     "origin": "Native",
     "native": true,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": true,
     "photo": "photos/PSBP-00058-Giant-Leather-Fern.jpg",
@@ -1296,8 +1353,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00063-Pagoda-Flower.jpg",
@@ -1314,8 +1371,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00064-Ixora-Maui-Yellow.jpg",
@@ -1362,7 +1419,7 @@
     "wetland": true,
     "photo": "photos/PSBP-00066-Lanceleaf-Arrowhead.jpg",
     "page": "plants/PSBP-00066-Lanceleaf-Arrowhead.html",
-    "quick": "The genus Sagittaria takes its name from the Latin for arrow — most of its members have arrowhead-shaped leaves. This one is the exception: its leaves are narrow and lance-shaped, which is just what ‘lancifolia’ means."
+    "quick": "The genus Sagittaria takes its name from the Latin for arrow — most of its members have arrowhead-shaped leaves. This one is the exception: its leaves are narrow and lance-shaped, which is just what 'lancifolia' means."
   },
   {
     "id": "PSBP-00067",
@@ -1506,8 +1563,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00073-Kings-Mantle.jpg",
@@ -1543,7 +1600,9 @@
     "sci": "Aristolochia gigantea",
     "family": "Aristolochiaceae",
     "aliases": [
-      "Giant Dutchman's Pipe · Giant Pelican Flower · Giant Pipevine"
+      "Giant Dutchman's Pipe",
+      "Giant Pelican Flower",
+      "Giant Pipevine"
     ],
     "cat": "Flowering Shrubs & Vines",
     "origin": "Non-native",
@@ -1666,8 +1725,8 @@
     "origin": "Native",
     "native": true,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00081-Ball-Moss.jpg",
@@ -1701,7 +1760,8 @@
     "sci": "Pachypodium lamerei",
     "family": "Apocynaceae",
     "aliases": [
-      "Madagascar Palm · Club Foot · (genus 'Pachypodium' = 'thick foot')"
+      "Club Foot",
+      "(genus 'Pachypodium' = 'thick foot')"
     ],
     "cat": "Tropical & Exotic Palms",
     "origin": "Non-native",
@@ -1749,8 +1809,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00085-Little-Lady-Palm.jpg",
@@ -1810,8 +1870,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00088-Blue-Porterweed.jpg",
@@ -1867,8 +1927,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00091-Pink-Powderpuff.jpg",
@@ -2142,8 +2202,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00105-Shrubby-False-Buttonweed.jpg",
@@ -2185,8 +2245,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": true,
     "wetland": false,
     "photo": "photos/PSBP-00107-Wedelia.jpg",
@@ -2203,8 +2263,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00108-Largeflower-Pusley.jpg",
@@ -2224,8 +2284,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00109-Lawn-Orchid.jpg",
@@ -2346,8 +2406,8 @@
     "origin": "Non-native",
     "native": false,
     "butterfly": false,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00115-Oriental-False-Hawksbeard.jpg",
@@ -2489,8 +2549,8 @@
     "origin": "Native",
     "native": true,
     "butterfly": true,
-    "toxic": true,
-    "edible": false,
+    "toxic": false,
+    "edible": true,
     "invasive": false,
     "wetland": false,
     "photo": "photos/PSBP-00122-Walters-Viburnum.jpg",
