@@ -98,13 +98,12 @@ Migration find-and-replace checklist:
 | `/` (root) | Site pages, the 3 JSON files | `site.js` is under `js/` |
 | `css/` | `site.css` — all shared styles + CSS variables | |
 | `js/` | `site.js` — shared nav/footer/router/loaders | |
-| `plants/` | Plant field-guide **HTML pages** (`PSBP-00001…00122+`) | Pages only |
-| `wildlife/` | Wildlife **HTML pages** (`PSBP-99970…99999`) | Pages only |
+| `plants/` | Plant field-guide **HTML pages** (`PSBP-00001…00122+`) | Pages only, derived from a master spreadsheet with many columns of info about each species |
+| `wildlife/` | Wildlife **HTML pages** (`PSBP-99970…99999`) | Pages only, derived from a master spreadsheet with many columns of info about each species |
 | `photos/` | Specimen **JPGs** named by PSBP ID | What the pages/JSON point at |
 | `images/` | Logos + page-hero background JPGs (named by scientific name) | Site chrome, not field-guide photos |
 | `screen/` | `display.html` — office/galleria TV app | Reads the same sheet |
-| `news/` | News page assets | |
-| `docs/` | Project handoff / reference docs | |
+| `docs/` | Project handoff / assets needed to be stored in the repo categorized by area like News, Events, Venue, etc  | |
 | `data/` | **Workshop — NOT read by the live site.** Subdivided: | |
 | `data/sources/` | Master spreadsheets (signage xlsx, photo-credits CSV) | Source of truth |
 | `data/scripts/` | Generators & tools | **All scripts live here — never in asset/page folders** |
@@ -116,6 +115,39 @@ Migration find-and-replace checklist:
 - A species has a page (`plants/` or `wildlife/`) **and** a photo (`photos/`) sharing the same ID, **hyphenated** (e.g. `PSBP-00001-Tree-Crinum.html` ↔ `PSBP-00001-Tree-Crinum.jpg`).
 - **Wildlife page theme colors:** green = plants, **blue = birds** (sky), **pink = butterflies**, **brown = reptiles/mammals/bugs** (earth). The `theme-*` class lives on `.wild-wrap`.
 - **Placeholder images** (when a species lacks a usable photo — usually a licensing gap): copy the matching theme-color master and rename to the species' PSBP filename. Masters in `photos/`: `PLACEHOLDER-plant-green.jpg`, `PLACEHOLDER-bird-blue.jpg`. Pink/brown made on-demand only (none needed yet).
+
+## Content build pipeline (how plant & wildlife pages are made)
+
+This is the process behind every field-guide page — research → spreadsheets → script → HTML. It is **separate from the live site**: it produces the static pages and JSON the site reads. Two parallel tracks (plants and wildlife) that work identically.
+
+### The source files (all in `data/sources/`)
+
+| File | Role |
+|------|------|
+| `PSBP_Master_Plant_Signage.xlsx` | **The master content** for every plant — one row per species. (Wildlife: `PSBP_Master_Animal_Signage.xlsx`.) |
+| `Plants_and_Wildlife_Photo_Credits.csv` | **Photo attribution** — who took each photo / source / license, keyed to the species. |
+
+The plant signage workbook has three tabs: `PSBP_Plants` (one row per species, ~30 columns), `Placements` (physical instances — see the species-vs-instance note), and an `Export Summary`. The `PSBP_Plants` columns group into:
+- **Identity:** Common Name, Botanical Name, PSBP Species ID, Family, Genus, Species, Cultivar, Alternate Names
+- **Content prose:** Quick Hits, Origin, More Information, Wildlife Value, Reproduction and Identification, Size, Growing Conditions
+- **Safety flags (each a Green/Yellow/Red flag + a prose field):** Edibility, Toxicity / Toxic to People, Toxic to Dogs, Invasive (+ Invasive Notes); plus Native or Non-native
+- **Housekeeping:** Sign Level, Has Sign, Category, Feature Tier, Other Notes, Internal Notes
+
+### The build flow
+
+1. **Research the species** and fill in its row in the signage spreadsheet. *Accuracy is paramount* (Bev flags AI errors) — defer to firsthand on-site observation over textbook descriptions; flag blanks rather than fabricate.
+2. **Source a usable photo** (right to use it — licensing matters; see the placeholder convention for photo-less species) and **record its credit** in the photo-credits CSV.
+3. **Run the page generator** — `data/scripts/generate_plant_pages.py` reads the **plant signage spreadsheet + the photo-credits CSV together** and writes the HTML field-guide page into `plants/`, with the **photo attribution rendered on the page**.
+   - *Wildlife note:* there is **no** `generate_wildlife_pages.py`. The ~30 wildlife pages in `wildlife/` were built by another means (hand-built, or a one-off / retired process — **confirm with Randy**). Only the wildlife *search index* (`generate_wildlife_json.py`, step 4) is a standing tool. If wildlife pages need regenerating in bulk, that page-builder does not currently exist.
+4. **Run the search-index generator** — `data/scripts/generate_plants_json.py` reads the finished HTML pages and writes `plants.json` (the search/filter index). `generate_wildlife_json.py` does the same for `wildlife.json`. (These read the HTML; they are *not* page builders.)
+5. **Commit + push.**
+
+### Where credit appears (and where it doesn't)
+
+- **Full field-guide page** (`plants/PSBP-*.html`): photo **with** its attribution credit.
+- **Search-result card** (built from `plants.json`): the **same photo, no credit line**. Credit lives only on the full page, by design. If credit display in search results is ever wanted, it would mean adding the credit field to the JSON generator's output.
+
+> The signage spreadsheet is the **single source of truth** for content. Edit there and regenerate — don't hand-edit finished HTML pages (changes get overwritten on the next build, and it breaks the derive-don't-scrape rule).
 
 ## Common tasks
 
@@ -213,6 +245,14 @@ that scans to its field-guide page.
   *fetches* the bytes with JS → subject to CORS. Third-party file hosts (Mailchimp `mcusercontent.com`, etc.)
   block cross-origin reads, so the raw link works but the in-site embed renders blank. Host embeddable PDFs in
   the repo (`docs/news/`). (Incident 2026-06-14, resolved by rehosting.)
+- **Content build pipeline (see PART 1 for full detail):** plant field-guide pages are built from
+  `data/sources/PSBP_Master_Plant_Signage.xlsx` (content) + `Plants_and_Wildlife_Photo_Credits.csv` (attribution)
+  by `generate_plant_pages.py` → HTML pages **with photo credit shown** → `generate_plants_json.py` → `plants.json`
+  (search index, **same photo, no credit**). **There is NO `generate_wildlife_pages.py`** — wildlife pages were
+  built by another (hand/one-off/retired) means; only `generate_wildlife_json.py` (search index) is standing. The
+  signage spreadsheet is the **single source of truth** — never hand-edit finished plant HTML (overwritten on
+  rebuild). Recurring back-and-forth on page-build details + master-spreadsheet column conventions; treat the
+  spreadsheet columns + the generator as the contract, and confirm with Randy before changing either.
 
 ## Content voice & accuracy rules
 
