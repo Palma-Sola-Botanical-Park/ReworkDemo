@@ -1,5 +1,72 @@
 /* ── PALMA SOLA BOTANICAL PARK · SHARED JS v2 ── */
 
+/* ============================================================
+   PSBP LINK ROUTER  —  one place decides how every link behaves
+     • internal  → same window   (your own pages)
+     • external  → new tab       (other websites)
+     • document  → viewer.html   (PDFs & PUBLISHED Google Docs/
+                                   Sheets/Slides), framed in-site
+     • direct    → mailto: / tel:, opened natively
+   Usage:
+     PSBP.linkTag(url, label, { title, back, className, style })
+     PSBP.linkAttrs(url, { title, back })  → { href, target, rel, kind }
+     PSBP.linkKind(url)                     → 'internal'|'external'|'document'|'direct'
+     PSBP.rowLink(row)                      → { url, text }  (reads new or legacy column names)
+   ============================================================ */
+window.PSBP = window.PSBP || {};
+(function (P) {
+
+  P.linkKind = function (url) {
+    var u = (url || '').trim();
+    if (!u) return 'internal';
+    if (/^(mailto:|tel:)/i.test(u)) return 'direct';
+    if (/\.pdf($|[?#])/i.test(u)) return 'document';
+    if (/docs\.google\.com\/.+\/pub(html)?($|[?#])/i.test(u)) return 'document';
+    if (/^https?:\/\//i.test(u)) {
+      try { if (new URL(u).host === location.host) return 'internal'; } catch (e) {}
+      return 'external';
+    }
+    return 'internal';
+  };
+
+  P.linkAttrs = function (url, opts) {
+    opts = opts || {};
+    var u = (url || '').trim();
+    var kind = P.linkKind(u);
+    if (kind === 'document') {
+      var back = opts.back || (location.pathname.split('/').pop() || '');
+      var href = 'viewer.html?url=' + encodeURIComponent(u) +
+                 '&title=' + encodeURIComponent(opts.title || 'Document') +
+                 (back ? '&back=' + encodeURIComponent(back) : '');
+      return { href: href, target: '', rel: '', kind: kind };
+    }
+    if (kind === 'external') {
+      return { href: u, target: '_blank', rel: 'noopener', kind: kind };
+    }
+    return { href: u, target: '', rel: '', kind: kind }; // internal + direct
+  };
+
+  P.linkTag = function (url, label, opts) {
+    opts = opts || {};
+    var a = P.linkAttrs(url, opts);
+    var attrs = 'href="' + a.href + '"';
+    if (a.target)        attrs += ' target="' + a.target + '"';
+    if (a.rel)           attrs += ' rel="' + a.rel + '"';
+    if (opts.className)  attrs += ' class="' + opts.className + '"';
+    if (opts.style)      attrs += ' style="' + opts.style + '"';
+    return '<a ' + attrs + '>' + (label == null ? '' : label) + '</a>';
+  };
+
+  P.rowLink = function (row) {
+    row = row || {};
+    return {
+      url:  ((row.link_url || row.pdf_url || row.link || '') + '').trim(),
+      text: row.link_text || row.pdf_link_text || ''
+    };
+  };
+
+})(window.PSBP);
+
 const INAT_PROJECT = 'palma-sola-botanical-park';
 const SHEET_ID     = '12gRB-c4gND8qJWPmwBoV2X4adqTfRROYHtA8jR4-kS4';
 
@@ -354,7 +421,8 @@ async function loadEvents(containerId, maxItems=8) {
 
     el.innerHTML = upcoming.map(e => {
       const d = new Date(e.date+'T12:00');
-      const pdfBtn = e.pdf_url ? `<a href="viewer.html?url=${encodeURIComponent(e.pdf_url)}&title=${encodeURIComponent(e.title||'Event Details')}&back=${encodeURIComponent(location.pathname.split('/').pop()||'events.html')}" rel="noopener" class="btn btn-sm btn-gold" style="margin-top:.6rem">📄 Event Details</a>` : '';
+      const eLink = PSBP.rowLink(e);
+      const pdfBtn = eLink.url ? PSBP.linkTag(eLink.url, '📄 ' + (eLink.text || 'Event Details'), { title: e.title || 'Event Details', back: location.pathname.split('/').pop() || 'events.html', className: 'btn btn-sm btn-gold', style: 'margin-top:.6rem' }) : '';
       return `<div class="event-card">
         <div class="event-datebox">
           <div class="mo">${d.toLocaleDateString('en-US',{month:'short'}).toUpperCase()}</div>
@@ -384,44 +452,40 @@ async function loadClasses(containerId) {
     const rows = await fetchTab(TAB.classes);
     const visible = rows.filter(r => isWebVisible(r));
     if (!visible.length) { el.innerHTML='<p class="text-soft">No classes currently scheduled.</p>'; return; }
-    el.innerHTML = visible.map(c => `
+    el.innerHTML = visible.map(c => {
+      const cLink = PSBP.rowLink(c);
+      const back  = location.pathname.split('/').pop() || 'events.html';
+      const detailsBtn = cLink.url ? PSBP.linkTag(cLink.url, '📄 ' + (cLink.text || 'Details'), { title: c.title || 'Details', back: back, className: 'btn btn-sm btn-green', style: 'margin-top:.5rem' }) : '';
+      const regBtn = c.registration_url ? PSBP.linkTag(c.registration_url, 'Register →', { title: c.title || 'Register', back: back, className: 'btn btn-sm btn-gold', style: 'margin-top:.5rem' }) : '';
+      return `
       <div class="class-card">
         <div class="class-day">${c.day||''} <span>${c.time||''}</span></div>
         <h4>${c.title||''}</h4>
         ${c.instructor?`<div class="class-instructor">with ${c.instructor}</div>`:''}
         ${c.description?`<p>${c.description}</p>`:''}
-        ${c.pdf_url?`<a href="viewer.html?url=${encodeURIComponent(c.pdf_url)}&title=${encodeURIComponent(c.title||'Details')}&back=${encodeURIComponent(location.pathname.split('/').pop()||'events.html')}" rel="noopener" class="btn btn-sm btn-green" style="margin-top:.5rem">📄 Details</a>`:''}
-        ${c.registration_url?`<a href="${c.registration_url}" target="_blank" rel="noopener" class="btn btn-sm btn-gold" style="margin-top:.5rem">Register →</a>`:''}
-      </div>`).join('');
+        ${detailsBtn}
+        ${regBtn}
+      </div>`;
+    }).join('');
   } catch(e) {
     el.innerHTML = '<p class="text-soft">Could not load classes.</p>';
   }
 }
 
-// Announcement link behavior, driven by the `link_type` column:
-//   "External site" → opens in a NEW tab
-//   "Internal page" → same-tab navigation to a page on this site (e.g. get-started.html)
-//   "PDF"           → opens inside viewer.html, staying in context
-// If link_type is blank it degrades gracefully: a pdf_url is treated as PDF,
-// otherwise a link_url opens externally in a new tab.
+// Announcement link button. No type column needed — PSBP.linkKind reads the
+// URL and routes it: a .pdf or published Google Doc frames inside viewer.html,
+// an internal page opens same-window, any other site opens in a new tab.
 function annButton(a){
-  const url = (a.link_url || a.pdf_url || '').trim();
+  const { url, text } = PSBP.rowLink(a);
   if (!url) return '';
-  const type  = (a.link_type || '').toLowerCase();
-  const label = a.link_text || (type.includes('pdf') ? 'Read More' : 'Learn more');
-  const css   = 'class="ann-link" style="margin-left:.75rem"';
-
-  // PDF → wrap in the in-site viewer (same window, with Back button)
-  if (type.includes('pdf') || (!type && a.pdf_url)) {
-    const href = `viewer.html?url=${encodeURIComponent(url)}&title=${encodeURIComponent(a.title||'')}&back=${encodeURIComponent(location.pathname.split('/').pop()||'index.html')}`;
-    return `<a href="${href}" ${css}>📄 ${label} →</a>`;
-  }
-  // Internal page on this site → same window, no new tab
-  if (type.includes('internal')) {
-    return `<a href="${url}" ${css}>${label} →</a>`;
-  }
-  // External site (default) → new tab
-  return `<a href="${url}" target="_blank" rel="noopener" ${css}>${label} →</a>`;
+  const isDoc = PSBP.linkKind(url) === 'document';
+  const label = (isDoc ? '📄 ' : '') + (text || (isDoc ? 'Read More' : 'Learn more')) + ' →';
+  return PSBP.linkTag(url, label, {
+    title: a.title || '',
+    back: location.pathname.split('/').pop() || 'index.html',
+    className: 'ann-link',
+    style: 'margin-left:.75rem'
+  });
 }
 
 // ── ANNOUNCEMENTS — slow-cycling, one at a time ───────────────
