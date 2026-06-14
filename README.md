@@ -123,7 +123,20 @@ TAB GIDs:
 ### Naming conventions
 - **PSBP IDs:** plants `PSBP-00001`–`00122+`; wildlife `PSBP-99970`–`99999`.
 - A species has a page (`plants/` or `wildlife/`) **and** a photo (`photos/`) sharing the same ID.
-- Plants missing a real photo use a copy of `photos/PLACEHOLDER-plant-green.jpg`.
+
+### Placeholder images (when a species has no usable photo)
+Wildlife pages are color-themed: green = plants, blue = birds (sky), pink = butterflies,
+brown = reptiles/mammals/bugs (earth). When a species lacks a usable photo (usually a
+licensing gap — the observation exists but we don't have rights to the image), use the
+matching theme-color placeholder: **copy it and rename it to that species' PSBP filename.**
+
+Reusable masters live in `photos/`:
+- `PLACEHOLDER-plant-green.jpg` — plants
+- `PLACEHOLDER-bird-blue.jpg` — birds
+
+Pink (butterfly) and brown (reptile/mammal/bug) masters aren't kept because no species in
+those categories has ever needed one. If that changes, make the master on demand from the
+matching theme color — don't create them preemptively.
 
 ---
 
