@@ -119,15 +119,38 @@ function orderByFeatured(list, featuredIds) {
 }
 
 // ── SHEET FETCH HELPER ────────────────────────────────────────
+// Column-header tokens seen across the live tabs. Used to LOCATE the header row by
+// its CONTENT rather than trusting a fixed row index — so an inserted row, a stray
+// blank, or a Google Sheets "Table" wrapper can't silently shove the feed off its
+// rails (that exact thing took the News feed dark on 2026-06-14).
+const KNOWN_HEADERS = new Set([
+  'display','date','pinned','headline','subhead','blurb','hero_image','intro',
+  'image1','image1_caption','aside','body2','title','role','name','bio','body',
+  'description','photo_url','link','link_text','url','time','start','end',
+  'location','status','note','category','tags'
+]);
+const normHeader = s => (s || '').trim().toLowerCase().replace(/\s+/g, '_');
+
 async function fetchTab(gid) {
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
   const resp = await fetch(url);
   if (!resp.ok) throw new Error(`Sheet tab ${gid} failed`);
   const text = await resp.text();
   const lines = text.trim().split('\n');
-  // Row 0 = section title, Row 1 = column headers, Row 2 = notes, Row 3+ = data
-  const headers = parseCSVLine(lines[1]).map(h => h.trim().toLowerCase().replace(/\s+/g,'_'));
-  return lines.slice(3)
+
+  // Convention: [section title] / [column headers] / [hint] / data…
+  // Find the header row by content (the row with the most cells matching known
+  // column names) instead of assuming it's always line 2. If rows shift up or down,
+  // this self-corrects; data is taken from two rows below it (skipping the hint row).
+  let headerIdx = 1, best = 0;
+  for (let i = 0; i < Math.min(lines.length, 12); i++) {
+    const hits = parseCSVLine(lines[i]).map(normHeader).filter(c => KNOWN_HEADERS.has(c)).length;
+    if (hits > best) { best = hits; headerIdx = i; }
+  }
+  if (best < 2) headerIdx = 1; // not confident → fall back to the documented layout
+
+  const headers = parseCSVLine(lines[headerIdx]).map(normHeader);
+  return lines.slice(headerIdx + 2) // skip the hint row directly beneath the header
     .map(line => {
       const vals = parseCSVLine(line);
       const obj = {};

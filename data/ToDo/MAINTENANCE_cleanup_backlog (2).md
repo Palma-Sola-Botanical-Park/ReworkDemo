@@ -128,7 +128,7 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Steps:** 1) Fix the responsive breakpoints (the events list + classes sidebar grid). 2) Reduce block density — convert some cards to flowing text. 3) Test on a real phone width.
 
 ### ✅ D10. News article hero images — COMPLETE (2026-06-14)
-- Reader-pane article hero enlarged/made more prominent in `news.html`. (`hero_image` field already in the data shape; sized up in the News reader CSS.)
+- Reader-pane article hero enlarged/made more prominent in `news.html`.
 
 ### D11. About content → Sheet-managed tab (persistent "News"-style)
 - **Issue:** About content (history, mission, staff, eventually **Board of Directors**) is currently **hardcoded** in `contact.html` (merged there 2026-06-14 — the right step 1). Phase 2: make it **Sheet-driven** like News, but for *evergreen* content — a reader-pane layout (right-side clickable items, left-side text, reader picks what to read). Reuse the existing `news.html` reader+squares pattern. Lets Bev edit About content (and add Board members) without touching code.
@@ -156,10 +156,9 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Criticality:** Low — a deliberate decision, not a bug.
 - **Effort:** Low.
 
-### D5. `get-started.html` heft
-- **Issue:** ~105 KB — the heaviest hand-built page; lots of inline content. Not wrong, just the most unwieldy to maintain by hand.
-- **Criticality:** Low.
-- **Effort:** Medium if ever refactored (e.g. move repeated content to shared CSS/partials).
+### ✅ D5. `get-started.html` — reworked; "heft" was a false alarm (2026-06-14)
+- Layout + copy pass: relocated the iNaturalist icon (now over the 2|3 step gap); floated the pull-quote and the green payoff callout ~1/3 right with steps/tips wrapping left + below; punched up the "Be an Identifier" intro; expanded identifier step 1 (project link + Join-button guidance + "tracks what still needs ID"); reframed "fun" → "rewarding". Rendered/verified desktop + mobile.
+- **Not actually heavy.** Measured: ~104 KB total, but ~90 KB (86%) is just 3 base64-embedded images (iNat icon + 2 store badges); only ~14 KB is real HTML/CSS/text. Loads fine on mobile — no performance concern. Inline images are cosmetic clutter only (noisy diffs, no separate caching). Optional housekeeping, NOT heft: extract the 3 images into `images/` files whenever convenient. Concern closed.
 
 ### D6. Deferred style decisions
 - **Issue:** (a) Quick Hits bolding — generator output is unbolded; decide whether to auto-bold. (b) Own-photo credit style — `OWN_PHOTO_PLAIN` flag for a plain "Photo by Randall Carter" credit.
@@ -172,7 +171,7 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Effort:** Low — archive *after* they reply (and point them at the live page going forward).
 
 ### ✅ D8. Nav/footer label: "Contact" → "About" — COMPLETE (2026-06-14)
-- Merged Contact+About page now reads as an About page, so the label was renamed **everywhere** it names the page: `site.js` `NAV_HTML` (desktop + mobile) and `FOOTER_HTML` → "About"; `contact.html` `<title>` → "About · Palma Sola Botanical Park". Filename stays `contact.html` (no links broken). Action CTAs that point at the page ("Reach Out", "Send a Message", "Get on the list") left as-is — they're actions, not the page name.
+- Renamed everywhere it names the page: `site.js` nav (desktop + mobile) and footer → "About"; `contact.html` `<title>` → "About". Filename stays `contact.html`. Hero `<h1>` later set to "Palma Sola Botanical Park" per Randy.
 
 ---
 
