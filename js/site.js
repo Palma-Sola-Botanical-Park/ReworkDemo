@@ -164,9 +164,6 @@ function isWebVisible(row) {
 // ── NAV HTML ─────────────────────────────────────────────────
 const NAV_HTML = `
 <nav id="site-nav">
-  <a href="index.html" class="nav-logo">
-    <img src="images/white_PSBP_logo.png" alt="Palma Sola Botanical Park">
-  </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="nature.html">Nature</a></li>
@@ -177,6 +174,9 @@ const NAV_HTML = `
     <li><a href="members.html">Members</a></li>
     <li><a href="contact.html">About</a></li>
   </ul>
+  <a href="index.html" class="nav-logo">
+    <img src="images/white_PSBP_logo.png" alt="Palma Sola Botanical Park">
+  </a>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
