@@ -77,6 +77,7 @@ const TAB = {
   volunteer:     269225929,
   announcements: 673905300,
   newsletters:   1749891854,
+  news:          195499912,
   venues:        1744975586,
   wedding_calendar: 1260078193,
   wedding_gallery:  874456476,
