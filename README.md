@@ -209,6 +209,10 @@ that scans to its field-guide page.
   Reproduction/Identification column across ~68 pages; a global fix was applied. Don't reintroduce em-dashes there.
 - **iNaturalist GPS is sloppy** (bad signal, many yards off). Do NOT use it for sign/instance location — use
   Google Earth / KML hand-placed coordinates as the master location. (See Placements below.)
+- **In-site PDFs must be same-origin (repo) or a published Google Doc.** `viewer.html` renders via PDF.js, which
+  *fetches* the bytes with JS → subject to CORS. Third-party file hosts (Mailchimp `mcusercontent.com`, etc.)
+  block cross-origin reads, so the raw link works but the in-site embed renders blank. Host embeddable PDFs in
+  the repo (`docs/news/`). (Incident 2026-06-14, resolved by rehosting.)
 
 ## Content voice & accuracy rules
 

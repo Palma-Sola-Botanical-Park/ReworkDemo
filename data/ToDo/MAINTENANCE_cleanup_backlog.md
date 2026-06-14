@@ -4,7 +4,7 @@ Refreshed running list for the ReworkDemo site + plant/wildlife catalog.
 Supersedes the 2026-06-08 version. Items ranked by **Criticality** (do-it-now → polish)
 and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 
-**Last updated: 2026-06-14 (rev 4)**
+**Last updated: 2026-06-14 (rev 6)**
 
 ---
 
@@ -52,6 +52,15 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Steps:** 1) Normalize N/O to canonical labels: Light, Soil tolerances, Drought, Salt, Wind, Cold tolerance, USDA zones (+Note). 2) Inline rows convert losslessly (labels exist); prose rows — extract only what's stated, flag blanks for Randy, do NOT fabricate. 3) Collapse Alternate-Names separators to one style. 4) Strip citation markers / Unicode separators from source. 5) Regenerate + spot-check.
 
 ---
+
+### B5. Harden Google Sheet tabs against structural breakage (prevention + resilience)
+- **Issue:** Live-tab feeds break if the sheet's **structure** shifts — not its content. Real incident (2026-06-14): the News range got wrapped in a Google Sheets **"Table" (`Table1`)**, which injected a structural row, pushed the header/data down, and the whole news feed went dark ("come back shortly") because `fetchTab()` expects the header on a fixed row. Editing cell *values* is safe; inserting rows above the data, deleting the header row, or converting to a Table is what breaks it.
+- **Criticality:** Medium — silent, total-feed failure mode; invisible until a feed goes dark. Affects every live tab (events/classes/announcements/volunteer/newsletters/news).
+- **Effort:** Low–Medium (split across two fixes).
+- **Two layers:**
+  - **Prevention (in the Sheet):** (a) Remove the `Table1` Table wrapper — revert to a plain range (Tables are more fragile for CSV-export fetch). (b) **Protected ranges** (Data → Protect sheets and ranges) on rows 1–3 (title + header) so they can't be edited/deleted. (c) Document the rule for Bev: *edit cell values freely; never insert/delete rows above the data, never touch the header row, never convert to a Table.* Intended layout: rows 1–3 fixed (title/header), **data starts row 4**.
+  - **Resilience (in code — the better fix):** make `fetchTab()` **find the header row by detecting known column names** (`display`, `date`, `headline`, …) instead of assuming a fixed row index. Then a shifted/inserted row self-corrects instead of killing the feed. One change protects all tabs.
+- **Note:** This is also strong evidence for **B2** (nightly JSON bake + fallback) — with a snapshot floor, this incident would've shown slightly stale news instead of an empty feed. And the Bev-facing rule belongs in the CONTENT-GUIDE rewrite.
 
 ### B4. Species vs. instance data model + iNaturalist linkage (LOGGED — deferred, architecture already in place)
 - **Issue:** One HTML page = one *species* profile, but a species can have **multiple physical instances** in the park (e.g. 4 Staghorn Ferns). Each instance gets its own QR sign, so instance-awareness matters for the eventual map/wayfinding layer.
@@ -170,6 +179,7 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 - **Catalog reconciliation** (pages ↔ photos): the `comm` diff of `PSBP-*` IDs across `plants/`+`wildlife/` vs `photos/` should return two empty lists.
 - **Scripts live only in `data/scripts/`** — never in asset or page folders.
 - **Single source of truth:** derive everything from the master sheet / JSON; never scrape rendered HTML.
+- **PDFs that render in-site must be same-origin or a published Google Doc.** `viewer.html` uses PDF.js, which *fetches* the file with JS — subject to CORS. Third-party hosts (Mailchimp `mcusercontent.com`, random file hosts) serve for direct download but block cross-origin JS reads, so they render blank in-site even though the raw link works. Fix: host embeddable PDFs in the repo (e.g. `docs/news/`) or use a published Google Doc. (Incident 2026-06-14: a Mailchimp-hosted Horticulture PDF wouldn't embed; rehosted into the repo, fixed.)
 
 ---
 
