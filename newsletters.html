@@ -152,7 +152,7 @@ injectShared({ inatBar: false });
     const rows = await fetchTab(TAB.newsletters);
     const visible = rows
       .filter(r => { const d = (r.display || 'both').toLowerCase(); return d === 'both' || d === 'web'; })
-      .filter(r => r.title || r.pdf_url)
+      .filter(r => r.title || PSBP.rowLink(r).url)
       .sort((a, b) => new Date(b.date) - new Date(a.date));
 
     if (!visible.length) {
@@ -165,11 +165,9 @@ injectShared({ inatBar: false });
       const dateLabel = (d && !isNaN(d))
         ? d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
         : (n.date || '');
-      const href = n.pdf_url
-        ? `viewer.html?url=${encodeURIComponent(n.pdf_url)}&title=${encodeURIComponent(n.title || 'Newsletter')}&back=${encodeURIComponent(location.pathname.split('/').pop() || 'newsletters.html')}`
-        : '';
-      const btn = href
-        ? `<a href="${href}" class="btn btn-gold btn-sm">📄 Read Newsletter →</a>`
+      const nl = PSBP.rowLink(n);
+      const btn = nl.url
+        ? PSBP.linkTag(nl.url, '📄 ' + (nl.text || 'Read Newsletter') + ' →', { title: n.title || 'Newsletter', back: location.pathname.split('/').pop() || 'newsletters.html', className: 'btn btn-gold btn-sm' })
         : '';
       return `<div class="news-card">
         <div class="news-date">${dateLabel}</div>

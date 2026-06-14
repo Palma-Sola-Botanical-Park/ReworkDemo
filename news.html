@@ -147,19 +147,16 @@ let newsItems = [], newsShown = 0, newsActive = 0;
 function paras(t){ return (t||'').split('||').map(s=>s.trim()).filter(Boolean).map(s=>`<p>${s}</p>`).join(''); }
 
 function newsCTA(n){
-  if (n.pdf_url) {
-    const href = `viewer.html?url=${encodeURIComponent(n.pdf_url)}&title=${encodeURIComponent(n.headline||'Park News')}&back=news.html`;
-    return `<a href="${href}" class="btn btn-gold">📄 Read the full story →</a>`;
-  }
-  const url = (n.link_url||'').trim();
+  const { url, text } = PSBP.rowLink(n);
   if (!url) return '';
-  const type = (n.link_type||'').toLowerCase();
-  if (type.includes('pdf')) {
-    const href = `viewer.html?url=${encodeURIComponent(url)}&title=${encodeURIComponent(n.headline||'Park News')}&back=news.html`;
-    return `<a href="${href}" class="btn btn-gold">📄 Read the full story →</a>`;
-  }
-  if (type.includes('internal')) return `<a href="${url}" class="btn btn-green">Read more →</a>`;
-  return `<a href="${url}" target="_blank" rel="noopener" class="btn btn-green">Read more →</a>`;
+  const isDoc = PSBP.linkKind(url) === 'document';
+  const label = isDoc ? ('📄 ' + (text || 'Read the full story') + ' →')
+                      : ((text || 'Read more') + ' →');
+  return PSBP.linkTag(url, label, {
+    title: n.headline || 'Park News',
+    back: 'news.html',
+    className: isDoc ? 'btn btn-gold' : 'btn btn-green'
+  });
 }
 
 function fmtDate(raw, opts){ const d = raw ? new Date(raw+'T12:00') : null; return (d && !isNaN(d)) ? d.toLocaleDateString('en-US', opts) : (raw||''); }
@@ -230,8 +227,8 @@ let nlItems = [], nlShown = 0;
 
 function nlCardHTML(n){
   const dateLabel = fmtDate(n.date, { month:'long', year:'numeric' });
-  const href = n.pdf_url ? `viewer.html?url=${encodeURIComponent(n.pdf_url)}&title=${encodeURIComponent(n.title||'Newsletter')}&back=news.html` : '';
-  const btn = href ? `<a href="${href}" class="btn btn-gold btn-sm">📄 Read Newsletter →</a>` : '';
+  const nl = PSBP.rowLink(n);
+  const btn = nl.url ? PSBP.linkTag(nl.url, '📄 ' + (nl.text || 'Read Newsletter') + ' →', { title: n.title || 'Newsletter', back: 'news.html', className: 'btn btn-gold btn-sm' }) : '';
   return `<div class="nl-card"><div class="nl-date">${dateLabel}</div><h3>${n.title||'Newsletter'}</h3><p>${n.description||''}</p>${btn}</div>`;
 }
 function renderNL(){
@@ -241,7 +238,7 @@ function renderNL(){
 async function loadNewsletters(){
   try {
     const rows = await fetchTab(TAB.newsletters);
-    nlItems = rows.filter(isWebVisible).filter(r => r.title || r.pdf_url)
+    nlItems = rows.filter(isWebVisible).filter(r => r.title || PSBP.rowLink(r).url)
                   .sort((a,b) => new Date(b.date) - new Date(a.date));
     if (!nlItems.length) { nlEl.innerHTML = '<p class="text-soft" style="padding:1rem">Newsletters are on the way — check back soon.</p>'; return; }
     nlShown = Math.min(NL_STEP, nlItems.length);
