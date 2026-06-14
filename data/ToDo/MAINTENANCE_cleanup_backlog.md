@@ -4,7 +4,7 @@ Refreshed running list for the ReworkDemo site + plant/wildlife catalog.
 Supersedes the 2026-06-08 version. Items ranked by **Criticality** (do-it-now → polish)
 and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 
-**Last updated: 2026-06-14 (rev 2)**
+**Last updated: 2026-06-14 (rev 4)**
 
 ---
 
@@ -23,17 +23,11 @@ and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 
 ## 🔴 Do now — pending actions (live data slightly out of sync until done)
 
-### A1. Regenerate `plants.json` after the duplicate-page deletes
-- **Issue:** Five+ duplicate pages were deleted, but `plants.json` may still carry stale entries (e.g. old Frangipani) and an inflated species count until regenerated.
-- **Criticality:** High — the live Plants tab reads this file; counts/cards are wrong until rebuilt.
-- **Effort:** Low — one command + push.
-- **Steps:** 1) `python3 data/scripts/generate_plants_json.py`  2) eyeball the new count  3) commit + push.
+### ✅ A1. Regenerate `plants.json` / `wildlife.json` — COMPLETE (2026-06-14)
+Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clean.
 
-### A2. Confirm `photos/` has no stray script
-- **Issue:** `restyle_plants.py` may still be sitting in `photos/` (the `PSBP-*` diff wouldn't catch it).
-- **Criticality:** Medium — harmless to live site, but breaks the "scripts live only in `data/scripts/`" rule.
-- **Effort:** Low.
-- **Steps:** 1) `ls photos/*.py` → if found, `rm photos/restyle_plants.py`.
+### ✅ A2. Confirm `photos/` has no stray script — COMPLETE (2026-06-14)
+`photos/` is JPG-only.
 
 ---
 
@@ -72,6 +66,22 @@ and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 
 ## 🟡 Medium — correctness & content
 
+### ✅ C4. Merge About page into Contact — COMPLETE (2026-06-14)
+- Folded rescued WordPress "About" content into `contact.html` → one "About & Contact" page: full history (Timucuan/Spanish heritage, Bradenton Herald, Galleria + Baden buildings, frost-free micro-climate, 2008 Rare Fruit Council), Mission + 3 pillars, Staff (Beverly, Jennifer), mailing address (P.O. Box 14214), recognition block. Board roster intentionally omitted (volatile). Hero swapped off invasive Nandina → native Ficus aurea.
+- **Follow-ups:** (a) partner **logos** still need migrating into `images/` (currently a text placeholder — don't hotlink palmasolabp.org). (b) Consider updating nav/footer label in `site.js` from "Contact" → "About" / "About & Contact" to match the page.
+
+### C5. Migrate "Mark Boehmig" park video off legacy pages → News tab + pinning
+- **Issue:** A YouTube video about the park (`youtube.com/watch?v=f3zfcUHm0k4`) sits hardcoded at the bottom of the legacy WordPress About/Contact pages. It should become a **News row** in the Google Sheet (link to the video), not live in page HTML. Raises a real feature need: `news.html` sorts newest-first by date, so an evergreen 2023 video would sink forever.
+- **Criticality:** Low–Medium — content migration + a small useful feature.
+- **Effort:** Low–Medium.
+- **Steps:** 1) Randy adds a News tab row for the video. 2) Add a **`pinned`** column to the News tab. 3) Update `news.html` sort so pinned rows surface to the top regardless of date. 4) (Same pinning mechanism is reusable for any evergreen news item.)
+
+### C6. Working "Contact us" form on the merged contact page
+- **Issue:** The legacy WordPress contact page had a "Drop us a line" form (Name / Email / Message) that did NOT migrate. ReworkDemo is a static GitHub Pages site with **no backend**, so it can't send email on its own. To have a working form, route it through a no-backend form service (e.g. Formspree, Basin, or a Google Form embed) that emails the park on submit.
+- **Criticality:** Low–Medium — nice-to-have; phone/email already work as direct contact.
+- **Effort:** Low — pick a service, drop in the form HTML pointing at the service endpoint, test delivery to info@palmasolabp.org.
+- **Note:** This is the "email add-on (a)" flavor. The other flavor — an AI tool that drafts/sends email via a Gmail connector — is a separate utility, NOT part of the park site.
+
 ### C1. Real-photo wishlist (replaces old "missing images" item)
   - License-blocked, need replacement: **00015 Coral Bean** (all-rights-reserved), **00114 Pink Orchid Tree** (license check).
   - On green placeholder pending real photos: the cluster of 67 KB plant JPGs (e.g. Paurotis Palm, Umbrella Tree, Dollarweed, Four-o-clock, etc.).
@@ -93,6 +103,23 @@ and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 ---
 
 ## 🟢 Low — polish & design decisions (whenever)
+
+### D9. Events & Classes page — mobile layout + too block-heavy
+- **Issue:** `events.html` doesn't lay out well on phone, and it's too "blocky" — too many cards/boxes, not enough flowing text. Two problems bundled: **(a) mobile rendering is broken** (higher priority — most QR-sign visitors are on phones), **(b)** the design is too dense/card-heavy and reads as stiff rather than inviting.
+- **Criticality:** Low–**Medium for the mobile half** — a page that breaks on phones matters for the sign-scanning audience.
+- **Effort:** Medium — responsive pass on the events/classes grid + a copy/density rework toward more prose, fewer boxes.
+- **Steps:** 1) Fix the responsive breakpoints (the events list + classes sidebar grid). 2) Reduce block density — convert some cards to flowing text. 3) Test on a real phone width.
+
+### D10. News article hero images
+- **Issue:** Each News article should show a **hero image at the top, slightly large**. The `news.html` reader pane already has a `hero_image` field in the data shape — this may be mostly a styling tweak to render it bigger/more prominent rather than net-new structure.
+- **Criticality:** Low — visual polish.
+- **Effort:** Low — adjust the reader-pane hero CSS; confirm the `hero_image` column is populated in the News tab.
+
+### D11. About content → Sheet-managed tab (persistent "News"-style)
+- **Issue:** About content (history, mission, staff, eventually **Board of Directors**) is currently **hardcoded** in `contact.html` (merged there 2026-06-14 — the right step 1). Phase 2: make it **Sheet-driven** like News, but for *evergreen* content — a reader-pane layout (right-side clickable items, left-side text, reader picks what to read). Reuse the existing `news.html` reader+squares pattern. Lets Bev edit About content (and add Board members) without touching code.
+- **Criticality:** Low — current hardcoded version works fine; this is a maintainability upgrade for when Bev self-manages.
+- **Effort:** Medium — new Sheet tab + GID, adapt the news.html reader-pane component, wire into contact/about page.
+- **Note:** Pairs naturally with the B1 Google account migration (new tab gets created in the park-owned sheet).
 
 ### D1. Filter / search UI revamp
 - **Issue:** Agreed direction (2026-06-08): a **category dropdown** on top (11 categories, already in `plants.json` as `cat`) + a single **row of attribute buttons** under it (Native, Edible, Toxic, Butterfly). Drop Wetland/Invasive from the row (they're categories). Consider broadening Butterfly → Pollinator.
@@ -128,6 +155,11 @@ and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 - **Issue:** Superseded by live `venue.html`, but left in place so Bev/Jenny's review-email link still works.
 - **Criticality:** Low — housekeeping.
 - **Effort:** Low — archive *after* they reply (and point them at the live page going forward).
+
+### D8. Nav/footer label: "Contact" → "About" or "About & Contact"
+- **Issue:** `contact.html` now leads with About content, but the nav/footer label (injected from `site.js`) still says "Contact." Update `NAV_HTML`/`FOOTER_HTML` in `site.js` so the menu matches the page. Filename stays `contact.html` (don't break links).
+- **Criticality:** Low — cosmetic; link works either way.
+- **Effort:** Low — one or two string edits in `site.js`.
 
 ---
 
