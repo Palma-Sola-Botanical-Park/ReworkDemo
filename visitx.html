@@ -6,12 +6,6 @@
 <title>Visit · Palma Sola Botanical Park</title>
 <link rel="stylesheet" href="css/site.css">
 <style>
-/* ── Card icon + heading on one line (matches the About/Contact page); only cards that have an icon ── */
-.info-card:has(> .info-card-icon) { display: grid; grid-template-columns: auto 1fr; column-gap: .65rem; }
-.info-card:has(> .info-card-icon) > * { grid-column: 1 / -1; min-width: 0; }
-.info-card:has(> .info-card-icon) > .info-card-icon { grid-column: 1; grid-row: 1; align-self: center; margin: 0 !important; }
-.info-card:has(> .info-card-icon) > h3 { grid-column: 2; grid-row: 1; align-self: center; margin: 0 !important; }
-
 /* ── PARK MAP BLOCK ── */
 .parkmap-wrap { display:grid; grid-template-columns: 1.4fr 1fr; gap:2.5rem; align-items:center; }
 .parkmap {
@@ -194,7 +188,7 @@
 ============================================================ -->
 <section class="bg-white">
   <div class="section-inner">
-    <div class="grid-2" style="gap:3rem;align-items:stretch">
+    <div class="grid-2" style="gap:3rem;align-items:start">
       <div>
         <span class="label">Find Us</span>
         <h2 class="section-title">Getting here</h2>
@@ -202,21 +196,18 @@
           We're tucked into the northeast shore of Palma Sola Bay, just west of Manatee Avenue. Free parking.
           Paved and natural paths suitable for most visitors.
         </p>
-        <div class="info-card" style="margin-bottom:1rem;border-top-color:#5b8db8">
-          <div class="info-card-icon">♿</div>
+        <div class="info-card" style="margin-bottom:1rem">
           <h3>Accessibility</h3>
           <p>Main paths are paved or packed gravel. Some garden areas have natural ground cover. Wheelchairs and strollers can navigate most of the park. Call ahead if you have specific questions.</p>
         </div>
-        <div class="info-card" style="border-top-color:var(--gold)">
-          <div class="info-card-icon">🐾</div>
-          <h3>Pets Welcome</h3>
+        <div class="info-card">
+          <h3>🐾 Pets Welcome</h3>
           <p>Well-behaved pets on leash are welcome. Please clean up. Keep pets from disturbing plant life or wildlife. <strong>Note:</strong> several plants in the collection are toxic to dogs — see the <a href="nature.html#plants">plant library</a> and filter by "Toxic."</p>
         </div>
       </div>
-      <div style="display:flex;flex-direction:column">
+      <div>
         <iframe src="https://maps.google.com/maps?q=Palma%20Sola%20Botanical%20Park&t=m&z=14&output=embed&iwloc=near"
-          title="Map to Palma Sola Botanical Park"
-          style="width:100%;flex:1 1 auto;min-height:440px;border-radius:12px;border:none;box-shadow:0 4px 18px rgba(0,0,0,.1)" allowfullscreen loading="lazy"></iframe>
+          style="width:100%;height:360px;border-radius:10px;border:none" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
   </div>
