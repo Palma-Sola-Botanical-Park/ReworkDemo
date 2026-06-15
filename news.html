@@ -228,7 +228,8 @@ async function loadNews(){
 
     // Deep-link: news.html?story=Horticulture+Mag opens that story
     let startIdx = 0;
-    const storyParam = new URLSearchParams(location.search).get('story');
+    const storyParam = new URLSearchParams(location.search).get('story')
+                    || new URLSearchParams(location.search).get('Story');
     if (storyParam) {
       const q = storyParam.toLowerCase();
       const match = newsItems.findIndex(n => (n.headline || '').toLowerCase().includes(q));
