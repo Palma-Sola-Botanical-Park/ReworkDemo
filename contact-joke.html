@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About &amp; Contact · Palma Sola Botanical Park</title>
 <link rel="stylesheet" href="css/site.css">
+<style>
+  html { scroll-behavior: smooth; }
+  #visit { scroll-margin-top: 90px; }
+</style>
 </head>
 <body>
 <div id="nav-placeholder"></div>
@@ -17,6 +21,9 @@
     <div class="label label-light">Who We Are</div>
     <h1>About Palma Sola</h1>
     <p>Ten acres of subtropical garden in northwest Bradenton — free and open to everyone, every day of the year.</p>
+    <p style="margin-top:1.35rem">
+      <a href="#visit" style="display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.55);color:#fff;font-weight:600;font-size:.95rem;padding:.55rem 1.15rem;border-radius:999px;text-decoration:none;backdrop-filter:blur(2px)">📍 Hours, directions &amp; contact ↓</a>
+    </p>
   </div>
 </div>
 
@@ -48,16 +55,6 @@
           elsewhere this far north. In 2008 the Manatee Rare Fruit Council planted — and still tends — an extensive
           exotic fruit tree collection.
         </p>
-
-        <!-- Donation framing, adapted from Beverly's email signature: free, no government subsidies, donation-supported. -->
-        <div style="background:var(--white);border-left:4px solid var(--gold);border-radius:8px;padding:1.25rem 1.4rem;margin-top:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.05)">
-          <p style="color:var(--text-soft);line-height:1.7;margin-bottom:1rem">
-            The park charges <strong>no entrance fee</strong> and receives <strong>no federal, state, or local
-            government funding</strong>. Donations are what keep our gates open to everyone, seven days a week,
-            365 days a year.
-          </p>
-          <a href="https://www.paypal.com/donate/?hosted_button_id=JS3RF9UEW5ZKL" target="_blank" rel="noopener" class="btn btn-gold">Support the Park →</a>
-        </div>
       </div>
 
       <div>
@@ -83,6 +80,16 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Support strip — donation framing adapted from Beverly's email signature. -->
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.25rem;background:linear-gradient(120deg,#fbf3da 0%,#f6eac4 100%);border:1px solid var(--gold);border-radius:14px;padding:1.6rem 1.8rem;margin-top:2.5rem">
+      <p style="color:var(--text-soft);line-height:1.65;margin:0;flex:1 1 360px;min-width:260px">
+        The park charges <strong style="color:var(--green-deep)">no entrance fee</strong> and receives
+        <strong style="color:var(--green-deep)">no federal, state, or local government funding</strong>.
+        Donations are what keep our gates open to everyone, seven days a week, 365 days a year.
+      </p>
+      <a href="https://www.paypal.com/donate/?hosted_button_id=JS3RF9UEW5ZKL" target="_blank" rel="noopener" class="btn btn-gold" style="flex:0 0 auto">Support the Park →</a>
     </div>
   </div>
 </section>
@@ -303,7 +310,7 @@
 </section>
 
 <!-- CONTACT -->
-<section class="bg-deep">
+<section class="bg-deep" id="visit">
   <div class="section-inner">
     <div style="text-align:center;max-width:680px;margin:0 auto 2rem">
       <span class="label label-light">Talk to Us</span>
