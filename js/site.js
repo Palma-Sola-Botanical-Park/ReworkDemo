@@ -423,6 +423,15 @@ function renderObsGrid(containerId, obs) {
 }
 
 // ── EVENTS (with PDF links, display filter) ───────────────────
+// Truncate at a word boundary with an ellipsis (no mid-word "plus mor" cutoffs).
+function clip(s, n = 140) {
+  if (!s) return '';
+  if (s.length <= n) return s;
+  const cut = s.slice(0, n);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 40 ? cut.slice(0, lastSpace) : cut).replace(/[\s,;:.!–—-]+$/, '') + '…';
+}
+
 async function loadEvents(containerId, maxItems=8) {
   const el = document.getElementById(containerId);
   if (!el) return [];
@@ -454,7 +463,7 @@ async function loadEvents(containerId, maxItems=8) {
         </div>
         <div class="event-info">
           <h4>${e.title}</h4>
-          ${e.description?`<p>${e.description.slice(0,120)}</p>`:''}
+          ${e.description?`<p>${clip(e.description,140)}</p>`:''}
           ${e.time?`<p style="font-size:.8rem;color:#999">${e.time}</p>`:''}
           <span class="event-type ${typeClass(e.type)}">${typeLabel(e.type)}</span>
           ${pdfBtn}
