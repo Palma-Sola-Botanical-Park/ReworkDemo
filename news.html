@@ -225,7 +225,21 @@ async function loadNews(){
                     .sort((a,b) => new Date(b.date) - new Date(a.date));
     if (!newsItems.length) { newsComingSoon(); return; }
     newsShown = Math.min(NEWS_STEP, newsItems.length);
-    selectNews(0);
+
+    // Deep-link: news.html?story=Horticulture+Mag opens that story
+    let startIdx = 0;
+    const storyParam = new URLSearchParams(location.search).get('story');
+    if (storyParam) {
+      const q = storyParam.toLowerCase();
+      const match = newsItems.findIndex(n => (n.headline || '').toLowerCase().includes(q));
+      if (match >= 0) {
+        startIdx = match;
+        // Ensure the sidebar shows enough items to include the target
+        newsShown = Math.max(newsShown, match + 1);
+      }
+    }
+
+    selectNews(startIdx);
     renderSquares();
     moreBtn.addEventListener('click', () => { newsShown = Math.min(newsShown + NEWS_STEP, newsItems.length); renderSquares(); });
   } catch (e) { newsComingSoon(); console.error(e); }
