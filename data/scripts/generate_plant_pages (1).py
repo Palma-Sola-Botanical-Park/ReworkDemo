@@ -198,11 +198,13 @@ def badge_invasive(v):
 
 SEVERITY = {"green": 0, "yellow": 1, "red": 2, "nan": 0, "": 0}
 def safety_level(row):
-    keys = ["Edibility Green/Yellow/Red", "Toxicity Green/Yellow/Red", "Toxic to Dogs Green/Yellow/Red"]
-    lvl = 0
-    for k in keys:
-        lvl = max(lvl, SEVERITY.get(str(row.get(k, "")).strip().lower(), 0))
-    return lvl  # 0 safe, 1 caution, 2 toxic
+    """Determine danger level from TOXICITY color codes only.
+    Edibility is deliberately excluded — 'not a significant food plant'
+    is not a safety concern and should never trigger a caution badge.
+    The Edibility text still appears in the section body for context."""
+    tox = SEVERITY.get(str(row.get("Toxicity Green/Yellow/Red", "")).strip().lower(), 0)
+    dog = SEVERITY.get(str(row.get("Toxic to Dogs Green/Yellow/Red", "")).strip().lower(), 0)
+    return max(tox, dog)  # 0 safe, 1 caution, 2 toxic
 
 def safety_block(row):
     lvl = safety_level(row)
@@ -221,7 +223,7 @@ def safety_block(row):
     elif lvl == 1:
         sect, badge = "plant-caution-section", '<span class="badge badge-warn">⚠️ Mild Caution</span>'
     else:
-        sect, badge = "plant-safe-section", '<span class="badge badge-safe">✅ Edible &amp; Safe</span>'
+        sect, badge = "plant-safe-section", '<span class="badge badge-safe">✅ Non-Toxic</span>'
     icon = "⚠️" if lvl else "✅"
     section_html = (
         f'  <div class="{sect}">\n'

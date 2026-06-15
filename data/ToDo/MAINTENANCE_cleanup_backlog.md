@@ -4,7 +4,7 @@ Refreshed running list for the ReworkDemo site + plant/wildlife catalog.
 Supersedes the 2026-06-08 version. Items ranked by **Criticality** (do-it-now → polish)
 and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 
-**Last updated: 2026-06-14 (rev 9)**
+**Last updated: 2026-06-14 (rev 12)**
 
 ---
 
@@ -61,21 +61,13 @@ and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 - **Effort:** Low — pick a service, drop in the form HTML pointing at the service endpoint, test delivery to info@palmasolabp.org.
 - **Note:** This is the "email add-on (a)" flavor. The other flavor — an AI tool that drafts/sends email via a Gmail connector — is a separate utility, NOT part of the park site.
 
-### C1. Real-photo wishlist (replaces old "missing images" item)
-  - License-blocked, need replacement: **00015 Coral Bean** (all-rights-reserved), **00114 Pink Orchid Tree** (license check).
-  - On green placeholder pending real photos: the cluster of 67 KB plant JPGs (e.g. Paurotis Palm, Umbrella Tree, Dollarweed, Four-o-clock, etc.).
-- **Criticality:** Medium — cosmetic on the live site, but it's the natural **volunteer photo target list** for the June 17 training onward.
-- **Effort:** Low to *produce the list*; ongoing to *fill* it.
-- **Steps:** 1) Generate the wishlist (find placeholder-sized files / cross-ref). 2) Hand to volunteers post-training as "help us shoot these." 3) Replace placeholders one upload at a time; re-bake `plants.json`/`wildlife.json` as reals land.
 
-### C2. Promote architectural principle into README
-- **Issue:** Hard-won lesson worth codifying: *derive filter/data flags from the MASTER columns / category — never scrape rendered badge text.* Every past filter bug traced to HTML regex scraping. This is the same single-source-of-truth philosophy behind the JSON-driven idea.
-- **Criticality:** Medium — prevents a recurring class of bugs.
-- **Effort:** Low — a paragraph in the README architecture notes.
-- **Steps:** 1) Add to README. 2) Treat as a rule for any future generator/filter work.
-
----
-
+### C7. Edibility badge — separate from toxicity
+- **Issue:** The safety badge currently answers "is it dangerous?" (Non-Toxic / Mild Caution / Toxic) but park visitors frequently ask "can I eat this?" — a different question entirely. Plants like Beach Sunflower (edible seeds, edible flowers, historically used by Native Americans) show "✅ Non-Toxic" but deserve an edibility callout that connects visitors to the plant's food history. The detailed text in the Edibility & Toxicity section body is accurate, but there's no quick visual badge for "this one has edible parts."
+- **Complexity:** Not a binary. Some plants have edible flowers but toxic sap, edible roots only after preparation, or "technically edible but not a food plant." A simple Green/Yellow/Red color code can't capture this — the old logic proved that. Needs a plant-by-plant judgment call.
+- **Recommended approach:** Handle during the 5-at-a-time Gemini validation passes. For each plant, Gemini reads the full page in context and flags whether an edibility badge is warranted and what it should say. Options: "🌿 Edible Parts" / "🍽️ Historically Edible" / "🌱 Edible with Prep" / no badge. Build a new column in the spreadsheet (e.g., "Edibility Badge Text") that the generator reads — if non-empty, render it as a fourth badge. Keeps the judgment human/AI-reviewed, not regex-driven.
+- **Criticality:** Medium — park visitors actively ask about edibles; this is a real engagement opportunity.
+- **Effort:** Medium — generator change is small (read column, render badge); the content judgment across 122 plants is the real work, but it folds into the existing validation workflow.
 ## 🟢 Low — polish & design decisions (whenever)
 
 ### D9. Events & Classes page — mobile layout + too block-heavy
@@ -95,10 +87,10 @@ and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 - **Criticality:** Low — current filter works; this is UX refinement.
 - **Effort:** Medium — UI rebuild in `site.js` + flags sourced from master/category (not scraped — see C2).
 
-### D2. Card + detail badge restyle (off-brand pills) — IN PROGRESS
-- **Issue:** Card pills (`.tag-*`) clashed (Native read red, Non-native blue); plant detail pages drift too (`badge-native` was blue; pages use local `--moss/--gold/--cream` constants slightly off the brand tokens).
-- **Done:** `site.css` `.tag-*` retuned to brand earth-tones (green = belongs/safe, sand = neutral, gold = caution, clay = warning) — shipped.
-- **Remaining (to close):** the detail `.badge-*` CSS lives in the **reference page `PSBP-00003-Buccaneer-Palm.html`** — the generator copies its `<head>` into every page (`head = open(REF).read()`). Swap the `.badge-*` block there → re-run `generate_plant_pages.py` to repaint all ~122 pages. Optional: align the pages' local `--moss/--gold/--cream` fallbacks to the brand tokens.
+### D2. Badge restyle — plants DONE, wildlife outstanding
+- **Issue (original):** Card pills (`.tag-*`) clashed (Native red, Non-native blue); plant detail `.badge-native` was blue; pages drifted from brand tokens.
+- **Done (2026-06-14):** `site.css` `.tag-*` retuned to brand earth-tones. Buccaneer reference `.badge-*` block fixed (native = green). All 122 plant pages regenerated with corrected badges. Generator patched with sanitization layer, `parse_repro` dash/lead-text fixes, and block-count validation.
+- **Remaining:** Wildlife detail pages still show the off-brand blue "Native to Florida" badge (`#d0e8ff`). No wildlife generator exists — hand-built pages. Upload one wildlife page to fix. Wildlife card tags (`.tag-bird/reptile/insect`) could also be aligned to the page themes (birds=blue, mammals=brown, butterflies=magenta).
 - **Criticality:** Low — cosmetic.
 
 ### D3. Curated hero images
@@ -120,6 +112,17 @@ and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 - **Issue:** Superseded by live `venue.html`, but left in place so Bev/Jenny's review-email link still works.
 - **Criticality:** Low — housekeeping.
 - **Effort:** Low — archive *after* they reply (and point them at the live page going forward).
+
+---
+
+### C1. Real-photo wishlist (replaces old "missing images" item)
+  - License-blocked, need replacement: **00015 Coral Bean** (all-rights-reserved), **00114 Pink Orchid Tree** (license check).
+  - On green placeholder pending real photos: the cluster of 67 KB plant JPGs (e.g. Paurotis Palm, Umbrella Tree, Dollarweed, Four-o-clock, etc.).
+- **Criticality:** Low — photos will fill organically as volunteers and visitors contribute over time. Generate a formal wishlist only after months if gaps persist.
+- **Effort:** Low to *produce the list*; ongoing to *fill* it.
+- **Steps:** 1) Generate the wishlist (find placeholder-sized files / cross-ref). 2) Hand to volunteers post-training as "help us shoot these." 3) Replace placeholders one upload at a time; re-bake `plants.json`/`wildlife.json` as reals land.
+
+
 
 ---
 
@@ -164,6 +167,9 @@ Both JSONs regenerated after the duplicate-page deletes; catalog reconciles clea
 
 ### ✅ D8. Nav/footer label: "Contact" → "About" — COMPLETE (2026-06-14)
 - Renamed in `site.js` nav (desktop + mobile) and footer, plus `contact.html` `<title>`. Filename unchanged.
+
+### ✅ C2. Promote architectural principle into README — COMPLETE (2026-06-14)
+- Principle already codified in README Architecture philosophy §1 and Maintenance habits. Added Claude-session build note to the Content build pipeline section.
 
 ### ✅ D10. News article hero images — COMPLETE (2026-06-14)
 - Reader-pane article hero enlarged in `news.html`.
