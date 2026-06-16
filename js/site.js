@@ -734,9 +734,12 @@ function renderMonthList(groups, seriesMap){
       const date  = `<span class="ml-date">${_dowNice(it.date)} ${it.date.getDate()}</span>`;
       const title = `<span class="ml-title">${closed?'🔒 Park closed':_evEsc(it.title||'')}</span>`;
       const inner = `${dot}${date}${title}<span class="ml-chev">›</span>`;
-      return href
+      const row = href
         ? PSBP.linkTag(href, inner, { title:it.title||'', back:_BACK(), className:'ml-row' })
         : `<div class="ml-row">${inner}</div>`;
+      // Wrap so the calendar filter can show/hide by category / kid-friendly.
+      return `<div class="ml-rowwrap" data-category="${_evEsc(it.category||'')}"${
+        it.kid_friendly?' data-kid="1"':''}${closed?' data-always="1"':''}>${row}</div>`;
     }).join('');
     return `<section class="ml-month">
       <h3 class="ml-title-h">${first.toLocaleDateString('en-US',{month:'long',year:'numeric'})}</h3>
@@ -745,13 +748,19 @@ function renderMonthList(groups, seriesMap){
   }).join('');
 }
 
-// Build the category filter from categories actually present, and wire
-// show/hide. Closure cards (data-always="1") stay visible under every filter.
-function buildEventFilters(container, cardContainers){
+// Build the category (+ kid-friendly) filter from what's actually present, and
+// wire show/hide. Closure items (data-always="1") stay visible under every filter.
+// opts.itemSelector picks which elements to toggle (default agenda cards);
+// opts.groupSelector, when set, hides group wrappers left with no visible items
+// (used to drop empty month headers in the calendar list).
+function buildEventFilters(container, cardContainers, opts){
   if (!container) return;
+  opts = opts || {};
+  const itemSel  = opts.itemSelector || '[data-category]';
+  const groupSel = opts.groupSelector || null;
   const present = new Set();
   let hasKid = false;
-  cardContainers.forEach(c => c && c.querySelectorAll('[data-category]')
+  cardContainers.forEach(c => c && c.querySelectorAll(itemSel)
     .forEach(el => {
       const v = el.getAttribute('data-category'); if (v) present.add(v);
       if (el.getAttribute('data-kid') === '1') hasKid = true;
@@ -768,13 +777,21 @@ function buildEventFilters(container, cardContainers){
       container.querySelectorAll('.ev-filter-btn').forEach(x => x.classList.remove('active'));
       b.classList.add('active');
       const cat = b.getAttribute('data-cat');
-      cardContainers.forEach(c => c && c.querySelectorAll('[data-category]').forEach(el => {
-        const always = el.getAttribute('data-always') === '1';
-        const show = always || cat === '__all'
-                  || (cat === '__kid' ? el.getAttribute('data-kid') === '1'
-                                      : el.getAttribute('data-category') === cat);
-        el.style.display = show ? '' : 'none';
-      }));
+      cardContainers.forEach(c => {
+        if (!c) return;
+        c.querySelectorAll(itemSel).forEach(el => {
+          const always = el.getAttribute('data-always') === '1';
+          const show = always || cat === '__all'
+                    || (cat === '__kid' ? el.getAttribute('data-kid') === '1'
+                                        : el.getAttribute('data-category') === cat);
+          el.style.display = show ? '' : 'none';
+        });
+        // Hide month sections that ended up empty under this filter.
+        if (groupSel) c.querySelectorAll(groupSel).forEach(g => {
+          const anyVisible = [...g.querySelectorAll(itemSel)].some(el => el.style.display !== 'none');
+          g.style.display = anyVisible ? '' : 'none';
+        });
+      });
     });
   });
 }
@@ -871,7 +888,7 @@ async function loadEventsPage(opts){
   const $ = id => id ? document.getElementById(id) : null;
   const agendaEl = $(opts.agenda), filtersEl = $(opts.filters),
         schedEl = $(opts.schedule), seriesEl = $(opts.series),
-        listEl = $(opts.monthList),
+        listEl = $(opts.monthList), calFiltersEl = $(opts.calFilters),
         sdEl = $(opts.saveDate), sdWrap = $(opts.saveDateWrap), titleEl = $(opts.viewTitle);
   try {
     const [events, classes, series] = await Promise.all([
@@ -903,8 +920,8 @@ async function loadEventsPage(opts){
     buildEventFilters(filtersEl, [agendaEl]);
 
     // FULL CALENDAR — every dated event/closure from the 1st of this month on,
-    // NO weekly class instances (those live in the schedule rail). Grid on
-    // desktop, grouped list on phone.
+    // NO weekly class instances (those live in the schedule rail). Grouped
+    // scrolling list, with its own category / kid-friendly filter.
     const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
     const monthItems = evItems.filter(i => i.date >= monthStart)
       .filter(notSuppressed).sort(_byDateThenTime);
@@ -912,6 +929,9 @@ async function loadEventsPage(opts){
     if (listEl) listEl.innerHTML = groups.length
       ? renderMonthList(groups, seriesMap)
       : '<p class="text-soft" style="padding:1rem 0">No upcoming events on the calendar yet.</p>';
+
+    buildEventFilters(calFiltersEl, [listEl],
+      { itemSelector: '.ml-rowwrap', groupSelector: '.ml-month' });
 
     // SAVE THE DATE — flagged marquee events, deduped by title, soonest 2, pinned.
     if (sdEl){

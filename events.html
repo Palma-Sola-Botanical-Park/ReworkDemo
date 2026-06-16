@@ -90,6 +90,7 @@
 
         <!-- FULL CALENDAR: grouped scrolling list (all screen sizes) -->
         <div id="view-calendar" style="display:none">
+          <div id="calFilters" class="event-filters"></div>
           <div id="monthList" class="month-list"></div>
         </div>
       </div>
@@ -142,6 +143,7 @@ loadAnnouncements('announcementsList').then(() => {
 loadEventsPage({
   agenda:       'agenda',
   filters:      'eventFilters',
+  calFilters:   'calFilters',
   monthList:    'monthList',
   saveDate:     'saveDate',
   saveDateWrap: 'saveDateWrap',
