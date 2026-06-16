@@ -723,44 +723,7 @@ function _groupByMonth(items){
   return [...map.values()];          // items pre-sorted by date → months in order
 }
 
-// A tiny month-grid event chip: just the title, weekday-tinted, linked to details.
-function _monthChip(item, seriesMap){
-  const href  = _itemHref(item, seriesMap);
-  const closed = item.kind === 'closure';
-  const cls   = 'mg-chip' + (closed ? ' mg-chip-closed' : '');
-  const label = closed ? '🔒 Closed' : _evEsc(item.title||'Event');
-  const style = `border-left-color:${closed ? '#6b6b6b' : dowColor(item.date)}`;
-  return href
-    ? PSBP.linkTag(href, label, { title:item.title||'', back:_BACK(), className:cls, style })
-    : `<span class="${cls}" style="${style}">${label}</span>`;
-}
-
-// One month as a 7-column grid (desktop calendar view).
-function renderMonthGrid(group, seriesMap){
-  const { year, month, items } = group;
-  const byDay = new Map();
-  items.forEach(it => { const k=it.date.getDate(); if(!byDay.has(k)) byDay.set(k,[]); byDay.get(k).push(it); });
-  const first  = new Date(year, month, 1);
-  const offset = first.getDay();                       // leading blank cells
-  const daysIn = new Date(year, month+1, 0).getDate();
-  let cells = '';
-  for (let i=0;i<offset;i++) cells += `<div class="mg-cell mg-empty"></div>`;
-  for (let day=1; day<=daysIn; day++){
-    const evs = byDay.get(day) || [];
-    const dow = new Date(year,month,day).getDay();
-    cells += `<div class="mg-cell${evs.length?' has-ev':''}">
-      <div class="mg-daynum"${evs.length?` style="color:${DOW_COLOR[dow]}"`:''}>${day}</div>
-      ${evs.map(e => _monthChip(e, seriesMap)).join('')}
-    </div>`;
-  }
-  return `<section class="mg-month">
-    <h3 class="mg-title">${first.toLocaleDateString('en-US',{month:'long',year:'numeric'})}</h3>
-    <div class="mg-dowhead">${['S','M','T','W','T','F','S'].map(x=>`<div>${x}</div>`).join('')}</div>
-    <div class="mg-grid">${cells}</div>
-  </section>`;
-}
-
-// Months as grouped scrolling lists (phone calendar view).
+// Months as grouped scrolling lists (the full-calendar view, all screen sizes).
 function renderMonthList(groups, seriesMap){
   return groups.map(g => {
     const first = new Date(g.year, g.month, 1);
@@ -873,44 +836,25 @@ function injectEventStyles(){
   .std-linkrow{margin-top:.3rem}
   .std-link{font-weight:600;font-size:.88rem;color:var(--green-mid,#2d6a35)}
 
-  /* month grid (desktop) */
-  .month-list{display:none}
-  .mg-month{margin-bottom:2rem}
-  .mg-title{font-size:1.35rem;margin:0 0 .6rem}
-  .mg-dowhead{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px}
-  .mg-dowhead div{text-align:center;font-size:.72rem;font-weight:800;letter-spacing:.05em;
-    color:var(--text-soft,#8a8e80)}
-  .mg-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-  .mg-cell{min-height:78px;background:#faf9f5;border:1px solid #ece9df;border-radius:8px;
-    padding:5px 6px;display:flex;flex-direction:column;gap:4px}
-  .mg-cell.mg-empty{background:transparent;border:0}
-  .mg-cell.has-ev{background:#fff;border-color:#e0dccf;box-shadow:0 1px 2px rgba(40,50,30,.05)}
-  .mg-daynum{font-size:.82rem;font-weight:700;color:#b3b1a4}
-  .mg-chip{display:block;font-size:.74rem;font-weight:600;line-height:1.2;
-    color:var(--green-deep,#23402a);background:#f0f3ec;border-left:3px solid #4f7d3a;
-    border-radius:4px;padding:2px 5px;text-decoration:none;overflow:hidden;
-    text-overflow:ellipsis;white-space:nowrap}
-  a.mg-chip:hover{background:#e4ebdd}
-  .mg-chip-closed{background:#efefef;color:#5a5a5a}
-
-  /* month list (mobile) */
-  .ml-month{margin-bottom:1.4rem}
-  .ml-title-h{font-size:1.15rem;margin:0 0 .5rem;position:sticky;top:0;
-    background:var(--cream,#f7f5ee);padding:.2rem 0}
-  .ml-row{display:flex;align-items:center;gap:.6rem;padding:.6rem .2rem;
-    border-bottom:1px solid #ece9df;text-decoration:none;color:inherit}
-  .ml-dot{flex:0 0 auto;width:10px;height:10px;border-radius:50%}
-  .ml-date{flex:0 0 auto;width:62px;font-size:.82rem;font-weight:700;color:var(--text-soft,#6b6f63)}
-  .ml-title{flex:1;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .ml-chev{flex:0 0 auto;color:#b3b1a4;font-size:1.1rem}
+  /* full calendar — grouped scrolling list, all screen sizes */
+  .ml-month{margin-bottom:1.6rem}
+  .ml-title-h{font-size:1.25rem;margin:0 0 .5rem;position:sticky;top:0;z-index:1;
+    background:var(--cream,#f7f5ee);padding:.3rem 0;border-bottom:2px solid #e7e2d6}
+  .ml-row{display:flex;align-items:center;gap:.75rem;padding:.7rem .3rem;
+    border-bottom:1px solid #ece9df;text-decoration:none;color:inherit;transition:background .12s}
+  a.ml-row:hover{background:#faf9f4}
+  .ml-dot{flex:0 0 auto;width:11px;height:11px;border-radius:50%}
+  .ml-date{flex:0 0 auto;width:72px;font-size:.86rem;font-weight:700;color:var(--text-soft,#6b6f63)}
+  .ml-title{flex:1;min-width:0;font-weight:600;font-size:1.02rem;color:var(--green-deep,#23402a);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ml-chev{flex:0 0 auto;color:#b3b1a4;font-size:1.2rem}
 
   @media (max-width:760px){
-    .month-grid{display:none}
-    .month-list{display:block}
     .ev-card .ev-date{width:72px}
     .ev-date .ev-dnum{font-size:1.45rem}
     .ev-title{flex-basis:100%}
     .ev-titlerow .ev-badges{justify-content:flex-start}
+    .ml-title{font-size:.96rem}
   }`;
   const tag = document.createElement('style');
   tag.id = 'psbp-event-styles';
@@ -919,7 +863,7 @@ function injectEventStyles(){
 }
 
 // ── ORCHESTRATOR for events.html ──────────────────────────────
-// opts: { agenda, filters, schedule, series, monthGrid, monthList,
+// opts: { agenda, filters, schedule, series, monthList,
 //         saveDate, saveDateWrap, viewTitle, windowDays }
 async function loadEventsPage(opts){
   opts = opts || {};
@@ -927,7 +871,7 @@ async function loadEventsPage(opts){
   const $ = id => id ? document.getElementById(id) : null;
   const agendaEl = $(opts.agenda), filtersEl = $(opts.filters),
         schedEl = $(opts.schedule), seriesEl = $(opts.series),
-        gridEl = $(opts.monthGrid), listEl = $(opts.monthList),
+        listEl = $(opts.monthList),
         sdEl = $(opts.saveDate), sdWrap = $(opts.saveDateWrap), titleEl = $(opts.viewTitle);
   try {
     const [events, classes, series] = await Promise.all([
@@ -965,10 +909,9 @@ async function loadEventsPage(opts){
     const monthItems = evItems.filter(i => i.date >= monthStart)
       .filter(notSuppressed).sort(_byDateThenTime);
     const groups = _groupByMonth(monthItems);
-    if (gridEl) gridEl.innerHTML = groups.length
-      ? groups.map(g => renderMonthGrid(g, seriesMap)).join('')
+    if (listEl) listEl.innerHTML = groups.length
+      ? renderMonthList(groups, seriesMap)
       : '<p class="text-soft" style="padding:1rem 0">No upcoming events on the calendar yet.</p>';
-    if (listEl) listEl.innerHTML = groups.length ? renderMonthList(groups, seriesMap) : '';
 
     // SAVE THE DATE — flagged marquee events, deduped by title, soonest 2, pinned.
     if (sdEl){
