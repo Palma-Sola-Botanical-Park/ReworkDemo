@@ -208,6 +208,20 @@ section { padding: 3.375rem 1.5rem; }
 }
 .filter-btn:hover { border-color: var(--green-mid); color: var(--green-mid); }
 .filter-btn.on { background: var(--green-mid); color: var(--white); border-color: var(--green-mid); }
+.filter-select {
+  padding: .42rem 1.9rem .42rem .9rem; border-radius: 20px;
+  font-size: 1rem; font-weight: 700; cursor: pointer; font-family: inherit;
+  border: 2px solid transparent; background-color: var(--white); color: var(--text-soft);
+  appearance: none; -webkit-appearance: none; -moz-appearance: none;
+  width: auto; max-width: 100%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%232d6a35' d='M0 0l5 6 5-6z'/></svg>");
+  background-repeat: no-repeat; background-position: right .75rem center;
+  transition: all .15s;
+}
+.filter-select:hover  { border-color: var(--green-mid); color: var(--green-mid); }
+.filter-select:focus  { outline: none; border-color: var(--green-mid); color: var(--green-mid); }
+.filter-select:focus-visible { outline: none; }
+.filter-select option { color: var(--text-soft); font-weight: 600; }
 .filter-btn.on.f-native   { background: #b52a2a; border-color: #b52a2a; }
 .filter-btn.on.f-butterfly{ background: #6a1f9a; border-color: #6a1f9a; }
 .filter-btn.on.f-toxic    { background: #a04000; border-color: #a04000; }
