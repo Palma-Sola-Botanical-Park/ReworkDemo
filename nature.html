@@ -129,30 +129,20 @@
 
     <!-- ── PLANTS TAB ── -->
     <div class="tab-panel active" id="panel-plants">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:2rem">
-        <p class="section-sub" style="margin:0">
-          <span id="plantCollectionCount">Hundreds</span> of documented plant species across 10 acres. Tropical specimen trees, Florida natives, rare palms, edible plants, and a few invasives kept for education.
-          Click any card for the full story — or scan the QR code at the plant's sign for the complete profile.
-        </p>
-        <div style="background:var(--green-deep);border-radius:8px;padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem">
-          <span style="font-size:1.4rem;flex-shrink:0">📷</span>
-          <span style="font-size:.92rem;color:rgba(255,255,255,.88);line-height:1.6">
-            Every plant photo was contributed by our community through <strong style="color:var(--gold-light)">iNaturalist</strong>.
-            Photos are updated regularly — the best observations earn a spot here, with full credit to the photographer.
-            <a href="get-started.html" style="color:var(--gold-light);font-weight:700;display:block;margin-top:.4rem">Get your name on a photo →</a>
-          </span>
-        </div>
-      </div>
+      <p class="section-sub" style="max-width:780px;margin:0 0 1.25rem">
+        Every plant below was found by someone walking this park — phone in hand, photo posted to <strong>iNaturalist</strong>, identified by the community. The best photo earns a spot here, with full credit to the observer. <span id="plantCollectionCount">Hundreds</span> species so far. <a href="get-started.html" style="color:var(--green-mid);font-weight:700;white-space:nowrap">Get your name on the next one →</a>
+      </p>
 
       <div id="plants"></div>
       <div class="filter-bar">
         <input type="search" id="plantSearch" placeholder="Search by name, family, or keyword…" oninput="filterPlants()">
+        <select id="plantCategory" class="filter-select" onchange="setCategory(this.value)" aria-label="Plant category">
+          <option value="">All categories</option>
+        </select>
         <button class="filter-btn f-native"    data-filter="native"    onclick="toggleFilter('native')">🌿 Native</button>
         <button class="filter-btn f-butterfly" data-filter="butterfly" onclick="toggleFilter('butterfly')">🦋 Butterfly</button>
-        <button class="filter-btn f-toxic"     data-filter="toxic"     onclick="toggleFilter('toxic')">⚠️ Toxic</button>
         <button class="filter-btn"             data-filter="edible"    onclick="toggleFilter('edible')">🍃 Edible</button>
         <button class="filter-btn"             data-filter="wetland"   onclick="toggleFilter('wetland')">💧 Wetland</button>
-        <button class="filter-btn"             data-filter="invasive"  onclick="toggleFilter('invasive')">🚫 Invasive</button>
         <button class="filter-btn" onclick="clearFilters()" style="border-color:var(--border)">Clear</button>
       </div>
       <p style="font-size:1rem;color:var(--text-soft);margin-bottom:1.5rem">Showing <strong id="plantCount">0</strong> plants
@@ -173,21 +163,9 @@
 
     <!-- ── WILDLIFE TAB ── -->
     <div class="tab-panel" id="panel-wildlife">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:1.5rem">
-        <p class="section-sub" style="margin:0">
-          The park sits on Palma Sola Bay, surrounded by wetlands and a productive pond system.
-          <span id="wildCollectionCount">Dozens</span> of birds, butterflies, reptiles, and more — each with a full profile
-          documented through our iNaturalist project. Click any card for the whole story: how to spot it, what it eats, and where to find it in the park.
-        </p>
-        <div style="background:var(--green-deep);border-radius:8px;padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem">
-          <span style="font-size:1.4rem;flex-shrink:0">📷</span>
-          <span style="font-size:.92rem;color:rgba(255,255,255,.88);line-height:1.6">
-            Every wildlife observation below was submitted by a community member through <strong style="color:var(--gold-light)">iNaturalist</strong>.
-            Photograph something at the park and it could appear here — with your name on it.
-            <a href="get-started.html" style="color:var(--gold-light);font-weight:700;display:block;margin-top:.4rem">Get started →</a>
-          </span>
-        </div>
-      </div>
+      <p class="section-sub" style="max-width:780px;margin:0 0 1.25rem">
+        Every animal below was photographed by someone walking this park — posted to <strong>iNaturalist</strong>, identified by the community, brought here with the observer's name attached. <span id="wildCollectionCount">Dozens</span> species so far, and the bay and wetlands keep adding more. <a href="get-started.html" style="color:var(--green-mid);font-weight:700;white-space:nowrap">Photograph the next one →</a>
+      </p>
 
       <div id="wildlife"></div>
       <div class="filter-bar">
