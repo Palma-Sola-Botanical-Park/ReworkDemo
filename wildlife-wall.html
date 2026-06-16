@@ -123,6 +123,16 @@ const EXCLUDE_IDS = new Set([
 // Records with no photographer credit are "Photo Coming Soon" placeholders.
 const SKIP_NO_CREDIT = true;
 
+// Crop focal point per photo. Tiles use object-fit:cover, which keeps the CENTER
+// of the image by default — so a subject sitting low in the frame can get cropped
+// out the bottom. Override here: '50% 100%' = anchor to bottom, '50% 0%' = top.
+// (A "focus" field in wildlife.json, if present, takes precedence.)
+const FOCAL = {
+  'PSBP-99981': '50% 85%',   // American White Pelican — birds sit low on the water
+  'PSBP-99991': '50% 85%',   // Mottled Duck — same
+};
+const DEFAULT_FOCAL = '50% 50%';
+
 // Group display names + the tour rhythm (varying batch sizes, ~7s each).
 const GROUP_LABEL = { birds:'🐦 Birds of the Park', turtles:'🐢 Turtles', butterflies:'🦋 Butterflies & Moths' };
 const TOUR = [
@@ -142,9 +152,10 @@ const catbar = document.getElementById('catbar');
 function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
 function tileHTML(r){
+  const focus = (r.focus && String(r.focus).trim()) || FOCAL[r.id] || DEFAULT_FOCAL;
   return `
     <div class="tile">
-      <img src="${encodeURI(r.photo)}" alt="" onerror="this.style.display='none';this.parentElement.classList.add('broken')">
+      <img src="${encodeURI(r.photo)}" alt="" style="object-position:${focus}" onerror="this.style.display='none';this.parentElement.classList.add('broken')">
       <div class="scrim">
         <div class="sp">${escapeHtml(r.common||'')}</div>
         ${r.sci ? `<div class="sci">${escapeHtml(r.sci)}</div>` : ''}
