@@ -749,7 +749,8 @@ function renderMonthList(groups, seriesMap){
 }
 
 // Build the category (+ kid-friendly) filter from what's actually present, and
-// wire show/hide. Closure items (data-always="1") stay visible under every filter.
+// wire show/hide. Closures filter by their own category (e.g. Private), so they
+// show under All and Private but drop out of Kid-friendly and other categories.
 // opts.itemSelector picks which elements to toggle (default agenda cards);
 // opts.groupSelector, when set, hides group wrappers left with no visible items
 // (used to drop empty month headers in the calendar list).
@@ -780,8 +781,9 @@ function buildEventFilters(container, cardContainers, opts){
       cardContainers.forEach(c => {
         if (!c) return;
         c.querySelectorAll(itemSel).forEach(el => {
-          const always = el.getAttribute('data-always') === '1';
-          const show = always || cat === '__all'
+          // Closures filter by their own category now (visible under All and Private,
+          // hidden when you narrow to Kid-friendly or any other single category).
+          const show = cat === '__all'
                     || (cat === '__kid' ? el.getAttribute('data-kid') === '1'
                                         : el.getAttribute('data-category') === cat);
           el.style.display = show ? '' : 'none';
