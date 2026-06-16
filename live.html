@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PSBP · Live iNaturalist Board</title>
+<style>
+  /* ──────────────────────────────────────────────────────────────
+     PSBP LIVE BOARD — page 1: "Where we stand"
+     Standalone full-screen scoreboard. No site chrome by design.
+     Reuses the same iNat project + endpoints as the live site footer.
+  ─────────────────────────────────────────────────────────────── */
+  :root{
+    --bg:#0c2417;            /* deep forest, darker than site --green-deep */
+    --bg2:#0a1d13;
+    --panel:rgba(255,255,255,.035);
+    --panel-line:rgba(255,255,255,.08);
+    --gold:#e7c66b;          /* bright gold for numbers */
+    --gold-soft:#c9a94e;
+    --ink:#f3f1e7;           /* warm white */
+    --muted:#8fb39c;         /* muted sage for labels */
+    --muted-dim:#5f7d6c;
+    --live:#7bd88f;          /* "live" green pulse */
+    --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+    --sans:'Source Sans 3', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:radial-gradient(120% 120% at 50% 0%, var(--bg) 0%, var(--bg2) 70%);
+    color:var(--ink); font-family:var(--sans);
+    min-height:100vh; overflow:hidden;
+    display:flex; flex-direction:column;
+    padding:2.4vw 3vw;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+3:wght@400;600;700;900&display=swap');
+
+  /* ── Header ── */
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    flex-shrink:0; margin-bottom:2vh;
+  }
+  .brand{display:flex; align-items:center; gap:1rem}
+  .brand .logo{
+    width:clamp(40px,3.4vw,64px); height:clamp(40px,3.4vw,64px);
+    border-radius:50%; background:var(--gold); flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:clamp(20px,2vw,34px); color:var(--bg);
+  }
+  .brand h1{
+    font-family:var(--serif); font-weight:700;
+    font-size:clamp(1.3rem,2.3vw,2.6rem); line-height:1; letter-spacing:.01em;
+  }
+  .brand .sub{
+    color:var(--muted); font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+    font-size:clamp(.6rem,.85vw,.95rem); margin-top:.35rem;
+  }
+  .live-tag{
+    display:flex; align-items:center; gap:.6rem;
+    color:var(--muted); font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    font-size:clamp(.65rem,.9vw,1rem);
+  }
+  .live-dot{
+    width:.7em; height:.7em; border-radius:50%; background:var(--live);
+    box-shadow:0 0 0 0 rgba(123,216,143,.6); animation:livePulse 2s infinite;
+  }
+  @keyframes livePulse{
+    0%{box-shadow:0 0 0 0 rgba(123,216,143,.55)}
+    70%{box-shadow:0 0 0 .8em rgba(123,216,143,0)}
+    100%{box-shadow:0 0 0 0 rgba(123,216,143,0)}
+  }
+
+  /* ── Title line ── */
+  .board-title{
+    flex-shrink:0; text-align:center; margin:1vh 0 2.5vh;
+  }
+  .board-title h2{
+    font-family:var(--serif); font-weight:800;
+    font-size:clamp(1.6rem,3.4vw,3.4rem); line-height:1.05;
+  }
+  .board-title p{
+    color:var(--muted); font-size:clamp(.8rem,1.3vw,1.3rem); margin-top:.6rem;
+  }
+
+  /* ── The grid ── */
+  .grid{
+    flex:1; min-height:0;
+    display:grid;
+    grid-template-columns: 1.35fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr 1fr;
+    gap:clamp(.5rem,1vw,1.1rem);
+  }
+  .cell{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative;
+  }
+  /* column headers (top row) */
+  .colhead{
+    align-self:center; color:var(--muted);
+    font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    font-size:clamp(.65rem,1.1vw,1.25rem);
+  }
+  .colhead.hour{ color:var(--gold-soft); }
+  /* row labels (first column) */
+  .rowlabel{
+    align-items:flex-start; justify-content:center; text-align:left;
+    padding-left:.5vw;
+  }
+  .rowlabel .rl-big{
+    font-family:var(--serif); font-weight:700; color:var(--ink);
+    font-size:clamp(1.1rem,2.1vw,2.3rem); line-height:1.05;
+  }
+  .rowlabel .rl-sub{
+    color:var(--muted-dim); font-size:clamp(.6rem,.9vw,1rem); margin-top:.3rem; font-weight:600;
+  }
+  /* value cells */
+  .vcell{
+    background:var(--panel); border:1px solid var(--panel-line);
+    border-radius:clamp(8px,1vw,16px);
+  }
+  .vcell .num{
+    font-family:var(--sans); font-weight:900; color:var(--gold);
+    font-size:clamp(1.8rem,5vw,5.5rem); line-height:1;
+    font-variant-numeric:tabular-nums; letter-spacing:-.01em;
+    transition:transform .25s ease;
+  }
+  /* the Hour column gets emphasis — it's the one that moves live */
+  .col-hour .vcell{
+    background:linear-gradient(180deg, rgba(231,198,107,.10), rgba(231,198,107,.03));
+    border-color:rgba(231,198,107,.28);
+  }
+  .col-hour .vcell .num{ color:#ffe8a3; }
+  .vcell .num.bump{ animation:bump .6s ease; }
+  @keyframes bump{
+    0%{transform:scale(1)}
+    30%{transform:scale(1.18); color:#fff}
+    100%{transform:scale(1)}
+  }
+  .vcell .num.loading{ color:var(--muted-dim); font-size:clamp(1.4rem,3vw,3rem); }
+
+  /* ── Footer status ── */
+  footer{
+    flex-shrink:0; display:flex; align-items:center; justify-content:space-between;
+    margin-top:2vh; color:var(--muted-dim);
+    font-size:clamp(.65rem,.95vw,1rem); font-weight:600;
+  }
+  footer .updated{ display:flex; align-items:center; gap:.5rem; }
+  footer .err{ color:#e8a87c; }
+  footer a{ color:var(--gold-soft); text-decoration:none; }
+
+  /* first-load veil */
+  #veil{
+    position:fixed; inset:0; background:var(--bg2);
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+    gap:1.5rem; z-index:50; transition:opacity .6s ease;
+  }
+  #veil.gone{ opacity:0; pointer-events:none; }
+  #veil .spinner{
+    width:48px; height:48px; border-radius:50%;
+    border:4px solid rgba(255,255,255,.12); border-top-color:var(--gold);
+    animation:spin 1s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  #veil p{ color:var(--muted); font-size:1.1rem; letter-spacing:.04em; }
+</style>
+</head>
+<body>
+
+  <div id="veil">
+    <div class="spinner"></div>
+    <p>Connecting to iNaturalist…</p>
+  </div>
+
+  <header>
+    <div class="brand">
+      <div class="logo">🌿</div>
+      <div>
+        <h1>Palma Sola Botanical Park</h1>
+        <div class="sub">Citizen Science · Live Board</div>
+      </div>
+    </div>
+    <div class="live-tag"><span class="live-dot"></span> Live from iNaturalist</div>
+  </header>
+
+  <div class="board-title">
+    <h2>Where we stand right now</h2>
+    <p>Everything our community has documented — and what just happened in the last hour</p>
+  </div>
+
+  <div class="grid" id="grid">
+    <!-- top-left blank corner -->
+    <div class="cell"></div>
+    <div class="cell colhead">Total</div>
+    <div class="cell colhead">This Month</div>
+    <div class="cell colhead">This Week</div>
+    <div class="cell colhead hour">Past Hour</div>
+
+    <!-- Observations row -->
+    <div class="cell rowlabel"><div><div class="rl-big">Observations</div><div class="rl-sub">photos logged</div></div></div>
+    <div class="cell vcell"><span class="num loading" id="obs-total">…</span></div>
+    <div class="cell vcell"><span class="num loading" id="obs-month">…</span></div>
+    <div class="cell vcell"><span class="num loading" id="obs-week">…</span></div>
+    <div class="cell vcell col-hour-cell"><span class="num loading" id="obs-hour">…</span></div>
+
+    <!-- Species row -->
+    <div class="cell rowlabel"><div><div class="rl-big">Unique Species</div><div class="rl-sub">distinct life forms</div></div></div>
+    <div class="cell vcell"><span class="num loading" id="sp-total">…</span></div>
+    <div class="cell vcell"><span class="num loading" id="sp-month">…</span></div>
+    <div class="cell vcell"><span class="num loading" id="sp-week">…</span></div>
+    <div class="cell vcell col-hour-cell"><span class="num loading" id="sp-hour">…</span></div>
+
+    <!-- Observers row -->
+    <div class="cell rowlabel"><div><div class="rl-big">Observers</div><div class="rl-sub">people who showed up</div></div></div>
+    <div class="cell vcell"><span class="num loading" id="ob-total">…</span></div>
+    <div class="cell vcell"><span class="num loading" id="ob-month">…</span></div>
+    <div class="cell vcell"><span class="num loading" id="ob-week">…</span></div>
+    <div class="cell vcell col-hour-cell"><span class="num loading" id="ob-hour">…</span></div>
+  </div>
+
+  <footer>
+    <div class="updated"><span id="updatedText">Loading…</span></div>
+    <div><a href="https://www.inaturalist.org/projects/palma-sola-botanical-park" target="_blank">Palma Sola on iNaturalist →</a></div>
+  </footer>
+
+<script>
+const INAT_PROJECT = 'palma-sola-botanical-park';
+const BASE = 'https://api.inaturalist.org/v1';
+const REFRESH_MS = 60000;          // 60s auto-refresh
+const HOUR_HEAVY_COLUMN = true;
+
+// Mark the hour cells so the column can be emphasised via CSS.
+document.querySelectorAll('.col-hour-cell').forEach(c => c.classList.add('col-hour'));
+document.querySelectorAll('.grid .cell:nth-child(5)').forEach(()=>{}); // no-op, header handled in markup
+
+// --- date helpers (local time, ISO with offset so "past hour" is exact) ---
+function isoOffset(d){
+  // returns e.g. 2026-06-17T09:05:00-04:00
+  const pad = n => String(n).padStart(2,'0');
+  const off = -d.getTimezoneOffset();
+  const sign = off >= 0 ? '+' : '-';
+  const oh = pad(Math.floor(Math.abs(off)/60));
+  const om = pad(Math.abs(off)%60);
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`
+       + `T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}${sign}${oh}:${om}`;
+}
+function startOfMonth(){ const d=new Date(); return isoOffset(new Date(d.getFullYear(), d.getMonth(), 1, 0,0,0)); }
+function weekAgo(){ const d=new Date(); d.setDate(d.getDate()-7); d.setHours(0,0,0,0); return isoOffset(d); }
+function hourAgo(){ const d=new Date(); d.setHours(d.getHours()-1); return isoOffset(d); }
+
+// --- low-level fetch with graceful failure ---
+async function jget(url){
+  const r = await fetch(url);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  return r.json();
+}
+
+// total_results for a given endpoint + optional created_d1
+async function count(endpoint, createdD1){
+  let url = `${BASE}/${endpoint}?project_id=${INAT_PROJECT}&per_page=1`;
+  if(createdD1) url += `&created_d1=${encodeURIComponent(createdD1)}`;
+  const j = await jget(url);
+  return j.total_results || 0;
+}
+
+// Robust unique-observer count for a time window.
+// The /observers aggregation endpoint does not reliably honour created_d1,
+// so for time windows we derive distinct observers from the observation list.
+async function observerCount(createdD1){
+  if(!createdD1){
+    // total: the dedicated endpoint is correct & cheapest
+    return count('observations/observers');
+  }
+  // windowed: page through observations, collect distinct user ids.
+  const seen = new Set();
+  let page = 1, pages = 1;
+  do {
+    const url = `${BASE}/observations?project_id=${INAT_PROJECT}`
+              + `&created_d1=${encodeURIComponent(createdD1)}`
+              + `&per_page=200&page=${page}&order=desc&order_by=created_at`;
+    const j = await jget(url);
+    (j.results||[]).forEach(o => { if(o.user && o.user.id!=null) seen.add(o.user.id); });
+    const total = j.total_results || 0;
+    pages = Math.min(Math.ceil(total/200), 5); // safety cap: 1000 obs/window is plenty
+    page++;
+  } while(page <= pages);
+  return seen.size;
+}
+
+// --- render a single number with bump animation on increase ---
+const prev = {};
+function setNum(id, val){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.remove('loading');
+  const display = (typeof val === 'number') ? val.toLocaleString() : val;
+  if(prev[id] !== undefined && typeof val === 'number' && val > prev[id]){
+    el.textContent = display;
+    el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+  } else {
+    el.textContent = display;
+  }
+  if(typeof val === 'number') prev[id] = val;
+}
+
+let lastOk = null;
+async function refresh(){
+  const month = startOfMonth(), week = weekAgo(), hour = hourAgo();
+  const tasks = [
+    // Observations row
+    ['obs-total', () => count('observations')],
+    ['obs-month', () => count('observations', month)],
+    ['obs-week',  () => count('observations', week)],
+    ['obs-hour',  () => count('observations', hour)],
+    // Species row
+    ['sp-total',  () => count('observations/species_counts')],
+    ['sp-month',  () => count('observations/species_counts', month)],
+    ['sp-week',   () => count('observations/species_counts', week)],
+    ['sp-hour',   () => count('observations/species_counts', hour)],
+    // Observers row
+    ['ob-total',  () => observerCount()],
+    ['ob-month',  () => observerCount(month)],
+    ['ob-week',   () => observerCount(week)],
+    ['ob-hour',   () => observerCount(hour)],
+  ];
+
+  let anyFail = false;
+  // Run sequentially-ish but lightly parallel: stagger to stay friendly to the API.
+  for(const [id, fn] of tasks){
+    try{
+      const v = await fn();
+      setNum(id, v);
+    }catch(err){
+      anyFail = true;
+      const el = document.getElementById(id);
+      if(el && el.classList.contains('loading')) el.textContent = '—';
+    }
+    await new Promise(r => setTimeout(r, 120)); // ~120ms gap between calls
+  }
+
+  // hide veil after first successful-ish pass
+  document.getElementById('veil').classList.add('gone');
+
+  const stamp = new Date();
+  const upd = document.getElementById('updatedText');
+  if(anyFail && !lastOk){
+    upd.innerHTML = '<span class="err">Trouble reaching iNaturalist — retrying…</span>';
+  }else{
+    lastOk = stamp;
+    upd.textContent = 'Updated ' + stamp.toLocaleTimeString([], {hour:'numeric', minute:'2-digit', second:'2-digit'})
+                    + ' · refreshes every minute';
+  }
+}
+
+refresh();
+setInterval(refresh, REFRESH_MS);
+
+// Safety: if the very first load totally fails (no network), drop the veil after 6s
+// so the board shows its dashes instead of spinning forever.
+setTimeout(() => document.getElementById('veil').classList.add('gone'), 6000);
+</script>
+</body>
+</html>
