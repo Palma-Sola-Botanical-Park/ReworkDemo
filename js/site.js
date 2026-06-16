@@ -891,10 +891,11 @@ async function loadEventsPage(opts){
         listEl = $(opts.monthList), calFiltersEl = $(opts.calFilters),
         sdEl = $(opts.saveDate), sdWrap = $(opts.saveDateWrap), titleEl = $(opts.viewTitle);
   try {
-    const [events, classes, series] = await Promise.all([
+    const [events, classes, series, weddingCal] = await Promise.all([
       fetchTab(TAB.events).catch(()=>[]),
       fetchTab(TAB.classes).catch(()=>[]),
       fetchTab(TAB.series).catch(()=>[]),
+      fetchTab(TAB.wedding_calendar).catch(()=>[]),
     ]);
 
     // series lookup (visible only)
@@ -905,12 +906,32 @@ async function loadEventsPage(opts){
     const windowEnd = new Date(today); windowEnd.setDate(windowEnd.getDate() + (opts.windowDays || 14));
 
     const evItems = events.filter(isWebVisible).map(_eventItem).filter(Boolean);
-    const closureDays = new Set(evItems.filter(i => i.kind === 'closure').map(i => _ymd(i.date)));
+
+    // PARK CLOSURES from the wedding_calendar tab: rows flagged closes_park
+    // become GENERIC public closures — no private names. (public_note, if set,
+    // gives a public label like "Thanksgiving"; otherwise it's generic.)
+    const evClosureDays = new Set(evItems.filter(i => i.kind === 'closure').map(i => _ymd(i.date)));
+    const seenWed = new Set();
+    const wedClosures = (weddingCal || [])
+      .filter(r => _isYes(r.closes_park))
+      .map(r => {
+        const date = parseDateLocal(r.date);
+        if (!date) return null;
+        return { kind:'closure', date, title:(r.public_note||'').trim(),
+                 description:'', category:'Private', _link:{} };
+      })
+      .filter(Boolean)
+      // dedup: skip dates already closed via the events tab, and any repeats.
+      .filter(c => { const k = _ymd(c.date);
+        if (evClosureDays.has(k) || seenWed.has(k)) return false; seenWed.add(k); return true; });
+
+    const allItems = evItems.concat(wedClosures);
+    const closureDays = new Set(allItems.filter(i => i.kind === 'closure').map(i => _ymd(i.date)));
     const notSuppressed = i => i.kind === 'closure' || !closureDays.has(_ymd(i.date));
 
     // AGENDA — within window: events + sessions + class instances (closures preempt)
     const classInst = expandClasses(classes.filter(isWebVisible), today, windowEnd).filter(notSuppressed);
-    const agenda = evItems.filter(i => i.date >= today && i.date <= windowEnd)
+    const agenda = allItems.filter(i => i.date >= today && i.date <= windowEnd)
       .filter(notSuppressed).concat(classInst).sort(_byDateThenTime);
 
     if (agendaEl) agendaEl.innerHTML = agenda.length
@@ -923,7 +944,7 @@ async function loadEventsPage(opts){
     // NO weekly class instances (those live in the schedule rail). Grouped
     // scrolling list, with its own category / kid-friendly filter.
     const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
-    const monthItems = evItems.filter(i => i.date >= monthStart)
+    const monthItems = allItems.filter(i => i.date >= monthStart)
       .filter(notSuppressed).sort(_byDateThenTime);
     const groups = _groupByMonth(monthItems);
     if (listEl) listEl.innerHTML = groups.length

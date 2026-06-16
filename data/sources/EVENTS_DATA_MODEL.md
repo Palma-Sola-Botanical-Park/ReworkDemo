@@ -1,7 +1,17 @@
 # Events, Classes & Series — Data Model
 
-**Status:** agreed design, 2026-06-15. Source of truth for how `events.html` + `loadEvents`/`loadClasses` in `site.js` read the Google Sheet.
-**v2 (2026-06-15) reconciled against the real sheet:** links pair globally (`link_url`+`link_text`, `flyer_url`+`flyer_text`); `registration_url` uses a hardcoded "Register →" (no text column); `type→category` confirmed events-only; column order is free (read by header name); `display` value behavior spelled out (only `web`/`both` show); added the **class-vs-series rule of thumb** (§1) and the multi-day `weekday` format (`Tue,Thu`).
+**Status:** BUILT & DEPLOYED on `events.html` (live). Source of truth for how `events.html` + `loadEventsPage`/`loadEvents` in `site.js` read the Google Sheet.
+**v3 (2026-06-15, evening) — shipped a major events.html rework, all live:**
+- **Card redesign:** wider **weekday-colored** date block (weekday + month + day + time); title line `**Title**, Instructor` (classes only); badges right-justified on the title row, wrapping below on phones.
+- **Weekday color-coding** (muted botanical palette) on cards + calendar, so the eye feels days passing.
+- **Two views with a toggle** — "Next 2 weeks" (rich cards) ⇄ "Full calendar" (a spartan grouped month **list**, same on desktop & phone; a month *grid* was tried and dropped). Both have a **category + 👪 Kid-friendly filter**.
+- **Save the Date rail** — `save_the_date` flag pins marquee events (Holiday Nights, gala) regardless of how far out.
+- **`kid_friendly` flag** → badge + filter.
+- **Park closures now also come from the `wedding_calendar` tab** via `closes_park` (see §3) — no re-entering weddings.
+- Links render as **prose, not buttons** (only Register is a button). Newsletter box + old "Further ahead" list removed.
+- All CSS for the events engine is **injected by `injectEventStyles()` in site.js** (so cards render on any page, incl. the homepage teaser); `events.html`'s own `<style>` only holds page-layout/filter/schedule/series rules.
+
+**v2 (2026-06-15) reconciled against the real sheet:** links pair globally (`link_url`+`link_text`, `flyer_url`+`flyer_text`); `registration_url` uses a hardcoded "Register →"; `type→category` confirmed events-only; column order is free (read by header name); `display` value behavior spelled out (only `web`/`both` show); class-vs-series rule of thumb (§1); multi-day `weekday` format (`Tue,Thu`).
 **Read this before changing the events/classes tabs or their rendering.** These decisions were made deliberately to end the "everything is a Class" mess. Don't undo them without reading the rationale at the bottom.
 
 ---
@@ -54,27 +64,41 @@ Controlled vocabulary. Type these **exactly** (use a Sheets dropdown / Data Vali
 ### Secondary flags (cut across categories — badges, not filter buckets)
 
 - **cost** — free text shown as a badge: `Free`, `$15`, `$45`, etc.
-- **registration_url** — if present, the card shows a **Register →** button.
-- **fundraiser** — `yes` adds a "Fundraiser" badge (a gala is *Community + Fundraiser*).
-- **closes_park** — `yes` turns this row into a **closure notice** (see §3).
+- **registration_url** — if present, the card shows a **Register →** button (the only button on a card).
+- **fundraiser** — `yes` adds a "💛 Fundraiser" badge (a gala is *Community + Fundraiser*).
+- **kid_friendly** — `yes` adds a "👪 Kid-friendly" badge *and* surfaces a Kid-friendly filter button (in both views, only when ≥1 kid-friendly event is present). A flag, not a category — a Workshop can be kid-friendly without being "Family & Kids."
+- **save_the_date** — `yes` pins the event to the **Save the Date** rail (§1).
+- **closes_park** — `yes` turns this row into a **closure notice** (see §3). Present on **two** tabs: `events` and `wedding_calendar`.
 
-> Why two tiers: a thing's *kind* (Workshop) is stable and filterable; whether it costs money, needs signup, or benefits the park is orthogonal. Zumba = `Fitness & Wellness` + `$15`. A workday = `Volunteer` + `Free`. A gala = `Community` + fundraiser + `$`.
+> Why two tiers: a thing's *kind* (Workshop) is stable and filterable; whether it costs money, needs signup, benefits the park, or is kid-friendly is orthogonal. Zumba = `Fitness & Wellness` + `$15`. A workday = `Volunteer` + `Free`. A gala = `Community` + fundraiser + `$`.
 
 ---
 
-## 3. Park closures (the "anti-event")
+## 3. Park closures (the "anti-event") — TWO sources
 
-A full-park wedding is **not** something to invite the public to — it's an announcement that the park is **closed**, and it can **cancel** overlapping programming.
+A full-park wedding/holiday/private booking is **not** something to invite the public to — it's an announcement that the park is **closed**, and it can **cancel** overlapping programming. A closure does two jobs wherever it comes from:
+1. Renders as a **"🔒 Park closed [date] — private event"** notice (a card in the 2-week view, a row in the calendar). **No private names ever** — couple names from the wedding calendar are never shown.
+2. **Suppresses** any class instances / events that fall on that day. The closure wins (park's closed → nothing public happens).
 
-Model it as a **`Private`** event with **`closes_park = yes`**. That flag does two jobs:
-1. Renders as a **"🔒 Park closed [date] — private event"** notice (no couple's names), so day-trippers see it early.
-2. **Suppresses** any class instances / sessions that fall inside its window when the two-week agenda is built. The closure wins.
+Closures are merged from **two tabs**, then **deduped by date** (an events-tab closure wins if a date is flagged in both):
+
+**Source A — `events` tab:** a row with `category = Private` + `closes_park = yes`. Use for one-off public-facing closures you're entering directly.
+
+**Source B — `wedding_calendar` tab (the big one):** this tab already lists every date that blocks a wedding booking (it drives `venue.html`). Flagging a row `closes_park = yes` makes the **public Events calendar** draw a generic closure for that date — **without re-entering the wedding anywhere.** This is the key win: weddings live **once**, in `wedding_calendar`.
+
+**Why a per-row flag and not "every booking closes the park":** the wedding_calendar mixes **whole-park** bookings (weddings, holidays, Winter Nights setup) with **partial** ones (Galleria-only, pavilion-only — note the `(Gal.)` / `(pav.)` hints). Only whole-park dates should close the park to visitors. The flag lets Randy mark exactly those; a Galleria-only baby shower stays unflagged and the park shows **open**.
+
+**The dividing line (which tab gets it):**
+- Something the public should **see or attend** (gala people attend, plant sale, Holiday/Winter Nights *nights*) → **`events` tab** as a real event (with description/flyer), plus `closes_park` there if the rest of the park is shut.
+- A date that's just **blocked with nothing to promote** (private wedding, holiday, Winter Nights *setup* days) → **`wedding_calendar`**, flag `closes_park`. Generic closure, no name.
+
+> **Optional `public_note` on `wedding_calendar`:** blank → generic "private event"; filled → a public label (e.g. `Thanksgiving` → "🔒 Park closed — Thanksgiving"). Use it for holidays you're happy to name; leave blank for weddings.
 
 This is the heavyweight version of the future **overrides** idea (a sick instructor cancels *one* class; a closure closes *everything*). Closures ship now; per-class overrides come later (§5).
 
 ---
 
-## 4. Sheet schema — BUILD THIS NOW
+## 4. Sheet schema (live)
 
 **Tab layout convention (all tabs):** Row 1 = section title · Row 2 = column headers · Row 3 = hint row (human notes, skipped by code) · Row 4+ = data. Headers are lowercase, spaces become underscores. Keep the hint row filled when you add a column — it's where you remind yourself what the column is for.
 
@@ -99,7 +123,7 @@ Keep what's there (`display`, `date`, `time`, `title`, `description`, `link_url`
 | `fundraiser` | **NEW** | no | `yes` adds a Fundraiser badge. | `yes` |
 | `kid_friendly` | **NEW** | no | `yes` adds a "👪 Kid-friendly" badge. A *flag*, not a category — a Workshop can be kid-friendly without being "Family & Kids" (which means aimed AT kids). | `yes` |
 | `save_the_date` | **NEW** | no | `yes` pins this event to the **Save the Date** rail (marquee events like Holiday Nights / the gala). For a multi-day run entered as separate day-rows, flag just the **first** row — the rail dedupes by title and shows at most 2. | `yes` |
-| `closes_park` | **NEW** | no | `yes` → closure notice + preempts the window (§3). Pair with `category = Private`. | `yes` |
+| `closes_park` | **NEW** | no | `yes` → closure notice + preempts the day (§3). Pair with `category = Private`. Also available on `wedding_calendar` (§4d); the two are deduped by date. | `yes` |
 
 ### 4b. `classes` tab — ADAPT (add columns), and REMOVE the fake series
 
@@ -132,19 +156,32 @@ One row per series. This is where Bev's bundled flyers/infographics finally live
 
 > **Convention note (intentional):** `series` uses `active` (yes/retired) rather than the `print/web` meaning of `display`. A series is on or off, not web-vs-print. `display` is still there for the standard visibility filter; `active` is the "is this series currently happening" switch. Documented here so it's not "fixed" later.
 
-### 4d. `overrides` tab — DO **NOT** build yet (planned)
+### 4d. `wedding_calendar` tab — ADD ONE COLUMN (already drives venue.html)
+
+This tab already exists and powers the availability calendar on `venue.html` (columns `date`, `status` = open/possible/booked, `note`). `events.html` now **also reads it** for park closures. One column to add:
+
+| Column | Status | Required | Purpose | Example |
+|---|---|---|---|---|
+| `closes_park` | **NEW** | no | `yes` → the public Events calendar shows a **generic** "🔒 Park closed" for this date (no `note`/couple name). Flag only **whole-park** dates (weddings, holidays, Winter Nights setup); leave Galleria-/pavilion-only bookings blank so the park reads open. Deduped against the `events` tab by date. | `yes` |
+| `public_note` | optional | no | A public-safe label shown on the closure ("🔒 Park closed — Thanksgiving"). Blank → generic "private event". Never auto-pulled from `note`. | `Thanksgiving` |
+
+> `status` (open/possible/booked) is for **wedding customers** on venue.html and is independent of `closes_park`, which is for **general visitors** on events.html. A date can be `booked` (wedding customer can't have it) yet unflagged for closure (Galleria-only — park still open to visitors).
+
+### 4e. `overrides` tab — DO **NOT** build yet (planned)
 
 Future home for one-off exceptions (a cancelled session, a moved class). When we build it: `date`, `scope` (a class title or `park`), `status` (`cancelled`/`closed`/`moved`), `note`. Listed here only so the column names are reserved and consistent. **Skip for now.**
 
 ---
 
-## 5. Build order
+## 5. Build status
 
-1. **Sheet (Randy + Bev):** rename `events.type → category`; add the new `events` columns; pull series out of `classes` and add the class columns; create the `series` tab. Add Data-Validation dropdowns for `category` and `weekday` to prevent typos.
-2. **`site.js` (Claude):** rewrite `loadEvents`/`loadClasses` into the three views — window expander (bounded, never infinite), closure preemption, badges, series index, and the category filter (built from categories actually present, mirroring the `nature.html` wildlife-theme filter).
-3. **Later:** the `overrides` tab + sick-instructor / moved-session handling.
+**Done & live (v3):** the `events`/`classes`/`series` tabs, the two-view events.html (2-week cards + full-calendar list, toggle, filters), weekday colors, Save the Date, kid-friendly flag/filter, and `wedding_calendar` `closes_park` closures. The engine lives in `site.js` (`loadEventsPage` orchestrator; `injectEventStyles` for all CSS; expander, closure merge/dedup/preemption, filters, save-the-date). Tested via Node harnesses (`/tmp/*_test.js`): expander, date math, closure suppression, calendar grouping, save-the-date dedup, wedding-closure merge + privacy.
 
-Code is written defensively: missing new columns degrade gracefully, so the site keeps working while the sheet is mid-migration.
+**Still on the sheet side (Randy):** keep `category`/`weekday` Data-Validation dropdowns clean; add `closes_park` to `wedding_calendar` and flag the whole-park dates.
+
+**Later:** the `overrides` tab + sick-instructor / moved-session handling.
+
+Code is written defensively: missing columns degrade gracefully, so the site keeps working while the sheet is mid-migration.
 
 ---
 
@@ -154,4 +191,6 @@ Code is written defensively: missing new columns degrade gracefully, so the site
 - **A series is a label, not a class.** Putting series in `classes` forced every session to be typed twice (once as the "class," once as the event). The `series` tab + a `series` reference on each event fixes it with zero duplication.
 - **Classes are rules expanded only in a 2-week window.** Long-range expansion is calendar spam. Near-term, a real dated instance is genuinely useful. Same row, two renderings, bounded generation = no infinity.
 - **Closures are `Private` + `closes_park`, not events.** They announce *absence* and *preempt* programming. Same machinery as future per-class overrides; closures are just the whole-park version.
+- **Closures have two sources, deduped by date — weddings are never re-entered.** The `wedding_calendar` tab already holds every blocking date (it drives venue.html). A per-row `closes_park` flag there feeds generic closures to the public calendar — solving "do I add every wedding to Events?" with **no double entry** and **no leaked names**. The flag is per-row precisely because the wedding calendar mixes whole-park closures with Galleria-/pavilion-only bookings that *don't* close the park. (A blanket "booked = closed" rule was rejected as wrong for partial bookings.)
+- **The month *grid* was tried and dropped.** A 7-column desktop grid read worse than the grouped list at every width; the list is now the full-calendar view everywhere. Don't rebuild the grid.
 - **Controlled vocabulary for `category`.** The badge set = the filter set = the sheet values. Define once; a dropdown keeps them clean.
