@@ -506,6 +506,20 @@ const DAY_FULL  = {Sun:'Sundays',Mon:'Mondays',Tue:'Tuesdays',Wed:'Wednesdays',
 const formatWeekday = w => (w||'').split(',')
   .map(s => DAY_FULL[s.trim().slice(0,3)] || s.trim()).filter(Boolean).join(' & ');
 
+// Muted weekday palette — same hue down a column = same weekday, so the eye
+// feels days passing (Mon red-ish … Sun rose). Index by Date.getDay() (0=Sun).
+const DOW_COLOR = ['#8f5675','#a14b3e','#9a7b2b','#4f7d3a','#3d7873','#45648f','#6f5790'];
+const DOW_ABBR  = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+const dowColor  = d => DOW_COLOR[d.getDay()];
+const _dowNice  = d => { const a = DOW_ABBR[d.getDay()]; return a[0] + a.slice(1).toLowerCase(); };
+
+// A link target for an item: its own link, else its series flyer, else ''.
+function _itemHref(item, seriesMap){
+  let url = item._link && item._link.url;
+  if (!url && seriesMap){ const s = _seriesOf(item, seriesMap); if (s) url = s.flyer_url || ''; }
+  return url || '';
+}
+
 // Sort by date, then by start time (best-effort time parse).
 function _timeKey(t){
   const m = (t||'').match(/(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m)?/i);
@@ -526,6 +540,7 @@ function _eventItem(e){
     date, title: e.title, time: e.time, description: e.description,
     category: eventCategory(e), cost: e.cost, series: e.series,
     fundraiser: _isYes(e.fundraiser), kid_friendly: _isYes(e.kid_friendly),
+    save_the_date: _isYes(e.save_the_date),
     registration_url: e.registration_url,
     instructor: '', _link: PSBP.rowLink(e)
   };
@@ -600,35 +615,46 @@ function _badges(item){
   return out.length ? `<div class="ev-badges">${out.join('')}</div>` : '';
 }
 
-// One agenda/ahead card (events, series sessions, class instances, closures).
+// One agenda card (events, series sessions, class instances, closures).
 function renderAgendaCard(item, seriesMap){
   const d = item.date;
-  if (item.kind === 'closure'){
-    return `<div class="event-card agenda-closure" data-category="Private" data-always="1">
-      <div class="event-datebox"><div class="mo">${_mo(d)}</div><div class="dy">${d.getDate()}</div></div>
+  const isClosure = item.kind === 'closure';
+  const boxColor = isClosure ? '#6b6b6b' : dowColor(d);
+  const dateBox = `<div class="ev-date" style="background:${boxColor}">
+      <span class="ev-dow">${DOW_ABBR[d.getDay()]}</span>
+      <span class="ev-dnum">${d.getDate()}</span>
+      <span class="ev-dmo">${_mo(d)}</span>
+      ${item.time ? `<span class="ev-dtime">${_evEsc(item.time)}</span>` : ''}
+    </div>`;
+
+  if (isClosure){
+    return `<div class="event-card ev-card agenda-closure" data-category="Private" data-always="1">
+      ${dateBox}
       <div class="event-info">
-        <h4>🔒 Park closed${item.title?` — ${_evEsc(item.title)}`:''}</h4>
+        <div class="ev-titlerow"><h4 class="ev-title">🔒 Park closed${item.title?` — ${_evEsc(item.title)}`:''}</h4></div>
         <p>${item.description ? clip(item.description,160) : 'The park is closed to the public this day for a private event — please plan your visit around it.'}</p>
-        ${item.time?`<p class="ev-time">${_evEsc(item.time)}</p>`:''}
       </div>
     </div>`;
   }
+
   const reg = item.registration_url
     ? PSBP.linkTag(item.registration_url, 'Register →',
         { title:item.title||'Register', back:_BACK(), className:'btn btn-sm btn-gold', style:'margin-top:.5rem' })
     : '';
-  // Description prose with the link tacked on inline (no Details button).
   const descText = item.description ? clip(item.description,140) : '';
   const inline   = _inlineLink(item);
   const descHtml = (descText || inline) ? `<p>${descText}${inline}</p>` : '';
-  return `<div class="event-card" data-category="${_evEsc(item.category)}">
-    <div class="event-datebox"><div class="mo">${_mo(d)}</div><div class="dy">${d.getDate()}</div></div>
+  const instr = (item.kind==='class' && item.instructor)
+    ? `<span class="ev-instr">, ${_evEsc(item.instructor)}</span>` : '';
+
+  return `<div class="event-card ev-card" data-category="${_evEsc(item.category)}">
+    ${dateBox}
     <div class="event-info">
-      <h4>${_evEsc(item.title||'')}</h4>
-      ${item.kind==='class' && item.instructor ? `<div class="class-instructor">with ${_evEsc(item.instructor)}</div>` : ''}
+      <div class="ev-titlerow">
+        <h4 class="ev-title">${_evEsc(item.title||'')}${instr}</h4>
+        ${_badges(item)}
+      </div>
       ${descHtml}
-      ${item.time ? `<p class="ev-time">${_evEsc(item.time)}</p>` : ''}
-      ${_badges(item)}
       ${_seriesLine(item, seriesMap)}
       ${reg ? `<div class="ev-actions">${reg}</div>` : ''}
     </div>
@@ -667,6 +693,95 @@ function renderSeriesCard(s){
   </div>`;
 }
 
+// One "Save the Date" rail card — a marquee event (Holiday Nights, the gala),
+// pinned regardless of how far out it is. Title + date + flyer link, nothing more.
+function renderSaveDate(item){
+  const href = item._link && item._link.url;
+  const dateStr = item.date.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  const link = href
+    ? PSBP.linkTag(href, (item._link.text||'See the flyer')+' →',
+        { title:item.title||'', back:_BACK(), className:'std-link' })
+    : '';
+  return `<div class="std-card">
+    <span class="std-star">⭐</span>
+    <div class="std-body">
+      <strong>${_evEsc(item.title||'')}</strong>
+      <span class="std-date">${dateStr}</span>
+      ${link ? `<div class="std-linkrow">${link}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+// Group dated items (events + closures, NO classes) into chronological months.
+function _groupByMonth(items){
+  const map = new Map();
+  items.forEach(it => {
+    const key = it.date.getFullYear()*100 + it.date.getMonth();
+    if (!map.has(key)) map.set(key, { year:it.date.getFullYear(), month:it.date.getMonth(), items:[] });
+    map.get(key).items.push(it);
+  });
+  return [...map.values()];          // items pre-sorted by date → months in order
+}
+
+// A tiny month-grid event chip: just the title, weekday-tinted, linked to details.
+function _monthChip(item, seriesMap){
+  const href  = _itemHref(item, seriesMap);
+  const closed = item.kind === 'closure';
+  const cls   = 'mg-chip' + (closed ? ' mg-chip-closed' : '');
+  const label = closed ? '🔒 Closed' : _evEsc(item.title||'Event');
+  const style = `border-left-color:${closed ? '#6b6b6b' : dowColor(item.date)}`;
+  return href
+    ? PSBP.linkTag(href, label, { title:item.title||'', back:_BACK(), className:cls, style })
+    : `<span class="${cls}" style="${style}">${label}</span>`;
+}
+
+// One month as a 7-column grid (desktop calendar view).
+function renderMonthGrid(group, seriesMap){
+  const { year, month, items } = group;
+  const byDay = new Map();
+  items.forEach(it => { const k=it.date.getDate(); if(!byDay.has(k)) byDay.set(k,[]); byDay.get(k).push(it); });
+  const first  = new Date(year, month, 1);
+  const offset = first.getDay();                       // leading blank cells
+  const daysIn = new Date(year, month+1, 0).getDate();
+  let cells = '';
+  for (let i=0;i<offset;i++) cells += `<div class="mg-cell mg-empty"></div>`;
+  for (let day=1; day<=daysIn; day++){
+    const evs = byDay.get(day) || [];
+    const dow = new Date(year,month,day).getDay();
+    cells += `<div class="mg-cell${evs.length?' has-ev':''}">
+      <div class="mg-daynum"${evs.length?` style="color:${DOW_COLOR[dow]}"`:''}>${day}</div>
+      ${evs.map(e => _monthChip(e, seriesMap)).join('')}
+    </div>`;
+  }
+  return `<section class="mg-month">
+    <h3 class="mg-title">${first.toLocaleDateString('en-US',{month:'long',year:'numeric'})}</h3>
+    <div class="mg-dowhead">${['S','M','T','W','T','F','S'].map(x=>`<div>${x}</div>`).join('')}</div>
+    <div class="mg-grid">${cells}</div>
+  </section>`;
+}
+
+// Months as grouped scrolling lists (phone calendar view).
+function renderMonthList(groups, seriesMap){
+  return groups.map(g => {
+    const first = new Date(g.year, g.month, 1);
+    const rows = g.items.map(it => {
+      const href   = _itemHref(it, seriesMap);
+      const closed = it.kind === 'closure';
+      const dot   = `<span class="ml-dot" style="background:${closed?'#6b6b6b':dowColor(it.date)}"></span>`;
+      const date  = `<span class="ml-date">${_dowNice(it.date)} ${it.date.getDate()}</span>`;
+      const title = `<span class="ml-title">${closed?'🔒 Park closed':_evEsc(it.title||'')}</span>`;
+      const inner = `${dot}${date}${title}<span class="ml-chev">›</span>`;
+      return href
+        ? PSBP.linkTag(href, inner, { title:it.title||'', back:_BACK(), className:'ml-row' })
+        : `<div class="ml-row">${inner}</div>`;
+    }).join('');
+    return `<section class="ml-month">
+      <h3 class="ml-title-h">${first.toLocaleDateString('en-US',{month:'long',year:'numeric'})}</h3>
+      ${rows}
+    </section>`;
+  }).join('');
+}
+
 // Build the category filter from categories actually present, and wire
 // show/hide. Closure cards (data-always="1") stay visible under every filter.
 function buildEventFilters(container, cardContainers){
@@ -694,13 +809,119 @@ function buildEventFilters(container, cardContainers){
   });
 }
 
+// ── Inject all events CSS once, so cards render correctly on ANY page
+// (events.html, homepage teaser, etc.). Colors are inline per-weekday; this
+// handles layout, typography, and responsive behavior.
+function injectEventStyles(){
+  if (document.getElementById('psbp-event-styles')) return;
+  const css = `
+  .ev-card{display:flex;gap:1rem;align-items:stretch;background:var(--white,#fff);
+    border:1px solid #e7e2d6;border-radius:14px;padding:0;overflow:hidden;
+    box-shadow:0 1px 3px rgba(40,50,30,.06);margin-bottom:1rem}
+  .ev-card .event-info{flex:1;min-width:0;padding:.85rem 1.1rem .95rem 0}
+  .ev-card .ev-date{flex:0 0 auto;width:76px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:.05rem;color:#fff;padding:.6rem .3rem;text-align:center}
+  .ev-date .ev-dow{font-size:.7rem;font-weight:800;letter-spacing:.08em;opacity:.92}
+  .ev-date .ev-dnum{font-size:1.7rem;font-weight:800;line-height:1}
+  .ev-date .ev-dmo{font-size:.7rem;font-weight:700;letter-spacing:.08em;opacity:.92;text-transform:uppercase}
+  .ev-date .ev-dtime{margin-top:.25rem;font-size:.66rem;font-weight:600;line-height:1.2;
+    opacity:.95;border-top:1px solid rgba(255,255,255,.35);padding-top:.25rem}
+  .ev-titlerow{display:flex;justify-content:space-between;align-items:flex-start;
+    gap:.6rem;flex-wrap:wrap}
+  .ev-title{margin:0;font-size:1.18rem;line-height:1.25;flex:1 1 60%;min-width:0}
+  .ev-title .ev-instr{font-weight:500;color:var(--text-soft,#6b6f63)}
+  .ev-titlerow .ev-badges{margin:.1rem 0 0;justify-content:flex-end}
+  .ev-card .event-info > p{margin:.45rem 0 0;color:var(--text-soft,#54584c);line-height:1.5}
+  .ev-badges{display:flex;flex-wrap:wrap;gap:.4rem;margin:.55rem 0 0}
+  .ev-badge{display:inline-block;font-size:.74rem;font-weight:700;padding:.2rem .55rem;
+    border-radius:999px;white-space:nowrap;background:#eef0ea;color:#4a5040}
+  .ev-badge-free{background:#e3f0e2;color:#2d6a35}
+  .ev-badge-cost{background:#f6ecca;color:#7a5a12}
+  .ev-badge-reg{background:#e2edf6;color:#2b5d86}
+  .ev-badge-fund{background:#fbe6d6;color:#9a5a1e}
+  .ev-badge-kid{background:#e8e3f3;color:#5d4a8a}
+  .ev-inline-link{color:var(--green-mid,#2d6a35);font-weight:600;white-space:nowrap}
+  .ev-series{margin:.55rem 0 0;font-size:.9rem;color:var(--text-soft,#6b6f63)}
+  .ev-series-link{font-weight:600;color:var(--green-mid,#2d6a35)}
+  .ev-actions{margin-top:.35rem}
+  .agenda-closure{background:#f4f3ef}
+  .agenda-closure .ev-title{color:#5a5a5a}
+
+  /* view toggle */
+  .ev-viewbar{display:flex;justify-content:space-between;align-items:center;
+    gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+  .ev-viewtoggle{display:inline-flex;background:#eceadf;border-radius:999px;padding:.2rem}
+  .ev-vbtn{border:0;background:transparent;font:inherit;font-weight:700;font-size:.9rem;
+    color:var(--text-soft,#6b6f63);padding:.4rem 1rem;border-radius:999px;cursor:pointer}
+  .ev-vbtn.active{background:var(--green-deep,#1e3a24);color:#fff}
+
+  /* save the date */
+  .std-card{display:flex;gap:.6rem;align-items:flex-start;background:#fffdf6;
+    border:1px solid #ecd9a6;border-left:4px solid var(--gold,#c79a3a);
+    border-radius:12px;padding:.7rem .85rem;margin-bottom:.7rem}
+  .std-star{font-size:1.1rem;line-height:1.2}
+  .std-body{display:flex;flex-direction:column;min-width:0}
+  .std-body strong{font-size:1rem;color:var(--green-deep,#1e3a24)}
+  .std-date{font-size:.85rem;font-weight:700;color:var(--gold-deep,#9a7414);margin-top:.1rem}
+  .std-linkrow{margin-top:.3rem}
+  .std-link{font-weight:600;font-size:.88rem;color:var(--green-mid,#2d6a35)}
+
+  /* month grid (desktop) */
+  .month-list{display:none}
+  .mg-month{margin-bottom:2rem}
+  .mg-title{font-size:1.35rem;margin:0 0 .6rem}
+  .mg-dowhead{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px}
+  .mg-dowhead div{text-align:center;font-size:.72rem;font-weight:800;letter-spacing:.05em;
+    color:var(--text-soft,#8a8e80)}
+  .mg-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .mg-cell{min-height:78px;background:#faf9f5;border:1px solid #ece9df;border-radius:8px;
+    padding:5px 6px;display:flex;flex-direction:column;gap:4px}
+  .mg-cell.mg-empty{background:transparent;border:0}
+  .mg-cell.has-ev{background:#fff;border-color:#e0dccf;box-shadow:0 1px 2px rgba(40,50,30,.05)}
+  .mg-daynum{font-size:.82rem;font-weight:700;color:#b3b1a4}
+  .mg-chip{display:block;font-size:.74rem;font-weight:600;line-height:1.2;
+    color:var(--green-deep,#23402a);background:#f0f3ec;border-left:3px solid #4f7d3a;
+    border-radius:4px;padding:2px 5px;text-decoration:none;overflow:hidden;
+    text-overflow:ellipsis;white-space:nowrap}
+  a.mg-chip:hover{background:#e4ebdd}
+  .mg-chip-closed{background:#efefef;color:#5a5a5a}
+
+  /* month list (mobile) */
+  .ml-month{margin-bottom:1.4rem}
+  .ml-title-h{font-size:1.15rem;margin:0 0 .5rem;position:sticky;top:0;
+    background:var(--cream,#f7f5ee);padding:.2rem 0}
+  .ml-row{display:flex;align-items:center;gap:.6rem;padding:.6rem .2rem;
+    border-bottom:1px solid #ece9df;text-decoration:none;color:inherit}
+  .ml-dot{flex:0 0 auto;width:10px;height:10px;border-radius:50%}
+  .ml-date{flex:0 0 auto;width:62px;font-size:.82rem;font-weight:700;color:var(--text-soft,#6b6f63)}
+  .ml-title{flex:1;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ml-chev{flex:0 0 auto;color:#b3b1a4;font-size:1.1rem}
+
+  @media (max-width:760px){
+    .month-grid{display:none}
+    .month-list{display:block}
+    .ev-card .ev-date{width:64px}
+    .ev-date .ev-dnum{font-size:1.45rem}
+    .ev-title{flex-basis:100%}
+    .ev-titlerow .ev-badges{justify-content:flex-start}
+  }`;
+  const tag = document.createElement('style');
+  tag.id = 'psbp-event-styles';
+  tag.textContent = css;
+  document.head.appendChild(tag);
+}
+
 // ── ORCHESTRATOR for events.html ──────────────────────────────
-// opts: { agenda, ahead, aheadHeading, filters, schedule, series, windowDays, aheadMax }
+// opts: { agenda, filters, schedule, series, monthGrid, monthList,
+//         saveDate, saveDateWrap, viewTitle, windowDays }
 async function loadEventsPage(opts){
   opts = opts || {};
+  injectEventStyles();
   const $ = id => id ? document.getElementById(id) : null;
-  const agendaEl = $(opts.agenda), aheadEl = $(opts.ahead), aheadHeadEl = $(opts.aheadHeading),
-        filtersEl = $(opts.filters), schedEl = $(opts.schedule), seriesEl = $(opts.series);
+  const agendaEl = $(opts.agenda), filtersEl = $(opts.filters),
+        schedEl = $(opts.schedule), seriesEl = $(opts.series),
+        gridEl = $(opts.monthGrid), listEl = $(opts.monthList),
+        sdEl = $(opts.saveDate), sdWrap = $(opts.saveDateWrap), titleEl = $(opts.viewTitle);
   try {
     const [events, classes, series] = await Promise.all([
       fetchTab(TAB.events).catch(()=>[]),
@@ -724,20 +945,34 @@ async function loadEventsPage(opts){
     const agenda = evItems.filter(i => i.date >= today && i.date <= windowEnd)
       .filter(notSuppressed).concat(classInst).sort(_byDateThenTime);
 
-    // AHEAD — beyond window: dated events/sessions only, no class instances
-    const ahead = evItems.filter(i => i.date > windowEnd).filter(notSuppressed)
-      .sort(_byDateThenTime).slice(0, opts.aheadMax || 24);
-
     if (agendaEl) agendaEl.innerHTML = agenda.length
       ? agenda.map(i => renderAgendaCard(i, seriesMap)).join('')
-      : '<p class="text-soft" style="padding:1rem 0">Nothing scheduled in the next two weeks — see what\'s further ahead below.</p>';
+      : '<p class="text-soft" style="padding:1rem 0">Nothing scheduled in the next two weeks — switch to the full calendar to see what\'s ahead.</p>';
 
-    if (aheadEl){
-      aheadEl.innerHTML = ahead.map(i => renderAgendaCard(i, seriesMap)).join('');
-      if (aheadHeadEl) aheadHeadEl.style.display = ahead.length ? '' : 'none';
+    buildEventFilters(filtersEl, [agendaEl]);
+
+    // FULL CALENDAR — every dated event/closure from the 1st of this month on,
+    // NO weekly class instances (those live in the schedule rail). Grid on
+    // desktop, grouped list on phone.
+    const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+    const monthItems = evItems.filter(i => i.date >= monthStart)
+      .filter(notSuppressed).sort(_byDateThenTime);
+    const groups = _groupByMonth(monthItems);
+    if (gridEl) gridEl.innerHTML = groups.length
+      ? groups.map(g => renderMonthGrid(g, seriesMap)).join('')
+      : '<p class="text-soft" style="padding:1rem 0">No upcoming events on the calendar yet.</p>';
+    if (listEl) listEl.innerHTML = groups.length ? renderMonthList(groups, seriesMap) : '';
+
+    // SAVE THE DATE — flagged marquee events, deduped by title, soonest 2, pinned.
+    if (sdEl){
+      const seen = new Set();
+      const sd = evItems.filter(i => i.kind !== 'closure' && i.save_the_date && i.date >= today)
+        .sort(_byDateThenTime)
+        .filter(i => { const k=(i.title||'').trim().toLowerCase(); if(seen.has(k)) return false; seen.add(k); return true; })
+        .slice(0, 2);
+      sdEl.innerHTML = sd.map(renderSaveDate).join('');
+      if (sdWrap) sdWrap.style.display = sd.length ? '' : 'none';
     }
-
-    buildEventFilters(filtersEl, [agendaEl, aheadEl]);
 
     if (schedEl){
       const cls = classes.filter(isWebVisible);
@@ -750,6 +985,18 @@ async function loadEventsPage(opts){
       const act = series.filter(isWebVisible).filter(s => !s.active || _isYes(s.active));
       seriesEl.innerHTML = act.length ? act.map(renderSeriesCard).join('') : '';
     }
+
+    // VIEW TOGGLE — "Next 2 weeks" ⇄ "Full calendar"
+    const weeksView = $('view-weeks'), calView = $('view-calendar');
+    document.querySelectorAll('.ev-vbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const v = btn.getAttribute('data-view');
+        document.querySelectorAll('.ev-vbtn').forEach(x => x.classList.toggle('active', x === btn));
+        if (weeksView) weeksView.style.display = (v === 'weeks') ? '' : 'none';
+        if (calView)   calView.style.display   = (v === 'calendar') ? '' : 'none';
+        if (titleEl)   titleEl.textContent = (v === 'weeks') ? 'The next two weeks' : 'Full calendar';
+      });
+    });
   } catch(err){
     if (agendaEl) agendaEl.innerHTML =
       '<p class="text-soft" style="padding:1rem">Could not load events. <a href="https://palmasolabp.org/calendar/" target="_blank" rel="noopener">See the park calendar →</a></p>';
@@ -761,6 +1008,7 @@ async function loadEventsPage(opts){
 async function loadEvents(containerId, maxItems=8){
   const el = document.getElementById(containerId);
   if (!el) return [];
+  injectEventStyles();
   try {
     const [events, series] = await Promise.all([
       fetchTab(TAB.events).catch(()=>[]), fetchTab(TAB.series).catch(()=>[])

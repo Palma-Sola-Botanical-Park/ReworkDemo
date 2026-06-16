@@ -25,13 +25,21 @@ There are **three genuinely different kinds** of thing the park puts on. They ar
 
 The expander **only** handles clean weekly rules. If you can't write the schedule as "every {weekday} at {time}," it is *not* a class — make it a series of dated events. (This is why a "monthly volunteer day" is a series, not a class: there's no weekly rule to compute, and each one differs.)
 
-### The three views on events.html
+### The views on events.html
 
-1. **Next two weeks** — one merged, chronological agenda: one-off events + series sessions + *class instances expanded inside the window*. This is where the **category filter** lives. Park **closures preempt** everything in their window.
-2. **Further ahead** — dated one-offs + series sessions beyond the window. **No expanded class instances** (that's what kept the old calendar spamming "Zumba" to infinity).
-3. **The rhythm rail** (sidebar) — the standing **weekly schedule** (each class shown *once*) + a **"This season's series"** index (each series shown *once*, linking to Bev's flyer).
+The main column has a **toggle**: **"Next 2 weeks" ⇄ "Full calendar"** (defaults to 2 weeks).
 
-So a standing class appears as a **dated row** in view 1, a **schedule line** in view 3, and **never** in view 2. No duplication, no infinity.
+1. **Next two weeks** — one merged, chronological agenda of rich cards: one-off events + series sessions + *class instances expanded inside the window*. This is where the **category filter** lives. Park **closures preempt** everything in their window. Date blocks are **weekday-colored** (see below).
+2. **Full calendar** — the long-range scan. A **month grid on desktop / grouped scrolling list on phone**, covering every dated event from the 1st of the current month onward. Deliberately **spartan**: date + title + a tap to details, **no badges, no descriptions, and NO weekly class instances** (those are a rule, not a calendar entry — they'd spam "Zumba" to infinity). This replaces the old "Further ahead" card list.
+3. **The rhythm rail** (sidebar) — an optional **"Save the Date"** panel up top (marquee events, see below), then the standing **weekly schedule** (each class shown *once*) + the **"Ongoing series"** index (each series shown *once*, linking to Bev's flyer).
+
+So a standing class appears as a **dated card** in the 2-week view, a **schedule line** in the rail, and **never** in the month calendar. No duplication, no infinity.
+
+**Weekday color-coding.** Each weekday has its own muted hue (Mon red-ish, Tue gold-ish … Sun rose), used on the date blocks (2-week cards) and the chips/dots (calendar). Same color down a column = same weekday, so the eye feels the days passing instead of a wall of identical green. The palette is intentionally *muted* so it doesn't fight the park greens.
+
+**Card anatomy (2-week view).** Wider **colored date block** carrying weekday + month + day + time; title line reads `**Title**, Instructor` (instructor for classes only); badges **right-justified** on the title row (they wrap below the title on phones); description with its inline link; the "Part of the … series →" line; and a single **Register →** button when needed.
+
+**Save the Date rail.** A flagged marquee panel for the biggies people ask about months out — Holiday Nights, the gala. Set **`save_the_date = yes`** on the event row (just the *first* row if it's a multi-day run entered as separate days — the rail dedupes by title and shows at most 2, soonest first). Each shows ⭐ title + date + flyer link, and stays pinned no matter how far out it is. The same row still flows into the calendar on its actual date.
 
 ---
 
@@ -90,6 +98,7 @@ Keep what's there (`display`, `date`, `time`, `title`, `description`, `link_url`
 | `cost` | **NEW** | no | Cost badge; blank or `Free` if none. | `$5/rock` |
 | `fundraiser` | **NEW** | no | `yes` adds a Fundraiser badge. | `yes` |
 | `kid_friendly` | **NEW** | no | `yes` adds a "👪 Kid-friendly" badge. A *flag*, not a category — a Workshop can be kid-friendly without being "Family & Kids" (which means aimed AT kids). | `yes` |
+| `save_the_date` | **NEW** | no | `yes` pins this event to the **Save the Date** rail (marquee events like Holiday Nights / the gala). For a multi-day run entered as separate day-rows, flag just the **first** row — the rail dedupes by title and shows at most 2. | `yes` |
 | `closes_park` | **NEW** | no | `yes` → closure notice + preempts the window (§3). Pair with `category = Private`. | `yes` |
 
 ### 4b. `classes` tab — ADAPT (add columns), and REMOVE the fake series

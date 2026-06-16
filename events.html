@@ -11,7 +11,7 @@
   @media (min-width: 880px) {
     .events-layout { grid-template-columns: 1fr 360px; gap: 3rem; }
   }
-  .agenda-list { display: flex; flex-direction: column; gap: .9rem; }
+  .agenda-list { display: flex; flex-direction: column; }
 
   /* Category filter */
   .event-filters { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.25rem; }
@@ -23,35 +23,6 @@
   .ev-filter-btn:hover { border-color: var(--green-mid, #2d6a35); }
   .ev-filter-btn.active { background: var(--green-mid, #2d6a35); color: #fff; border-color: var(--green-mid, #2d6a35); }
 
-  /* Badges */
-  .ev-badges { display: flex; flex-wrap: wrap; gap: .4rem; margin: .6rem 0 .2rem; }
-  .ev-badge {
-    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .01em;
-    padding: .22rem .55rem; border-radius: 6px; line-height: 1.3; white-space: nowrap;
-  }
-  .ev-badge-free { background: #e3f0e2; color: #2d6a35; }
-  .ev-badge-cost { background: #f6ecca; color: #7a5a12; }
-  .ev-badge-reg  { background: #e2edf6; color: #2b5d86; }
-  .ev-badge-fund { background: #fbe6d6; color: #9a5a1e; }
-  .ev-badge-kid  { background: #e8e3f3; color: #5d4a8a; }
-
-  .ev-inline-link { color: var(--green-mid, #2d6a35); font-weight: 600; white-space: nowrap; }
-
-  .ev-series { font-size: .82rem; color: var(--text-soft, #5a5a4f); margin-top: .35rem; }
-  .ev-series-link { color: var(--green-mid, #2d6a35); font-weight: 600; }
-  .ev-time { font-size: .8rem; color: #999; margin-top: .15rem; }
-  .ev-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
-
-  /* Closure notice */
-  .agenda-closure .event-datebox { background: #7c7c7c !important; }
-  .agenda-closure h4 { color: #8a3b3b; }
-
-  /* Further-ahead heading */
-  .ahead-heading {
-    font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--green-deep, #1e3a24);
-    margin: 2.25rem 0 1rem; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,.08);
-  }
-
   /* Weekly schedule rows */
   .sched-list { display: flex; flex-direction: column; gap: .6rem; }
   .sched-row {
@@ -62,7 +33,6 @@
   .sched-day span { color: #888; margin-left: .4rem; }
   .sched-body { font-size: .92rem; margin-top: .15rem; line-height: 1.4; }
   .sched-cost { color: #7a5a12; }
-  .sched-actions { margin-top: .3rem; }
   .sched-link, .series-link { color: var(--green-mid, #2d6a35); font-weight: 600; font-size: .85rem; }
 
   /* Series index cards */
@@ -74,12 +44,6 @@
   .series-card h4 { margin: 0 0 .4rem; font-size: 1.02rem; color: var(--green-deep, #1e3a24); }
   .series-card p { font-size: .88rem; color: var(--text-soft, #5a5a4f); line-height: 1.55; margin: .5rem 0 .4rem; }
   .series-actions { margin-top: .3rem; }
-
-  /* Director note */
-  .events-note {
-    margin-top: 1.75rem; font-size: .84rem; color: var(--text-soft, #5a5a4f);
-    background: var(--sand, #f1ead6); padding: 1rem; border-radius: 8px; line-height: 1.65;
-  }
 </style>
 </head>
 <body>
@@ -103,29 +67,41 @@
   <div class="section-inner">
     <div class="events-layout">
 
-      <!-- MAIN — next two weeks, then further ahead -->
+      <!-- MAIN — toggle between the 2-week agenda and the full calendar -->
       <div>
-        <span class="label">What's On</span>
-        <h2 class="section-title" style="margin-bottom:1rem">The next two weeks</h2>
-
-        <div id="eventFilters" class="event-filters"></div>
-        <div id="agenda" class="agenda-list">
-          <p class="text-soft">Loading events…</p>
+        <div class="ev-viewbar">
+          <div>
+            <span class="label">What's On</span>
+            <h2 class="section-title" id="viewTitle" style="margin:0">The next two weeks</h2>
+          </div>
+          <div class="ev-viewtoggle">
+            <button class="ev-vbtn active" data-view="weeks">Next 2 weeks</button>
+            <button class="ev-vbtn" data-view="calendar">Full calendar</button>
+          </div>
         </div>
 
-        <h3 id="aheadHeading" class="ahead-heading" style="display:none">Further ahead</h3>
-        <div id="ahead" class="agenda-list"></div>
+        <!-- 2-WEEK VIEW: rich cards + category filter -->
+        <div id="view-weeks">
+          <div id="eventFilters" class="event-filters"></div>
+          <div id="agenda" class="agenda-list">
+            <p class="text-soft">Loading events…</p>
+          </div>
+        </div>
 
-        <div class="events-note">
-          📅 <strong>Kept current by the park.</strong> This calendar updates automatically from our schedule —
-          weekly classes show on their actual dates here, and the whole season's special events sit under
-          <em>Further ahead</em>. Use the filters to narrow by type, and look for the
-          <strong style="color:var(--gold)">Register</strong> button where sign-up is needed.
+        <!-- FULL CALENDAR: month grid (desktop) / grouped list (phone) -->
+        <div id="view-calendar" style="display:none">
+          <div id="monthGrid" class="month-grid"></div>
+          <div id="monthList" class="month-list"></div>
         </div>
       </div>
 
-      <!-- RAIL — weekly rhythm + series index + newsletter -->
+      <!-- RAIL — save the date, weekly rhythm, series index -->
       <div>
+        <div id="saveDateWrap" style="display:none;margin-bottom:1.9rem">
+          <span class="label">Save the Date</span>
+          <div id="saveDate" class="std-list" style="margin-top:.5rem"></div>
+        </div>
+
         <span class="label">Every Week</span>
         <h2 class="section-title" style="font-size:1.3rem;margin-bottom:.9rem">Weekly schedule</h2>
         <div id="weeklySchedule" class="sched-list">
@@ -135,19 +111,6 @@
         <span class="label" style="margin-top:1.9rem;display:inline-block">Series &amp; Programs</span>
         <h2 class="section-title" style="font-size:1.3rem;margin-bottom:.9rem">Ongoing series</h2>
         <div id="seriesIndex" class="series-list"></div>
-
-        <div style="margin-top:1.9rem">
-          <span class="label">Stay in the Loop</span>
-          <div class="info-card" style="margin-top:.5rem">
-            <div class="info-card-icon">📬</div>
-            <h3>Newsletter</h3>
-            <p>Monthly updates on what's blooming, events, and volunteer news.</p>
-            <div style="display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap">
-              <input type="email" placeholder="your@email.com" style="flex:1;min-width:140px;padding:.5rem .75rem;border:1px solid #ccc;border-radius:5px;font-size:.88rem;font-family:inherit">
-              <button class="btn btn-gold btn-sm">Subscribe</button>
-            </div>
-          </div>
-        </div>
       </div>
 
     </div>
@@ -179,9 +142,12 @@ loadAnnouncements('announcementsList').then(() => {
 
 loadEventsPage({
   agenda:       'agenda',
-  ahead:        'ahead',
-  aheadHeading: 'aheadHeading',
   filters:      'eventFilters',
+  monthGrid:    'monthGrid',
+  monthList:    'monthList',
+  saveDate:     'saveDate',
+  saveDateWrap: 'saveDateWrap',
+  viewTitle:    'viewTitle',
   schedule:     'weeklySchedule',
   series:       'seriesIndex'
 });
