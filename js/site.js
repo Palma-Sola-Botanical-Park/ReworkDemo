@@ -647,7 +647,7 @@ function renderAgendaCard(item, seriesMap){
   const instr = (item.kind==='class' && item.instructor)
     ? `<span class="ev-instr">, ${_evEsc(item.instructor)}</span>` : '';
 
-  return `<div class="event-card ev-card" data-category="${_evEsc(item.category)}">
+  return `<div class="event-card ev-card" data-category="${_evEsc(item.category)}"${item.kid_friendly?' data-kid="1"':''}>
     ${dateBox}
     <div class="event-info">
       <div class="ev-titlerow">
@@ -787,22 +787,29 @@ function renderMonthList(groups, seriesMap){
 function buildEventFilters(container, cardContainers){
   if (!container) return;
   const present = new Set();
+  let hasKid = false;
   cardContainers.forEach(c => c && c.querySelectorAll('[data-category]')
-    .forEach(el => { const v = el.getAttribute('data-category'); if (v) present.add(v); }));
+    .forEach(el => {
+      const v = el.getAttribute('data-category'); if (v) present.add(v);
+      if (el.getAttribute('data-kid') === '1') hasKid = true;
+    }));
   const order = EVENT_CATEGORIES.map(c => c.key).filter(k => present.has(k));
-  if (order.length < 2){ container.innerHTML = ''; return; }   // not worth a filter
+  if (order.length < 2 && !hasKid){ container.innerHTML = ''; return; }   // not worth a filter
   const btn = (cat,label,active) =>
     `<button class="ev-filter-btn${active?' active':''}" data-cat="${_evEsc(cat)}">${label}</button>`;
   container.innerHTML = btn('__all','All',true) +
-    order.map(k => { const m = catMeta(k); return btn(k, `${m.emoji} ${k}`, false); }).join('');
+    order.map(k => { const m = catMeta(k); return btn(k, `${m.emoji} ${k}`, false); }).join('') +
+    (hasKid ? btn('__kid','👪 Kid-friendly',false) : '');
   container.querySelectorAll('.ev-filter-btn').forEach(b => {
     b.addEventListener('click', () => {
       container.querySelectorAll('.ev-filter-btn').forEach(x => x.classList.remove('active'));
       b.classList.add('active');
       const cat = b.getAttribute('data-cat');
       cardContainers.forEach(c => c && c.querySelectorAll('[data-category]').forEach(el => {
-        const show = cat === '__all' || el.getAttribute('data-always') === '1'
-                  || el.getAttribute('data-category') === cat;
+        const always = el.getAttribute('data-always') === '1';
+        const show = always || cat === '__all'
+                  || (cat === '__kid' ? el.getAttribute('data-kid') === '1'
+                                      : el.getAttribute('data-category') === cat);
         el.style.display = show ? '' : 'none';
       }));
     });
@@ -819,16 +826,16 @@ function injectEventStyles(){
     border:1px solid #e7e2d6;border-radius:14px;padding:0;overflow:hidden;
     box-shadow:0 1px 3px rgba(40,50,30,.06);margin-bottom:1rem}
   .ev-card .event-info{flex:1;min-width:0;padding:.85rem 1.1rem .95rem 0}
-  .ev-card .ev-date{flex:0 0 auto;width:76px;display:flex;flex-direction:column;
+  .ev-card .ev-date{flex:0 0 auto;width:84px;display:flex;flex-direction:column;
     align-items:center;justify-content:center;gap:.05rem;color:#fff;padding:.6rem .3rem;text-align:center}
   .ev-date .ev-dow{font-size:.7rem;font-weight:800;letter-spacing:.08em;opacity:.92}
   .ev-date .ev-dnum{font-size:1.7rem;font-weight:800;line-height:1}
   .ev-date .ev-dmo{font-size:.7rem;font-weight:700;letter-spacing:.08em;opacity:.92;text-transform:uppercase}
-  .ev-date .ev-dtime{margin-top:.25rem;font-size:.66rem;font-weight:600;line-height:1.2;
-    opacity:.95;border-top:1px solid rgba(255,255,255,.35);padding-top:.25rem}
+  .ev-date .ev-dtime{margin-top:.3rem;font-size:.8rem;font-weight:700;line-height:1.25;
+    border-top:1px solid rgba(255,255,255,.4);padding-top:.3rem}
   .ev-titlerow{display:flex;justify-content:space-between;align-items:flex-start;
     gap:.6rem;flex-wrap:wrap}
-  .ev-title{margin:0;font-size:1.18rem;line-height:1.25;flex:1 1 60%;min-width:0}
+  .ev-title{margin:0;font-size:1.18rem;line-height:1.25;flex:1 1 auto;min-width:0}
   .ev-title .ev-instr{font-weight:500;color:var(--text-soft,#6b6f63)}
   .ev-titlerow .ev-badges{margin:.1rem 0 0;justify-content:flex-end}
   .ev-card .event-info > p{margin:.45rem 0 0;color:var(--text-soft,#54584c);line-height:1.5}
@@ -900,7 +907,7 @@ function injectEventStyles(){
   @media (max-width:760px){
     .month-grid{display:none}
     .month-list{display:block}
-    .ev-card .ev-date{width:64px}
+    .ev-card .ev-date{width:72px}
     .ev-date .ev-dnum{font-size:1.45rem}
     .ev-title{flex-basis:100%}
     .ev-titlerow .ev-badges{justify-content:flex-start}
