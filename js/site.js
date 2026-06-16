@@ -525,7 +525,8 @@ function _eventItem(e){
     kind: _isYes(e.closes_park) ? 'closure' : 'event',
     date, title: e.title, time: e.time, description: e.description,
     category: eventCategory(e), cost: e.cost, series: e.series,
-    fundraiser: _isYes(e.fundraiser), registration_url: e.registration_url,
+    fundraiser: _isYes(e.fundraiser), kid_friendly: _isYes(e.kid_friendly),
+    registration_url: e.registration_url,
     instructor: '', _link: PSBP.rowLink(e)
   };
 }
@@ -549,7 +550,8 @@ function expandClasses(classes, start, end){
         kind: 'class', date: new Date(cur), title: c.title, time: c.time,
         instructor: c.instructor, description: c.description,
         category: eventCategory(c), cost: c.cost, series: '',
-        fundraiser: false, registration_url: c.registration_url, _link: PSBP.rowLink(c)
+        fundraiser: false, kid_friendly: _isYes(c.kid_friendly),
+        registration_url: c.registration_url, _link: PSBP.rowLink(c)
       });
     }
   });
@@ -559,28 +561,25 @@ function expandClasses(classes, start, end){
 // Resolve a series row from a session's `series` name.
 const _seriesOf = (item, map) => item.series ? map[item.series.trim().toLowerCase()] : null;
 
-// Details link: the event's own link, else fall back to its series flyer.
-function _detailsLink(item, seriesMap){
-  let url  = item._link && item._link.url;
-  let text = item._link && item._link.text;
-  if (!url){
-    const s = _seriesOf(item, seriesMap);
-    if (s && s.flyer_url){ url = s.flyer_url; text = text || s.flyer_text || 'See the flyer'; }
-  }
+// Inline prose link tacked onto the end of a description — the words ARE the
+// link, no button. Uses link_text, or a quiet "more" default when blank.
+function _inlineLink(item){
+  const url  = item._link && item._link.url;
   if (!url) return '';
-  return PSBP.linkTag(url, '📄 ' + (text || 'Details'),
-    { title: item.title || 'Details', back: _BACK(), className: 'btn btn-sm btn-green', style:'margin-top:.5rem' });
+  const text = (item._link && item._link.text) || 'more';
+  return ' ' + PSBP.linkTag(url, _evEsc(text) + ' →',
+    { title: item.title || '', back: _BACK(), className: 'ev-inline-link' });
 }
 
-// "Part of {series}" line, linking the flyer when present.
+// "Part of the {series} →" sentence, the series name linking the flyer.
 function _seriesLine(item, seriesMap){
   if (!item.series) return '';
   const label = item.series.trim();
   const s = _seriesOf(item, seriesMap);
   if (s && s.flyer_url)
-    return `<div class="ev-series">Part of ${PSBP.linkTag(s.flyer_url, _evEsc(label)+' →',
+    return `<div class="ev-series">Part of the ${PSBP.linkTag(s.flyer_url, _evEsc(label)+' →',
       { title: label, back: _BACK(), className:'ev-series-link' })}</div>`;
-  return `<div class="ev-series">Part of ${_evEsc(label)}</div>`;
+  return `<div class="ev-series">Part of the ${_evEsc(label)}</div>`;
 }
 
 function _badges(item){
@@ -588,6 +587,8 @@ function _badges(item){
   const cm = catMeta(item.category);
   if (item.category)
     out.push(`<span class="ev-badge" style="background:${cm.color}1a;color:${cm.color}">${cm.emoji} ${_evEsc(item.category)}</span>`);
+  if (item.kid_friendly)
+    out.push(`<span class="ev-badge ev-badge-kid">👪 Kid-friendly</span>`);
   if (/^free$/i.test((item.cost||'').trim()))
     out.push(`<span class="ev-badge ev-badge-free">Free</span>`);
   else if (item.cost)
@@ -616,16 +617,20 @@ function renderAgendaCard(item, seriesMap){
     ? PSBP.linkTag(item.registration_url, 'Register →',
         { title:item.title||'Register', back:_BACK(), className:'btn btn-sm btn-gold', style:'margin-top:.5rem' })
     : '';
+  // Description prose with the link tacked on inline (no Details button).
+  const descText = item.description ? clip(item.description,140) : '';
+  const inline   = _inlineLink(item);
+  const descHtml = (descText || inline) ? `<p>${descText}${inline}</p>` : '';
   return `<div class="event-card" data-category="${_evEsc(item.category)}">
     <div class="event-datebox"><div class="mo">${_mo(d)}</div><div class="dy">${d.getDate()}</div></div>
     <div class="event-info">
       <h4>${_evEsc(item.title||'')}</h4>
       ${item.kind==='class' && item.instructor ? `<div class="class-instructor">with ${_evEsc(item.instructor)}</div>` : ''}
-      ${item.description ? `<p>${clip(item.description,140)}</p>` : ''}
+      ${descHtml}
       ${item.time ? `<p class="ev-time">${_evEsc(item.time)}</p>` : ''}
       ${_badges(item)}
       ${_seriesLine(item, seriesMap)}
-      <div class="ev-actions">${_detailsLink(item, seriesMap)}${reg}</div>
+      ${reg ? `<div class="ev-actions">${reg}</div>` : ''}
     </div>
   </div>`;
 }
@@ -634,16 +639,15 @@ function renderAgendaCard(item, seriesMap){
 function renderScheduleRow(c){
   const dayLabel = c.day || formatWeekday(c.weekday) || '';
   const link = PSBP.rowLink(c);
-  const details = link.url
-    ? PSBP.linkTag(link.url, (link.text||'Details')+' →',
+  const more = link.url
+    ? ' <span class="text-soft">·</span> ' + PSBP.linkTag(link.url, (link.text||'more')+' →',
         { title:c.title||'', back:_BACK(), className:'sched-link' })
     : '';
   return `<div class="sched-row">
     <div class="sched-day">${_evEsc(dayLabel)}${c.time?`<span>${_evEsc(c.time)}</span>`:''}</div>
     <div class="sched-body">
       <strong>${_evEsc(c.title||'')}</strong>${c.instructor?` <span class="text-soft">· ${_evEsc(c.instructor)}</span>`:''}
-      ${c.cost?` <span class="sched-cost">· ${_evEsc(c.cost)}</span>`:''}
-      ${details?`<div class="sched-actions">${details}</div>`:''}
+      ${c.cost?` <span class="sched-cost">· ${_evEsc(c.cost)}</span>`:''}${more}
     </div>
   </div>`;
 }

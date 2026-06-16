@@ -76,7 +76,7 @@ This is the heavyweight version of the future **overrides** idea (a sick instruc
 
 **Links travel in pairs (standard across all tabs).** A content link is two columns side by side: the URL (`link_url`, or the semantic `flyer_url` on the series tab) **plus** a label column (`link_text` / `flyer_text`). Blank label → the code picks a sensible default ("Read More" / "Details"); filled → your exact wording ("See the flyer →", "RSVP →"). The adjacency is for *your* eyes only; the code finds them by name. A `.pdf` or published Google Doc opens framed in `viewer.html`; other URLs open normally.
 
-**Exception — action buttons have no label column.** `registration_url` is an *action*, not a content link, so its button label is **hardcoded "Register →"**. Don't add a `registration_url_text` column. (Same would apply to any future fixed-action button.)
+**Links render as prose, not buttons.** On an event card, the link is the words at the **end of the description** (using `link_text`, or a quiet "more →" when blank) — the sentence *is* the link. A **series session** instead shows a "Part of the *{series}* →" line whose series name links the flyer. The **only button** on a card is **Register →**, and only when `registration_url` is set — because registering is an action, not reading. (This keeps cards calm: date chip + badges + a sentence with a link, plus at most one Register button.)
 
 ### 4a. `events` tab — ADAPT (add columns)
 
@@ -89,6 +89,7 @@ Keep what's there (`display`, `date`, `time`, `title`, `description`, `link_url`
 | `registration_url` | **NEW** | no | If set, card shows **Register →**. | `https://…` |
 | `cost` | **NEW** | no | Cost badge; blank or `Free` if none. | `$5/rock` |
 | `fundraiser` | **NEW** | no | `yes` adds a Fundraiser badge. | `yes` |
+| `kid_friendly` | **NEW** | no | `yes` adds a "👪 Kid-friendly" badge. A *flag*, not a category — a Workshop can be kid-friendly without being "Family & Kids" (which means aimed AT kids). | `yes` |
 | `closes_park` | **NEW** | no | `yes` → closure notice + preempts the window (§3). Pair with `category = Private`. | `yes` |
 
 ### 4b. `classes` tab — ADAPT (add columns), and REMOVE the fake series
