@@ -74,6 +74,7 @@ const SHEET_ID     = '12gRB-c4gND8qJWPmwBoV2X4adqTfRROYHtA8jR4-kS4';
 const TAB = {
   events:        992316234,
   classes:       141740803,
+  series:        926436540,
   volunteer:     269225929,
   announcements: 673905300,
   newsletters:   1749891854,
@@ -127,7 +128,11 @@ const KNOWN_HEADERS = new Set([
   'display','date','pinned','headline','subhead','blurb','hero_image','intro',
   'image1','image1_caption','aside','body2','title','role','name','bio','body',
   'description','photo_url','link','link_text','url','time','start','end',
-  'location','status','note','category','tags'
+  'location','status','note','category','tags',
+  // events / classes / series model (see EVENTS_DATA_MODEL.md)
+  'series','weekday','day','instructor','link_url','registration_url','cost',
+  'fundraiser','closes_park','active','active_from','active_to',
+  'flyer_url','flyer_text'
 ]);
 const normHeader = s => (s || '').trim().toLowerCase().replace(/\s+/g, '_');
 
@@ -432,75 +437,355 @@ function clip(s, n = 140) {
   return (lastSpace > 40 ? cut.slice(0, lastSpace) : cut).replace(/[\s,;:.!–—-]+$/, '') + '…';
 }
 
-async function loadEvents(containerId, maxItems=8) {
+/* ============================================================
+   EVENTS ENGINE  —  events.html (see EVENTS_DATA_MODEL.md)
+
+   Three kinds of content:
+     • one-off EVENT      → events tab (a dated row)
+     • standing CLASS     → classes tab (a weekday RULE, expanded
+                            into dated instances only inside a window)
+     • SERIES             → series tab (a label bundling dated events)
+
+   Three views, all rendered by loadEventsPage():
+     1. AGENDA   — next 14 days, MERGED: events + series sessions +
+                   expanded class instances, sorted by date.
+     2. AHEAD    — dated events/sessions beyond the window (NO class
+                   instances — that's what stops infinite repeats).
+     3. RHYTHM   — weekly class SCHEDULE (each class once) + SERIES
+                   index (each series once, with its flyer link).
+
+   Closures (events with closes_park = yes) announce the park is shut
+   and SUPPRESS any other programming on that date.
+
+   loadEvents()/loadClasses() are kept as simpler single-list
+   renderers for other pages (e.g. a homepage teaser).
+   ============================================================ */
+
+// Controlled category vocabulary → badge emoji + accent colour.
+// Order here is also the filter-button order. Keep in sync with the
+// sheet's `category` dropdown (the 8 terms in EVENTS_DATA_MODEL.md §2).
+const EVENT_CATEGORIES = [
+  { key:'Fitness & Wellness', emoji:'🧘', color:'#5b8db8' },
+  { key:'Talks & Learning',   emoji:'📚', color:'#2d6a35' },
+  { key:'Workshops',          emoji:'✂️', color:'#b07d2b' },
+  { key:'Family & Kids',      emoji:'🎨', color:'#c8643c' },
+  { key:'Arts & Music',       emoji:'🎵', color:'#8a5a9b' },
+  { key:'Community',          emoji:'🎉', color:'#d29a1f' },
+  { key:'Volunteer',          emoji:'🌱', color:'#4a8b3b' },
+  { key:'Private',            emoji:'🔒', color:'#8a8a8a' },
+];
+const catMeta = key => EVENT_CATEGORIES.find(c => c.key === (key||'').trim())
+  || { key:(key||'').trim(), emoji:'📅', color:'#8a8a8a' };
+
+// Map a row's category, tolerating the legacy `type` values during migration.
+function eventCategory(row){
+  const c = (row.category || row.type || '').trim();
+  const legacy = { education:'Talks & Learning', social:'Community',
+                   event:'Community', wedding:'Private' };
+  return legacy[c.toLowerCase()] || c;
+}
+
+const _evEsc = s => (s==null?'':(''+s)).replace(/[&<>"']/g,
+  c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const _isYes = v => /^(yes|y|true|1)$/i.test(((v||'')+'').trim());
+const _BACK  = () => location.pathname.split('/').pop() || 'events.html';
+
+// 'YYYY-MM-DD' → local Date at noon (noon anchor avoids timezone day-shift).
+function parseDateLocal(s){
+  if (!s) return null;
+  const d = new Date(((s+'').trim()) + 'T12:00');
+  return isNaN(d) ? null : d;
+}
+const _ymd = d => d.getFullYear() + '-' +
+  String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+const _mo  = d => d.toLocaleDateString('en-US',{month:'short'}).toUpperCase();
+
+const DAY_CODES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const DAY_FULL  = {Sun:'Sundays',Mon:'Mondays',Tue:'Tuesdays',Wed:'Wednesdays',
+                   Thu:'Thursdays',Fri:'Fridays',Sat:'Saturdays'};
+const formatWeekday = w => (w||'').split(',')
+  .map(s => DAY_FULL[s.trim().slice(0,3)] || s.trim()).filter(Boolean).join(' & ');
+
+// Sort by date, then by start time (best-effort time parse).
+function _timeKey(t){
+  const m = (t||'').match(/(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m)?/i);
+  if (!m) return 9999;
+  let h = +m[1]; const min = +(m[2]||0); const ap = (m[3]||'').toLowerCase();
+  if (ap.startsWith('p') && h < 12) h += 12;
+  if (ap.startsWith('a') && h === 12) h = 0;
+  return h*60 + min;
+}
+const _byDateThenTime = (a,b) => (a.date - b.date) || (_timeKey(a.time) - _timeKey(b.time));
+
+// Turn one event row into an agenda item.
+function _eventItem(e){
+  const date = parseDateLocal(e.date);
+  if (!date) return null;
+  return {
+    kind: _isYes(e.closes_park) ? 'closure' : 'event',
+    date, title: e.title, time: e.time, description: e.description,
+    category: eventCategory(e), cost: e.cost, series: e.series,
+    fundraiser: _isYes(e.fundraiser), registration_url: e.registration_url,
+    instructor: '', _link: PSBP.rowLink(e)
+  };
+}
+
+// Expand visible classes into dated instances inside [start, end],
+// honouring weekday rule(s) and any active_from / active_to season.
+function expandClasses(classes, start, end){
+  const out = [];
+  classes.forEach(c => {
+    const days = (c.weekday||'').split(',').map(s => DAY_CODES.indexOf(s.trim().slice(0,3)))
+                  .filter(i => i >= 0);
+    if (!days.length) return;                 // no weekday rule → not expandable
+    const from = parseDateLocal(c.active_from);
+    const to   = parseDateLocal(c.active_to);
+    const cur  = new Date(start);
+    for (; cur <= end; cur.setDate(cur.getDate()+1)){
+      if (!days.includes(cur.getDay())) continue;
+      if (from && cur < from) continue;
+      if (to   && cur > to)   continue;
+      out.push({
+        kind: 'class', date: new Date(cur), title: c.title, time: c.time,
+        instructor: c.instructor, description: c.description,
+        category: eventCategory(c), cost: c.cost, series: '',
+        fundraiser: false, registration_url: c.registration_url, _link: PSBP.rowLink(c)
+      });
+    }
+  });
+  return out;
+}
+
+// Resolve a series row from a session's `series` name.
+const _seriesOf = (item, map) => item.series ? map[item.series.trim().toLowerCase()] : null;
+
+// Details link: the event's own link, else fall back to its series flyer.
+function _detailsLink(item, seriesMap){
+  let url  = item._link && item._link.url;
+  let text = item._link && item._link.text;
+  if (!url){
+    const s = _seriesOf(item, seriesMap);
+    if (s && s.flyer_url){ url = s.flyer_url; text = text || s.flyer_text || 'See the flyer'; }
+  }
+  if (!url) return '';
+  return PSBP.linkTag(url, '📄 ' + (text || 'Details'),
+    { title: item.title || 'Details', back: _BACK(), className: 'btn btn-sm btn-green', style:'margin-top:.5rem' });
+}
+
+// "Part of {series}" line, linking the flyer when present.
+function _seriesLine(item, seriesMap){
+  if (!item.series) return '';
+  const label = item.series.trim();
+  const s = _seriesOf(item, seriesMap);
+  if (s && s.flyer_url)
+    return `<div class="ev-series">Part of ${PSBP.linkTag(s.flyer_url, _evEsc(label)+' →',
+      { title: label, back: _BACK(), className:'ev-series-link' })}</div>`;
+  return `<div class="ev-series">Part of ${_evEsc(label)}</div>`;
+}
+
+function _badges(item){
+  const out = [];
+  const cm = catMeta(item.category);
+  if (item.category)
+    out.push(`<span class="ev-badge" style="background:${cm.color}1a;color:${cm.color}">${cm.emoji} ${_evEsc(item.category)}</span>`);
+  if (/^free$/i.test((item.cost||'').trim()))
+    out.push(`<span class="ev-badge ev-badge-free">Free</span>`);
+  else if (item.cost)
+    out.push(`<span class="ev-badge ev-badge-cost">${_evEsc(item.cost)}</span>`);
+  if (item.registration_url)
+    out.push(`<span class="ev-badge ev-badge-reg">Sign-up</span>`);
+  if (item.fundraiser)
+    out.push(`<span class="ev-badge ev-badge-fund">💛 Fundraiser</span>`);
+  return out.length ? `<div class="ev-badges">${out.join('')}</div>` : '';
+}
+
+// One agenda/ahead card (events, series sessions, class instances, closures).
+function renderAgendaCard(item, seriesMap){
+  const d = item.date;
+  if (item.kind === 'closure'){
+    return `<div class="event-card agenda-closure" data-category="Private" data-always="1">
+      <div class="event-datebox"><div class="mo">${_mo(d)}</div><div class="dy">${d.getDate()}</div></div>
+      <div class="event-info">
+        <h4>🔒 Park closed${item.title?` — ${_evEsc(item.title)}`:''}</h4>
+        <p>${item.description ? clip(item.description,160) : 'The park is closed to the public this day for a private event — please plan your visit around it.'}</p>
+        ${item.time?`<p class="ev-time">${_evEsc(item.time)}</p>`:''}
+      </div>
+    </div>`;
+  }
+  const reg = item.registration_url
+    ? PSBP.linkTag(item.registration_url, 'Register →',
+        { title:item.title||'Register', back:_BACK(), className:'btn btn-sm btn-gold', style:'margin-top:.5rem' })
+    : '';
+  return `<div class="event-card" data-category="${_evEsc(item.category)}">
+    <div class="event-datebox"><div class="mo">${_mo(d)}</div><div class="dy">${d.getDate()}</div></div>
+    <div class="event-info">
+      <h4>${_evEsc(item.title||'')}</h4>
+      ${item.kind==='class' && item.instructor ? `<div class="class-instructor">with ${_evEsc(item.instructor)}</div>` : ''}
+      ${item.description ? `<p>${clip(item.description,140)}</p>` : ''}
+      ${item.time ? `<p class="ev-time">${_evEsc(item.time)}</p>` : ''}
+      ${_badges(item)}
+      ${_seriesLine(item, seriesMap)}
+      <div class="ev-actions">${_detailsLink(item, seriesMap)}${reg}</div>
+    </div>
+  </div>`;
+}
+
+// One weekly-schedule row (a class shown ONCE, as a rule not an instance).
+function renderScheduleRow(c){
+  const dayLabel = c.day || formatWeekday(c.weekday) || '';
+  const link = PSBP.rowLink(c);
+  const details = link.url
+    ? PSBP.linkTag(link.url, (link.text||'Details')+' →',
+        { title:c.title||'', back:_BACK(), className:'sched-link' })
+    : '';
+  return `<div class="sched-row">
+    <div class="sched-day">${_evEsc(dayLabel)}${c.time?`<span>${_evEsc(c.time)}</span>`:''}</div>
+    <div class="sched-body">
+      <strong>${_evEsc(c.title||'')}</strong>${c.instructor?` <span class="text-soft">· ${_evEsc(c.instructor)}</span>`:''}
+      ${c.cost?` <span class="sched-cost">· ${_evEsc(c.cost)}</span>`:''}
+      ${details?`<div class="sched-actions">${details}</div>`:''}
+    </div>
+  </div>`;
+}
+
+// One series-index card (a series shown ONCE, with its flyer link).
+function renderSeriesCard(s){
+  const cm = catMeta(s.category);
+  const link = s.flyer_url
+    ? PSBP.linkTag(s.flyer_url, (s.flyer_text||'Learn more')+' →',
+        { title:s.name||'', back:_BACK(), className:'series-link' })
+    : '';
+  return `<div class="series-card">
+    <h4>${_evEsc(s.name||'')}</h4>
+    ${s.category?`<span class="ev-badge" style="background:${cm.color}1a;color:${cm.color}">${cm.emoji} ${_evEsc(s.category)}</span>`:''}
+    ${s.blurb?`<p>${_evEsc(s.blurb)}</p>`:''}
+    ${link?`<div class="series-actions">${link}</div>`:''}
+  </div>`;
+}
+
+// Build the category filter from categories actually present, and wire
+// show/hide. Closure cards (data-always="1") stay visible under every filter.
+function buildEventFilters(container, cardContainers){
+  if (!container) return;
+  const present = new Set();
+  cardContainers.forEach(c => c && c.querySelectorAll('[data-category]')
+    .forEach(el => { const v = el.getAttribute('data-category'); if (v) present.add(v); }));
+  const order = EVENT_CATEGORIES.map(c => c.key).filter(k => present.has(k));
+  if (order.length < 2){ container.innerHTML = ''; return; }   // not worth a filter
+  const btn = (cat,label,active) =>
+    `<button class="ev-filter-btn${active?' active':''}" data-cat="${_evEsc(cat)}">${label}</button>`;
+  container.innerHTML = btn('__all','All',true) +
+    order.map(k => { const m = catMeta(k); return btn(k, `${m.emoji} ${k}`, false); }).join('');
+  container.querySelectorAll('.ev-filter-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      container.querySelectorAll('.ev-filter-btn').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      const cat = b.getAttribute('data-cat');
+      cardContainers.forEach(c => c && c.querySelectorAll('[data-category]').forEach(el => {
+        const show = cat === '__all' || el.getAttribute('data-always') === '1'
+                  || el.getAttribute('data-category') === cat;
+        el.style.display = show ? '' : 'none';
+      }));
+    });
+  });
+}
+
+// ── ORCHESTRATOR for events.html ──────────────────────────────
+// opts: { agenda, ahead, aheadHeading, filters, schedule, series, windowDays, aheadMax }
+async function loadEventsPage(opts){
+  opts = opts || {};
+  const $ = id => id ? document.getElementById(id) : null;
+  const agendaEl = $(opts.agenda), aheadEl = $(opts.ahead), aheadHeadEl = $(opts.aheadHeading),
+        filtersEl = $(opts.filters), schedEl = $(opts.schedule), seriesEl = $(opts.series);
+  try {
+    const [events, classes, series] = await Promise.all([
+      fetchTab(TAB.events).catch(()=>[]),
+      fetchTab(TAB.classes).catch(()=>[]),
+      fetchTab(TAB.series).catch(()=>[]),
+    ]);
+
+    // series lookup (visible only)
+    const seriesMap = {};
+    series.filter(isWebVisible).forEach(s => { if (s.name) seriesMap[s.name.trim().toLowerCase()] = s; });
+
+    const today = new Date(); today.setHours(12,0,0,0);
+    const windowEnd = new Date(today); windowEnd.setDate(windowEnd.getDate() + (opts.windowDays || 14));
+
+    const evItems = events.filter(isWebVisible).map(_eventItem).filter(Boolean);
+    const closureDays = new Set(evItems.filter(i => i.kind === 'closure').map(i => _ymd(i.date)));
+    const notSuppressed = i => i.kind === 'closure' || !closureDays.has(_ymd(i.date));
+
+    // AGENDA — within window: events + sessions + class instances (closures preempt)
+    const classInst = expandClasses(classes.filter(isWebVisible), today, windowEnd).filter(notSuppressed);
+    const agenda = evItems.filter(i => i.date >= today && i.date <= windowEnd)
+      .filter(notSuppressed).concat(classInst).sort(_byDateThenTime);
+
+    // AHEAD — beyond window: dated events/sessions only, no class instances
+    const ahead = evItems.filter(i => i.date > windowEnd).filter(notSuppressed)
+      .sort(_byDateThenTime).slice(0, opts.aheadMax || 24);
+
+    if (agendaEl) agendaEl.innerHTML = agenda.length
+      ? agenda.map(i => renderAgendaCard(i, seriesMap)).join('')
+      : '<p class="text-soft" style="padding:1rem 0">Nothing scheduled in the next two weeks — see what\'s further ahead below.</p>';
+
+    if (aheadEl){
+      aheadEl.innerHTML = ahead.map(i => renderAgendaCard(i, seriesMap)).join('');
+      if (aheadHeadEl) aheadHeadEl.style.display = ahead.length ? '' : 'none';
+    }
+
+    buildEventFilters(filtersEl, [agendaEl, aheadEl]);
+
+    if (schedEl){
+      const cls = classes.filter(isWebVisible);
+      schedEl.innerHTML = cls.length
+        ? cls.map(renderScheduleRow).join('')
+        : '<p class="text-soft" style="font-size:.9rem">No weekly classes scheduled right now.</p>';
+    }
+
+    if (seriesEl){
+      const act = series.filter(isWebVisible).filter(s => !s.active || _isYes(s.active));
+      seriesEl.innerHTML = act.length ? act.map(renderSeriesCard).join('') : '';
+    }
+  } catch(err){
+    if (agendaEl) agendaEl.innerHTML =
+      '<p class="text-soft" style="padding:1rem">Could not load events. <a href="https://palmasolabp.org/calendar/" target="_blank" rel="noopener">See the park calendar →</a></p>';
+  }
+}
+
+// ── Simpler single-list renderers (homepage teasers, other pages) ─────
+// loadEvents: upcoming dated events only (no class expansion), same card style.
+async function loadEvents(containerId, maxItems=8){
   const el = document.getElementById(containerId);
   if (!el) return [];
   try {
-    const rows = await fetchTab(TAB.events);
-    const now = new Date();
-    const upcoming = rows
-      .filter(r => isWebVisible(r))
-      .filter(r => { try { return new Date(r.date+'T12:00') >= now; } catch { return false; } })
-      .sort((a,b) => new Date(a.date)-new Date(b.date))
-      .slice(0, maxItems);
-
-    if (!upcoming.length) {
-      el.innerHTML = '<p class="text-soft" style="padding:1.5rem">No upcoming events scheduled. Check back soon.</p>';
-      return rows;
-    }
-
-    const typeClass = t => t.includes('wed')?'wedding':t.includes('edu')?'education':t.includes('soc')?'social':'';
-    const typeLabel = t => t.includes('wed')?'💍 Wedding/Private':t.includes('edu')?'📚 Learning':t.includes('soc')?'🎉 Community':'📅 Event';
-
-    el.innerHTML = upcoming.map(e => {
-      const d = new Date(e.date+'T12:00');
-      const eLink = PSBP.rowLink(e);
-      const pdfBtn = eLink.url ? PSBP.linkTag(eLink.url, '📄 ' + (eLink.text || 'Event Details'), { title: e.title || 'Event Details', back: location.pathname.split('/').pop() || 'events.html', className: 'btn btn-sm btn-gold', style: 'margin-top:.6rem' }) : '';
-      return `<div class="event-card">
-        <div class="event-datebox">
-          <div class="mo">${d.toLocaleDateString('en-US',{month:'short'}).toUpperCase()}</div>
-          <div class="dy">${d.getDate()}</div>
-        </div>
-        <div class="event-info">
-          <h4>${e.title}</h4>
-          ${e.description?`<p>${clip(e.description,140)}</p>`:''}
-          ${e.time?`<p style="font-size:.8rem;color:#999">${e.time}</p>`:''}
-          <span class="event-type ${typeClass(e.type)}">${typeLabel(e.type)}</span>
-          ${pdfBtn}
-        </div>
-      </div>`;
-    }).join('');
-    return rows;
-  } catch(err) {
-    el.innerHTML = `<p class="text-soft" style="padding:1rem">Could not load events. <a href="https://palmasolabp.org/calendar/" target="_blank">See the park calendar →</a></p>`;
+    const [events, series] = await Promise.all([
+      fetchTab(TAB.events).catch(()=>[]), fetchTab(TAB.series).catch(()=>[])
+    ]);
+    const seriesMap = {};
+    series.filter(isWebVisible).forEach(s => { if (s.name) seriesMap[s.name.trim().toLowerCase()] = s; });
+    const today = new Date(); today.setHours(12,0,0,0);
+    const items = events.filter(isWebVisible).map(_eventItem).filter(Boolean)
+      .filter(i => i.date >= today).sort(_byDateThenTime).slice(0, maxItems);
+    el.innerHTML = items.length
+      ? items.map(i => renderAgendaCard(i, seriesMap)).join('')
+      : '<p class="text-soft" style="padding:1rem 0">No upcoming events scheduled. Check back soon.</p>';
+    return events;
+  } catch(err){
+    el.innerHTML = '<p class="text-soft" style="padding:1rem">Could not load events. <a href="https://palmasolabp.org/calendar/" target="_blank" rel="noopener">See the park calendar →</a></p>';
     return [];
   }
 }
 
-// ── CLASSES ───────────────────────────────────────────────────
-async function loadClasses(containerId) {
+// loadClasses: the weekly schedule list (each class once).
+async function loadClasses(containerId){
   const el = document.getElementById(containerId);
   if (!el) return;
   try {
-    const rows = await fetchTab(TAB.classes);
-    const visible = rows.filter(r => isWebVisible(r));
-    if (!visible.length) { el.innerHTML='<p class="text-soft">No classes currently scheduled.</p>'; return; }
-    el.innerHTML = visible.map(c => {
-      const cLink = PSBP.rowLink(c);
-      const back  = location.pathname.split('/').pop() || 'events.html';
-      const detailsBtn = cLink.url ? PSBP.linkTag(cLink.url, '📄 ' + (cLink.text || 'Details'), { title: c.title || 'Details', back: back, className: 'btn btn-sm btn-green', style: 'margin-top:.5rem' }) : '';
-      const regBtn = c.registration_url ? PSBP.linkTag(c.registration_url, 'Register →', { title: c.title || 'Register', back: back, className: 'btn btn-sm btn-gold', style: 'margin-top:.5rem' }) : '';
-      return `
-      <div class="class-card">
-        <div class="class-day">${c.day||''} <span>${c.time||''}</span></div>
-        <h4>${c.title||''}</h4>
-        ${c.instructor?`<div class="class-instructor">with ${c.instructor}</div>`:''}
-        ${c.description?`<p>${c.description}</p>`:''}
-        ${detailsBtn}
-        ${regBtn}
-      </div>`;
-    }).join('');
-  } catch(e) {
+    const rows = (await fetchTab(TAB.classes)).filter(isWebVisible);
+    el.innerHTML = rows.length
+      ? rows.map(renderScheduleRow).join('')
+      : '<p class="text-soft">No classes currently scheduled.</p>';
+  } catch(e){
     el.innerHTML = '<p class="text-soft">Could not load classes.</p>';
   }
 }

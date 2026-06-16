@@ -11,6 +11,72 @@
   @media (min-width: 880px) {
     .events-layout { grid-template-columns: 1fr 360px; gap: 3rem; }
   }
+  .agenda-list { display: flex; flex-direction: column; gap: .9rem; }
+
+  /* Category filter */
+  .event-filters { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.25rem; }
+  .ev-filter-btn {
+    border: 1px solid rgba(45,106,53,.3); background: #fff; color: var(--green-deep, #1e3a24);
+    font: inherit; font-size: .82rem; font-weight: 600; padding: .35rem .8rem;
+    border-radius: 999px; cursor: pointer; transition: background .15s, color .15s, border-color .15s;
+  }
+  .ev-filter-btn:hover { border-color: var(--green-mid, #2d6a35); }
+  .ev-filter-btn.active { background: var(--green-mid, #2d6a35); color: #fff; border-color: var(--green-mid, #2d6a35); }
+
+  /* Badges */
+  .ev-badges { display: flex; flex-wrap: wrap; gap: .4rem; margin: .6rem 0 .2rem; }
+  .ev-badge {
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .01em;
+    padding: .22rem .55rem; border-radius: 6px; line-height: 1.3; white-space: nowrap;
+  }
+  .ev-badge-free { background: #e3f0e2; color: #2d6a35; }
+  .ev-badge-cost { background: #f6ecca; color: #7a5a12; }
+  .ev-badge-reg  { background: #e2edf6; color: #2b5d86; }
+  .ev-badge-fund { background: #fbe6d6; color: #9a5a1e; }
+
+  .ev-series { font-size: .82rem; color: var(--text-soft, #5a5a4f); margin-top: .35rem; }
+  .ev-series-link { color: var(--green-mid, #2d6a35); font-weight: 600; }
+  .ev-time { font-size: .8rem; color: #999; margin-top: .15rem; }
+  .ev-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+  /* Closure notice */
+  .agenda-closure .event-datebox { background: #7c7c7c !important; }
+  .agenda-closure h4 { color: #8a3b3b; }
+
+  /* Further-ahead heading */
+  .ahead-heading {
+    font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--green-deep, #1e3a24);
+    margin: 2.25rem 0 1rem; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,.08);
+  }
+
+  /* Weekly schedule rows */
+  .sched-list { display: flex; flex-direction: column; gap: .6rem; }
+  .sched-row {
+    background: #fff; border-left: 3px solid var(--green-mid, #2d6a35);
+    border-radius: 8px; padding: .7rem .9rem; box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  }
+  .sched-day { font-size: .74rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--green-mid, #2d6a35); }
+  .sched-day span { color: #888; margin-left: .4rem; }
+  .sched-body { font-size: .92rem; margin-top: .15rem; line-height: 1.4; }
+  .sched-cost { color: #7a5a12; }
+  .sched-actions { margin-top: .3rem; }
+  .sched-link, .series-link { color: var(--green-mid, #2d6a35); font-weight: 600; font-size: .85rem; }
+
+  /* Series index cards */
+  .series-list { display: flex; flex-direction: column; gap: .8rem; }
+  .series-card {
+    background: #fff; border-top: 3px solid var(--gold, #c79a3a); border-radius: 10px;
+    padding: 1rem 1.1rem; box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .series-card h4 { margin: 0 0 .4rem; font-size: 1.02rem; color: var(--green-deep, #1e3a24); }
+  .series-card p { font-size: .88rem; color: var(--text-soft, #5a5a4f); line-height: 1.55; margin: .5rem 0 .4rem; }
+  .series-actions { margin-top: .3rem; }
+
+  /* Director note */
+  .events-note {
+    margin-top: 1.75rem; font-size: .84rem; color: var(--text-soft, #5a5a4f);
+    background: var(--sand, #f1ead6); padding: 1rem; border-radius: 8px; line-height: 1.65;
+  }
 </style>
 </head>
 <body>
@@ -34,29 +100,40 @@
   <div class="section-inner">
     <div class="events-layout">
 
-      <!-- EVENTS LIST -->
+      <!-- MAIN — next two weeks, then further ahead -->
       <div>
-        <span class="label">Upcoming Events</span>
-        <h2 class="section-title" style="margin-bottom:1.5rem">What's coming up</h2>
-        <div id="allEvents" style="display:flex;flex-direction:column;gap:.9rem">
+        <span class="label">What's On</span>
+        <h2 class="section-title" style="margin-bottom:1rem">The next two weeks</h2>
+
+        <div id="eventFilters" class="event-filters"></div>
+        <div id="agenda" class="agenda-list">
           <p class="text-soft">Loading events…</p>
         </div>
-        <div style="margin-top:1.75rem;font-size:.84rem;color:var(--text-soft);background:var(--sand);padding:1rem;border-radius:8px;line-height:1.65">
-          📅 <strong>Managed by the park director.</strong> This calendar updates automatically from Google Sheets.
-          Weddings and private events are listed so you can plan your visit.<br>
-          📄 Look for the <strong style="color:var(--gold)">Event Details</strong> button — it opens a full description or flyer.
+
+        <h3 id="aheadHeading" class="ahead-heading" style="display:none">Further ahead</h3>
+        <div id="ahead" class="agenda-list"></div>
+
+        <div class="events-note">
+          📅 <strong>Kept current by the park.</strong> This calendar updates automatically from our schedule —
+          weekly classes show on their actual dates here, and the whole season's special events sit under
+          <em>Further ahead</em>. Use the filters to narrow by type, and look for the
+          <strong style="color:var(--gold)">Register</strong> button where sign-up is needed.
         </div>
       </div>
 
-      <!-- CLASSES SIDEBAR -->
+      <!-- RAIL — weekly rhythm + series index + newsletter -->
       <div>
-        <span class="label">Regular Programs</span>
-        <h2 class="section-title" style="font-size:1.4rem;margin-bottom:1.25rem">Classes &amp; recurring events</h2>
-        <div id="classesList" style="display:flex;flex-direction:column;gap:.85rem">
+        <span class="label">Every Week</span>
+        <h2 class="section-title" style="font-size:1.3rem;margin-bottom:.9rem">Weekly schedule</h2>
+        <div id="weeklySchedule" class="sched-list">
           <p class="text-soft" style="font-size:.9rem">Loading classes…</p>
         </div>
 
-        <div style="margin-top:2rem">
+        <span class="label" style="margin-top:1.9rem;display:inline-block">Series &amp; Programs</span>
+        <h2 class="section-title" style="font-size:1.3rem;margin-bottom:.9rem">Ongoing series</h2>
+        <div id="seriesIndex" class="series-list"></div>
+
+        <div style="margin-top:1.9rem">
           <span class="label">Stay in the Loop</span>
           <div class="info-card" style="margin-top:.5rem">
             <div class="info-card-icon">📬</div>
@@ -97,8 +174,14 @@ loadAnnouncements('announcementsList').then(() => {
   if (list && list.children.length > 0) bar.style.display = 'block';
 });
 
-loadEvents('allEvents', 12);
-loadClasses('classesList');
+loadEventsPage({
+  agenda:       'agenda',
+  ahead:        'ahead',
+  aheadHeading: 'aheadHeading',
+  filters:      'eventFilters',
+  schedule:     'weeklySchedule',
+  series:       'seriesIndex'
+});
 </script>
 </body>
 </html>
