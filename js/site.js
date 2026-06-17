@@ -631,7 +631,7 @@ function renderAgendaCard(item, seriesMap){
     return `<div class="event-card ev-card agenda-closure" data-category="Private" data-always="1">
       ${dateBox}
       <div class="event-info">
-        <div class="ev-titlerow"><h4 class="ev-title">🔒 Park closed${item.title?` — ${_evEsc(item.title)}`:''}</h4></div>
+        <div class="ev-titlerow"><h4 class="ev-title">🔒 Park closed — ${_evEsc((item.title||'').trim() || 'Private event')}</h4></div>
         <p>${item.description ? clip(item.description,160) : 'The park is closed to the public this day for a private event — please plan your visit around it.'}</p>
       </div>
     </div>`;
@@ -732,8 +732,16 @@ function renderMonthList(groups, seriesMap){
       const closed = it.kind === 'closure';
       const dot   = `<span class="ml-dot" style="background:${closed?'#6b6b6b':dowColor(it.date)}"></span>`;
       const date  = `<span class="ml-date">${_dowNice(it.date)} ${it.date.getDate()}</span>`;
-      const title = `<span class="ml-title">${closed?'🔒 Park closed':_evEsc(it.title||'')}</span>`;
-      const inner = `${dot}${date}${title}<span class="ml-chev">›</span>`;
+      // time prefix on the row (events only; closures have no time)
+      const time  = (!closed && it.time)
+        ? `<span class="ml-time">${_evEsc(it.time)}</span>` : '';
+      // closures show a reason: public_note if set, otherwise "Private event"
+      const reason = (it.title || '').trim() || 'Private event';
+      const label = closed
+        ? `🔒 Park closed<span class="ml-closure-reason"> — ${_evEsc(reason)}</span>`
+        : _evEsc(it.title || '');
+      const title = `<span class="ml-title">${label}</span>`;
+      const inner = `${dot}${date}${time}${title}<span class="ml-chev">›</span>`;
       const row = href
         ? PSBP.linkTag(href, inner, { title:it.title||'', back:_BACK(), className:'ml-row' })
         : `<div class="ml-row">${inner}</div>`;
@@ -854,16 +862,19 @@ function injectEventStyles(){
   .std-link{font-weight:600;font-size:.88rem;color:var(--green-mid,#2d6a35)}
 
   /* full calendar — grouped scrolling list, all screen sizes */
-  .ml-month{margin-bottom:1.6rem}
+  .ml-month{margin-bottom:1rem}
   .ml-title-h{font-size:1.25rem;margin:0 0 .5rem;position:sticky;top:0;z-index:1;
     background:var(--cream,#f7f5ee);padding:.3rem 0;border-bottom:2px solid #e7e2d6}
-  .ml-row{display:flex;align-items:center;gap:.75rem;padding:.7rem .3rem;
+  .ml-row{display:flex;align-items:center;gap:.75rem;padding:.55rem .3rem;
     border-bottom:1px solid #ece9df;text-decoration:none;color:inherit;transition:background .12s}
   a.ml-row:hover{background:#faf9f4}
   .ml-dot{flex:0 0 auto;width:11px;height:11px;border-radius:50%}
   .ml-date{flex:0 0 auto;width:72px;font-size:.86rem;font-weight:700;color:var(--text-soft,#6b6f63)}
+  .ml-time{flex:0 0 auto;width:62px;font-size:.8rem;font-weight:600;color:var(--text-soft,#8a8d80);
+    text-align:right;font-variant-numeric:tabular-nums}
   .ml-title{flex:1;min-width:0;font-weight:600;font-size:1.02rem;color:var(--green-deep,#23402a);
     overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ml-closure-reason{font-weight:500;color:#8a8d80}
   .ml-chev{flex:0 0 auto;color:#b3b1a4;font-size:1.2rem}
 
   @media (max-width:760px){
