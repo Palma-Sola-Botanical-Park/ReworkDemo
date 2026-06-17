@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palma Sola · Live Wall</title>
+<style>
+  :root{
+    --bg:#0a1d13; --gold:#e7c66b; --ink:#f3f1e7; --muted:#5f7d6c;
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%; width:100%}
+  body{ background:var(--bg); overflow:hidden; font-family:var(--sans); }
+  body.hide-cursor, body.hide-cursor *{ cursor:none !important; }
+
+  /* the stage holds two stacked frames; we crossfade between them */
+  #stage{ position:fixed; inset:0; }
+  .screen{
+    position:absolute; inset:0; width:100%; height:100%; border:0;
+    opacity:0; transition:opacity .6s ease; pointer-events:none;
+  }
+  .screen.show{ opacity:1; pointer-events:auto; }
+
+  /* progress dots */
+  #dots{
+    position:fixed; left:50%; bottom:14px; transform:translateX(-50%);
+    display:flex; gap:10px; z-index:20; transition:opacity .4s ease;
+  }
+  #dots.dim{ opacity:0; }
+  .dot{ width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.18); transition:all .3s ease; }
+  .dot.on{ background:var(--gold); transform:scale(1.25); }
+
+  /* controls (fade out with the cursor) */
+  #ctl{
+    position:fixed; top:14px; right:16px; z-index:20; display:flex; gap:8px; align-items:center;
+    transition:opacity .4s ease;
+  }
+  #ctl.dim{ opacity:0; pointer-events:none; }
+  #ctl button{
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); color:var(--ink);
+    font-family:var(--sans); font-size:13px; font-weight:700; border-radius:8px; padding:6px 11px;
+    cursor:pointer; backdrop-filter:blur(4px);
+  }
+  #ctl button:hover{ background:rgba(255,255,255,.12); }
+  #ctl .pausetag{ color:var(--gold); font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase; display:none; }
+  #ctl.paused .pausetag{ display:inline; }
+
+  /* first-load hint */
+  #hint{
+    position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:1.2rem; background:var(--bg); z-index:40; text-align:center; transition:opacity .5s ease;
+  }
+  #hint.gone{ opacity:0; pointer-events:none; }
+  #hint h1{ color:var(--ink); font-family:Georgia,serif; font-size:clamp(1.4rem,3vw,2.4rem); font-weight:800; }
+  #hint p{ color:var(--muted); font-size:clamp(.85rem,1.3vw,1.1rem); max-width:46ch; line-height:1.5; }
+  #hint .keys{ color:var(--ink); font-size:.95rem; margin-top:.4rem; }
+  #hint kbd{ background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:5px;
+    padding:2px 8px; font-family:var(--sans); font-size:.85rem; margin:0 2px; }
+  #hint button{
+    margin-top:.8rem; background:var(--gold); color:#0c2417; border:0; border-radius:10px;
+    padding:.7rem 1.6rem; font-family:var(--sans); font-weight:800; font-size:1rem; cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+  <div id="stage">
+    <iframe class="screen" id="frameA"></iframe>
+    <iframe class="screen" id="frameB"></iframe>
+  </div>
+
+  <div id="dots"></div>
+
+  <div id="ctl">
+    <span class="pausetag">⏸ paused</span>
+    <button id="btnFs" title="Fullscreen (F)">⛶ Fullscreen</button>
+  </div>
+
+  <div id="hint">
+    <h1>Palma Sola · Live Wall</h1>
+    <p>Six screens rotate on their own. You can also drive it by hand.</p>
+    <div class="keys">
+      <kbd>→</kbd> next &nbsp; <kbd>←</kbd> back &nbsp; <kbd>space</kbd> pause &nbsp; <kbd>F</kbd> fullscreen
+    </div>
+    <button id="btnStart">▶ Start the wall</button>
+  </div>
+
+<script>
+// ── the rotation: file + dwell time (seconds) ──────────────────────────
+const SCREENS = [
+  { src:'live.html',          secs:20 },  // bearings — where we stand
+  { src:'wall.html',          secs:35 },  // photos — fresh from the field
+  { src:'ladder.html',        secs:22 },  // identification ladder
+  { src:'wildlife-wall.html', secs:35 },  // wildlife — life is everywhere
+  { src:'growth.html',        secs:28 },  // the climb (animated)
+  { src:'roles.html',         secs:30 },  // find your role (close)
+];
+// ───────────────────────────────────────────────────────────────────────
+
+const frames = [document.getElementById('frameA'), document.getElementById('frameB')];
+let activeFrame = 0;      // which iframe element is currently shown
+let idx = 0;              // which SCREEN index is showing
+let paused = false;
+let timer = null;
+let started = false;
+
+// build progress dots
+const dotsWrap = document.getElementById('dots');
+SCREENS.forEach((_,i)=>{ const d=document.createElement('div'); d.className='dot'; dotsWrap.appendChild(d); });
+const dots = [...dotsWrap.children];
+function paintDots(){ dots.forEach((d,i)=> d.classList.toggle('on', i===idx)); }
+
+// show a given screen index, reloading the off-screen frame fresh so its
+// animations restart and its data re-pulls each time it lands
+function go(toIdx){
+  toIdx = (toIdx + SCREENS.length) % SCREENS.length;
+  const incoming = frames[1-activeFrame];
+  const outgoing = frames[activeFrame];
+  incoming.src = SCREENS[toIdx].src;          // reload fresh
+  // wait for it to load before crossfading in
+  incoming.onload = () => {
+    incoming.classList.add('show');
+    outgoing.classList.remove('show');
+    activeFrame = 1-activeFrame;
+  };
+  idx = toIdx;
+  paintDots();
+  schedule();
+}
+
+function schedule(){
+  clearTimeout(timer);
+  if(paused) return;
+  timer = setTimeout(()=> go(idx+1), SCREENS[idx].secs*1000);
+}
+
+function next(){ go(idx+1); }
+function prev(){ go(idx-1); }
+function togglePause(){
+  paused = !paused;
+  document.getElementById('ctl').classList.toggle('paused', paused);
+  if(paused) clearTimeout(timer); else schedule();
+}
+
+// ── fullscreen ──
+function toggleFs(){
+  if(!document.fullscreenElement){ document.documentElement.requestFullscreen?.(); }
+  else { document.exitFullscreen?.(); }
+}
+document.getElementById('btnFs').onclick = toggleFs;
+
+// ── keyboard ──
+window.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight'){ next(); }
+  else if(e.key==='ArrowLeft'){ prev(); }
+  else if(e.code==='Space'){ e.preventDefault(); togglePause(); }
+  else if(e.key==='f' || e.key==='F'){ toggleFs(); }
+});
+
+// ── auto-hide cursor + controls after stillness ──
+let hideT;
+function wake(){
+  document.body.classList.remove('hide-cursor');
+  document.getElementById('ctl').classList.remove('dim');
+  dotsWrap.classList.remove('dim');
+  clearTimeout(hideT);
+  hideT = setTimeout(()=>{
+    document.body.classList.add('hide-cursor');
+    document.getElementById('ctl').classList.add('dim');
+    dotsWrap.classList.add('dim');
+  }, 3000);
+}
+window.addEventListener('mousemove', wake);
+
+// ── keep the display awake (best-effort; OS setting is the real fix) ──
+let wakeLock=null;
+async function keepAwake(){
+  try{ if('wakeLock' in navigator){ wakeLock = await navigator.wakeLock.request('screen'); } }catch(e){}
+}
+document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='visible') keepAwake(); });
+
+// ── start ──
+function start(){
+  if(started) return; started=true;
+  document.getElementById('hint').classList.add('gone');
+  keepAwake();
+  // load first screen into frame A and show it
+  frames[0].src = SCREENS[0].src;
+  frames[0].onload = ()=> frames[0].classList.add('show');
+  idx=0; activeFrame=0; paintDots();
+  schedule();
+  wake();
+}
+document.getElementById('btnStart').onclick = ()=>{ toggleFs(); start(); };
+// also allow Enter / arrow / space to start from the hint screen
+window.addEventListener('keydown', function starter(e){
+  if(!started && (e.key==='Enter'||e.key==='ArrowRight'||e.code==='Space'||e.key==='f'||e.key==='F')){
+    start();
+  }
+}, {once:false});
+</script>
+</body>
+</html>
