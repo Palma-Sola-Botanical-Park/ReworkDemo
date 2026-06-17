@@ -872,9 +872,9 @@ function injectEventStyles(){
   .std-link{font-weight:600;font-size:.88rem;color:var(--green-mid,#2d6a35)}
 
   /* full calendar — grouped scrolling list, all screen sizes */
-  .ml-month{margin-bottom:.35rem}
+  .ml-month{margin-bottom:.5rem;padding:0}
   .ml-title-h{font-size:1.25rem;margin:.4rem 0 .25rem;position:sticky;top:0;z-index:1;
-    background:var(--cream,#f7f5ee);padding:.2rem 0;border-bottom:2px solid #e7e2d6}
+    background:var(--cream,#f7f5ee);padding:.2rem 0;border-bottom:2px solid #d4cab2}
   .ml-month:first-child .ml-title-h{margin-top:0}
   .ml-row{display:flex;align-items:center;gap:.75rem;padding:.55rem .3rem;
     border-bottom:1px solid #ece9df;text-decoration:none;color:inherit;transition:background .12s}
