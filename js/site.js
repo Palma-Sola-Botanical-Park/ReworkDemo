@@ -1212,11 +1212,9 @@ function plantCard(p) {
       </div>
       <div style="font-style:italic;font-size:.82rem;color:var(--text-soft);margin-bottom:.55rem">${p.sci}</div>
       <div style="display:flex;flex-wrap:wrap;gap:.3rem">
-        ${p.native?'<span class="tag tag-native">🌿 Native</span>':'<span class="tag tag-nonnative">Non-native</span>'}
+        ${p.native?'<span class="tag tag-native">🌿 Native</span>':''}
         ${p.butterfly?'<span class="tag tag-butterfly">🦋</span>':''}
-        ${p.toxic?'<span class="tag tag-toxic">⚠️ Toxic</span>':''}
         ${p.edible?'<span class="tag tag-edible">🍃 Edible</span>':''}
-        ${p.invasive?'<span class="tag tag-invasive">🚫 Invasive</span>':''}
         ${p.wetland?'<span class="tag tag-wetland">💧</span>':''}
       </div>
     </div>
