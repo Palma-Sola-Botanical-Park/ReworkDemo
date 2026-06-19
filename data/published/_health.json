@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-19T03:12:12+00:00",
+  "generated_at": "2026-06-19T03:29:58+00:00",
   "overall": "ok",
   "feeds": [
     {
@@ -8,11 +8,11 @@
       "published": true,
       "rows": 20,
       "changes": {
-        "added": 0,
+        "added": 1,
         "changed": 0,
-        "removed": 0
+        "removed": 1
       },
-      "last_good_at": "2026-06-19T03:12:12+00:00",
+      "last_good_at": "2026-06-19T03:29:58+00:00",
       "first_run": false,
       "messages": []
     },
@@ -22,12 +22,12 @@
       "published": true,
       "rows": 4,
       "changes": {
-        "added": 4,
+        "added": 0,
         "changed": 0,
         "removed": 0
       },
-      "last_good_at": "2026-06-19T03:12:12+00:00",
-      "first_run": true,
+      "last_good_at": "2026-06-19T03:29:58+00:00",
+      "first_run": false,
       "messages": []
     }
   ]
