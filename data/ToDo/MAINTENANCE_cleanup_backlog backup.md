@@ -4,7 +4,7 @@ Refreshed running list for the ReworkDemo site + plant/wildlife catalog.
 Supersedes the 2026-06-08 version. Items ranked by **Criticality** (do-it-now → polish)
 and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 
-**Last updated: 2026-06-19 (rev 17 — wildlife signage JSON now authoritative; subspecies→species folds; new wildlife fields + import tasks logged: C10–C13)**
+**Last updated: 2026-06-18 (rev 16 — JSON architecture migration, photo reorganization)**
 
 ---
 
@@ -107,31 +107,6 @@ and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 - **Criticality:** Medium — blocks a real visitor-engagement opportunity (rare fruits, edible natives), and the current confused state is worse than no badge.
 - **Effort:** Medium–High — schema design + spreadsheet column additions + Gemini-assisted per-plant validation pass (folds into the workflow already used for C7) + generator update to render the new structure + filter logic that respects "edible parts" semantics. Pairs naturally with C7 (same content workflow, same review pass).
 - **Steps:** 1) Settle the schema (e.g. `edible_parts` / `toxic_parts` text columns + a top-level summary "true edible? Y/N/with-prep"). 2) Gemini-assisted pass across 122 plants. 3) Generator emits a richer Edibility section + a clean true/false summary for the badge & filter. 4) Reintroduce Edible and Toxic to the cards (and optionally to the filter toolbar — separately decided).
-
-### C10. Wildlife signage JSON — populate the new stub fields (data pass)
-- **Issue:** `wildlife_signage.json` is now the **authoritative wildlife source** (no spreadsheet upstream — `meta.source` updated 2026-06-19, schema `1.4`). On 2026-06-19 it gained three structured fields that are currently **empty stubs across all 46 records**: `plant_links` (host-plant cross-refs by PSBP plant ID), `last_reviewed` (ISO fact-check date), and `sources` (`{label, url}` attribution). Added as schema now; to be filled in a dedicated pass.
-- **Criticality:** Medium — `plant_links` unlocks auto-linking species ↔ host-plant pages (e.g. Passionflower → Zebra Longwing & Gulf Fritillary); `last_reviewed`/`sources` underpin the "accurate, sourced" promise.
-- **Effort:** Medium — mostly content/research, not code.
-- **Steps:** 1) `plant_links`: needs `plant_signage.json` (or an ID↔name map) in hand; wire host/nectar plants to plant PSBP IDs — element shape `{plant_id, common_name, relationship}`, relationship ∈ host / nectar / food / shelter. 2) `sources`: add `{label, url}` rows per record during fact-check (FWC, iNat, Audubon, etc.). 3) `last_reviewed`: stamp the ISO date as each record is verified. 4) Keep `sources`/`last_reviewed` identical to the plant-side fields (same shape being added there) so one tool can fill both.
-
-### C11. Wildlife photos — rename files for the 2026-06-19 subspecies→species folds
-- **Issue:** Three wildlife records were folded from subspecies to their parent species: **Florida Screech-Owl → Eastern Screech-Owl**, **Florida Zebra Longwing → Zebra Longwing**, **Florida Mangrove Skipper → Mangrove Skipper**. Photo **filenames are derived from the common name**, so the existing files in `photos/` for these three still carry the old "Florida …" names and no longer match the records.
-- **Criticality:** Low–Medium — consistency now; becomes a broken/mismatched reference once HTML is regenerated from the new common names.
-- **Effort:** Low — scripted rename (do alongside the next automated photo pass / HTML regen).
-- **Steps:** 1) Identify the affected files (old common-name basenames for the three species). 2) Rename to the new species common name — or, once B7's subfolder model lands, move into the species subfolder instead (**see B7 Step 5**). 3) Update any `photo_credits.json` rows + HTML/CSS references. 4) Pair this with the common-name-driven HTML regeneration so both are caught together. **Cross-ref B7.**
-
-### C12. Wildlife species expansion — iNaturalist June import (Rob's upload)
-- **Issue:** A large iNat upload (robcarr52, ~198 observations on 2026-06-18) added many species to the park project. The master currently holds 46 species; an unknown number of new-to-signage candidates remain to be brought in.
-- **Criticality:** Medium — grows the catalog visitors actually see; rides the momentum of the iNat program.
-- **Effort:** Medium — dedupe + triage + drafting.
-- **Steps:** 1) Export the project `species_counts` (fetch-script CSV or iNat API JSON). 2) Dedupe against the 46 existing `inat_taxon_id`s. 3) Triage into tiers (document-now / next / hold — vertebrates & charismatic inverts first). 4) Assign PSBP IDs continuing **downward from 99952** (wildlife descending scheme; note **99964 is now an open slot** from the hybrid removal — backfill candidate). 5) Draft keepers in house voice with all current fields (incl. `seasonality`, `similar_species`).
-- **Decision needed (blocks the import):** Do new species get a provisional PSBP ID immediately at `research` status (like the 99953–99969 batch), or stay ID-less until promoted to `html`?
-
-### C13. Promote research-status wildlife entries → html (photo + license collection)
-- **Issue:** 17 records sit at `status: "research"` — content drafted and ready ("obituary on file"), but **no iNat photos collected and no licensing confirmed**. Per the lifecycle, promotion to `html` is gated on fetching photos + verifying license, after which the record goes live on the web.
-- **Criticality:** Medium — publish-ready except for imagery; clearing them is high-yield.
-- **Effort:** Medium — per-species photo sourcing + license check (folds into **B7 Step 6** check-in process).
-- **Steps:** 1) For each research record, pull a suitable iNat photo, verify the observation's license, download from the CDN. 2) Add a `photo_credits.json` row with `source_url`. 3) Confirm/assign the final PSBP ID. 4) Flip `status` research → html. 5) Rebake the search JSON (`wildlife.json`, soon to be renamed `wildlife_search.json`).
 
 ---
 

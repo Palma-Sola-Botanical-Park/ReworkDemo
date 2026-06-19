@@ -15,7 +15,7 @@ All species content — plants, wildlife, photos, physical sign locations — li
 | File | Grain | Records | Key | Purpose |
 |------|-------|---------|-----|---------|
 | `plant_signage.json` | one plant species | 156 | `PSBP-000xx` | All content for plant field-guide pages and signs |
-| `wildlife_signage.json` | one animal species | 47 | `PSBP-999xx` | All content for wildlife field-guide pages and signs |
+| `wildlife_signage.json` | one animal species | 78 | `PSBP-999xx` | **Authoritative master** (v1.4) — species profiles, seasonality, similar_species, cross-links, observation stats |
 | `photo_credits.json` | one photo | ~152+ | `PSBP ID` + `role` | Photo registry — licensing, attribution, filenames, both kingdoms |
 | `placements.json` | one physical sign | 76 | `PLC-####` → FK to species | GPS coordinates and area for each sign installation |
 
@@ -306,7 +306,9 @@ Keys are snake_cased from the original labels. The common keys are `height`, `sp
 
 ---
 
-## 5. Wildlife signage schema (v1.1)
+## 5. Wildlife signage schema (v1.4)
+
+`wildlife_signage.json` is the **authoritative master** for all wildlife content — no upstream spreadsheet. Schema v1.4 (2026-06-19).
 
 Parallels the plant schema with these differences:
 
@@ -314,17 +316,86 @@ Parallels the plant schema with these differences:
 |------------|--------|----------|
 | Name field | `botanical_name` | `scientific_name` |
 | ID field source | `PSBP Species ID` | `PSBP Animal ID` |
-| Group | *(category serves this role)* | `animal_group` (Bird, Lizard, Butterfly...) |
+| ID numbering | ascending from `00001` | descending from `99999` |
+| Group | *(category serves this role)* | `animal_group` (Bird, Lizard, Butterfly, Dragonfly, Moth, True Bug, Beetle, Crustacean, Mammal, Grasshopper...) |
 | Labeled blocks | `reproduction` | `identification` (same `{blocks, what_to_look_for}` shape) |
-| Narrative fields | arrays (multi-paragraph) | plain strings (all single-paragraph) |
-| Seasonality | `seasonality` object | `when_to_see` string |
+| Seasonality | `seasonality` object (bloom/fruit months) | `seasonality` object (presence/reliability/months) — see below |
 | Safety | `edibility`, `toxicity` | `danger`, `interaction` |
 | Conservation | *(not tracked)* | `conservation` with traffic-light |
 | Observation data | *(not in signage)* | `observation_stats` with counts and dates |
-| Tags | *(not used)* | `tags` array (comma-separated in source) |
+| Tags | *(not used)* | `tags` array |
 | Alt names | `alternate_names` | `also_known_as` |
 
-The `identification` field uses single-newline-separated labeled lines in the source (vs. double-newline for plant reproduction), but the output structure is identical: `{blocks: [{label, text}], what_to_look_for}`.
+### Subspecies convention
+
+**Always key to the species level.** The `scientific_name` is the binomial (e.g., `Megascops asio`, not `Megascops asio floridanus`), and `inat_taxon_id` points to the species-level taxon on iNaturalist so observation counts roll up correctly. The Florida race or subspecies name is preserved in `also_known_as` and noted in the body text. This was established 2026-06-19 after discovering that subspecies-keyed records systematically undercounted observations.
+
+### Seasonality (structured — v1.3+)
+
+```json
+"seasonality": {
+  "presence": "year-round",
+  "reliability": "reliable",
+  "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  "peak": "Spring and summer breeding season",
+  "note": "Quieter and more stealthy in winter."
+}
+```
+
+| Field | Type | Values |
+|-------|------|--------|
+| `presence` | string | `"year-round"` or `"seasonal"` |
+| `reliability` | string | `"reliable"` / `"occasional"` / `"rare"` — how likely a visitor will actually see it |
+| `months` | array of ints (1–12) | Which months the species is present; drives "what's here in June?" filters |
+| `peak` | string or null | When it's most visible/numerous |
+| `note` | string or null | Extra nuance (e.g., "Nocturnal; detected mainly by voice") |
+
+This shape is intentionally parallel to the plant `seasonality` — both use month arrays for machine-queryable presence. Plants add `bloom_months`/`fruit_months` alongside; wildlife uses `presence`/`reliability` instead.
+
+### Similar species (v1.3+)
+
+```json
+"similar_species": [
+  {
+    "common_name": "Double-crested Cormorant",
+    "psbp_id": "PSBP-99989",
+    "how_to_tell_apart": "The cormorant has a hook-tipped bill and a shorter tail; the anhinga's bill is straight and dagger-like."
+  }
+]
+```
+
+Cross-links to look-alikes. `psbp_id` is populated when the look-alike is one of our species (enables auto-linking on pages), `null` when it's a species we don't carry (e.g., gallinule vs. American coot).
+
+### Cross-reference and provenance fields (v1.4+ — stubs, to be populated)
+
+| Field | Type | Purpose |
+|-------|------|---------|
+| `plant_links` | array of `{plant_id, common_name, relationship}` | Host-plant cross-refs by PSBP plant ID; `relationship` ∈ host / nectar / food / shelter |
+| `last_reviewed` | ISO date string or null | When a human last fact-checked this record |
+| `sources` | array of `{label, url}` | Attribution/provenance for the content (FWC, Audubon, etc.) |
+
+These fields are identical in shape to their plant-side counterparts so one tool can fill both.
+
+### Additional wildlife-specific fields
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `diet` | string | What it eats |
+| `behavior` | string | Key behaviors visitors might observe |
+| `sounds` | string | Vocalizations or "Silent" |
+| `ecological_role` | string | Role in the ecosystem |
+| `plant_connections` | string or null | Prose description of plant relationships (complements structured `plant_links`) |
+| `habitat` | string | Preferred habitat types |
+| `where_to_look` | string | Park-specific guidance for spotting |
+| `when_to_see` | string | Prose seasonality (retained alongside structured `seasonality`) |
+| `danger` | object | `{people_level, people, pets_level, pets}` — traffic-light |
+| `interaction` | object | `{level, guidance}` — traffic-light |
+| `invasive` | object | `{level, notes}` — traffic-light |
+| `conservation` | object | `{level, status}` — traffic-light (prose, not structured) |
+| `observation_stats` | object | `{psbp_observations, distinct_observers, first_observed, last_observed}` |
+| `internal_notes` | string | Maintenance notes, not visitor-facing |
+
+The `identification` field uses the same `{blocks: [{label, text}], what_to_look_for}` shape as plant `reproduction`.
 
 ---
 
@@ -403,6 +474,11 @@ The backlog item B3 (messy Size/Growing Conditions cells mixing clean key-value 
 - **Seasonality as a structured field, not prose extraction.** Bloom timing was buried across Quick Hits, Reproduction, and Wildlife Value. A dedicated `seasonality` object with month arrays enables "What's blooming now?" — a question visitors and staff ask constantly.
 - **Photo subfolders as a collection, not a card catalog.** Every usable volunteer photo goes in the subfolder and gets a `photo_credits.json` row with full licensing. `role` is an array (a single shot can show leaf + fruit + be gallery-worthy). `primary_for` flags the chosen image per role; `hero` flags the one card/sign image; `gallery` as a role marks shots for future slideshows, galleries, and office screens. Capturing licensing now is what makes future apps possible — storage is cheap, re-clearing rights later is not.
 - **One photo registry for the whole site.** Species photos, venue shots, page heroes, volunteer pics — all in `photo_credits.json`. The alternative (separate tracking for "site images") fragments licensing and makes searching impossible. `type` and `tags` distinguish species from park photos; `used_by` tracks what's referenced where.
+- **Subspecies always folded to species (2026-06-19).** Wildlife records are keyed to the species-level iNat taxon, never the subspecies. The Florida race name goes in `also_known_as` and the body text. This prevents observation undercounting — iNat users ID at different taxonomic levels, and a subspecies-keyed record misses anyone who labeled at species level. Three records were folded during the initial audit: Eastern Screech-Owl (from *M. a. floridanus*), Zebra Longwing (from *H. c. tuckeri*), Mangrove Skipper (from *P. b. okeechobee*).
+- **Structured seasonality on wildlife, parallel to plants (2026-06-19).** Wildlife `seasonality` uses `presence`/`reliability`/`months` (month array) instead of plant-side `bloom_months`/`fruit_months`, but both share the month-array pattern for machine-queryable "what's here now?" filtering. The prose `when_to_see` field is retained alongside for human reading.
+- **`similar_species` as structured cross-links (2026-06-19).** Look-alike pairs (anhinga/cormorant, green/brown anole, the three cooters/sliders) are wired by PSBP ID, enabling auto-generated "Confused with?" cards on species pages. `psbp_id` is null when the look-alike isn't one of ours.
+- **Conservation status kept as prose, not structured (2026-06-19).** Considered `{federal, state, iucn}` object fields but decided the maintenance cost outweighs the benefit — conservation statuses change rarely and are best verified by a human when they do (cf. wood stork ESA delisting, March 2026). The traffic-light `level` (Green/Yellow/Red) is sufficient for filtering.
+- **`wildlife_signage.json` is authoritative — no upstream spreadsheet (2026-06-19).** The `meta.source` field was updated to reflect this. The xlsx is retained as a historical artifact only. All edits happen in the JSON master.
 
 ---
 
@@ -449,8 +525,8 @@ Tag the known host plants. Short list — maybe 15–20 species. Gives the 🦋 
 **T11. Cross-reference signage JSONs against iNat export.**
 Script: read `plant_signage.json`, read fresh iNat CSV, join on `inat_taxon_id`. Any `"research"` species with a matching observation → flag as `"spotted"`. That's your punch list of species needing a licensed photo and HTML page.
 
-**T12. Ingest Rob's / Christine's / volunteer photos.**
-For each usable photo: drop it in the species subfolder (or `photos/park/`), add a `photo_credits.json` row with full attribution, set `role` and flags. This is the ongoing "check-in" process — see below.
+**T12. Ingest Rob's / Christine's / volunteer photos.** ✅ TOOLING BUILT (2026-06-19)
+`download_species_photos.py` automates the iNat photo pipeline: queries all observations for a species, filters for CC-licensed photos, downloads originals to `photos/PSBP-xxxxx/` subfolders (one flat folder per species, filenames are iNat photo IDs), and appends `photo_credits.json` entries with full attribution. New photos enter as `role: ["gallery"], hero: false`; hero promotion is manual. Supports single-species, batch, and `--all` modes with `--dry-run`. Companion script `tag_inat_observations.py` writes PSBP IDs to the iNat "Unique ID" observation field (78 species tagged as of 2026-06-19).
 
 ### Ongoing process: checking in a non-iNat photo
 
