@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated": "2026-06-18",
-    "source": "PSBP_Master_Animal_Signage.xlsx",
+    "generated": "2026-06-19",
+    "source": "wildlife_signage.json (authoritative master — no longer generated from a spreadsheet)",
     "species_count": 47,
     "schema_version": "1.2"
   },
@@ -102,7 +102,7 @@
         "first_observed": "2018-11-12",
         "last_observed": "2026-04-08"
       },
-      "internal_notes": "Most-observed animal in the export (23 obs). Strong 'introduced species' interpretive angle. Confirm 'invasive' vs. 'naturalized' framing during research."
+      "internal_notes": "Most-observed animal in the export (23 obs). Strong 'introduced species' interpretive angle. Framing resolved — treated as invasive (invasive=Red), tied to the documented decline of the native green anole."
     },
     {
       "id": "PSBP-99998",
@@ -812,7 +812,7 @@
         "first_observed": "2023-01-01",
         "last_observed": "2026-02-03"
       },
-      "internal_notes": "Federally listed history — verify current conservation status (downlisted to Threatened) during research."
+      "internal_notes": "Federally listed history. Status verified 2026-06-19: ESA-delisted (Southeast U.S. DPS), effective March 2026, with a 10-year post-delisting monitoring plan; content reflects this."
     },
     {
       "id": "PSBP-99991",
@@ -1915,15 +1915,14 @@
     },
     {
       "id": "PSBP-99980",
-      "common_name": "Florida Mangrove Skipper",
-      "scientific_name": "Phocides batabano okeechobee",
-      "inat_taxon_id": 1607213,
+      "common_name": "Mangrove Skipper",
+      "scientific_name": "Phocides batabano",
+      "inat_taxon_id": 1607210,
       "sign_level": "Subspecies",
       "taxonomy": {
         "family": "Hesperiidae",
         "genus": "Phocides",
-        "species": "batabano",
-        "subspecies": "okeechobee"
+        "species": "batabano"
       },
       "animal_group": "Butterfly",
       "category": "Butterflies & Moths",
@@ -1932,7 +1931,7 @@
       "status": "html",
       "native": true,
       "also_known_as": [
-        "Mangrove Skipper"
+        "Florida Mangrove Skipper"
       ],
       "tags": [
         "Butterfly",
@@ -2007,19 +2006,18 @@
         "first_observed": "2019-10-11",
         "last_observed": "2025-07-06"
       },
-      "internal_notes": "Florida-endemic subspecies; ties to mangrove/coastal plantings."
+      "internal_notes": "Re-keyed 2026-06-19 from subspecies P. b. okeechobee (taxon 1607213) to species Phocides batabano (taxon 1607210); Florida race kept in also_known_as and noted in text. NOTE: this taxon is in flux on iNat (historical pigmalion/batabano lumping, active curator debate) — species roll-up may be imperfect until iNat settles. obs_stats reflect the old subspecies key — recompute at species taxon on next pipeline run."
     },
     {
       "id": "PSBP-99979",
-      "common_name": "Florida Screech-Owl",
-      "scientific_name": "Megascops asio floridanus",
-      "inat_taxon_id": 725930,
+      "common_name": "Eastern Screech-Owl",
+      "scientific_name": "Megascops asio",
+      "inat_taxon_id": 19765,
       "sign_level": "Subspecies",
       "taxonomy": {
         "family": "Strigidae",
         "genus": "Megascops",
-        "species": "asio",
-        "subspecies": "floridanus"
+        "species": "asio"
       },
       "animal_group": "Bird",
       "category": "Birds of Prey",
@@ -2028,7 +2026,6 @@
       "status": "html",
       "native": true,
       "also_known_as": [
-        "Eastern Screech-Owl",
         "Florida Screech-Owl"
       ],
       "tags": [
@@ -2105,12 +2102,12 @@
         "status": "Least Concern. Common and adaptable, though it depends on trees with natural cavities and benefits from nest boxes where old trees are scarce."
       },
       "observation_stats": {
-        "psbp_observations": 1,
-        "distinct_observers": 1,
-        "first_observed": "2025-05-22",
+        "psbp_observations": 2,
+        "distinct_observers": 2,
+        "first_observed": "2025-05-17",
         "last_observed": "2025-05-22"
       },
-      "internal_notes": "Owl = high visitor appeal. Subspecies floridanus."
+      "internal_notes": "Owl = high visitor appeal. Re-keyed 2026-06-19 from subspecies M. a. floridanus (taxon 725930) to species Megascops asio (taxon 19765); Florida race kept in also_known_as and noted in text. obs_stats updated from project view (2 obs / 2 observers: robcarr52 species-level + brice_c subspecies-level — the latter was all the old subspecies key was catching)."
     },
     {
       "id": "PSBP-99978",
@@ -2795,15 +2792,14 @@
     },
     {
       "id": "PSBP-99971",
-      "common_name": "Florida Zebra Longwing",
-      "scientific_name": "Heliconius charithonia tuckeri",
-      "inat_taxon_id": 49765,
+      "common_name": "Zebra Longwing",
+      "scientific_name": "Heliconius charithonia",
+      "inat_taxon_id": 49766,
       "sign_level": "Subspecies",
       "taxonomy": {
         "family": "Nymphalidae",
         "genus": "Heliconius",
-        "species": "charithonia",
-        "subspecies": "tuckeri"
+        "species": "charithonia"
       },
       "animal_group": "Butterfly",
       "category": "Butterflies & Moths",
@@ -2812,8 +2808,8 @@
       "status": "html",
       "native": true,
       "also_known_as": [
-        "Zebra Longwing",
-        "Zebra Heliconian"
+        "Zebra Heliconian",
+        "Florida Zebra Longwing"
       ],
       "tags": [
         "Butterfly",
@@ -2888,7 +2884,7 @@
         "first_observed": "2024-04-13",
         "last_observed": "2024-04-13"
       },
-      "internal_notes": "FLORIDA STATE BUTTERFLY — include regardless of low count. Single observation so far. Subspecies tuckeri."
+      "internal_notes": "FLORIDA STATE BUTTERFLY — include regardless of count. Re-keyed 2026-06-19 from subspecies H. c. tuckeri (taxon 49765) to species Heliconius charithonia (taxon 49766); Florida race kept in also_known_as and noted in text. obs_stats still reflect the old subspecies key — recompute at species taxon on next pipeline run (likely undercount)."
     },
     {
       "id": "PSBP-99970",
@@ -3082,7 +3078,7 @@
         "first_observed": "2021-12-03",
         "last_observed": "2021-12-03"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #362821784 (randall_carter); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #362821784 (randall_carter); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99968",
@@ -3185,7 +3181,7 @@
         "first_observed": "2025-11-22",
         "last_observed": "2025-11-22"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #328061189 (jerseymeg); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #328061189 (jerseymeg); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99967",
@@ -3287,7 +3283,7 @@
         "first_observed": "2023-09-09",
         "last_observed": "2023-09-09"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #182494203 (pammy63); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #182494203 (pammy63); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99966",
@@ -3390,7 +3386,7 @@
         "first_observed": "2021-02-16",
         "last_observed": "2021-02-16"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #69689744 (pammy63); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #69689744 (pammy63); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99965",
@@ -3490,7 +3486,7 @@
         "first_observed": "2023-01-01",
         "last_observed": "2023-01-01"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #145591163 (wabbster); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #145591163 (wabbster); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99964",
@@ -3587,7 +3583,7 @@
         "first_observed": "2023-07-18",
         "last_observed": "2026-04-08"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #349782425 (coleguyton); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #349782425 (coleguyton); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99963",
@@ -3689,7 +3685,7 @@
         "first_observed": "2026-04-08",
         "last_observed": "2026-04-08"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #349782433 (coleguyton); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #349782433 (coleguyton); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99962",
@@ -3788,7 +3784,7 @@
         "first_observed": "2026-06-17",
         "last_observed": "2026-06-17"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #372610677 (jengunter); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #372610677 (jengunter); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99961",
@@ -3887,7 +3883,7 @@
         "first_observed": "2022-11-27",
         "last_observed": "2022-11-27"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #143209669 (teschaim); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #143209669 (teschaim); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99960",
@@ -3986,7 +3982,7 @@
         "first_observed": "2018-10-04",
         "last_observed": "2025-07-06"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #295720857 (catalaniclaire); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #295720857 (catalaniclaire); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99959",
@@ -4083,7 +4079,7 @@
         "first_observed": "2016-07-07",
         "last_observed": "2023-06-16"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #167766870 (jeffreypatton); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #167766870 (jeffreypatton); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99958",
@@ -4178,7 +4174,7 @@
         "first_observed": "2023-07-04",
         "last_observed": "2023-07-04"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #171501076 (pammy63); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #171501076 (pammy63); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99957",
@@ -4277,7 +4273,7 @@
         "first_observed": "2020-08-08",
         "last_observed": "2020-08-08"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #55928965 (baygirl01); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #55928965 (baygirl01); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99956",
@@ -4373,7 +4369,7 @@
         "first_observed": "2025-05-22",
         "last_observed": "2025-05-22"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #288246402 (brice_c); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #288246402 (brice_c); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99955",
@@ -4471,7 +4467,7 @@
         "first_observed": "2025-05-22",
         "last_observed": "2025-05-22"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #288246394 (brice_c); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #288246394 (brice_c); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99954",
@@ -4569,7 +4565,7 @@
         "first_observed": "2018-10-04",
         "last_observed": "2018-10-04"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #17217419 (ktreffinger); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #17217419 (ktreffinger); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     },
     {
       "id": "PSBP-99953",
@@ -4668,7 +4664,7 @@
         "first_observed": "2025-11-22",
         "last_observed": "2025-11-22"
       },
-      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #328293707 (katiet5); Unique ID written to iNat. Shell row — content fields pending review."
+      "internal_notes": "Added 2026-06-18 from iNaturalist gap analysis (June 2026 batch). Anchor obs #328293707 (katiet5); Unique ID written to iNat. Content drafted and ready; at research status pending iNat photo collection + licensing, then promotion to html."
     }
   ]
 }
