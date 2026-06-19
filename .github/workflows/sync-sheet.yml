@@ -28,14 +28,14 @@ jobs:
       # Stage 1 — pull each tab to data/staging/*.json (faithful mirror).
       # A fetch hiccup keeps last-good staging; don't abort the whole run.
       - name: Fetch sheet tabs → staging
-        run: python3 scripts/fetch_sheets.py
+        run: python3 data/scripts/fetch_sheets.py
         continue-on-error: true
 
       # Stage 2 — the gate. Exits non-zero if a feed is BLOCKED, but we let the
       # job continue so the red board still gets committed; we fail at the end.
       - name: Validate + promote (the gate)
         id: gate
-        run: python3 scripts/validate_promote.py
+        run: python3 data/scripts/validate_promote.py
         continue-on-error: true
 
       # Commit only when something actually changed (no-op runs leave files

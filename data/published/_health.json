@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-06-19T02:45:54+00:00",
+  "overall": "warn",
+  "feeds": [
+    {
+      "tab": "events",
+      "status": "amber",
+      "published": true,
+      "rows": 20,
+      "changes": {
+        "added": 22,
+        "changed": 0,
+        "removed": 0
+      },
+      "last_good_at": "2026-06-19T02:45:54+00:00",
+      "first_run": true,
+      "messages": [
+        "20 row(s) with warnings: iNaturalist class — kid_friendly: 'Yes' is not an allowed value"
+      ]
+    }
+  ]
+}
