@@ -65,7 +65,7 @@ def get_hero(psbp_id, photos):
     return None
 
 
-def build_page(species, hero_photo):
+def build_page(species, hero_photo, all_photos):
     """Build the full HTML page string."""
     sid = species["id"]
     name = species["common_name"]
@@ -175,6 +175,43 @@ def build_page(species, hero_photo):
         if tags:
             tag_chips = '<div class="alias-list" style="padding-top:0">' + "".join(f'<span class="wild-tag">{h(t)}</span>' for t in tags) + "</div>"
         aka_section = f"""<div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">🏷️</span><span class="wild-section-title">Also Known As</span></div>{aka_chips}{tag_chips}</div>"""
+
+    # Photo Gallery
+    gallery_photos = [p for p in all_photos if not p.get("hero") and p.get("filename")]
+    gallery_section = ""
+    if gallery_photos:
+        gallery_items = ""
+        for i, p in enumerate(gallery_photos):
+            fn = p["filename"]
+            photog = p.get("photographer", "Unknown")
+            img_path = f"../photos/{sid}/{fn}"
+            gallery_items += f'<div class="gal-item" onclick="openLB({i})"><img src="{img_path}" loading="lazy" alt="{h(name)} — photo by {h(photog)}"><div class="gal-credit">📷 {h(photog)}</div></div>'
+
+        # Build lightbox data array
+        lb_data = []
+        for p in gallery_photos:
+            lb_data.append({"src": f"../photos/{sid}/{p['filename']}", "credit": p.get("photographer", "Unknown"), "license": p.get("license", "")})
+
+        gallery_section = f"""<div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">📸</span><span class="wild-section-title">Photo Gallery</span></div>
+    <div class="gal-note">Photos contributed by park visitors and volunteers via iNaturalist</div>
+    <div class="gal-grid">{gallery_items}</div></div>
+    <div class="lightbox" id="lb" onclick="closeLB(event)">
+      <div class="lb-inner">
+        <button class="lb-close" onclick="closeLB()">&times;</button>
+        <button class="lb-prev" onclick="stepLB(-1)">&#8249;</button>
+        <img class="lb-img" id="lbImg">
+        <button class="lb-next" onclick="stepLB(1)">&#8250;</button>
+        <div class="lb-credit" id="lbCredit"></div>
+      </div>
+    </div>
+    <script>
+    var lbData={json.dumps(lb_data)};
+    var lbIdx=0;
+    function openLB(i){{lbIdx=i;var d=lbData[i];document.getElementById('lbImg').src=d.src;document.getElementById('lbCredit').innerHTML='📷 '+d.credit+' · '+d.license+' · via iNaturalist';document.getElementById('lb').classList.add('active');document.body.style.overflow='hidden';}}
+    function closeLB(e){{if(e&&e.target!==document.getElementById('lb')&&!e.target.classList.contains('lb-close'))return;document.getElementById('lb').classList.remove('active');document.body.style.overflow='';}}
+    function stepLB(dir){{lbIdx=(lbIdx+dir+lbData.length)%lbData.length;openLB(lbIdx);}}
+    document.addEventListener('keydown',function(e){{if(!document.getElementById('lb').classList.contains('active'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')stepLB(1);if(e.key==='ArrowLeft')stepLB(-1);}});
+    </script>"""
 
     # Hero img tag
     hero_img = ""
@@ -287,6 +324,22 @@ def build_page(species, hero_photo):
   .all-wild-link{{animation-delay:.38s}}
   @keyframes wildFadeUp{{ from{{opacity:0;transform:translateY(10px)}} to{{opacity:1;transform:translateY(0)}} }}
   @media (prefers-reduced-motion:reduce){{ .wild-section,.wild-caution-section,.wild-safe-section,.all-wild-link{{ animation:none; }} }}
+  .gal-note{{ font-size:13px;color:#888;padding:10px 16px 4px;font-style:italic; }}
+  .gal-grid{{ display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;padding:8px 16px 16px; }}
+  .gal-item{{ position:relative;border-radius:8px;overflow:hidden;cursor:pointer;aspect-ratio:1;background:#111; }}
+  .gal-item img{{ width:100%;height:100%;object-fit:cover;transition:transform .3s; }}
+  .gal-item:hover img{{ transform:scale(1.05); }}
+  .gal-credit{{ position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);color:#ccc;font-size:11px;padding:4px 8px;opacity:0;transition:opacity .2s; }}
+  .gal-item:hover .gal-credit{{ opacity:1; }}
+  .lightbox{{ display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999;justify-content:center;align-items:center; }}
+  .lightbox.active{{ display:flex; }}
+  .lb-inner{{ position:relative;max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center; }}
+  .lb-img{{ max-width:90vw;max-height:80vh;object-fit:contain;border-radius:4px; }}
+  .lb-credit{{ color:#ccc;font-size:13px;margin-top:10px;font-style:italic; }}
+  .lb-close{{ position:fixed;top:16px;right:20px;background:none;border:none;color:#fff;font-size:36px;cursor:pointer;z-index:1001; }}
+  .lb-prev,.lb-next{{ position:fixed;top:50%;background:none;border:none;color:#fff;font-size:48px;cursor:pointer;padding:20px;transform:translateY(-50%); }}
+  .lb-prev{{ left:8px; }}
+  .lb-next{{ right:8px; }}
 </style>
 </head>
 <body>
@@ -312,6 +365,7 @@ def build_page(species, hero_photo):
     {diet_section}
     {ww_section}
     {int_section}
+    {gallery_section}
     {aka_section}
     <a class="all-wild-link" href="../nature.html#wildlife">{float_icon} Explore More Wildlife</a>
   </div>
@@ -350,7 +404,8 @@ def main():
             continue
 
         hero = get_hero(sp["id"], pc["photos"])
-        page_html = build_page(sp, hero)
+        species_photos = [p for p in pc["photos"] if p.get("psbp_id") == sp["id"]]
+        page_html = build_page(sp, hero, species_photos)
 
         slug = sp["common_name"].replace(" ", "-").replace("'", "")
         filename = f'{sp["id"]}-{slug}.html'
