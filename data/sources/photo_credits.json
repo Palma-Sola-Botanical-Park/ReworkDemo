@@ -1,8 +1,8 @@
 {
   "meta": {
-    "generated": "2026-06-18",
+    "generated": "2026-06-19",
     "source": "Plants_and_Wildlife_Photo_Credits.csv",
-    "photo_count": 152,
+    "photo_count": 205,
     "schema_version": "1.0"
   },
   "photos": [
@@ -2935,150 +2935,6 @@
       "used_by": []
     },
     {
-      "psbp_id": "PSBP-99999",
-      "type": "Wildlife",
-      "common_name": "Brown Anole",
-      "scientific_name": "Anolis sagrei",
-      "role": [
-        "whole"
-      ],
-      "primary_for": [
-        "whole"
-      ],
-      "hero": true,
-      "tags": [],
-      "photographer": "naturalistclaire",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© naturalistclaire (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/261070928/large.jpeg",
-      "source_url": "https://www.inaturalist.org/observations/151155729",
-      "photo_id": "261070928",
-      "filename": "PSBP-99999-Brown-Anole.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99998",
-      "type": "Wildlife",
-      "common_name": "Anhinga",
-      "scientific_name": "Anhinga anhinga",
-      "role": [
-        "whole"
-      ],
-      "primary_for": [
-        "whole"
-      ],
-      "hero": true,
-      "tags": [],
-      "photographer": "joycem1218",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© joycem1218 (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609965586/large.jpg",
-      "source_url": "https://www.inaturalist.org/observations/335724271",
-      "photo_id": "609965586",
-      "filename": "PSBP-99998-Anhinga.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99997",
-      "type": "Wildlife",
-      "common_name": "White Ibis",
-      "scientific_name": "Eudocimus albus",
-      "role": [
-        "whole"
-      ],
-      "primary_for": [
-        "whole"
-      ],
-      "hero": true,
-      "tags": [],
-      "photographer": "kcstanyard",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© kcstanyard (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/617374553/large.jpg",
-      "source_url": "https://www.inaturalist.org/observations/339382306",
-      "photo_id": "617374553",
-      "filename": "PSBP-99997-White-Ibis.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99996",
-      "type": "Wildlife",
-      "common_name": "Common Gallinule",
-      "scientific_name": "Gallinula galeata",
-      "role": [
-        "whole"
-      ],
-      "primary_for": [
-        "whole"
-      ],
-      "hero": true,
-      "tags": [],
-      "photographer": "pammy63",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© Pammy63 (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/297331058/large.jpg",
-      "source_url": "https://www.inaturalist.org/observations/168585525",
-      "photo_id": "297331058",
-      "filename": "PSBP-99996-Common-Gallinule.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99995",
-      "type": "Wildlife",
-      "common_name": "Great Egret",
-      "scientific_name": "Ardea alba",
-      "role": [
-        "whole"
-      ],
-      "primary_for": [
-        "whole"
-      ],
-      "hero": true,
-      "tags": [],
-      "photographer": "mewells",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© Mark E. Wells (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613021665/large.jpg",
-      "source_url": "https://www.inaturalist.org/observations/337245053",
-      "photo_id": "613021665",
-      "filename": "PSBP-99995-Great-Egret.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99994",
-      "type": "Wildlife",
-      "common_name": "Monarch",
-      "scientific_name": "Danaus plexippus",
-      "role": [
-        "whole"
-      ],
-      "primary_for": [
-        "whole"
-      ],
-      "hero": true,
-      "tags": [],
-      "photographer": "jsea",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© jsea (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626742167/large.jpg",
-      "source_url": "https://www.inaturalist.org/observations/344005669",
-      "photo_id": "626742167",
-      "filename": "PSBP-99994-Monarch.jpg",
-      "used_by": []
-    },
-    {
       "psbp_id": "PSBP-99993",
       "type": "Wildlife",
       "common_name": "Great Blue Heron",
@@ -3653,6 +3509,1363 @@
       "photo_id": "366238094",
       "filename": "PSBP-99970-Gulf-Fritillary.jpg",
       "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245373536/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143085558",
+      "photo_id": "245373536",
+      "filename": "245373536.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": false,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635345903/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348374886",
+      "photo_id": "635345903",
+      "filename": "635345903.jpg",
+      "used_by": [],
+      "focus": "50% 50%"
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635345923/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348374886",
+      "photo_id": "635345923",
+      "filename": "635345923.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635346033/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348374926",
+      "photo_id": "635346033",
+      "filename": "635346033.jpg",
+      "used_by": [],
+      "focus": "50% 50%"
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635347321/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348375638",
+      "photo_id": "635347321",
+      "filename": "635347321.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635347394/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348375676",
+      "photo_id": "635347394",
+      "filename": "635347394.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635347465/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348375741",
+      "photo_id": "635347465",
+      "filename": "635347465.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/638116724/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/349782441",
+      "photo_id": "638116724",
+      "filename": "638116724.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/638116759/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/349782444",
+      "photo_id": "638116759",
+      "filename": "638116759.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/638116756/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/349782445",
+      "photo_id": "638116756",
+      "filename": "638116756.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/638116898/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/349782469",
+      "photo_id": "638116898",
+      "filename": "638116898.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/638116963/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/349782474",
+      "photo_id": "638116963",
+      "filename": "638116963.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/638116967/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/349782479",
+      "photo_id": "638116967",
+      "filename": "638116967.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "harrisonmello",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© harrisonmello (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/680941874/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/372634015",
+      "photo_id": "680941874",
+      "filename": "680941874.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99998",
+      "type": "Wildlife",
+      "common_name": "Anhinga",
+      "scientific_name": "Anhinga anhinga",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "hmac73",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© hmac73 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/249453205/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/145238298",
+      "photo_id": "249453205",
+      "filename": "249453205.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99998",
+      "type": "Wildlife",
+      "common_name": "Anhinga",
+      "scientific_name": "Anhinga anhinga",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "hmac73",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© hmac73 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/249453451/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/145238385",
+      "photo_id": "249453451",
+      "filename": "249453451.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99998",
+      "type": "Wildlife",
+      "common_name": "Anhinga",
+      "scientific_name": "Anhinga anhinga",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681678647/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034298",
+      "photo_id": "681678647",
+      "filename": "681678647.jpg",
+      "used_by": [],
+      "focus": "51% 49%"
+    },
+    {
+      "psbp_id": "PSBP-99998",
+      "type": "Wildlife",
+      "common_name": "Anhinga",
+      "scientific_name": "Anhinga anhinga",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681678800/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034326",
+      "photo_id": "681678800",
+      "filename": "681678800.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99998",
+      "type": "Wildlife",
+      "common_name": "Anhinga",
+      "scientific_name": "Anhinga anhinga",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681680115/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034461",
+      "photo_id": "681680115",
+      "filename": "681680115.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99998",
+      "type": "Wildlife",
+      "common_name": "Anhinga",
+      "scientific_name": "Anhinga anhinga",
+      "role": [
+        "gallery",
+        "display"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681680401/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034506",
+      "photo_id": "681680401",
+      "filename": "681680401.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99998",
+      "type": "Wildlife",
+      "common_name": "Anhinga",
+      "scientific_name": "Anhinga anhinga",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681284/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034612",
+      "photo_id": "681681284",
+      "filename": "681681284.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99998",
+      "type": "Wildlife",
+      "common_name": "Anhinga",
+      "scientific_name": "Anhinga anhinga",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681848/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034655",
+      "photo_id": "681681848",
+      "filename": "681681848.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245371015/original.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143084030",
+      "photo_id": "245371015",
+      "filename": "245371015.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "hmac73",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© hmac73 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/249453701/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/145238520",
+      "photo_id": "249453701",
+      "filename": "249453701.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "ruby_meador",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© ruby_meador (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/680975638/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/372652782",
+      "photo_id": "680975638",
+      "filename": "680975638.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "cleamon",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© cleamon (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681005185/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/372669122",
+      "photo_id": "681005185",
+      "filename": "681005185.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681678543/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034268",
+      "photo_id": "681678543",
+      "filename": "681678543.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681678596/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034289",
+      "photo_id": "681678596",
+      "filename": "681678596.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681678758/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034312",
+      "photo_id": "681678758",
+      "filename": "681678758.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681680035/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034445",
+      "photo_id": "681680035",
+      "filename": "681680035.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681680979/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034536",
+      "photo_id": "681680979",
+      "filename": "681680979.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681324/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034617",
+      "photo_id": "681681324",
+      "filename": "681681324.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681352/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034620",
+      "photo_id": "681681352",
+      "filename": "681681352.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681371/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034622",
+      "photo_id": "681681371",
+      "filename": "681681371.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681498/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034652",
+      "photo_id": "681681498",
+      "filename": "681681498.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681682344/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034722",
+      "photo_id": "681682344",
+      "filename": "681682344.jpg",
+      "used_by": [],
+      "focus": "49% 51%"
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "brice_c",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© brice_c (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/518341427/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/288246379",
+      "photo_id": "518341427",
+      "filename": "518341427.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "catalaniclaire",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© catalaniclaire (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/665114365/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/364339941",
+      "photo_id": "665114365",
+      "filename": "665114365.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "cleamon",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© cleamon (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681005087/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/372669065",
+      "photo_id": "681005087",
+      "filename": "681005087.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "cleamon",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© cleamon (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681065389/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/372700526",
+      "photo_id": "681065389",
+      "filename": "681065389.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681679178/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034385",
+      "photo_id": "681679178",
+      "filename": "681679178.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery",
+        "juvenile"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681680511/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034521",
+      "photo_id": "681680511",
+      "filename": "681680511.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery",
+        "juvenile",
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681680513/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034523",
+      "photo_id": "681680513",
+      "filename": "681680513.jpg",
+      "used_by": [],
+      "focus": "50% 50%"
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681072/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034569",
+      "photo_id": "681681072",
+      "filename": "681681072.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681194/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034597",
+      "photo_id": "681681194",
+      "filename": "681681194.jpg",
+      "used_by": [],
+      "focus": "57% 50%"
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681337/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034619",
+      "photo_id": "681681337",
+      "filename": "681681337.jpg",
+      "used_by": [],
+      "focus": "46% 48%"
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681979/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034679",
+      "photo_id": "681681979",
+      "filename": "681681979.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681682319/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034719",
+      "photo_id": "681682319",
+      "filename": "681682319.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99995",
+      "type": "Wildlife",
+      "common_name": "Great Egret",
+      "scientific_name": "Ardea alba",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "hmac73",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© hmac73 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/249453076/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/145238194",
+      "photo_id": "249453076",
+      "filename": "249453076.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99995",
+      "type": "Wildlife",
+      "common_name": "Great Egret",
+      "scientific_name": "Ardea alba",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "david_mcswain",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© david_mcswain (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/680899228/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/372609957",
+      "photo_id": "680899228",
+      "filename": "680899228.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99995",
+      "type": "Wildlife",
+      "common_name": "Great Egret",
+      "scientific_name": "Ardea alba",
+      "role": [
+        "gallery"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "mariaaaz",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© mariaaaz (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/680905742/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/372613760",
+      "photo_id": "680905742",
+      "filename": "680905742.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99995",
+      "type": "Wildlife",
+      "common_name": "Great Egret",
+      "scientific_name": "Ardea alba",
+      "role": [
+        "gallery",
+        "whole",
+        "flight"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681677765/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034213",
+      "photo_id": "681677765",
+      "filename": "681677765.jpg",
+      "used_by": [],
+      "focus": "50% 50%"
+    },
+    {
+      "psbp_id": "PSBP-99995",
+      "type": "Wildlife",
+      "common_name": "Great Egret",
+      "scientific_name": "Ardea alba",
+      "role": [
+        "gallery",
+        "whole",
+        "flight"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681679001/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034370",
+      "photo_id": "681679001",
+      "filename": "681679001.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99995",
+      "type": "Wildlife",
+      "common_name": "Great Egret",
+      "scientific_name": "Ardea alba",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681680249/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034482",
+      "photo_id": "681680249",
+      "filename": "681680249.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99995",
+      "type": "Wildlife",
+      "common_name": "Great Egret",
+      "scientific_name": "Ardea alba",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681680339/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034498",
+      "photo_id": "681680339",
+      "filename": "681680339.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99994",
+      "type": "Wildlife",
+      "common_name": "Monarch",
+      "scientific_name": "Danaus plexippus",
+      "role": [
+        "gallery",
+        "feeding"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "catalaniclaire",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© catalaniclaire (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/532397345/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/295722825",
+      "photo_id": "532397345",
+      "filename": "532397345.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99994",
+      "type": "Wildlife",
+      "common_name": "Monarch",
+      "scientific_name": "Danaus plexippus",
+      "role": [
+        "gallery",
+        "juvenile"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "jsea",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© jsea (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626742166/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/344005669",
+      "photo_id": "626742166",
+      "filename": "626742166.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99994",
+      "type": "Wildlife",
+      "common_name": "Monarch",
+      "scientific_name": "Danaus plexippus",
+      "role": [
+        "gallery",
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681099/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034572",
+      "photo_id": "681681099",
+      "filename": "681681099.jpg",
+      "used_by": [],
+      "focus": "46% 41%"
+    },
+    {
+      "psbp_id": "PSBP-99994",
+      "type": "Wildlife",
+      "common_name": "Monarch",
+      "scientific_name": "Danaus plexippus",
+      "role": [
+        "gallery",
+        "display"
+      ],
+      "primary_for": [],
+      "hero": false,
+      "tags": [],
+      "photographer": "robcarr52",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681681097/original.jpg",
+      "source_url": "https://www.inaturalist.org/observations/373034577",
+      "photo_id": "681681097",
+      "filename": "681681097.jpg",
+      "used_by": []
     }
+  ],
+  "_local_folders": [
+    "PSBP-99997",
+    "PSBP-99999",
+    "PSBP-99998",
+    "PSBP-99996",
+    "PSBP-99994",
+    "PSBP-99995"
   ]
 }
