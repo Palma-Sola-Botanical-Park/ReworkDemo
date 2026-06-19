@@ -121,17 +121,33 @@ photos/
 
 **The only rule:** no duplicate filenames within the same species folder.
 
-### Photo roles (controlled vocabulary)
+### Photo roles (controlled vocabulary — extensible)
 
-A single photo can serve **multiple roles** — a shot of a fruiting branch shows leaves and fruit, and might also be the hero.
+A single photo can serve **multiple roles** — a shot of a fruiting branch shows leaves and fruit, and might also be the hero. Roles are open-vocabulary strings stored in an array. **Add new roles freely; document them here when you do.** A role only does something when a generator or app specifically queries for it — undocumented roles are harmless but useless.
 
-**Plants:** `whole` · `leaf` · `flower` · `fruit` · `bark` · `gallery` (extend later: `seed`, `root`, `cone`, `frond`, `habitat`)
+`gallery` is special: it's the catch-all for beautiful shots worth surfacing beyond their specific role. Every keeper gets `gallery` even if it also has a specific role. "Show me all the good photos" is always `role contains gallery`.
 
-**Wildlife — butterflies/moths:** `adult` · `caterpillar` · `gallery` (extend later: `chrysalis`, `egg`)
+**Plants:** `whole` · `leaf` · `flower` · `fruit` · `bark` · `gallery` (extend: `seed`, `root`, `cone`, `frond`, `habitat`)
+
+**Wildlife — birds:** `whole` · `portrait` · `flight` · `feeding` · `juvenile` · `display` · `habitat` · `gallery` (extend as needed)
+
+**Wildlife — butterflies/moths:** `adult` · `caterpillar` · `gallery` (extend: `chrysalis`, `egg`)
 
 **Wildlife — other:** `whole` · `gallery` (extend as needed per animal group)
 
-`gallery` is the catch-all for beautiful shots that don't map to a specific botanical/anatomical role but are too good to leave uncaptured.
+| Role | What it means |
+|------|--------------|
+| `whole` | Full body, standard ID view |
+| `portrait` | Head/face close-up — bill detail, eye color, crest |
+| `flight` | In the air, wings visible |
+| `feeding` | Actively hunting or eating |
+| `juvenile` | Immature plumage/form (critical for species where juveniles look different) |
+| `display` | Breeding plumage or behavior — dewlap flash, wing spread, plume show |
+| `habitat` | The subject in its environment, wider context shot |
+| `adult` | Adult form (butterflies/moths — distinguishes from caterpillar) |
+| `caterpillar` | Larval stage (butterflies/moths) |
+| `leaf` / `flower` / `fruit` / `bark` | Plant parts |
+| `gallery` | Beautiful shot, worth surfacing — the universal "keeper" tag |
 
 ### Photo credits registry (`photo_credits.json`)
 
@@ -146,30 +162,41 @@ One record per photo file. Every photo in every subfolder gets a row — the reg
   "role": ["leaf", "fruit", "gallery"],
   "primary_for": ["leaf", "fruit"],
   "hero": true,
+  "focus": "43% 57%",
   "photographer": "cleamon",
   "license": "cc-by-nc",
   "publish_ok": true,
   "status": "OK",
   "credit_line": "© cleamon / iNaturalist (CC-BY-NC)",
   "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/...",
-  "source_url": "https://www.inaturalist.org/observations/...",
-  "filename": "cleamon_trunk_detail.jpg"
+  "source_url": "https://www.inaturalist.org/observations/143209347",
+  "observation_id": "143209347",
+  "photo_id": "245580589",
+  "filename": "cleamon_trunk_detail.jpg",
+  "tags": [],
+  "used_by": []
 }
 ```
 
-### Photo flags
+### Photo flags and fields
 
-| Flag | Type | Rule | Purpose |
-|------|------|------|---------|
-| `role` | array of strings | Every photo gets at least one | What the photo shows — can be multiple. `gallery` flags beautiful shots worth surfacing beyond their anatomical role. |
+| Field | Type | Rule | Purpose |
+|-------|------|------|---------|
+| `role` | array of strings | Every photo gets at least one | What the photo shows — can be multiple. Extensible vocabulary, documented above. |
 | `primary_for` | array of strings | At most one photo per species per role | The chosen image for that role — generators grab these |
 | `hero` | boolean | Exactly one per species | The card image, the sign image, the search index thumbnail |
+| `focus` | string or null | Only meaningful on hero photos | CSS `object-position` / `background-position` value (e.g., `"43% 57%"`). Tells the browser where to anchor the crop when the hero is squeezed into a banner or card. Without it, the crop centers at 50% 50% and you may be staring at mud instead of the turtle. Set by clicking on the subject during hero review. `null` for non-hero photos. |
+| `photo_id` | string or null | Unique per photo | The iNaturalist photo ID. Used as the filename for iNat-sourced photos (`<photo_id>.jpg`). Prevents re-downloading. `null` for non-iNat photos. |
+| `observation_id` | string or null | For iNat-sourced photos | The iNaturalist observation ID — enables deep-linking to the observation without parsing `source_url`. `null` for non-iNat photos. |
 
 **Validation rules:**
 - Every species with `status` of `html` must have exactly one `hero: true` photo.
+- Every `hero: true` photo should have a `focus` value (not null). Default `"50% 50%"` if not explicitly set.
 - A `primary_for` role should not appear on more than one photo per species.
 - A photo can be hero AND primary for multiple roles — one file, many jobs.
 - `gallery` as a role serves double duty: it marks shots for species-page galleries, office screen slideshows, and any future "best of" features.
+- `photo_id` must be unique across the entire registry (no duplicate downloads).
+- `observation_id` is populated automatically by the download script; for manually ingested iNat photos, extract it from the observation URL.
 
 ### Park and site photos (non-species)
 
@@ -542,4 +569,8 @@ When someone hands you a photo that didn't come through iNaturalist:
 
 1. **Verify the license** on the iNaturalist observation page (CC-BY-NC or more permissive).
 2. **Download** the photo from the iNat CDN URL.
-3. **Drop + register** — same as steps 2–5 above, but `source_url` points to the iNat observation and `photo_url` to the CDN link.
+3. **Drop + register** — same as steps 2–5 above, but `source_url` points to the iNat observation, `observation_id` carries the numeric ID, and `photo_url` points to the CDN link.
+
+### Migration: `photo_focus.json` → `focus` field (2026-06-19)
+
+The standalone `photo_focus.json` file (25 entries mapping PSBP IDs to CSS `object-position` values) is superseded by the `focus` field on hero photos in `photo_credits.json`. During the next photo review pass, migrate each value into the corresponding hero photo's `focus` field, then retire the standalone file. The review tool handles this automatically for new hero assignments.
