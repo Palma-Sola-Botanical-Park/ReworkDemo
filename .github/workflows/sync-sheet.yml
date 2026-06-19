@@ -1,0 +1,62 @@
+name: Sync sheet → JSON
+
+# Triggers: every ~10 min (best-effort — GitHub's scheduler can lag under load),
+# plus a manual "Run workflow" button (this is the force-now). No push trigger,
+# so the commit this job makes can't retrigger it (no loop).
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write          # needed to commit the refreshed JSON back to the repo
+
+concurrency:
+  group: sheet-sync        # never let two syncs overlap and race the commit
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Stage 1 — pull each tab to data/staging/*.json (faithful mirror).
+      # A fetch hiccup keeps last-good staging; don't abort the whole run.
+      - name: Fetch sheet tabs → staging
+        run: python3 scripts/fetch_sheets.py
+        continue-on-error: true
+
+      # Stage 2 — the gate. Exits non-zero if a feed is BLOCKED, but we let the
+      # job continue so the red board still gets committed; we fail at the end.
+      - name: Validate + promote (the gate)
+        id: gate
+        run: python3 scripts/validate_promote.py
+        continue-on-error: true
+
+      # Commit only when something actually changed (no-op runs leave files
+      # byte-identical → no diff → no commit → clean history). GitHub Pages
+      # redeploys automatically off this commit.
+      - name: Commit refreshed JSON (only if changed)
+        run: |
+          git config user.name  "psbp-sync-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/staging data/published
+          if git diff --cached --quiet; then
+            echo "No changes — nothing to commit."
+          else
+            git commit -m "data: sheet sync $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
+
+      # If the gate blocked a feed, fail the run AFTER committing the red board —
+      # a red ✗ in the Actions tab plus GitHub's automatic failure email.
+      - name: Fail the run if a feed was blocked
+        if: steps.gate.outcome == 'failure'
+        run: |
+          echo "A feed was BLOCKED (see the run summary). The site is serving last-known-good."
+          exit 1

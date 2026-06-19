@@ -136,7 +136,36 @@ const KNOWN_HEADERS = new Set([
 ]);
 const normHeader = s => (s || '').trim().toLowerCase().replace(/\s+/g, '_');
 
+// ── DATA SOURCE SWITCH (see SHEET_SYNC_ARCHITECTURE.md §6) ─────────────────────
+// Normal operation reads validated static JSON that a GitHub Action keeps fresh.
+// A migrated tab is served from data/published/<name>.json; un-migrated tabs
+// still fetch the live sheet. Flip DATA_SOURCE to 'live' as a break-glass switch
+// to force the WHOLE site back onto the live sheet during an extended Actions
+// outage (one-character commit). 'live' is the LESS-safe path — it reintroduces
+// the unguarded client-side parse the gate exists to remove — so flip it back
+// the moment the pipeline recovers.
+const DATA_SOURCE = 'published';            // 'published' (default) | 'live' (break-glass)
+const MIGRATED = new Set(['events']);       // tabs served from validated JSON; grow as templated
+const GID_TO_NAME = Object.fromEntries(Object.entries(TAB).map(([k, v]) => [v, k]));
+
 async function fetchTab(gid) {
+  const name = GID_TO_NAME[gid] || String(gid);
+  if (DATA_SOURCE !== 'live' && MIGRATED.has(name)) {
+    try {
+      const r = await fetch(`data/published/${name}.json`, { cache: 'no-store' });
+      if (r.ok) return await r.json();   // the gate guarantees this is clean
+      console.warn(`published/${name}.json -> ${r.status}; falling back to live sheet`);
+    } catch (e) {
+      console.warn(`published/${name}.json fetch failed (${e}); falling back to live sheet`);
+    }
+  }
+  return fetchTabLive(gid);
+}
+
+// The original live-CSV path, kept dormant as the break-glass fallback (§6).
+// All the brittle parsing now also runs server-side in fetch_sheets.py under the
+// gate; this stays so DATA_SOURCE='live' (or a missing published file) still works.
+async function fetchTabLive(gid) {
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
   const resp = await fetch(url);
   if (!resp.ok) throw new Error(`Sheet tab ${gid} failed`);

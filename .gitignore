@@ -1,1 +1,8 @@
 .DS_Store
+# Per-run scratch: previous-staging snapshots used only to compute edit counts.
+# Never committed — the committed staging files are the audit trail.
+data/staging/.prev/
+
+# Python cache
+__pycache__/
+*.pyc

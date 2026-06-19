@@ -1,6 +1,11 @@
 # Events, Classes & Series — Data Model
 
 **Status:** BUILT & DEPLOYED on `events.html` (live). Source of truth for how `events.html` + `loadEventsPage`/`loadEvents` in `site.js` read the Google Sheet.
+**v4 (2026-06-18) — two opt-in columns added to the sheet ahead of the JSON migration; rendering pending (backlog D12 / D13):**
+- **`date_end` on `events`** — a multi-day event is now **one row** (start `date` + last-day `date_end`), not N separate day-rows. Kills the multi-pin Save-the-Date bug. See §4a "Multi-day events." *Per-day calendar fan-out + one grouped agenda card is backlog **D12** — not yet rendered.*
+- **`close_time` on `wedding_calendar`** — **partial** park closures. Bev's new policy keeps the park open until X hours before a wedding, so the public notice can read "🔒 Park closes at {close_time}" instead of all-day "🔒 Park closed." Bride-facing red (`status`) is unchanged. See §3 and §4d. *Wording change is backlog **D13** — not yet rendered.*
+- Both columns are **non-breaking and opt-in** (blank = today's behavior) and both feed the forthcoming JSON events / wedding_calendar feeds (see `SHEET_SYNC_ARCHITECTURE.md`).
+
 **v3 (2026-06-15, evening) — shipped a major events.html rework, all live:**
 - **Card redesign:** wider **weekday-colored** date block (weekday + month + day + time); title line `**Title**, Instructor` (classes only); badges right-justified on the title row, wrapping below on phones.
 - **Weekday color-coding** (muted botanical palette) on cards + calendar, so the eye feels days passing.
@@ -94,6 +99,8 @@ Closures are merged from **two tabs**, then **deduped by date** (an events-tab c
 
 > **Optional `public_note` on `wedding_calendar`:** blank → generic "private event"; filled → a public label (e.g. `Thanksgiving` → "🔒 Park closed — Thanksgiving"). Use it for holidays you're happy to name; leave blank for weddings.
 
+> **Optional `close_time` on `wedding_calendar` (partial closure — v4):** Bev's policy now keeps the park open until X hours before a wedding rather than all day. If `close_time` is filled on a `closes_park = yes` row, the public notice reads **"🔒 Park closes at {close_time} — {reason}"** instead of all-day "🔒 Park closed." Blank → all-day closure (today's behavior). Free text (e.g. `2PM`) — **no validation**; a typo just shows an odd label for one day. Wedding day-of only — leave blank on setup days and full-day blocks. **Public-side only:** the bride-facing `status` (booked/possible) on venue.html is unchanged, so the date stays red for other weddings. Rendering is backlog **D13**.
+
 This is the heavyweight version of the future **overrides** idea (a sick instructor cancels *one* class; a closure closes *everything*). Closures ship now; per-class overrides come later (§5).
 
 ---
@@ -118,12 +125,20 @@ Keep what's there (`display`, `date`, `time`, `title`, `description`, `link_url`
 |---|---|---|---|---|
 | `category` | **rename from `type`** | yes | Controlled vocabulary (§2). `type` is read in exactly one place (events); every other tab already uses `category`, so this rename *removes* the system's one inconsistency. Migrate the old `education/social/event/wedding` values to the 8 terms. Code reads `category` with a quiet fallback to `type` during migration. | `Workshops` |
 | `series` | **NEW** | no | Series name. **Must match a `name` in the `series` tab.** Blank for true one-offs. | `Adult Park Workdays` |
+| `date_end` | **NEW (v4)** | no | **Last day of a multi-day event** (the start is `date`). Blank = a normal one-day event. When set, this **one row** is the whole run — one identity, one flyer, one Save-the-Date pin — fanned out to a calendar entry per day. Must parse as a date and be **≥ `date`**. See "Multi-day events" below. *Rendering: backlog D12.* | `2026-12-22` |
 | `registration_url` | **NEW** | no | If set, card shows **Register →**. | `https://…` |
 | `cost` | **NEW** | no | Cost badge; blank or `Free` if none. | `$5/rock` |
 | `fundraiser` | **NEW** | no | `yes` adds a Fundraiser badge. | `yes` |
 | `kid_friendly` | **NEW** | no | `yes` adds a "👪 Kid-friendly" badge. A *flag*, not a category — a Workshop can be kid-friendly without being "Family & Kids" (which means aimed AT kids). | `yes` |
-| `save_the_date` | **NEW** | no | `yes` pins this event to the **Save the Date** rail (marquee events like Holiday Nights / the gala). For a multi-day run entered as separate day-rows, flag just the **first** row — the rail dedupes by title and shows at most 2. | `yes` |
+| `save_the_date` | **NEW** | no | `yes` pins this event to the **Save the Date** rail (marquee events like Holiday Nights / the gala). For a multi-day run, this now sits on the **single `date_end` row** (no more flag-the-first-of-N; a run is one row). The rail dedupes by title and shows at most 2. | `yes` |
 | `closes_park` | **NEW** | no | `yes` → closure notice + preempts the day (§3). Pair with `category = Private`. Also available on `wedding_calendar` (§4d); the two are deduped by date. | `yes` |
+
+**Multi-day events (`date_end`).** A happening that spans consecutive days — *Winter Nights under the Lights* (Thu–Sun) — is **one events row**, not four. Set `date` to the first day and `date_end` to the last. That single row owns the event's identity: one title, one flyer, one Save-the-Date pin — which kills the old "four pins for four nights" bug (that was a title-dedupe papering over four real rows). Rendering fans the span into a calendar dot on **each** day across both the 2-week agenda and the full-calendar list — the same expansion the class expander already does for a weekly rule, just over an explicit start–end. In the 2-week agenda it shows as **one grouped card** ("Thu–Sun, Dec 19–22"), not a card per night. Closures and Save-the-Date read the single row once.
+
+- **Validation:** `date_end` must parse as a date and be **≥ `date`** — a backwards or fat-fingered end date is a quarantined row, never a months-long band smeared across the calendar. This is the one validated rule the new column adds.
+- **Same-hours assumption:** every day of a run shares the **same hours** (the park's actual usage). A run with one odd-time day (3 nights 8–12, a 7–9 finale) is **split into same-time spans** — a `date_end` row for the uniform block plus a separate single-day row for the odd night, both sharing the title — not forced into one row. The rule is "one row per same-time span"; a perfectly uniform run is just the happy case where the span is the whole thing.
+- **Why not a shared `group_id` key (considered, rejected):** a sibling-key model would let every day differ freely (times, descriptions), but it's too abstract for non-technical editors. "Last day of the event" is self-explanatory; an invisible shared key is not. Match the model to the human editing it — an editor who second-guesses a column produces exactly the silent bad data the system is built to avoid.
+- **Rendering status:** the per-day fan-out + grouped card is **backlog D12** — the column exists in the sheet and is captured here; the display work is pending.
 
 ### 4b. `classes` tab — ADAPT (add columns), and REMOVE the fake series
 
@@ -156,14 +171,15 @@ One row per series. This is where Bev's bundled flyers/infographics finally live
 
 > **Convention note (intentional):** `series` uses `active` (yes/retired) rather than the `print/web` meaning of `display`. A series is on or off, not web-vs-print. `display` is still there for the standard visibility filter; `active` is the "is this series currently happening" switch. Documented here so it's not "fixed" later.
 
-### 4d. `wedding_calendar` tab — ADD ONE COLUMN (already drives venue.html)
+### 4d. `wedding_calendar` tab — ADD COLUMNS (already drives venue.html)
 
-This tab already exists and powers the availability calendar on `venue.html` (columns `date`, `status` = open/possible/booked, `note`). `events.html` now **also reads it** for park closures. One column to add:
+This tab already exists and powers the availability calendar on `venue.html` (columns `date`, `status` = open/possible/booked, `note`). `events.html` now **also reads it** for park closures. Columns to add:
 
 | Column | Status | Required | Purpose | Example |
 |---|---|---|---|---|
 | `closes_park` | **NEW** | no | `yes` → the public Events calendar shows a **generic** "🔒 Park closed" for this date (no `note`/couple name). Flag only **whole-park** dates (weddings, holidays, Winter Nights setup); leave Galleria-/pavilion-only bookings blank so the park reads open. Deduped against the `events` tab by date. | `yes` |
 | `public_note` | optional | no | A public-safe label shown on the closure ("🔒 Park closed — Thanksgiving"). Blank → generic "private event". Never auto-pulled from `note`. | `Thanksgiving` |
+| `close_time` | **NEW (v4)** | no | **Partial closure.** Free-text time the park closes to visitors. On a `closes_park = yes` row, makes the notice read "🔒 Park closes at {close_time}" instead of the all-day "🔒 Park closed." Blank = all-day closure. Wedding **day-of only** (blank on setup days / full-day blocks). **Public-side only** — does not touch `status`/availability, so the date stays red for other weddings. No validation. *Rendering: backlog D13.* | `2PM` |
 
 > `status` (open/possible/booked) is for **wedding customers** on venue.html and is independent of `closes_park`, which is for **general visitors** on events.html. A date can be `booked` (wedding customer can't have it) yet unflagged for closure (Galleria-only — park still open to visitors).
 
@@ -178,6 +194,8 @@ Future home for one-off exceptions (a cancelled session, a moved class). When we
 **Done & live (v3):** the `events`/`classes`/`series` tabs, the two-view events.html (2-week cards + full-calendar list, toggle, filters), weekday colors, Save the Date, kid-friendly flag/filter, and `wedding_calendar` `closes_park` closures. The engine lives in `site.js` (`loadEventsPage` orchestrator; `injectEventStyles` for all CSS; expander, closure merge/dedup/preemption, filters, save-the-date). Tested via Node harnesses (`/tmp/*_test.js`): expander, date math, closure suppression, calendar grouping, save-the-date dedup, wedding-closure merge + privacy.
 
 **Still on the sheet side (Randy):** keep `category`/`weekday` Data-Validation dropdowns clean; add `closes_park` to `wedding_calendar` and flag the whole-park dates.
+
+**New columns added to the sheet (2026-06-18, v4) — rendering pending:** `date_end` on `events` (multi-day → one row; backlog **D12**) and `close_time` on `wedding_calendar` (partial closure wording; backlog **D13**). Both are non-breaking and opt-in (blank = current behavior). The JSON migration's `events` and `wedding_calendar` schemas must carry them, and the events schema enforces `date_end ≥ date` (see `SHEET_SYNC_ARCHITECTURE.md`).
 
 **Later:** the `overrides` tab + sick-instructor / moved-session handling.
 
@@ -194,3 +212,5 @@ Code is written defensively: missing columns degrade gracefully, so the site kee
 - **Closures have two sources, deduped by date — weddings are never re-entered.** The `wedding_calendar` tab already holds every blocking date (it drives venue.html). A per-row `closes_park` flag there feeds generic closures to the public calendar — solving "do I add every wedding to Events?" with **no double entry** and **no leaked names**. The flag is per-row precisely because the wedding calendar mixes whole-park closures with Galleria-/pavilion-only bookings that *don't* close the park. (A blanket "booked = closed" rule was rejected as wrong for partial bookings.)
 - **The month *grid* was tried and dropped.** A 7-column desktop grid read worse than the grouped list at every width; the list is now the full-calendar view everywhere. Don't rebuild the grid.
 - **Controlled vocabulary for `category`.** The badge set = the filter set = the sheet values. Define once; a dropdown keeps them clean.
+- **Multi-day events are one row (`date_end`), not N rows or a `group_id` (v4).** A run spanning days (Winter Nights, Thu–Sun) is a single `events` row with a start `date` and a last-day `date_end`, fanned out to per-day calendar entries at render — one identity, one Save-the-Date pin, no duplication. The four-rows approach caused the multi-pin bug; a shared `group_id` sibling-key was considered (it handles ragged per-day times natively) but rejected as too abstract for non-technical editors. `date_end` is self-explanatory; odd-time days are handled by splitting a run into same-time spans. The one validated rule: `date_end ≥ date`. (Rendering is backlog D12.)
+- **Partial closures via `close_time` are public-side-only free text (v4).** Bev's policy keeps the park open until X hours before a wedding. `close_time` on a `closes_park = yes` row changes the public notice to "🔒 Park closes at {close_time}"; blank keeps the all-day closure. It never touches the bride-facing `status`/availability, so the date stays red for other weddings. It's deliberately free text with no validation — a cosmetic label where a typo costs nothing, so over-validating it would solve a problem that doesn't exist. (Rendering is backlog D13.)

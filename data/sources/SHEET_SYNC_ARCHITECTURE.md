@@ -2,7 +2,7 @@
 
 **Status:** APPROVED, not yet built. Governing document for how the director's Google Sheet becomes the static JSON the site reads. Companion to `EVENTS_DATA_MODEL.md` (which defines *what* the tabs mean); this doc defines *how* the tab data gets safely onto the site.
 **Supersedes:** the live client-side `fetchTab()` CSV path in `site.js` *in normal operation*. Once this is built, the browser fetches validated static JSON instead of the sheet — but the old live path is kept dormant as a break-glass fallback (see §6), not deleted.
-**Last updated:** 2026-06-18 (evening — added §6 Failure modes & break-glass, the `DATA_SOURCE` toggle, and the resilience decisions behind them; renumbered later sections)
+**Last updated:** 2026-06-18 (evening, rev 4 — recorded the dashboard as intentionally unlinked/bookmark-only; rev 3 added §1 Consumers, the promote/visibility rule and closures-from-flag in §3, dual-mode venues + gallery existence check + screens in the decision log, and reordered the template build with venues last)
 
 ---
 
@@ -13,6 +13,8 @@ Today every visitor's browser fetches the sheet as CSV and parses it live — fi
 This pipeline moves that parse into CI, where it runs **once**, **under test**, and **fails loudly with a last-known-good fallback**. The site never again renders directly off a live sheet. It renders off a static JSON file that a GitHub Action keeps fresh — and only ever overwrites when the data passes validation.
 
 The philosophy is the same one already governing the species side (`DATA_ARCHITECTURE.md`): a controlled source of truth, scripts that derive everything downstream, and nothing fragile in the hot path. The difference is the source of truth here stays the Google Sheet (Bev's edit surface — that's non-negotiable and good), so we need a reliable bridge from sheet to JSON.
+
+**Consumers — two audiences, one set of files.** `data/published/*.json` feeds *both* the public website and the in-park TV-screen pages (hidden HTML on the office/galleria displays, not reachable from the public nav). They read the same files. The pipeline does **no** audience filtering — that happens at the HTML page: web pages render `web` + `both` and ignore `screen`; screen pages render `screen` + `both` and ignore `web` (mirror of today's `isWebVisible`). So an office-only "brochures are under the TV" announcement lives in the JSON as `screen` and simply never appears on the web. The break-glass `DATA_SOURCE` toggle (§6) applies to the screen pages identically — same files, same fallback.
 
 ---
 
@@ -64,9 +66,10 @@ Each tab has a rule list in `data/schemas/<tab>.py`. A rule is `{field, check, s
 - **Header presence** — `events` must carry `date`,`title`; `classes` must carry `weekday`. Missing → file ERROR. *(This is the 6/14 catch.)*
 - **Required cells** — `events.date` empty or unparseable → row ERROR. An event with no valid date breaks the 2-week date math; quarantine it.
 - **Controlled vocab** — `category` ∈ the 8 approved values; `display` ∈ {web, both, screen, off}; flags ∈ {yes, blank, no}; `weekday` matches `^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)(,(Mon|…|Sun))*$` with no spaces → WARN (show the event uncategorized rather than hide it).
+- **Visibility (promote filter)** — staging mirrors every row, `off` included. Promote publishes everything **except** `off` (which means "hidden everywhere, saved for later"). `web`, `both`, and `screen` all publish — `screen` is not dead content, it's *not-for-web* content the in-park screens need. Audience filtering is the page's job, never the pipeline's (see §1 Consumers). A `display` value outside the four legal ones → WARN, because a typo'd `display` silently hides a row from *everyone* — exactly the failure we want amber on the board, not invisible.
 - **Type / format** — dates parse as ISO `YYYY-MM-DD`; URLs look like URLs; times parse.
-- **Referential integrity** — every `events.series` resolves to a real `series.name` → WARN (the "Part of … series →" line just won't link).
-- **Cross-tab** — `closes_park` rows deduped by date across `events` + `wedding_calendar`; `public_note` default ("Private event") applied here, in Python, once — not re-derived in the browser.
+- **Referential integrity** — every `events.series` resolves to a real `series.name` → WARN (the "Part of … series →" line just won't link; the event itself still shows). It's a raw string join, so a trailing space or "&"-vs-"and" silently orphans it — **trim whitespace before matching is a clean autofix**. A series with no matching events is fine, never an error (it can sit in the rail on its flyer alone).
+- **Cross-tab** — `closes_park` rows deduped by date across `events` + `wedding_calendar`; `public_note` default ("Private event") applied here, in Python, once — not re-derived in the browser. Closure fires from the **flag alone**, never inferred from description prose: a row whose text reads "Park closed for private event" but is *not* flagged (e.g. Winter Nights, a ticketed marquee card) is correctly left open. Trust the flag, ignore the words.
 
 Severity and scope are per-rule, so tuning a check's harshness is a one-line edit. New tabs add a new schema file; the engine is shared.
 
@@ -82,9 +85,9 @@ Every run emits `_health.json` (current state) and appends to `_runlog.json` (hi
 - **amber** — published, but with warnings or quarantined rows ("2 edits · 1 row quarantined").
 - **red** — blocked. Serving last-known-good ("Missing field 'headline' · serving last-good from 2:32 PM").
 
-**Change counts** ("1 event edit, 2 series edits, 3 announcements, 4 news") come from diffing new staging against the previous, keyed by a stable per-tab identity (events: date+title; series: name; classes: title+weekday; announcements/news: headline+date; etc.). Counts split into added / changed / removed. This is the payoff for committing staging — the prior is always on hand to diff against.
+**Change counts** ("1 event edit, 2 series edits, 3 announcements, 4 news") come from diffing new staging against the previous, keyed by a stable per-tab identity (events: date+title; series: name; classes: title+weekday+**time**; announcements/news: headline+date; etc.). Counts split into added / changed / removed. This is the payoff for committing staging — the prior is always on hand to diff against. *(Class identity must include time: the weekday rule only collapses same-time multi-day classes like `Tue,Thu` into one row, so Basic Hatha Yoga is legitimately two rows — Mon 4PM and Wed 9AM — and title alone would misread them as a duplicate.)*
 
-**Surface A — `data-health.html`** on the live site. Fetches `_health.json` + `_runlog.json`, renders the board. Bookmark for Randy and Bev; the "is everything healthy right now" glance.
+**Surface A — `data-health.html`** on the live site. Fetches `_health.json` + `_runlog.json`, renders the board. **Intentionally unlinked from site nav/footer** (decided 2026-06-18) — Randy and Bev bookmark it; it's an ops glance, not public content. The "is everything healthy right now" view.
 
 **Surface B — the GitHub run page.** The workflow writes the same board into `$GITHUB_STEP_SUMMARY`, so every run in the Actions tab shows green/amber/red inline. The "what happened on this specific run" view, and the one tied to how you manage the Action.
 
@@ -215,6 +218,11 @@ Staging is **committed** (not just an artifact). Cheap on a low-write repo, and 
 - **Runtime fetch, not build-time bake (for these feeds).** Events render "next 2 weeks from *today*" — date math that must run at view time. So the browser still renders client-side, just off validated static JSON. (The species side bakes to HTML because it's static reference content; different problem, different answer.)
 - **One health model, rendered twice + email.** `_health.json` drives both the public board and the GitHub run summary; GitHub's failure email is free. No separate alerting to maintain.
 - **Pilot one tab, then template.** Prove the gate and last-known-good behavior end-to-end on `events` (richest tab, exercises every rule type) before the machinery is load-bearing for all the feeds.
+- **Screens are a first-class consumer, filtered at the page.** The in-park TV-screen pages read the same `published/*.json` as the website; `screen` is a valid `display` value, not dead content. The pipeline publishes everything except `off` and does no audience filtering — each page (web or screen) applies its own visibility filter. One file set, two audiences. (§1, §3)
+- **All ten data tabs are live.** Confirmed by Randy — none are dormant. The template phase covers all ten; no consumer-tracing step needed.
+- **Venues is the one dual-mode tab.** Today it's a clean rigid matrix (6 venue rows × a fixed seasonal price grid), but Bev is expanding it toward per-venue add-ons ("a few things, somewhat different per option") to stop nickel-and-diming customers. So the venues schema is built dual-mode: **fixed named fields** for the shared structure (the six day×season price cells — bare numbers, strip `$`/commas as autofix — plus deposit, capacity, scope) and an **open-ended `add_ons` block** of ordered `{label, value, kind}` line items for per-venue extras (the plant-reproduction array pattern). This is why the rigid-vs-flexible distinction survives *inside* venues rather than across tabs: strict-and-typed on the matrix, flexible-but-typed on the add-ons (every line needs a label; currency lines parse or are a sentinel like "Included"/"Inquire"). `manager`/`insurance` are deliberately free text + `—` sentinel, not currency. `photo` is a remote WordPress URL → validate shape only, not on-disk existence.
+- **Venues is built last, not first.** Its shape is still in motion (Bev updates it at platform-switch, since the current dev won't). Locking it early would mean rebuilding; the migration *is* the redesign moment. So venues is the template finale, wired to today's matrix as v1 with the `add_ons` block designed-in and dormant until her real pricing lands.
+- **Wedding gallery gets an on-disk existence check.** It's a flat `{title, caption, image}` mirror, but because its `image` paths are *local* (`/images/…`), the validator confirms each file exists in the repo → a missing/renamed file is a quarantined row on the board, not a broken `<img>` on venue.html. (Venues' remote `photo` URLs can't get this check — shape only.)
 
 ---
 
@@ -232,7 +240,8 @@ Staging is **committed** (not just an artifact). Cheap on a low-write repo, and 
 
 **Template (after the pilot proves out):**
 
-8. Add the remaining schemas (`classes`, `series`, `announcements`, `volunteer`, `wedding_calendar`, plus any of `newsletters` / `news` / `venues` / `wedding_gallery` confirmed to be live consumers) and point each `fetchTab` call at its published file. Same engine, one schema file per tab.
+8. Add schemas for the rest in roughly this order — `classes`, `series` (share the events model, near-zero guesswork), then `announcements`, `volunteer`, `wedding_calendar`, `newsletters`, `news`, `wedding_gallery` (flat mirror + local-image existence check) — pointing each `fetchTab` call at its published file. Same engine, one schema file per tab. All ten tabs are confirmed live, so none are skipped.
+9. **`venues` last** — its dual-mode schema (fixed seasonal matrix + open-ended `add_ons` block) is built only once Bev's expanded pricing is in hand. Wire today's 6×6 matrix as v1 with `add_ons` designed-in and dormant. (Decision log: "Venues is built last.")
 
 **Later (designed-for, not now):**
 

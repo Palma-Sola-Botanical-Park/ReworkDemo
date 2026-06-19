@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sheet Sync — Feed Health · PSBP</title>
+<style>
+  :root{
+    --green-deep:#1a3a1f; --green-mid:#2d6a35; --green-light:#4a9e56; --gold:#c5922a;
+    --cream:#faf8f2; --ink:#2b2b26; --soft:#6b6b60; --line:rgba(26,58,31,.12);
+    --ok:#2d8a4e; --ok-bg:#e7f3ec; --warn:#b8841f; --warn-bg:#faf1dc; --down:#b3402f; --down-bg:#f7e6e2;
+  }
+  *{box-sizing:border-box} body{margin:0;background:var(--cream);color:var(--ink);
+    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:2rem 1.25rem 4rem}
+  header{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:.6rem;margin-bottom:1.4rem}
+  h1{font-size:1.35rem;margin:0;color:var(--green-deep);font-weight:700}
+  .sub{font-size:.82rem;color:var(--soft);margin-top:.2rem}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:700;
+    padding:.4rem .85rem;border-radius:999px}
+  .pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.warn{background:var(--warn-bg);color:var(--warn)}
+  .pill.blocked{background:var(--down-bg);color:var(--down)}
+  .counts{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.5rem}
+  .count{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem}
+  .count .n{font-size:1.5rem;font-weight:700;line-height:1.1} .count .l{font-size:.78rem;color:var(--soft)}
+  .count.ok .n{color:var(--ok)} .count.warn .n{color:var(--warn)} .count.down .n{color:var(--down)}
+  .feed{display:flex;align-items:flex-start;gap:.75rem;background:#fff;border:1px solid var(--line);
+    border-radius:10px;padding:.65rem .85rem;margin-bottom:.45rem}
+  .dot{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;font-size:13px;font-weight:700;margin-top:1px}
+  .dot.green{background:var(--ok-bg);color:var(--ok)} .dot.amber{background:var(--warn-bg);color:var(--warn)}
+  .dot.red{background:var(--down-bg);color:var(--down)} .dot.gray{background:#eee;color:#999}
+  .fname{flex:none;width:140px;font-weight:600;font-size:.92rem}
+  .fdetail{flex:1;font-size:.84rem;color:var(--soft);min-width:0}
+  h2{font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--green-mid);
+    margin:1.8rem 0 .6rem}
+  .run{display:flex;align-items:baseline;gap:.7rem;padding:.32rem 0;border-bottom:1px solid var(--line);font-size:.85rem}
+  .run .rt{flex:none;width:120px;color:var(--soft);font-variant-numeric:tabular-nums;font-size:.78rem}
+  .run .rdot{flex:none;width:7px;height:7px;border-radius:50%}
+  .rdot.ok{background:var(--ok)} .rdot.warn{background:var(--warn)} .rdot.blocked{background:var(--down)}
+  .empty{background:#fff;border:1px dashed var(--line);border-radius:10px;padding:1.5rem;text-align:center;color:var(--soft)}
+  footer{margin-top:2.5rem;font-size:.75rem;color:var(--soft);text-align:center}
+  a{color:var(--green-mid)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Sheet Sync · Feed Health</h1>
+      <div class="sub" id="sub">Loading…</div>
+    </div>
+    <span class="pill" id="overall">—</span>
+  </header>
+
+  <div class="counts" id="counts" style="display:none">
+    <div class="count ok"><div class="n" id="cOk">0</div><div class="l">Healthy</div></div>
+    <div class="count warn"><div class="n" id="cWarn">0</div><div class="l">Warnings</div></div>
+    <div class="count down"><div class="n" id="cDown">0</div><div class="l">Down</div></div>
+  </div>
+
+  <div id="feeds"></div>
+
+  <h2 id="runsHdr" style="display:none">Recent runs</h2>
+  <div id="runs"></div>
+
+  <footer>
+    Reads <code>data/published/_health.json</code> · refreshed by the sync Action.
+    Liveness (is the sync running?) is the
+    <a href="../../actions">Actions tab</a>. Bookmark this page — it's intentionally unlinked.
+  </footer>
+</div>
+
+<script>
+const ICON = {green:"✓", amber:"!", red:"✕", gray:"–"};
+const fmt = iso => { try { return new Date(iso).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}); } catch { return iso || "—"; } };
+
+async function load(){
+  let health, runlog;
+  try { health = await (await fetch("data/published/_health.json", {cache:"no-store"})).json(); }
+  catch { document.getElementById("sub").textContent = "No health data yet — the sync hasn't run, or _health.json isn't published."; 
+          document.getElementById("feeds").innerHTML = '<div class="empty">Nothing to show yet. The board fills in after the first sync that publishes a feed.</div>';
+          document.getElementById("overall").textContent = "no data"; return; }
+  try { runlog = await (await fetch("data/published/_runlog.json", {cache:"no-store"})).json(); } catch { runlog = {runs:[]}; }
+
+  const pill = document.getElementById("overall");
+  pill.textContent = ({ok:"All healthy", warn:"Warnings", blocked:"Feed down"})[health.overall] || health.overall;
+  pill.className = "pill " + health.overall;
+  document.getElementById("sub").textContent = "Last meaningful run " + fmt(health.generated_at);
+
+  const f = health.feeds || [];
+  document.getElementById("counts").style.display = "grid";
+  document.getElementById("cOk").textContent   = f.filter(x=>x.status==="green").length;
+  document.getElementById("cWarn").textContent = f.filter(x=>x.status==="amber").length;
+  document.getElementById("cDown").textContent = f.filter(x=>x.status==="red").length;
+
+  document.getElementById("feeds").innerHTML = f.map(x=>{
+    const ch = x.changes||{};
+    const edits = (x.first_run) ? "initialized" :
+      (ch.added||ch.changed||ch.removed) ? `${(ch.added?`+${ch.added} `:"")}${(ch.changed?`~${ch.changed} `:"")}${(ch.removed?`-${ch.removed}`:"")}`.trim()+" edits" : "no changes";
+    const detail = (x.messages && x.messages.length) ? x.messages.join(" · ") : edits;
+    const lg = x.published ? "" : ` · last-good ${fmt(x.last_good_at)}`;
+    return `<div class="feed"><span class="dot ${x.status}">${ICON[x.status]||"–"}</span>`+
+      `<span class="fname">${x.tab}</span>`+
+      `<span class="fdetail">${detail}${lg}</span></div>`;
+  }).join("");
+
+  const runs = (runlog.runs||[]).slice(0,12);
+  if(runs.length){
+    document.getElementById("runsHdr").style.display = "block";
+    document.getElementById("runs").innerHTML = runs.map(r=>
+      `<div class="run"><span class="rdot ${r.overall}"></span>`+
+      `<span class="rt">${fmt(r.at)}</span>`+
+      `<span>${r.summary}</span></div>`).join("");
+  }
+}
+load();
+</script>
+</body>
+</html>
