@@ -105,7 +105,7 @@ def check_ge_field(val, row, arg, **_):
     return None if this >= other else f"is before {arg} ({val} < {row.get(arg)})"
 
 def check_in_vocab(val, arg, **_):
-    return None if (val or "").strip() in arg else f"'{val}' is not an allowed value"
+    return None if (val or "").strip().lower() in [a.lower() for a in arg] else f"'{val}' is not an allowed value"
 
 def check_url_or_blank(val, **_):
     v = (val or "").strip()
