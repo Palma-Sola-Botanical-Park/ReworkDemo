@@ -608,9 +608,10 @@
       "Kid-friendly",
       "Garden"
     ],
-    "credit": "jsea",
-    "photo": "photos/PSBP-99994-Monarch.jpg",
-    "page": "wildlife/PSBP-99994-Monarch.html"
+    "credit": "robcarr52",
+    "photo": "photos/PSBP-99994/681681099.jpg",
+    "page": "wildlife/PSBP-99994-Monarch.html",
+    "focus": "45% 38%"
   },
   {
     "id": "PSBP-99995",
@@ -634,9 +635,10 @@
       "Daytime",
       "Pond"
     ],
-    "credit": "Mark E. Wells",
-    "photo": "photos/PSBP-99995-Great-Egret.jpg",
-    "page": "wildlife/PSBP-99995-Great-Egret.html"
+    "credit": "robcarr52",
+    "photo": "photos/PSBP-99995/681679001.jpg",
+    "page": "wildlife/PSBP-99995-Great-Egret.html",
+    "focus": "54% 43%"
   },
   {
     "id": "PSBP-99996",
@@ -660,9 +662,10 @@
       "Pond",
       "Marsh"
     ],
-    "credit": "Pammy63",
-    "photo": "photos/PSBP-99996-Common-Gallinule.jpg",
-    "page": "wildlife/PSBP-99996-Common-Gallinule.html"
+    "credit": "robcarr52",
+    "photo": "photos/PSBP-99996/681679178.jpg",
+    "page": "wildlife/PSBP-99996-Common-Gallinule.html",
+    "focus": "69% 41%"
   },
   {
     "id": "PSBP-99997",
@@ -685,9 +688,10 @@
       "Pond",
       "Lawn"
     ],
-    "credit": "kcstanyard",
-    "photo": "photos/PSBP-99997-White-Ibis.jpg",
-    "page": "wildlife/PSBP-99997-White-Ibis.html"
+    "credit": "robcarr52",
+    "photo": "photos/PSBP-99997/681682344.jpg",
+    "page": "wildlife/PSBP-99997-White-Ibis.html",
+    "focus": "53% 56%"
   },
   {
     "id": "PSBP-99998",
@@ -711,9 +715,10 @@
       "Daytime",
       "Pond"
     ],
-    "credit": "joycem1218",
-    "photo": "photos/PSBP-99998-Anhinga.jpg",
-    "page": "wildlife/PSBP-99998-Anhinga.html"
+    "credit": "robcarr52",
+    "photo": "photos/PSBP-99998/681678800.jpg",
+    "page": "wildlife/PSBP-99998-Anhinga.html",
+    "focus": "54% 51%"
   },
   {
     "id": "PSBP-99999",
@@ -734,8 +739,9 @@
       "Common",
       "Daytime"
     ],
-    "credit": "naturalistclaire",
-    "photo": "photos/PSBP-99999-Brown-Anole.jpg",
-    "page": "wildlife/PSBP-99999-Brown-Anole.html"
+    "credit": "coleguyton",
+    "photo": "photos/PSBP-99999/635346033.jpg",
+    "page": "wildlife/PSBP-99999-Brown-Anole.html",
+    "focus": "65% 66%"
   }
 ]
