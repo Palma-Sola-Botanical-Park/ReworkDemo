@@ -25,7 +25,7 @@ CATEGORIES = [
 # is a typo that would silently hide a row -> warn. (screen is not-for-web, not
 # dead — the in-park screen pages need it.)
 DISPLAY_VALUES = ["web", "both", "screen", "off"]
-YES_NO_BLANK = ["yes", "no", ""]  # secondary flags
+YES_NO_BLANK = ["yes", "no", "", "Yes", "No"]  # secondary flags (sheet dropdowns are capitalized)
 
 SCHEMA = {
     "tab": "events",
