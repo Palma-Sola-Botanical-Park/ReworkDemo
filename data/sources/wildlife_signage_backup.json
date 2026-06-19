@@ -476,7 +476,7 @@
       "size": {
         "height": "about 3.3 ft (39 in) tall",
         "wingspan": "up to about 5.5 ft (52 to 67 in)",
-        "weight": "roughly 2.2 lb (1 kg)",
+        "weight": "roughly 2 lb (1 kg)",
         "lifespan": "commonly around 15 years, sometimes longer."
       },
       "habitat": "Shallow fresh and salt water — marshes, ponds, lake edges, mudflats, and coastal shorelines — with open water for hunting and trees or reeds for nesting.",
@@ -2408,7 +2408,7 @@
         "first_observed": "2016-11-03",
         "last_observed": "2025-03-03"
       },
-      "internal_notes": "Species-level entry spanning two subspecies: native yellow-bellied slider and introduced red-eared slider (released pets). Invasive flag = Yellow to reflect the red-eared subspecies; Conservation = Green because the species overall is abundant. Strong responsible-pet-ownership teaching animal. native:false is intentional and reflects the introduced red-eared subspecies that dominates released-pet populations here; the native yellow-bellied subspecies is acknowledged in the species text. Do not 'correct' native to true."
+      "internal_notes": "Species-level entry spanning two subspecies: native yellow-bellied slider and introduced red-eared slider (released pets). Invasive flag = Yellow to reflect the red-eared subspecies; Conservation = Green because the species overall is abundant. Strong responsible-pet-ownership teaching animal."
     },
     {
       "id": "PSBP-99975",
@@ -4602,13 +4602,13 @@
       "quick_hits": [
         "A tiny pale-blue butterfly, barely bigger than a thumbnail, flickering low over the flower beds is a cassius blue — one of Florida's smallest and most common butterflies.",
         "Males shine pale blue above; females are duller, with more dusky gray and brown.",
-        "Flip to the underside and you find a delicate maze of fine gray-and-white bands, with one or two small black-and-orange eyespots near the tail.",
+        "Flip to the underside and you find a delicate maze of fine gray-and-white bands, with one or two small eyespots near the tail.",
         "Those eyespots, paired with tiny hindwing tails the butterfly wiggles, create a \"false head\" that fools a predator into striking the wrong end."
       ],
       "range_and_origin": "Native to the southeastern United States, the Caribbean, and south into the American tropics. In Florida it is a common, year-round resident of gardens, parks, and weedy open ground.",
       "more_information": [
         "The cassius blue is a member of the gossamer-wing family — small, fragile butterflies often no bigger than a fingernail. Males are a soft, pale blue above; females wear more gray and brown, so the two can look like different butterflies at a glance.",
-        "Turn one over and the underside tells the real story: a fine pattern of gray-and-white bands and a couple of small black-and-orange eyespots near the rear edge of the hindwing. Combined with tiny tails that the resting butterfly slowly wiggles, those spots mimic a head and antennae at the wrong end of the body. A bird aiming for the \"head\" gets a harmless beakful of wingtip, and the butterfly escapes.",
+        "Turn one over and the underside tells the real story: a fine pattern of gray-and-white bands and a couple of small black eyespots near the rear edge of the hindwing. Combined with tiny tails that the resting butterfly slowly wiggles, those spots mimic a head and antennae at the wrong end of the body. A bird aiming for the \"head\" gets a harmless beakful of wingtip, and the butterfly escapes.",
         "It is an easy butterfly to host. Its caterpillars feed on the buds and flowers of legumes and on plumbago, both common in Florida landscaping, which is part of why the cassius blue is such a constant presence in gardens."
       ],
       "identification": {
