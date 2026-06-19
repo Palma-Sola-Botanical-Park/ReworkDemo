@@ -101,6 +101,22 @@
   .all-wild-link{animation-delay:.38s}
   @keyframes wildFadeUp{ from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
   @media (prefers-reduced-motion:reduce){ .wild-section,.wild-caution-section,.wild-safe-section,.all-wild-link{ animation:none; } }
+  .gal-note{ font-size:13px;color:#888;padding:10px 16px 4px;font-style:italic; }
+  .gal-grid{ display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;padding:8px 16px 16px; }
+  .gal-item{ position:relative;border-radius:8px;overflow:hidden;cursor:pointer;aspect-ratio:1;background:#111; }
+  .gal-item img{ width:100%;height:100%;object-fit:cover;transition:transform .3s; }
+  .gal-item:hover img{ transform:scale(1.05); }
+  .gal-credit{ position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);color:#ccc;font-size:11px;padding:4px 8px;opacity:0;transition:opacity .2s; }
+  .gal-item:hover .gal-credit{ opacity:1; }
+  .lightbox{ display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999;justify-content:center;align-items:center; }
+  .lightbox.active{ display:flex; }
+  .lb-inner{ position:relative;max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center; }
+  .lb-img{ max-width:90vw;max-height:80vh;object-fit:contain;border-radius:4px; }
+  .lb-credit{ color:#ccc;font-size:13px;margin-top:10px;font-style:italic; }
+  .lb-close{ position:fixed;top:16px;right:20px;background:none;border:none;color:#fff;font-size:36px;cursor:pointer;z-index:1001; }
+  .lb-prev,.lb-next{ position:fixed;top:50%;background:none;border:none;color:#fff;font-size:48px;cursor:pointer;padding:20px;transform:translateY(-50%); }
+  .lb-prev{ left:8px; }
+  .lb-next{ right:8px; }
 </style>
 </head>
 <body>
@@ -126,6 +142,26 @@
     <div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">🍽️</span><span class="wild-section-title">What It Eats</span></div><div class="wild-section-body"><p>An opportunist — seeds, leaves, and stems of water plants, plus insects, snails, and other small aquatic creatures, gathered while swimming, dabbling, or walking on vegetation.</p></div></div>
     <div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">📍</span><span class="wild-section-title">Where &amp; When</span></div><div class="spot-list"><div class="spot-item"><div class="spot-label">Where in the park</div><p>Along the vegetated margins of the ponds — watch where plants meet open water, and listen for its loud calls from the reeds.</p></div><div class="spot-item"><div class="spot-label">When to see it</div><p>Year-round resident. Most easily found near pond edges with thick plant cover.</p></div></div></div>
     <div class="wild-caution-section"><div class="wild-section-header"><span class="wild-section-icon">🤝</span><span class="wild-section-title">Watching It Respectfully</span></div><div class="wild-section-body"><p>Watch from a distance and do not feed it. Gallinules are shy by nature and slip into cover when crowded.</p></div></div>
+    <div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">📸</span><span class="wild-section-title">Photo Gallery</span></div>
+    <div class="gal-note">Photos contributed by park visitors and volunteers via iNaturalist</div>
+    <div class="gal-grid"><div class="gal-item" onclick="openLB(0)"><img src="../photos/PSBP-99996/518341427.jpg" loading="lazy" alt="Common Gallinule — photo by brice_c"><div class="gal-credit">📷 brice_c</div></div><div class="gal-item" onclick="openLB(1)"><img src="../photos/PSBP-99996/665114365.jpg" loading="lazy" alt="Common Gallinule — photo by catalaniclaire"><div class="gal-credit">📷 catalaniclaire</div></div><div class="gal-item" onclick="openLB(2)"><img src="../photos/PSBP-99996/681005087.jpg" loading="lazy" alt="Common Gallinule — photo by cleamon"><div class="gal-credit">📷 cleamon</div></div><div class="gal-item" onclick="openLB(3)"><img src="../photos/PSBP-99996/681065389.jpg" loading="lazy" alt="Common Gallinule — photo by cleamon"><div class="gal-credit">📷 cleamon</div></div><div class="gal-item" onclick="openLB(4)"><img src="../photos/PSBP-99996/681680511.jpg" loading="lazy" alt="Common Gallinule — photo by robcarr52"><div class="gal-credit">📷 robcarr52</div></div><div class="gal-item" onclick="openLB(5)"><img src="../photos/PSBP-99996/681680513.jpg" loading="lazy" alt="Common Gallinule — photo by robcarr52"><div class="gal-credit">📷 robcarr52</div></div><div class="gal-item" onclick="openLB(6)"><img src="../photos/PSBP-99996/681681072.jpg" loading="lazy" alt="Common Gallinule — photo by robcarr52"><div class="gal-credit">📷 robcarr52</div></div><div class="gal-item" onclick="openLB(7)"><img src="../photos/PSBP-99996/681681194.jpg" loading="lazy" alt="Common Gallinule — photo by robcarr52"><div class="gal-credit">📷 robcarr52</div></div><div class="gal-item" onclick="openLB(8)"><img src="../photos/PSBP-99996/681681337.jpg" loading="lazy" alt="Common Gallinule — photo by robcarr52"><div class="gal-credit">📷 robcarr52</div></div><div class="gal-item" onclick="openLB(9)"><img src="../photos/PSBP-99996/681681979.jpg" loading="lazy" alt="Common Gallinule — photo by robcarr52"><div class="gal-credit">📷 robcarr52</div></div><div class="gal-item" onclick="openLB(10)"><img src="../photos/PSBP-99996/681682319.jpg" loading="lazy" alt="Common Gallinule — photo by robcarr52"><div class="gal-credit">📷 robcarr52</div></div></div></div>
+    <div class="lightbox" id="lb" onclick="closeLB(event)">
+      <div class="lb-inner">
+        <button class="lb-close" onclick="closeLB()">&times;</button>
+        <button class="lb-prev" onclick="stepLB(-1)">&#8249;</button>
+        <img class="lb-img" id="lbImg">
+        <button class="lb-next" onclick="stepLB(1)">&#8250;</button>
+        <div class="lb-credit" id="lbCredit"></div>
+      </div>
+    </div>
+    <script>
+    var lbData=[{"src": "../photos/PSBP-99996/518341427.jpg", "credit": "brice_c", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99996/665114365.jpg", "credit": "catalaniclaire", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99996/681005087.jpg", "credit": "cleamon", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99996/681065389.jpg", "credit": "cleamon", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99996/681680511.jpg", "credit": "robcarr52", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99996/681680513.jpg", "credit": "robcarr52", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99996/681681072.jpg", "credit": "robcarr52", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99996/681681194.jpg", "credit": "robcarr52", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99996/681681337.jpg", "credit": "robcarr52", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99996/681681979.jpg", "credit": "robcarr52", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99996/681682319.jpg", "credit": "robcarr52", "license": "CC-BY-NC"}];
+    var lbIdx=0;
+    function openLB(i){lbIdx=i;var d=lbData[i];document.getElementById('lbImg').src=d.src;document.getElementById('lbCredit').innerHTML='📷 '+d.credit+' · '+d.license+' · via iNaturalist';document.getElementById('lb').classList.add('active');document.body.style.overflow='hidden';}
+    function closeLB(e){if(e&&e.target!==document.getElementById('lb')&&!e.target.classList.contains('lb-close'))return;document.getElementById('lb').classList.remove('active');document.body.style.overflow='';}
+    function stepLB(dir){lbIdx=(lbIdx+dir+lbData.length)%lbData.length;openLB(lbIdx);}
+    document.addEventListener('keydown',function(e){if(!document.getElementById('lb').classList.contains('active'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')stepLB(1);if(e.key==='ArrowLeft')stepLB(-1);});
+    </script>
     <div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">🏷️</span><span class="wild-section-title">Also Known As</span></div><div class="alias-list"><span class="alias-tag">Common Moorhen (former name)</span><span class="alias-tag">Florida Gallinule</span></div><div class="alias-list" style="padding-top:0"><span class="wild-tag">Bird</span><span class="wild-tag">Waterbird</span><span class="wild-tag">Rail</span><span class="wild-tag">Native</span><span class="wild-tag">Daytime</span><span class="wild-tag">Pond</span><span class="wild-tag">Marsh</span></div></div>
     <a class="all-wild-link" href="../nature.html#wildlife">🦜 Explore More Wildlife</a>
   </div>
