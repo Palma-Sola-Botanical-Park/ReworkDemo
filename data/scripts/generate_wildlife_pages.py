@@ -176,10 +176,10 @@ def build_page(species, hero_photo, all_photos):
             tag_chips = '<div class="alias-list" style="padding-top:0">' + "".join(f'<span class="wild-tag">{h(t)}</span>' for t in tags) + "</div>"
         aka_section = f"""<div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">🏷️</span><span class="wild-section-title">Also Known As</span></div>{aka_chips}{tag_chips}</div>"""
 
-    # Photo Gallery
-    gallery_photos = [p for p in all_photos if not p.get("hero") and p.get("filename")]
+    # Photo Gallery — only photos with "gallery" in role
+    gallery_photos = [p for p in all_photos if not p.get("hero") and p.get("filename") and "gallery" in (p.get("role") or [])]
     gallery_section = ""
-    # Build lightbox data: hero first, then gallery
+    # Build lightbox data: hero always first, then gallery-tagged photos
     lb_all = []
     if hero_photo:
         lb_all.append({"src": f"../photos/{sid}/{hero_photo['filename']}", "credit": hero_photo.get("photographer", "Unknown"), "license": hero_photo.get("license", "")})
