@@ -1,0 +1,3658 @@
+{
+  "meta": {
+    "generated": "2026-06-18",
+    "source": "Plants_and_Wildlife_Photo_Credits.csv",
+    "photo_count": 152,
+    "schema_version": "1.0"
+  },
+  "photos": [
+    {
+      "psbp_id": "PSBP-00001",
+      "type": "Plant",
+      "common_name": "Tree Crinum",
+      "scientific_name": "Crinum asiaticum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245580589/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143209347",
+      "photo_id": null,
+      "filename": "PSBP-00001_Tree_Crinum.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00002",
+      "type": "Plant",
+      "common_name": "Weeping Bottlebrush",
+      "scientific_name": "Melaleuca viminalis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "kathynoran88",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© kathynoran88 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/382220097/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/216138601",
+      "photo_id": null,
+      "filename": "PSBP-00002_Weeping_Bottlebrush.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00003",
+      "type": "Plant",
+      "common_name": "Buccaneer Palm",
+      "scientific_name": "Pseudophoenix sargentii",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/662239153/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362822571",
+      "photo_id": null,
+      "filename": "PSBP-00003_Buccaneer_Palm.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00004",
+      "type": "Plant",
+      "common_name": "Silk Floss Tree",
+      "scientific_name": "Ceiba speciosa",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/663359491/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/363408779",
+      "photo_id": null,
+      "filename": "PSBP-00004_Silk_Floss_Tree.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00005",
+      "type": "Plant",
+      "common_name": "Queen's Crepe Myrtle",
+      "scientific_name": "Lagerstroemia speciosa",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "frankymca",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© frankymca / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/662740624/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/363083104",
+      "photo_id": null,
+      "filename": "PSBP-00005_Queens_Crepe_Myrtle.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00006",
+      "type": "Plant",
+      "common_name": "Peregrina",
+      "scientific_name": "Jatropha integerrima",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661606946/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362490569",
+      "photo_id": null,
+      "filename": "PSBP-00006_Peregrina.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00007",
+      "type": "Plant",
+      "common_name": "Jacaranda",
+      "scientific_name": "Jacaranda mimosifolia",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "nigrosh60",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© nigrosh60 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/366864093/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/207405883",
+      "photo_id": null,
+      "filename": "PSBP-00007_Jacaranda.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00008",
+      "type": "Plant",
+      "common_name": "Beach Sunflower",
+      "scientific_name": "Helianthus debilis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "averierob",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© averierob / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/68471027/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/43132326",
+      "photo_id": null,
+      "filename": "PSBP-00008_Beach_Sunflower.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00009",
+      "type": "Plant",
+      "common_name": "Firewheel",
+      "scientific_name": "Gaillardia pulchella",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "averierob",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© averierob / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/68470618/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/43132146",
+      "photo_id": null,
+      "filename": "PSBP-00009_Firewheel.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00010",
+      "type": "Plant",
+      "common_name": "Geiger tree",
+      "scientific_name": "Cordia sebestena",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "joanne_walker",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© joanne_walker / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/663458572/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/363460253",
+      "photo_id": null,
+      "filename": "PSBP-00010_Geiger_tree.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00011",
+      "type": "Plant",
+      "common_name": "Baobab",
+      "scientific_name": "Adansonia digitata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/662220904/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362813369",
+      "photo_id": null,
+      "filename": "PSBP-00011_Baobab.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00012",
+      "type": "Plant",
+      "common_name": "Peacock Flower",
+      "scientific_name": "Caesalpinia pulcherrima",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245519734/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143173704",
+      "photo_id": null,
+      "filename": "PSBP-00012_Peacock_Flower.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00013",
+      "type": "Plant",
+      "common_name": "Sunshine Mimosa",
+      "scientific_name": "Mimosa strigillosa",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661720270/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362548926",
+      "photo_id": null,
+      "filename": "PSBP-00013_Sunshine_Mimosa.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00014",
+      "type": "Plant",
+      "common_name": "Queen's Wreath",
+      "scientific_name": "Petrea volubilis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "nellmcphillips",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© nellmcphillips / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/355460801/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/201371141",
+      "photo_id": null,
+      "filename": "PSBP-00014_Queens_Wreath.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00015",
+      "type": "Plant",
+      "common_name": "Coral Bean",
+      "scientific_name": "Erythrina herbacea",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "victoriashein",
+      "license": "nan",
+      "publish_ok": false,
+      "status": "UNUSABLE — all rights reserved",
+      "credit_line": "© victoriashein / iNaturalist (NAN)",
+      "photo_url": "https://static.inaturalist.org/photos/245367488/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/143081611",
+      "photo_id": null,
+      "filename": "PSBP-00015_Coral_Bean.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00016",
+      "type": "Plant",
+      "common_name": "Copperleaf",
+      "scientific_name": "Acalypha wilkesiana",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661589009/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362480608",
+      "photo_id": null,
+      "filename": "PSBP-00016_Copperleaf.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00018",
+      "type": "Plant",
+      "common_name": "Gumbo Limbo",
+      "scientific_name": "Bursera simaruba",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "pammy63",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© pammy63 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/332545422/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/189778127",
+      "photo_id": null,
+      "filename": "PSBP-00018_Gumbo_Limbo.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00019",
+      "type": "Plant",
+      "common_name": "Bottle Palm",
+      "scientific_name": "Hyophorbe lagenicaulis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661720522/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362549055",
+      "photo_id": null,
+      "filename": "PSBP-00019_Bottle_Palm.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00020",
+      "type": "Plant",
+      "common_name": "Canary Island Date Palm",
+      "scientific_name": "Phoenix canariensis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661592924/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362482754",
+      "photo_id": null,
+      "filename": "PSBP-00020_Canary_Island_Date_Palm.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00021",
+      "type": "Plant",
+      "common_name": "Traveller's Palm",
+      "scientific_name": "Ravenala madagascariensis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/662214871/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362810164",
+      "photo_id": null,
+      "filename": "PSBP-00021_Travellers_Palm.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00022",
+      "type": "Plant",
+      "common_name": "White Bird of Paradise",
+      "scientific_name": "Strelitzia nicolai",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661614563/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362494778",
+      "photo_id": null,
+      "filename": "PSBP-00022_White_Bird_of_Paradise.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00023",
+      "type": "Plant",
+      "common_name": "Bald Cypress",
+      "scientific_name": "Taxodium distichum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635346946/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348375438",
+      "photo_id": null,
+      "filename": "PSBP-00023_Bald_Cypress.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00024",
+      "type": "Plant",
+      "common_name": "Coontie Palm",
+      "scientific_name": "Zamia integrifolia",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667875500/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365792413",
+      "photo_id": null,
+      "filename": "PSBP-00024_Coontie_Palm.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00025",
+      "type": "Plant",
+      "common_name": "Dahoon Holly",
+      "scientific_name": "Ilex cassine",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245520346/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143174057",
+      "photo_id": null,
+      "filename": "PSBP-00025_Dahoon_Holly.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00026",
+      "type": "Plant",
+      "common_name": "Muhly Grass",
+      "scientific_name": "Muhlenbergia capillaris",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661604788/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362489444",
+      "photo_id": null,
+      "filename": "PSBP-00026_Muhly_Grass.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00027",
+      "type": "Plant",
+      "common_name": "Live Oak",
+      "scientific_name": "Quercus virginiana",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661720593/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362549109",
+      "photo_id": null,
+      "filename": "PSBP-00027_Live_Oak.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00028",
+      "type": "Plant",
+      "common_name": "Red Mangrove",
+      "scientific_name": "Rhizophora mangle",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661605296/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362489649",
+      "photo_id": null,
+      "filename": "PSBP-00028_Red_Mangrove.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00029",
+      "type": "Plant",
+      "common_name": "Alligator Flag",
+      "scientific_name": "Thalia geniculata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667875759/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365792529",
+      "photo_id": null,
+      "filename": "PSBP-00029_Alligator_Flag.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00030",
+      "type": "Plant",
+      "common_name": "Fakahatchee Grass",
+      "scientific_name": "Tripsacum dactyloides",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/672187105/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/368047648",
+      "photo_id": null,
+      "filename": "PSBP-00030_Fakahatchee_Grass.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00031",
+      "type": "Plant",
+      "common_name": "American Elm",
+      "scientific_name": "Ulmus americana",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667875362/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365792363",
+      "photo_id": null,
+      "filename": "PSBP-00031_American_Elm.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00032",
+      "type": "Plant",
+      "common_name": "Mahogany",
+      "scientific_name": "Swietenia mahagoni",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667860600/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365784616",
+      "photo_id": null,
+      "filename": "PSBP-00032_Mahogany.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00033",
+      "type": "Plant",
+      "common_name": "Wild Lime",
+      "scientific_name": "Zanthoxylum fagara",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661626447/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362500628",
+      "photo_id": null,
+      "filename": "PSBP-00033_Wild_Lime.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00034",
+      "type": "Plant",
+      "common_name": "Golden Canna",
+      "scientific_name": "Canna flaccida",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667863800/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365786196",
+      "photo_id": null,
+      "filename": "PSBP-00034_Golden_Canna.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00035",
+      "type": "Plant",
+      "common_name": "Royal Palm",
+      "scientific_name": "Roystonea regia",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "jsea",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© jsea / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626742537/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/344005847",
+      "photo_id": null,
+      "filename": "PSBP-00035_Royal_Palm.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00036",
+      "type": "Plant",
+      "common_name": "Royal Poinciana",
+      "scientific_name": "Delonix regia",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/662234112/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362819588",
+      "photo_id": null,
+      "filename": "PSBP-00036_Royal_Poinciana.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00038",
+      "type": "Plant",
+      "common_name": "Mexican Petunia",
+      "scientific_name": "Ruellia simplex",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635348437/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348376207",
+      "photo_id": null,
+      "filename": "PSBP-00038_Mexican_Petunia.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00039",
+      "type": "Plant",
+      "common_name": "Giant Milkweed",
+      "scientific_name": "Calotropis gigantea",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "denise_sosa",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© denise_sosa / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/672227154/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/368070083",
+      "photo_id": null,
+      "filename": "PSBP-00039_Giant_Milkweed.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00040",
+      "type": "Plant",
+      "common_name": "Century Plant",
+      "scientific_name": "Agave americana",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "tom_sinisi",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© tom_sinisi / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/58583241/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/37000143",
+      "photo_id": null,
+      "filename": "PSBP-00040_Century_Plant.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00041",
+      "type": "Plant",
+      "common_name": "Canna Lilies",
+      "scientific_name": "Canna indica",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661591681/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362482090",
+      "photo_id": null,
+      "filename": "PSBP-00041_Canna_Lilies.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00042",
+      "type": "Plant",
+      "common_name": "Scorpion Tail",
+      "scientific_name": "Heliotropium angiospermum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "jsea",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© jsea / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626742303/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/344005735",
+      "photo_id": null,
+      "filename": "PSBP-00042_Scorpion_Tail.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00043",
+      "type": "Plant",
+      "common_name": "African Iris",
+      "scientific_name": "Dietes bicolor",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661606547/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362490359",
+      "photo_id": null,
+      "filename": "PSBP-00043_African_Iris.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00044",
+      "type": "Plant",
+      "common_name": "Screw Pine",
+      "scientific_name": "Pandanus utilis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "kaiyuan3",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© kaiyuan3 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://static.inaturalist.org/photos/518540909/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/288347726",
+      "photo_id": null,
+      "filename": "PSBP-00044_Screw_Pine.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00045",
+      "type": "Plant",
+      "common_name": "Plumbago",
+      "scientific_name": "Plumbago auriculata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661840948/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362611116",
+      "photo_id": null,
+      "filename": "PSBP-00045_Plumbago.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00046",
+      "type": "Plant",
+      "common_name": "Snake Plant",
+      "scientific_name": "Dracaena trifasciata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667850847/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365779536",
+      "photo_id": null,
+      "filename": "PSBP-00046_Snake_Plant.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00047",
+      "type": "Plant",
+      "common_name": "Staghorn Fern",
+      "scientific_name": "Platycerium spp",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635348075/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348376096",
+      "photo_id": null,
+      "filename": "PSBP-00047_Staghorn_Fern.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00048",
+      "type": "Plant",
+      "common_name": "Xanadu",
+      "scientific_name": "Thaumatophyllum xanadu",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661592696/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362482646",
+      "photo_id": null,
+      "filename": "PSBP-00048_Xanadu.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00049",
+      "type": "Plant",
+      "common_name": "Spath Lilly",
+      "scientific_name": "Spathiphyllum spp",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/672130743/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/368016701",
+      "photo_id": null,
+      "filename": "PSBP-00049_Spath_Lilly.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00050",
+      "type": "Plant",
+      "common_name": "Chenille Plant",
+      "scientific_name": "Acalypha hispida",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "astervawn",
+      "license": "nan",
+      "publish_ok": false,
+      "status": "LICENSE CHECK",
+      "credit_line": "© astervawn / iNaturalist (NAN)",
+      "photo_url": "https://static.inaturalist.org/photos/310311254/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/178338465",
+      "photo_id": null,
+      "filename": "PSBP-00050_Chenille_Plant.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00051",
+      "type": "Plant",
+      "common_name": "Shaving-Brush Tree",
+      "scientific_name": "Pseudobombax ellipticum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/672127374/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/368015112",
+      "photo_id": null,
+      "filename": "PSBP-00051_Shaving-Brush_Tree.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00052",
+      "type": "Plant",
+      "common_name": "Mexican Flame Vine",
+      "scientific_name": "Pseudogynoxys chenopodioides",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "jsea",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© jsea / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626741187/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/344005277",
+      "photo_id": null,
+      "filename": "PSBP-00052_Mexican_Flame_Vine.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00053",
+      "type": "Plant",
+      "common_name": "Pentas",
+      "scientific_name": "Pentas lanceolata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "jsea",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© jsea / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626741239/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/344005304",
+      "photo_id": null,
+      "filename": "PSBP-00053_Pentas.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00054",
+      "type": "Plant",
+      "common_name": "Grandleaf Seagrape",
+      "scientific_name": "Coccoloba pubescens",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/662671954/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/363046738",
+      "photo_id": null,
+      "filename": "PSBP-00054_Grandleaf_Seagrape.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00055",
+      "type": "Plant",
+      "common_name": "Mauve Indian Mallow",
+      "scientific_name": "Abutilon hulseanum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667863323/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365785892",
+      "photo_id": null,
+      "filename": "PSBP-00055_Mauve_Indian_Mallow.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00056",
+      "type": "Plant",
+      "common_name": "Parrots Beak",
+      "scientific_name": "Heliconia psittacorum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "elurding",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© elurding / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/602871254/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/332223399",
+      "photo_id": null,
+      "filename": "PSBP-00056_Parrots_Beak.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00057",
+      "type": "Plant",
+      "common_name": "Wax Myrtle",
+      "scientific_name": "Morella cerifera",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667867407/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365788321",
+      "photo_id": null,
+      "filename": "PSBP-00057_Wax_Myrtle.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00058",
+      "type": "Plant",
+      "common_name": "Giant Leather Fern",
+      "scientific_name": "Acrostichum danaeifolium",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661606686/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362490416",
+      "photo_id": null,
+      "filename": "PSBP-00058_Giant_Leather_Fern.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00059",
+      "type": "Plant",
+      "common_name": "Beautyberry",
+      "scientific_name": "Callicarpa americana",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661598340/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362485768",
+      "photo_id": null,
+      "filename": "PSBP-00059_Beautyberry.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00060",
+      "type": "Plant",
+      "common_name": "Kapok",
+      "scientific_name": "Ceiba pentandra",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667861673/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365785169",
+      "photo_id": null,
+      "filename": "PSBP-00060_Kapok.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00061",
+      "type": "Plant",
+      "common_name": "Yellow Walking Iris",
+      "scientific_name": "Trimezia steyermarkii",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667854875/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365781616",
+      "photo_id": null,
+      "filename": "PSBP-00061_Yellow_Walking_Iris.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00064",
+      "type": "Plant",
+      "common_name": "Ixora Maui Yellow",
+      "scientific_name": "Ixora coccinea",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245371897/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143084546",
+      "photo_id": null,
+      "filename": "PSBP-00064_Ixora_Maui_Yellow.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00065",
+      "type": "Plant",
+      "common_name": "Heavenly Bamboo",
+      "scientific_name": "Nandina domestica",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667854385/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365781353",
+      "photo_id": null,
+      "filename": "PSBP-00065_Heavenly_Bamboo.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00066",
+      "type": "Plant",
+      "common_name": "Lanceleaf Arrowhead",
+      "scientific_name": "Sagittaria lancifolia",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667875076/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365792233",
+      "photo_id": null,
+      "filename": "PSBP-00066_Lanceleaf_Arrowhead.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00068",
+      "type": "Plant",
+      "common_name": "Florida Strangler Fig",
+      "scientific_name": "Ficus aurea",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667875177/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365792289",
+      "photo_id": null,
+      "filename": "PSBP-00068_Florida_Strangler_Fig.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00069",
+      "type": "Plant",
+      "common_name": "Myrtle Oak",
+      "scientific_name": "Quercus myrtifolia",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667875251/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365792323",
+      "photo_id": null,
+      "filename": "PSBP-00069_Myrtle_Oak.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00070",
+      "type": "Plant",
+      "common_name": "Turk's Turban",
+      "scientific_name": "Clerodendrum indicum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "forkristin",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© forkristin / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/177334042/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/105661251",
+      "photo_id": null,
+      "filename": "PSBP-00070_Turks_Turban.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00071",
+      "type": "Plant",
+      "common_name": "Ti Plant",
+      "scientific_name": "Cordyline fruticosa",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245521150/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143174511",
+      "photo_id": null,
+      "filename": "PSBP-00071_Ti_Plant.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00072",
+      "type": "Plant",
+      "common_name": "Yellow Trumpet Flower",
+      "scientific_name": "Tecoma stans",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "nigrosh60",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© nigrosh60 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/366833134/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/207389096",
+      "photo_id": null,
+      "filename": "PSBP-00072_Yellow_Trumpet_Flower.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00073",
+      "type": "Plant",
+      "common_name": "King's Mantle",
+      "scientific_name": "Thunbergia erecta",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667855196/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365781780",
+      "photo_id": null,
+      "filename": "PSBP-00073_Kings_Mantle.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00074",
+      "type": "Plant",
+      "common_name": "Firebush",
+      "scientific_name": "Hamelia patens",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661595420/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362484294",
+      "photo_id": null,
+      "filename": "PSBP-00074_Firebush.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00083",
+      "type": "Plant",
+      "common_name": "Madagascar Palm",
+      "scientific_name": "Pachypodium lamerei",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "elurding",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© elurding / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/602867008/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/332221639",
+      "photo_id": null,
+      "filename": "PSBP-00083_Madagascar_Palm.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00062",
+      "type": "Plant",
+      "common_name": "Candelabra Bush",
+      "scientific_name": "Senna alata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245520188/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143173979",
+      "photo_id": null,
+      "filename": "PSBP-00062_Candelabra_Bush.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00063",
+      "type": "Plant",
+      "common_name": "Pagoda Flower",
+      "scientific_name": "Clerodendrum paniculatum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "sandytrailslvr",
+      "license": "cc-by-nd",
+      "publish_ok": false,
+      "status": "LICENSE CHECK",
+      "credit_line": "© sandytrailslvr / iNaturalist (CC-BY-ND)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5446364/large.jpg",
+      "source_url": "http://www.inaturalist.org/observations/4504007",
+      "photo_id": null,
+      "filename": "PSBP-00063_Pagoda_Flower.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00067",
+      "type": "Plant",
+      "common_name": "Madagascar Periwinkle",
+      "scientific_name": "Catharanthus roseus",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "pammy63",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© pammy63 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/340715783/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/193911574",
+      "photo_id": null,
+      "filename": "PSBP-00067_Madagascar_Periwinkle.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00076",
+      "type": "Plant",
+      "common_name": "Great Bougainvillea",
+      "scientific_name": "Bougainvillea spectabilis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661610658/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362492725",
+      "photo_id": null,
+      "filename": "PSBP-00076_Great_Bougainvillea.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00077",
+      "type": "Plant",
+      "common_name": "Bengal Trumpet",
+      "scientific_name": "Thunbergia grandiflora",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "astervawn",
+      "license": "nan",
+      "publish_ok": false,
+      "status": "LICENSE CHECK",
+      "credit_line": "© astervawn / iNaturalist (NAN)",
+      "photo_url": "https://static.inaturalist.org/photos/309702149/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/178022607",
+      "photo_id": null,
+      "filename": "PSBP-00077_Bengal_Trumpet.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00078",
+      "type": "Plant",
+      "common_name": "Swamp Milkweed",
+      "scientific_name": "Asclepias incarnata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "frankymca",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© frankymca / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/668445054/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/366090861",
+      "photo_id": null,
+      "filename": "PSBP-00078_Swamp_Milkweed.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00079",
+      "type": "Plant",
+      "common_name": "Papaya",
+      "scientific_name": "Carica papaya",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "elurding",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© elurding / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/602867317/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/332221754",
+      "photo_id": null,
+      "filename": "PSBP-00079_Papaya.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00082",
+      "type": "Plant",
+      "common_name": "Burmese Fishtail Palm",
+      "scientific_name": "Caryota mitis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "jsea",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© jsea / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626740347/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/344004901",
+      "photo_id": null,
+      "filename": "PSBP-00082_Burmese_Fishtail_Palm.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00084",
+      "type": "Plant",
+      "common_name": "Reclining Date Palm",
+      "scientific_name": "Phoenix reclinata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661591063/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362481756",
+      "photo_id": null,
+      "filename": "PSBP-00084_Reclining_Date_Palm.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00085",
+      "type": "Plant",
+      "common_name": "Little Lady Palm",
+      "scientific_name": "Rhapis excelsa",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667853763/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365780987",
+      "photo_id": null,
+      "filename": "PSBP-00085_Little_Lady_Palm.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00075",
+      "type": "Plant",
+      "common_name": "Brazilian Dutchman's Pipe",
+      "scientific_name": "Aristolochia gigantea",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "pspgal",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© pspgal / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/458709836/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/252026416",
+      "photo_id": null,
+      "filename": "PSBP-00075_Brazilian_Dutchmans_Pipe.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00080",
+      "type": "Plant",
+      "common_name": "Night-blooming Cereus / Dragon Fruit",
+      "scientific_name": "Selenicereus undatus",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635348329/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348376171",
+      "photo_id": null,
+      "filename": "PSBP-00080_Night-blooming_Cereus__Dragon_Fruit.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00081",
+      "type": "Plant",
+      "common_name": "Ball Moss",
+      "scientific_name": "Tillandsia recurvata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© coleguyton / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/638116928/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/349782470",
+      "photo_id": null,
+      "filename": "PSBP-00081_Ball_Moss.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00086",
+      "type": "Plant",
+      "common_name": "Moringa / Drumstick Tree",
+      "scientific_name": "Moringa oleifera",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "nigrosh60",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© nigrosh60 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/366864462/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/207406115",
+      "photo_id": null,
+      "filename": "PSBP-00086_Moringa__Drumstick_Tree.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00087",
+      "type": "Plant",
+      "common_name": "Frangipani / Mexican Plumeria",
+      "scientific_name": "Plumeria rubra",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "joanne_walker",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© joanne_walker / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/663458701/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/363460380",
+      "photo_id": null,
+      "filename": "PSBP-00087_Frangipani__Mexican_Plumeria.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00088",
+      "type": "Plant",
+      "common_name": "Blue Porterweed / Rattail",
+      "scientific_name": "Stachytarpheta cayennensis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245578102/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143207909",
+      "photo_id": null,
+      "filename": "PSBP-00088_Blue_Porterweed__Rattail.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00089",
+      "type": "Plant",
+      "common_name": "Gray Nickernut",
+      "scientific_name": "Guilandina bonduc",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "pammy63",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© pammy63 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/366404961/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/207160334",
+      "photo_id": null,
+      "filename": "PSBP-00089_Gray_Nickernut.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00090",
+      "type": "Plant",
+      "common_name": "Mango",
+      "scientific_name": "Mangifera indica",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245371312/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143084228",
+      "photo_id": null,
+      "filename": "PSBP-00090_Mango.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00091",
+      "type": "Plant",
+      "common_name": "Pink Powderpuff",
+      "scientific_name": "Calliandra tergemina",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667854946/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/365781663",
+      "photo_id": null,
+      "filename": "PSBP-00091_Pink_Powderpuff.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00092",
+      "type": "Plant",
+      "common_name": "Purple Heart",
+      "scientific_name": "Tradescantia pallida",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245519706/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143173771",
+      "photo_id": null,
+      "filename": "PSBP-00092_Purple_Heart.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00093",
+      "type": "Plant",
+      "common_name": "Lesser Bougainvillea",
+      "scientific_name": "Bougainvillea glabra",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245578209/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143207976",
+      "photo_id": null,
+      "filename": "PSBP-00093_Lesser_Bougainvillea.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00094",
+      "type": "Plant",
+      "common_name": "Butterfly Pea / Blue Pea",
+      "scientific_name": "Clitoria ternatea",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245580775/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143209466",
+      "photo_id": null,
+      "filename": "PSBP-00094_Butterfly_Pea__Blue_Pea.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00095",
+      "type": "Plant",
+      "common_name": "Moses-in-the-Cradle",
+      "scientific_name": "Tradescantia spathacea",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245520635/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143174280",
+      "photo_id": null,
+      "filename": "PSBP-00095_Moses-in-the-Cradle.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00096",
+      "type": "Plant",
+      "common_name": "Acerola / Barbados Cherry",
+      "scientific_name": "Malpighia emarginata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "pammy63",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© pammy63 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/331342584/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/189143994",
+      "photo_id": null,
+      "filename": "PSBP-00096_Acerola__Barbados_Cherry.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00097",
+      "type": "Plant",
+      "common_name": "Starburst Bush",
+      "scientific_name": "Clerodendrum quadriloculare",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "nellmcphillips",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© nellmcphillips / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/355459548/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/201370518",
+      "photo_id": null,
+      "filename": "PSBP-00097_Starburst_Bush.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00098",
+      "type": "Plant",
+      "common_name": "Necklace Pod",
+      "scientific_name": "Sophora tomentosa",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "frankymca",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© frankymca / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/672185543/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/368046783",
+      "photo_id": null,
+      "filename": "PSBP-00098_Necklace_Pod.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00099",
+      "type": "Plant",
+      "common_name": "Pink Rain Lily",
+      "scientific_name": "Zephyranthes robusta",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/672127369/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/368015087",
+      "photo_id": null,
+      "filename": "PSBP-00099_Pink_Rain_Lily.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00100",
+      "type": "Plant",
+      "common_name": "Showy Rattlebox",
+      "scientific_name": "Crotalaria spectabilis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661596189/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362484635",
+      "photo_id": null,
+      "filename": "PSBP-00100_Showy_Rattlebox.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00101",
+      "type": "Plant",
+      "common_name": "Lantana",
+      "scientific_name": "Lantana strigocamara",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661590074/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362481274",
+      "photo_id": null,
+      "filename": "PSBP-00101_Lantana.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00102",
+      "type": "Plant",
+      "common_name": "Red Silk Cotton Tree",
+      "scientific_name": "Bombax ceiba",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "katyperry",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© katyperry / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/625123687/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/343202559",
+      "photo_id": null,
+      "filename": "PSBP-00102_Red_Silk_Cotton_Tree.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00103",
+      "type": "Plant",
+      "common_name": "Whorled Pennywort",
+      "scientific_name": "Hydrocotyle verticillata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "victoriashein",
+      "license": "nan",
+      "publish_ok": false,
+      "status": "UNUSABLE — all rights reserved",
+      "credit_line": "© victoriashein / iNaturalist (NAN)",
+      "photo_url": "https://static.inaturalist.org/photos/245371493/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/143084337",
+      "photo_id": null,
+      "filename": "PSBP-00103_Whorled_Pennywort.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00104",
+      "type": "Plant",
+      "common_name": "Shiny-leaved Wild Coffee",
+      "scientific_name": "Psychotria nervosa",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245371594/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143084426",
+      "photo_id": null,
+      "filename": "PSBP-00104_Shiny-leaved_Wild_Coffee.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00105",
+      "type": "Plant",
+      "common_name": "Shrubby False Buttonweed",
+      "scientific_name": "Spermacoce verticillata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "victoriashein",
+      "license": "nan",
+      "publish_ok": false,
+      "status": "UNUSABLE — all rights reserved",
+      "credit_line": "© victoriashein / iNaturalist (NAN)",
+      "photo_url": "https://static.inaturalist.org/photos/245371690/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/143084462",
+      "photo_id": null,
+      "filename": "PSBP-00105_Shrubby_False_Buttonweed.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00106",
+      "type": "Plant",
+      "common_name": "Four-o-clock / Marvel of Peru",
+      "scientific_name": "Mirabilis jalapa",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "victoriashein",
+      "license": "nan",
+      "publish_ok": false,
+      "status": "UNUSABLE — all rights reserved",
+      "credit_line": "© victoriashein / iNaturalist (NAN)",
+      "photo_url": "https://static.inaturalist.org/photos/245373243/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/143085421",
+      "photo_id": null,
+      "filename": "PSBP-00106_Four-o-clock__Marvel_of_Peru.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00107",
+      "type": "Plant",
+      "common_name": "Trailing Daisy / Wedelia",
+      "scientific_name": "Sphagneticola trilobata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245580849/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143209530",
+      "photo_id": null,
+      "filename": "PSBP-00107_Trailing_Daisy__Wedelia.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00108",
+      "type": "Plant",
+      "common_name": "Largeflower Pusley",
+      "scientific_name": "Richardia grandiflora",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245580916/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143209572",
+      "photo_id": null,
+      "filename": "PSBP-00108_Largeflower_Pusley.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00109",
+      "type": "Plant",
+      "common_name": "Lawn Orchid",
+      "scientific_name": "Zeuxine strateumatica",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "pammy63",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© pammy63 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/251736281/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/146424689",
+      "photo_id": null,
+      "filename": "PSBP-00109_Lawn_Orchid.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00110",
+      "type": "Plant",
+      "common_name": "Smooth Rattlebox",
+      "scientific_name": "Crotalaria pallida",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "abraham_a_005",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© abraham_a_005 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/261667975/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/150952277",
+      "photo_id": null,
+      "filename": "PSBP-00110_Smooth_Rattlebox.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00111",
+      "type": "Plant",
+      "common_name": "Cranberry Hibiscus / False Roselle",
+      "scientific_name": "Hibiscus acetosella",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "turtleteam",
+      "license": "nan",
+      "publish_ok": false,
+      "status": "LICENSE CHECK",
+      "credit_line": "© turtleteam / iNaturalist (NAN)",
+      "photo_url": "https://static.inaturalist.org/photos/334980526/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/191009569",
+      "photo_id": null,
+      "filename": "PSBP-00111_Cranberry_Hibiscus__False_Roselle.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00112",
+      "type": "Plant",
+      "common_name": "Orchid Tree",
+      "scientific_name": "Bauhinia variegata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "wanderingshaunzy",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© wanderingshaunzy / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/479749705/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/266990478",
+      "photo_id": null,
+      "filename": "PSBP-00112_Orchid_Tree.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00113",
+      "type": "Plant",
+      "common_name": "Turkey Tangle Frogfruit",
+      "scientific_name": "Phyla nodiflora",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "conniecowan",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© conniecowan / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/499007983/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/277908471",
+      "photo_id": null,
+      "filename": "PSBP-00113_Turkey_Tangle_Frogfruit.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00114",
+      "type": "Plant",
+      "common_name": "Pink Orchid Tree",
+      "scientific_name": "Bauhinia monandra",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "billieknight",
+      "license": "nan",
+      "publish_ok": false,
+      "status": "LICENSE CHECK",
+      "credit_line": "© billieknight / iNaturalist (NAN)",
+      "photo_url": "https://static.inaturalist.org/photos/508845322/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/283198884",
+      "photo_id": null,
+      "filename": "PSBP-00114_Pink_Orchid_Tree.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00115",
+      "type": "Plant",
+      "common_name": "Oriental False Hawksbeard",
+      "scientific_name": "Youngia japonica",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "swainsona1897",
+      "license": "nan",
+      "publish_ok": false,
+      "status": "LICENSE CHECK",
+      "credit_line": "© swainsona1897 / iNaturalist (NAN)",
+      "photo_url": "https://static.inaturalist.org/photos/594663660/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/327723964",
+      "photo_id": null,
+      "filename": "PSBP-00115_Oriental_False_Hawksbeard.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00116",
+      "type": "Plant",
+      "common_name": "Groundsel Tree / Saltbush",
+      "scientific_name": "Baccharis halimifolia",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "frankymca",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© frankymca / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/672185829/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/368046909",
+      "photo_id": null,
+      "filename": "PSBP-00116_Groundsel_Tree__Saltbush.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00117",
+      "type": "Plant",
+      "common_name": "Southern Seaside Goldenrod",
+      "scientific_name": "Solidago mexicana",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "frankymca",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© frankymca / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/672185888/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/368046934",
+      "photo_id": null,
+      "filename": "PSBP-00117_Southern_Seaside_Goldenrod.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00118",
+      "type": "Plant",
+      "common_name": "Coral Plant / Coralbush",
+      "scientific_name": "Jatropha multifida",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "kmp1789",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© kmp1789 / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/352668640/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/199942358",
+      "photo_id": null,
+      "filename": "PSBP-00118_Coral_Plant__Coralbush.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00119",
+      "type": "Plant",
+      "common_name": "Sweet Viburnum",
+      "scientific_name": "Viburnum odoratissimum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661616216/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362495475",
+      "photo_id": null,
+      "filename": "PSBP-00119_Sweet_Viburnum.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00120",
+      "type": "Plant",
+      "common_name": "Croton / Garden Croton",
+      "scientific_name": "Codiaeum variegatum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "teschaim",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© teschaim / iNaturalist (CC-BY-NC)",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/245577684/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/143207709",
+      "photo_id": null,
+      "filename": "PSBP-00120_Croton__Garden_Croton.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00017",
+      "type": "Plant",
+      "common_name": "Paurotis Palm",
+      "scientific_name": "Acoelorrhaphe wrightii",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": null,
+      "license": null,
+      "publish_ok": false,
+      "status": "MISSING — needs photo",
+      "credit_line": null,
+      "photo_url": null,
+      "source_url": null,
+      "photo_id": null,
+      "filename": null,
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00037",
+      "type": "Plant",
+      "common_name": "Umbrella Tree",
+      "scientific_name": "Schefflera actinophylla",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": null,
+      "license": null,
+      "publish_ok": false,
+      "status": "MISSING — needs photo",
+      "credit_line": null,
+      "photo_url": null,
+      "source_url": null,
+      "photo_id": null,
+      "filename": null,
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00121",
+      "type": "Plant",
+      "common_name": "Amazon Lily",
+      "scientific_name": "Eucharis amazonica",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "cc-by-nc",
+      "publish_ok": true,
+      "status": "OK (back-filled from HTML — photo/obs URL still needed)",
+      "credit_line": "© randall_carter / iNaturalist (CC-BY-NC)",
+      "photo_url": null,
+      "source_url": null,
+      "photo_id": null,
+      "filename": "PSBP-00121-Amazon-Lily.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-00122",
+      "type": "Plant",
+      "common_name": "Walter's Viburnum",
+      "scientific_name": "Viburnum obovatum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": null,
+      "license": null,
+      "publish_ok": false,
+      "status": "MISSING — needs photo",
+      "credit_line": null,
+      "photo_url": null,
+      "source_url": null,
+      "photo_id": null,
+      "filename": null,
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99999",
+      "type": "Wildlife",
+      "common_name": "Brown Anole",
+      "scientific_name": "Anolis sagrei",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "naturalistclaire",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© naturalistclaire (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/261070928/large.jpeg",
+      "source_url": "https://www.inaturalist.org/observations/151155729",
+      "photo_id": "261070928",
+      "filename": "PSBP-99999-Brown-Anole.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99998",
+      "type": "Wildlife",
+      "common_name": "Anhinga",
+      "scientific_name": "Anhinga anhinga",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "joycem1218",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© joycem1218 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609965586/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/335724271",
+      "photo_id": "609965586",
+      "filename": "PSBP-99998-Anhinga.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99997",
+      "type": "Wildlife",
+      "common_name": "White Ibis",
+      "scientific_name": "Eudocimus albus",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "kcstanyard",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© kcstanyard (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/617374553/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/339382306",
+      "photo_id": "617374553",
+      "filename": "PSBP-99997-White-Ibis.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99996",
+      "type": "Wildlife",
+      "common_name": "Common Gallinule",
+      "scientific_name": "Gallinula galeata",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "pammy63",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Pammy63 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/297331058/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/168585525",
+      "photo_id": "297331058",
+      "filename": "PSBP-99996-Common-Gallinule.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99995",
+      "type": "Wildlife",
+      "common_name": "Great Egret",
+      "scientific_name": "Ardea alba",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "mewells",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Mark E. Wells (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613021665/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/337245053",
+      "photo_id": "613021665",
+      "filename": "PSBP-99995-Great-Egret.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99994",
+      "type": "Wildlife",
+      "common_name": "Monarch",
+      "scientific_name": "Danaus plexippus",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "jsea",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© jsea (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626742167/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/344005669",
+      "photo_id": "626742167",
+      "filename": "PSBP-99994-Monarch.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99993",
+      "type": "Wildlife",
+      "common_name": "Great Blue Heron",
+      "scientific_name": "Ardea herodias",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "frankymca",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© frankymca (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/672186447/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/368047308",
+      "photo_id": "672186447",
+      "filename": "PSBP-99993-Great-Blue-Heron.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99992",
+      "type": "Wildlife",
+      "common_name": "Wood Stork",
+      "scientific_name": "Mycteria americana",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "mewells",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Mark E. Wells (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613021640/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/337221869",
+      "photo_id": "613021640",
+      "filename": "PSBP-99992-Wood-Stork.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99991",
+      "type": "Wildlife",
+      "common_name": "Mottled Duck",
+      "scientific_name": "Anas fulvigula",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Cole Guyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635347951/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348376051",
+      "photo_id": "635347951",
+      "filename": "PSBP-99991-Mottled-Duck.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99990",
+      "type": "Wildlife",
+      "common_name": "Eastern Gray Squirrel",
+      "scientific_name": "Sciurus carolinensis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "delphpalma",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© delphpalma (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/176570644/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/105259593",
+      "photo_id": "176570644",
+      "filename": "PSBP-99990-Eastern-Gray-Squirrel.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99989",
+      "type": "Wildlife",
+      "common_name": "Double-crested Cormorant",
+      "scientific_name": "Nannopterum auritum",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "joycem1218",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© joycem1218 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609950059/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/335724048",
+      "photo_id": "609950059",
+      "filename": "PSBP-99989-Double-crested-Cormorant.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99988",
+      "type": "Wildlife",
+      "common_name": "Peninsular Cooter",
+      "scientific_name": "Pseudemys peninsularis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Cole Guyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/638116722/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/349782439",
+      "photo_id": "638116722",
+      "filename": "PSBP-99988-Peninsular-Cooter.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99987",
+      "type": "Wildlife",
+      "common_name": "Roseate Spoonbill",
+      "scientific_name": "Platalea ajaja",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": null,
+      "license": null,
+      "publish_ok": false,
+      "status": "MISSING — no valid-license photo",
+      "credit_line": null,
+      "photo_url": null,
+      "source_url": null,
+      "photo_id": null,
+      "filename": null,
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99986",
+      "type": "Wildlife",
+      "common_name": "Florida Softshell Turtle",
+      "scientific_name": "Apalone ferox",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "jwcemhc",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© jwcemhc (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/578652546/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/320073682",
+      "photo_id": "578652546",
+      "filename": "PSBP-99986-Florida-Softshell-Turtle.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99985",
+      "type": "Wildlife",
+      "common_name": "Tricolored Heron",
+      "scientific_name": "Egretta tricolor",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Cole Guyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/638116658/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/349782437",
+      "photo_id": "638116658",
+      "filename": "PSBP-99985-Tricolored-Heron.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99984",
+      "type": "Wildlife",
+      "common_name": "Wood Duck",
+      "scientific_name": "Aix sponsa",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": null,
+      "license": null,
+      "publish_ok": false,
+      "status": "MISSING — no valid-license photo",
+      "credit_line": null,
+      "photo_url": null,
+      "source_url": null,
+      "photo_id": null,
+      "filename": null,
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99983",
+      "type": "Wildlife",
+      "common_name": "Bald Eagle",
+      "scientific_name": "Haliaeetus leucocephalus",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": null,
+      "license": null,
+      "publish_ok": false,
+      "status": "MISSING — no valid-license photo",
+      "credit_line": null,
+      "photo_url": null,
+      "source_url": null,
+      "photo_id": null,
+      "filename": null,
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99982",
+      "type": "Wildlife",
+      "common_name": "Osprey",
+      "scientific_name": "Pandion haliaetus",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "ladwings",
+      "license": "CC-BY-NC-SA",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Laurel Ladwig (CC-BY-NC-SA), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/62439721/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/39363390",
+      "photo_id": "62439721",
+      "filename": "PSBP-99982-Osprey.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99981",
+      "type": "Wildlife",
+      "common_name": "American White Pelican",
+      "scientific_name": "Pelecanus erythrorhynchos",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "randall_carter",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Randall Carter (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/662218200/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/362812570",
+      "photo_id": "662218200",
+      "filename": "PSBP-99981-American-White-Pelican.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99980",
+      "type": "Wildlife",
+      "common_name": "Florida Mangrove Skipper",
+      "scientific_name": "Phocides batabano okeechobee",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "catalaniclaire",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© catalaniclaire (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/532397668/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/295723009",
+      "photo_id": "532397668",
+      "filename": "PSBP-99980-Florida-Mangrove-Skipper.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99979",
+      "type": "Wildlife",
+      "common_name": "Florida Screech-Owl",
+      "scientific_name": "Megascops asio floridanus",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "brice_c",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Brice C. (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/518341639/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/288246428",
+      "photo_id": "518341639",
+      "filename": "PSBP-99979-Florida-Screech-Owl.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99978",
+      "type": "Wildlife",
+      "common_name": "Northern Cardinal",
+      "scientific_name": "Cardinalis cardinalis",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "catalaniclaire",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© catalaniclaire (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/532397795/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/295723094",
+      "photo_id": "532397795",
+      "filename": "PSBP-99978-Northern-Cardinal.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99977",
+      "type": "Wildlife",
+      "common_name": "Yellow-crowned Night Heron",
+      "scientific_name": "Nyctanassa violacea",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "celestes",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© celestes (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/388440922/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/219454927",
+      "photo_id": "388440922",
+      "filename": "PSBP-99977-Yellow-crowned-Night-Heron.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99976",
+      "type": "Wildlife",
+      "common_name": "Pond Slider",
+      "scientific_name": "Trachemys scripta",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "flowerchild1969",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© flowerchild1969 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/473949552/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/263787920",
+      "photo_id": "473949552",
+      "filename": "PSBP-99976-Pond-Slider.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99975",
+      "type": "Wildlife",
+      "common_name": "Florida Red-bellied Cooter",
+      "scientific_name": "Pseudemys nelsoni",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "ardeljan_a_691",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Ardeljan_A_691 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/578110100/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/319791314",
+      "photo_id": "578110100",
+      "filename": "PSBP-99975-Florida-Red-bellied-Cooter.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99974",
+      "type": "Wildlife",
+      "common_name": "White Peacock",
+      "scientific_name": "Anartia jatrophae",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "mariaaaz",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Maria Escobar (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/672223250/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/368067935",
+      "photo_id": "672223250",
+      "filename": "PSBP-99974-White-Peacock.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99973",
+      "type": "Wildlife",
+      "common_name": "Cloudless Sulphur",
+      "scientific_name": "Phoebis sennae",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "coleguyton",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Cole Guyton (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635346355/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/348375110",
+      "photo_id": "635346355",
+      "filename": "PSBP-99973-Cloudless-Sulphur.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99972",
+      "type": "Wildlife",
+      "common_name": "Green Heron",
+      "scientific_name": "Butorides virescens",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": null,
+      "license": null,
+      "publish_ok": false,
+      "status": "MISSING — no valid-license photo",
+      "credit_line": null,
+      "photo_url": null,
+      "source_url": null,
+      "photo_id": null,
+      "filename": null,
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99971",
+      "type": "Wildlife",
+      "common_name": "Florida Zebra Longwing",
+      "scientific_name": "Heliconius charithonia tuckeri",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "pammy63",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Pammy63 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/366237756/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/207074393",
+      "photo_id": "366237756",
+      "filename": "PSBP-99971-Florida-Zebra-Longwing.jpg",
+      "used_by": []
+    },
+    {
+      "psbp_id": "PSBP-99970",
+      "type": "Wildlife",
+      "common_name": "Gulf Fritillary",
+      "scientific_name": "Dione vanillae",
+      "role": [
+        "whole"
+      ],
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "tags": [],
+      "photographer": "pammy63",
+      "license": "CC-BY-NC",
+      "publish_ok": true,
+      "status": "OK",
+      "credit_line": "© Pammy63 (CC-BY-NC), via iNaturalist",
+      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/366238094/large.jpg",
+      "source_url": "https://www.inaturalist.org/observations/207074593",
+      "photo_id": "366238094",
+      "filename": "PSBP-99970-Gulf-Fritillary.jpg",
+      "used_by": []
+    }
+  ]
+}
