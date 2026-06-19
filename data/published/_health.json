@@ -1,22 +1,20 @@
 {
-  "generated_at": "2026-06-19T02:45:54+00:00",
-  "overall": "warn",
+  "generated_at": "2026-06-19T02:52:03+00:00",
+  "overall": "ok",
   "feeds": [
     {
       "tab": "events",
-      "status": "amber",
+      "status": "green",
       "published": true,
       "rows": 20,
       "changes": {
-        "added": 22,
+        "added": 0,
         "changed": 0,
         "removed": 0
       },
-      "last_good_at": "2026-06-19T02:45:54+00:00",
-      "first_run": true,
-      "messages": [
-        "20 row(s) with warnings: iNaturalist class — kid_friendly: 'Yes' is not an allowed value"
-      ]
+      "last_good_at": "2026-06-19T02:52:03+00:00",
+      "first_run": false,
+      "messages": []
     }
   ]
 }
