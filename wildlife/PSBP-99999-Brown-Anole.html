@@ -117,6 +117,7 @@
   .lb-prev,.lb-next{ position:fixed;top:50%;background:none;border:none;color:#fff;font-size:48px;cursor:pointer;padding:20px;transform:translateY(-50%); }
   .lb-prev{ left:8px; }
   .lb-next{ right:8px; }
+  .lb-counter{ color:#888;font-size:12px;margin-top:4px; }
 </style>
 </head>
 <body>
@@ -124,7 +125,7 @@
 
 <div class="wild-wrap theme-reptile">
   <div class="wild-hero">
-    <img style="object-position:65% 66%;" src="../photos/PSBP-99999/635346033.jpg" alt="Brown Anole at Palma Sola Botanical Park">
+    <img style="cursor:pointer;object-position:65% 66%" src="../photos/PSBP-99999/635346033.jpg" alt="Brown Anole at Palma Sola Botanical Park" onclick="openLB(0)">
     <div class="wild-hero-overlay">
       <div class="wild-hero-category">Lizards</div>
       <div class="wild-hero-name">Brown Anole</div>
@@ -144,7 +145,7 @@
     <div class="wild-caution-section"><div class="wild-section-header"><span class="wild-section-icon">🤝</span><span class="wild-section-title">Watching It Respectfully</span></div><div class="wild-section-body"><p>Just watch and enjoy. No need to feed or handle them — they are doing fine on their own.</p></div></div>
     <div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">📸</span><span class="wild-section-title">Photo Gallery</span></div>
     <div class="gal-note">Photos contributed by park visitors and volunteers via iNaturalist</div>
-    <div class="gal-grid"><div class="gal-item" onclick="openLB(0)"><img src="../photos/PSBP-99999/245373536.jpg" loading="lazy" alt="Brown Anole — photo by teschaim"><div class="gal-credit">📷 teschaim</div></div><div class="gal-item" onclick="openLB(1)"><img src="../photos/PSBP-99999/635345903.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(2)"><img src="../photos/PSBP-99999/635347321.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(3)"><img src="../photos/PSBP-99999/635347465.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(4)"><img src="../photos/PSBP-99999/638116759.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(5)"><img src="../photos/PSBP-99999/638116756.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(6)"><img src="../photos/PSBP-99999/638116898.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(7)"><img src="../photos/PSBP-99999/680941874.jpg" loading="lazy" alt="Brown Anole — photo by harrisonmello"><div class="gal-credit">📷 harrisonmello</div></div></div></div>
+    <div class="gal-grid"><div class="gal-item" onclick="openLB(1)"><img src="../photos/PSBP-99999/245373536.jpg" loading="lazy" alt="Brown Anole — photo by teschaim"><div class="gal-credit">📷 teschaim</div></div><div class="gal-item" onclick="openLB(2)"><img src="../photos/PSBP-99999/635345903.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(3)"><img src="../photos/PSBP-99999/635347321.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(4)"><img src="../photos/PSBP-99999/635347465.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(5)"><img src="../photos/PSBP-99999/638116759.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(6)"><img src="../photos/PSBP-99999/638116756.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(7)"><img src="../photos/PSBP-99999/638116898.jpg" loading="lazy" alt="Brown Anole — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div><div class="gal-item" onclick="openLB(8)"><img src="../photos/PSBP-99999/680941874.jpg" loading="lazy" alt="Brown Anole — photo by harrisonmello"><div class="gal-credit">📷 harrisonmello</div></div></div></div>
     <div class="lightbox" id="lb" onclick="closeLB(event)">
       <div class="lb-inner">
         <button class="lb-close" onclick="closeLB()">&times;</button>
@@ -152,12 +153,13 @@
         <img class="lb-img" id="lbImg">
         <button class="lb-next" onclick="stepLB(1)">&#8250;</button>
         <div class="lb-credit" id="lbCredit"></div>
+        <div class="lb-counter" id="lbCounter"></div>
       </div>
     </div>
     <script>
-    var lbData=[{"src": "../photos/PSBP-99999/245373536.jpg", "credit": "teschaim", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/635345903.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/635347321.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/635347465.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/638116759.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/638116756.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/638116898.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/680941874.jpg", "credit": "harrisonmello", "license": "CC-BY-NC"}];
+    var lbData=[{"src": "../photos/PSBP-99999/635346033.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/245373536.jpg", "credit": "teschaim", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/635345903.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/635347321.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/635347465.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/638116759.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/638116756.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/638116898.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99999/680941874.jpg", "credit": "harrisonmello", "license": "CC-BY-NC"}];
     var lbIdx=0;
-    function openLB(i){lbIdx=i;var d=lbData[i];document.getElementById('lbImg').src=d.src;document.getElementById('lbCredit').innerHTML='📷 '+d.credit+' · '+d.license+' · via iNaturalist';document.getElementById('lb').classList.add('active');document.body.style.overflow='hidden';}
+    function openLB(i){lbIdx=i;var d=lbData[i];document.getElementById('lbImg').src=d.src;document.getElementById('lbCredit').innerHTML='📷 '+d.credit+' · '+d.license+' · via iNaturalist';document.getElementById('lbCounter').textContent=(i+1)+' / '+lbData.length;document.getElementById('lb').classList.add('active');document.body.style.overflow='hidden';}
     function closeLB(e){if(e&&e.target!==document.getElementById('lb')&&!e.target.classList.contains('lb-close'))return;document.getElementById('lb').classList.remove('active');document.body.style.overflow='';}
     function stepLB(dir){lbIdx=(lbIdx+dir+lbData.length)%lbData.length;openLB(lbIdx);}
     document.addEventListener('keydown',function(e){if(!document.getElementById('lb').classList.contains('active'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')stepLB(1);if(e.key==='ArrowLeft')stepLB(-1);});

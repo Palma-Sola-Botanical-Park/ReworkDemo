@@ -179,18 +179,21 @@ def build_page(species, hero_photo, all_photos):
     # Photo Gallery
     gallery_photos = [p for p in all_photos if not p.get("hero") and p.get("filename")]
     gallery_section = ""
+    # Build lightbox data: hero first, then gallery
+    lb_all = []
+    if hero_photo:
+        lb_all.append({"src": f"../photos/{sid}/{hero_photo['filename']}", "credit": hero_photo.get("photographer", "Unknown"), "license": hero_photo.get("license", "")})
+    for p in gallery_photos:
+        lb_all.append({"src": f"../photos/{sid}/{p['filename']}", "credit": p.get("photographer", "Unknown"), "license": p.get("license", "")})
+
     if gallery_photos:
         gallery_items = ""
         for i, p in enumerate(gallery_photos):
             fn = p["filename"]
             photog = p.get("photographer", "Unknown")
             img_path = f"../photos/{sid}/{fn}"
-            gallery_items += f'<div class="gal-item" onclick="openLB({i})"><img src="{img_path}" loading="lazy" alt="{h(name)} — photo by {h(photog)}"><div class="gal-credit">📷 {h(photog)}</div></div>'
-
-        # Build lightbox data array
-        lb_data = []
-        for p in gallery_photos:
-            lb_data.append({"src": f"../photos/{sid}/{p['filename']}", "credit": p.get("photographer", "Unknown"), "license": p.get("license", "")})
+            lb_idx = i + 1  # offset by 1 because hero is index 0
+            gallery_items += f'<div class="gal-item" onclick="openLB({lb_idx})"><img src="{img_path}" loading="lazy" alt="{h(name)} — photo by {h(photog)}"><div class="gal-credit">📷 {h(photog)}</div></div>'
 
         gallery_section = f"""<div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">📸</span><span class="wild-section-title">Photo Gallery</span></div>
     <div class="gal-note">Photos contributed by park visitors and volunteers via iNaturalist</div>
@@ -202,12 +205,13 @@ def build_page(species, hero_photo, all_photos):
         <img class="lb-img" id="lbImg">
         <button class="lb-next" onclick="stepLB(1)">&#8250;</button>
         <div class="lb-credit" id="lbCredit"></div>
+        <div class="lb-counter" id="lbCounter"></div>
       </div>
     </div>
     <script>
-    var lbData={json.dumps(lb_data)};
+    var lbData={json.dumps(lb_all)};
     var lbIdx=0;
-    function openLB(i){{lbIdx=i;var d=lbData[i];document.getElementById('lbImg').src=d.src;document.getElementById('lbCredit').innerHTML='📷 '+d.credit+' · '+d.license+' · via iNaturalist';document.getElementById('lb').classList.add('active');document.body.style.overflow='hidden';}}
+    function openLB(i){{lbIdx=i;var d=lbData[i];document.getElementById('lbImg').src=d.src;document.getElementById('lbCredit').innerHTML='📷 '+d.credit+' · '+d.license+' · via iNaturalist';document.getElementById('lbCounter').textContent=(i+1)+' / '+lbData.length;document.getElementById('lb').classList.add('active');document.body.style.overflow='hidden';}}
     function closeLB(e){{if(e&&e.target!==document.getElementById('lb')&&!e.target.classList.contains('lb-close'))return;document.getElementById('lb').classList.remove('active');document.body.style.overflow='';}}
     function stepLB(dir){{lbIdx=(lbIdx+dir+lbData.length)%lbData.length;openLB(lbIdx);}}
     document.addEventListener('keydown',function(e){{if(!document.getElementById('lb').classList.contains('active'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')stepLB(1);if(e.key==='ArrowLeft')stepLB(-1);}});
@@ -216,7 +220,11 @@ def build_page(species, hero_photo, all_photos):
     # Hero img tag
     hero_img = ""
     if img_src:
-        hero_img = f'<img{focus_style} src="{img_src}" alt="{h(name)} at Palma Sola Botanical Park">'
+        style_parts = ["cursor:pointer"]
+        if focus and focus != "50% 50%":
+            style_parts.append(f"object-position:{focus}")
+        hero_style = ";".join(style_parts)
+        hero_img = f'<img style="{hero_style}" src="{img_src}" alt="{h(name)} at Palma Sola Botanical Park" onclick="openLB(0)">'
 
     # Float back icon based on group
     float_icon = "🦜" if group == "Bird" else "🦋" if group in ("Butterfly", "Moth") else "🦎" if group in ("Lizard", "Turtle", "Snake") else "🐾" if group == "Mammal" else "🦜"
@@ -340,6 +348,7 @@ def build_page(species, hero_photo, all_photos):
   .lb-prev,.lb-next{{ position:fixed;top:50%;background:none;border:none;color:#fff;font-size:48px;cursor:pointer;padding:20px;transform:translateY(-50%); }}
   .lb-prev{{ left:8px; }}
   .lb-next{{ right:8px; }}
+  .lb-counter{{ color:#888;font-size:12px;margin-top:4px; }}
 </style>
 </head>
 <body>
