@@ -2,7 +2,7 @@
   "meta": {
     "generated": "2026-06-19",
     "source": "Plants_and_Wildlife_Photo_Credits.csv",
-    "photo_count": 231,
+    "photo_count": 219,
     "schema_version": "1.0"
   },
   "photos": [
@@ -2935,126 +2935,6 @@
       "used_by": []
     },
     {
-      "psbp_id": "PSBP-99993",
-      "type": "Wildlife",
-      "common_name": "Great Blue Heron",
-      "scientific_name": "Ardea herodias",
-      "role": [
-        "whole"
-      ],
-      "primary_for": [
-        "whole"
-      ],
-      "hero": true,
-      "tags": [],
-      "photographer": "frankymca",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© frankymca (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/672186447/large.jpg",
-      "source_url": "https://www.inaturalist.org/observations/368047308",
-      "photo_id": "672186447",
-      "filename": "PSBP-99993-Great-Blue-Heron.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99992",
-      "type": "Wildlife",
-      "common_name": "Wood Stork",
-      "scientific_name": "Mycteria americana",
-      "role": [
-        "whole"
-      ],
-      "primary_for": [
-        "whole"
-      ],
-      "hero": true,
-      "tags": [],
-      "photographer": "mewells",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© Mark E. Wells (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613021640/large.jpg",
-      "source_url": "https://www.inaturalist.org/observations/337221869",
-      "photo_id": "613021640",
-      "filename": "PSBP-99992-Wood-Stork.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99991",
-      "type": "Wildlife",
-      "common_name": "Mottled Duck",
-      "scientific_name": "Anas fulvigula",
-      "role": [
-        "whole"
-      ],
-      "primary_for": [
-        "whole"
-      ],
-      "hero": true,
-      "tags": [],
-      "photographer": "coleguyton",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© Cole Guyton (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635347951/large.jpg",
-      "source_url": "https://www.inaturalist.org/observations/348376051",
-      "photo_id": "635347951",
-      "filename": "PSBP-99991-Mottled-Duck.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99990",
-      "type": "Wildlife",
-      "common_name": "Eastern Gray Squirrel",
-      "scientific_name": "Sciurus carolinensis",
-      "role": [
-        "whole"
-      ],
-      "primary_for": [
-        "whole"
-      ],
-      "hero": true,
-      "tags": [],
-      "photographer": "delphpalma",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© delphpalma (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/176570644/large.jpg",
-      "source_url": "https://www.inaturalist.org/observations/105259593",
-      "photo_id": "176570644",
-      "filename": "PSBP-99990-Eastern-Gray-Squirrel.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99989",
-      "type": "Wildlife",
-      "common_name": "Double-crested Cormorant",
-      "scientific_name": "Nannopterum auritum",
-      "role": [
-        "whole"
-      ],
-      "primary_for": [
-        "whole"
-      ],
-      "hero": true,
-      "tags": [],
-      "photographer": "joycem1218",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© joycem1218 (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609950059/large.jpg",
-      "source_url": "https://www.inaturalist.org/observations/335724048",
-      "photo_id": "609950059",
-      "filename": "PSBP-99989-Double-crested-Cormorant.jpg",
-      "used_by": []
-    },
-    {
       "psbp_id": "PSBP-99987",
       "type": "Wildlife",
       "common_name": "Roseate Spoonbill",
@@ -3653,9 +3533,7 @@
       "type": "Wildlife",
       "common_name": "Brown Anole",
       "scientific_name": "Anolis sagrei",
-      "role": [
-        "gallery"
-      ],
+      "role": [],
       "primary_for": [],
       "hero": false,
       "tags": [],
@@ -3675,9 +3553,7 @@
       "type": "Wildlife",
       "common_name": "Brown Anole",
       "scientific_name": "Anolis sagrei",
-      "role": [
-        "gallery"
-      ],
+      "role": [],
       "primary_for": [],
       "hero": false,
       "tags": [],
@@ -3748,7 +3624,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": false,
+      "hero": true,
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -3760,7 +3636,7 @@
       "photo_id": "681678647",
       "filename": "681678647.jpg",
       "used_by": [],
-      "focus": "51% 49%"
+      "focus": "48% 42%"
     },
     {
       "psbp_id": "PSBP-99998",
@@ -3774,7 +3650,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -4174,9 +4050,7 @@
       "type": "Wildlife",
       "common_name": "Common Gallinule",
       "scientific_name": "Gallinula galeata",
-      "role": [
-        "gallery"
-      ],
+      "role": [],
       "primary_for": [],
       "hero": false,
       "tags": [],
@@ -4457,8 +4331,8 @@
       "common_name": "Great Egret",
       "scientific_name": "Ardea alba",
       "role": [
-        "gallery",
-        "whole"
+        "whole",
+        "gallery"
       ],
       "primary_for": [],
       "hero": false,
@@ -4705,79 +4579,9 @@
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
       "role": [
-        "gallery"
-      ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
-      "tags": [],
-      "photographer": "katiet5",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© katiet5 (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/375078835/original.jpg",
-      "source_url": "https://www.inaturalist.org/observations/212241550",
-      "observation_id": "212241550",
-      "photo_id": "375078835",
-      "filename": "375078835.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99993",
-      "type": "Wildlife",
-      "common_name": "Great Blue Heron",
-      "scientific_name": "Ardea herodias",
-      "role": [
-        "gallery"
-      ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
-      "tags": [],
-      "photographer": "doanrega",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© doanrega (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/503965403/original.jpeg",
-      "source_url": "https://www.inaturalist.org/observations/280592430",
-      "observation_id": "280592430",
-      "photo_id": "503965403",
-      "filename": "503965403.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99993",
-      "type": "Wildlife",
-      "common_name": "Great Blue Heron",
-      "scientific_name": "Ardea herodias",
-      "role": [
-        "gallery"
-      ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
-      "tags": [],
-      "photographer": "cleamon",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© cleamon (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681004933/original.jpg",
-      "source_url": "https://www.inaturalist.org/observations/372668972",
-      "observation_id": "372668972",
-      "photo_id": "681004933",
-      "filename": "681004933.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99993",
-      "type": "Wildlife",
-      "common_name": "Great Blue Heron",
-      "scientific_name": "Ardea herodias",
-      "role": [
-        "gallery"
+        "gallery",
+        "whole",
+        "portrait"
       ],
       "primary_for": [],
       "hero": false,
@@ -4801,11 +4605,14 @@
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "45% 59%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -4825,7 +4632,8 @@
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
       "role": [
-        "gallery"
+        "gallery",
+        "portrait"
       ],
       "primary_for": [],
       "hero": false,
@@ -4849,7 +4657,8 @@
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
       "role": [
-        "gallery"
+        "gallery",
+        "flight"
       ],
       "primary_for": [],
       "hero": false,
@@ -4873,7 +4682,8 @@
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
       "role": [
-        "gallery"
+        "gallery",
+        "habitat"
       ],
       "primary_for": [],
       "hero": false,
@@ -4896,9 +4706,7 @@
       "type": "Wildlife",
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
-      "role": [
-        "gallery"
-      ],
+      "role": [],
       "primary_for": [],
       "hero": false,
       "focus": null,
@@ -4921,7 +4729,8 @@
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
       "role": [
-        "gallery"
+        "gallery",
+        "habitat"
       ],
       "primary_for": [],
       "hero": false,
@@ -4945,7 +4754,8 @@
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
       "role": [
-        "gallery"
+        "gallery",
+        "habitat"
       ],
       "primary_for": [],
       "hero": false,
@@ -4969,7 +4779,8 @@
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
       "role": [
-        "gallery"
+        "gallery",
+        "habitat"
       ],
       "primary_for": [],
       "hero": false,
@@ -4993,7 +4804,8 @@
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
       "role": [
-        "gallery"
+        "gallery",
+        "habitat"
       ],
       "primary_for": [],
       "hero": false,
@@ -5017,7 +4829,8 @@
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
       "role": [
-        "gallery"
+        "gallery",
+        "flight"
       ],
       "primary_for": [],
       "hero": false,
@@ -5041,7 +4854,8 @@
       "common_name": "Great Blue Heron",
       "scientific_name": "Ardea herodias",
       "role": [
-        "gallery"
+        "gallery",
+        "habitat"
       ],
       "primary_for": [],
       "hero": false,
@@ -5065,11 +4879,14 @@
       "common_name": "Wood Stork",
       "scientific_name": "Mycteria americana",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "47% 48%",
       "tags": [],
       "photographer": "jwcemhc",
       "license": "CC-BY-NC",
@@ -5089,7 +4906,8 @@
       "common_name": "Wood Stork",
       "scientific_name": "Mycteria americana",
       "role": [
-        "gallery"
+        "gallery",
+        "flight"
       ],
       "primary_for": [],
       "hero": false,
@@ -5105,30 +4923,6 @@
       "observation_id": "373034371",
       "photo_id": "681679016",
       "filename": "681679016.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99991",
-      "type": "Wildlife",
-      "common_name": "Mottled Duck",
-      "scientific_name": "Anas fulvigula",
-      "role": [
-        "gallery"
-      ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
-      "tags": [],
-      "photographer": "cleamon",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© cleamon (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681004991/original.jpg",
-      "source_url": "https://www.inaturalist.org/observations/372668999",
-      "observation_id": "372668999",
-      "photo_id": "681004991",
-      "filename": "681004991.jpg",
       "used_by": []
     },
     {
@@ -5161,7 +4955,9 @@
       "common_name": "Mottled Duck",
       "scientific_name": "Anas fulvigula",
       "role": [
-        "gallery"
+        "gallery",
+        "habitat",
+        "whole"
       ],
       "primary_for": [],
       "hero": false,
@@ -5185,7 +4981,9 @@
       "common_name": "Mottled Duck",
       "scientific_name": "Anas fulvigula",
       "role": [
-        "gallery"
+        "gallery",
+        "juvenile",
+        "habitat"
       ],
       "primary_for": [],
       "hero": false,
@@ -5209,11 +5007,15 @@
       "common_name": "Mottled Duck",
       "scientific_name": "Anas fulvigula",
       "role": [
-        "gallery"
+        "gallery",
+        "whole",
+        "habitat"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "46% 49%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -5257,11 +5059,14 @@
       "common_name": "Eastern Gray Squirrel",
       "scientific_name": "Sciurus carolinensis",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "56% 63%",
       "tags": [],
       "photographer": "coleguyton",
       "license": "CC-BY-NC",
@@ -5305,31 +5110,8 @@
       "common_name": "Eastern Gray Squirrel",
       "scientific_name": "Sciurus carolinensis",
       "role": [
-        "gallery"
-      ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
-      "tags": [],
-      "photographer": "coleguyton",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© coleguyton (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/638116896/original.jpg",
-      "source_url": "https://www.inaturalist.org/observations/349782468",
-      "observation_id": "349782468",
-      "photo_id": "638116896",
-      "filename": "638116896.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99990",
-      "type": "Wildlife",
-      "common_name": "Eastern Gray Squirrel",
-      "scientific_name": "Sciurus carolinensis",
-      "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
       "primary_for": [],
       "hero": false,
@@ -5353,11 +5135,14 @@
       "common_name": "Double-crested Cormorant",
       "scientific_name": "Nannopterum auritum",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "45% 45%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -5377,7 +5162,8 @@
       "common_name": "Double-crested Cormorant",
       "scientific_name": "Nannopterum auritum",
       "role": [
-        "gallery"
+        "gallery",
+        "habitat"
       ],
       "primary_for": [],
       "hero": false,
@@ -5401,7 +5187,8 @@
       "common_name": "Double-crested Cormorant",
       "scientific_name": "Nannopterum auritum",
       "role": [
-        "gallery"
+        "gallery",
+        "habitat"
       ],
       "primary_for": [],
       "hero": false,
@@ -5417,54 +5204,6 @@
       "observation_id": "373034450",
       "photo_id": "681680068",
       "filename": "681680068.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99989",
-      "type": "Wildlife",
-      "common_name": "Double-crested Cormorant",
-      "scientific_name": "Nannopterum auritum",
-      "role": [
-        "gallery"
-      ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
-      "tags": [],
-      "photographer": "robcarr52",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681680059/original.jpg",
-      "source_url": "https://www.inaturalist.org/observations/373034451",
-      "observation_id": "373034451",
-      "photo_id": "681680059",
-      "filename": "681680059.jpg",
-      "used_by": []
-    },
-    {
-      "psbp_id": "PSBP-99989",
-      "type": "Wildlife",
-      "common_name": "Double-crested Cormorant",
-      "scientific_name": "Nannopterum auritum",
-      "role": [
-        "gallery"
-      ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
-      "tags": [],
-      "photographer": "robcarr52",
-      "license": "CC-BY-NC",
-      "publish_ok": true,
-      "status": "OK",
-      "credit_line": "© robcarr52 (CC-BY-NC), via iNaturalist",
-      "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681680157/original.jpg",
-      "source_url": "https://www.inaturalist.org/observations/373034467",
-      "observation_id": "373034467",
-      "photo_id": "681680157",
-      "filename": "681680157.jpg",
       "used_by": []
     },
     {
