@@ -7842,7 +7842,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "randall_carter",
@@ -7863,11 +7863,14 @@
       "common_name": "Pileated Woodpecker",
       "scientific_name": "Dryocopus pileatus",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "53% 42%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -7917,7 +7920,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "jerseymeg",
@@ -7986,11 +7989,14 @@
       "common_name": "Northern Mockingbird",
       "scientific_name": "Mimus polyglottos",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "60% 46%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -8041,7 +8047,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "55% 56%",
       "tags": [],
       "photographer": "pammy63",
       "license": "CC-BY-NC",
@@ -8068,7 +8074,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "46% 52%",
       "tags": [],
       "photographer": "pammy63",
       "license": "CC-BY-NC",
@@ -8118,7 +8124,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "robcarr52",
@@ -8139,11 +8145,14 @@
       "common_name": "Blue Jay",
       "scientific_name": "Cyanocitta cristata",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "48% 52%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -8169,7 +8178,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "coleguyton",
@@ -8214,11 +8223,14 @@
       "common_name": "Mourning Dove",
       "scientific_name": "Zenaida macroura",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "35% 51%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -8245,7 +8257,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "38% 51%",
       "tags": [],
       "photographer": "jengunter",
       "license": "CC-BY-NC",
@@ -8271,7 +8283,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "teschaim",
@@ -8292,11 +8304,14 @@
       "common_name": "Black Witch Moth",
       "scientific_name": "Ascalapha odorata",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "60% 47%",
       "tags": [],
       "photographer": "teschaim",
       "license": "CC-BY-NC",
@@ -8347,7 +8362,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "64% 42%",
       "tags": [],
       "photographer": "catalaniclaire",
       "license": "CC-BY-NC",
@@ -8374,7 +8389,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "56% 54%",
       "tags": [],
       "photographer": "mangoverde",
       "license": "CC-BY-NC",
@@ -8401,7 +8416,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "52% 60%",
       "tags": [],
       "photographer": "pammy63",
       "license": "CC-BY-NC",
@@ -8452,7 +8467,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "43% 56%",
       "tags": [],
       "photographer": "brice_c",
       "license": "CC-BY-NC",
@@ -8479,7 +8494,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "47% 49%",
       "tags": [],
       "photographer": "brice_c",
       "license": "CC-BY-NC",
@@ -8554,7 +8569,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "42% 71%",
       "tags": [],
       "photographer": "katiet5",
       "license": "CC-BY-NC",
@@ -8580,7 +8595,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "robcarr52",
@@ -8649,11 +8664,14 @@
       "common_name": "Red-bellied Woodpecker",
       "scientific_name": "Melanerpes carolinus",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
+      "primary_for": [
+        "whole"
+      ],
       "hero": false,
-      "focus": null,
+      "focus": "57% 48%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -8721,11 +8739,14 @@
       "common_name": "Red-bellied Woodpecker",
       "scientific_name": "Melanerpes carolinus",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "52% 44%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -8752,7 +8773,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "53% 46%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -8779,7 +8800,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "40% 55%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -8806,7 +8827,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "51% 55%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -8833,7 +8854,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "50% 65%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -8956,7 +8977,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "31% 73%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -8982,7 +9003,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "robcarr52",
@@ -9003,11 +9024,14 @@
       "common_name": "Red-shouldered Hawk",
       "scientific_name": "Buteo lineatus",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "43% 43%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9082,7 +9106,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "45% 51%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9109,7 +9133,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "50% 34%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9135,7 +9159,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "robcarr52",
@@ -9156,11 +9180,14 @@
       "common_name": "Little Blue Heron",
       "scientific_name": "Egretta caerulea",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "47% 41%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9187,7 +9214,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "55% 50%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9214,7 +9241,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "52% 53%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9241,7 +9268,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "48% 53%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9268,7 +9295,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "53% 50%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9295,7 +9322,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "47% 55%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9322,7 +9349,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "56% 43%",
       "tags": [],
       "photographer": "mariaaaz",
       "license": "CC-BY-NC",
@@ -9349,7 +9376,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "48% 54%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9376,7 +9403,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "51% 60%",
       "tags": [],
       "photographer": "pammy63",
       "license": "CC-BY-NC",
@@ -9427,7 +9454,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "58% 56%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9526,7 +9553,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "49% 54%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9552,7 +9579,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "robcarr52",
@@ -9573,11 +9600,14 @@
       "common_name": "Palm Warbler",
       "scientific_name": "Setophaga palmarum",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "58% 50%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9603,7 +9633,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "robcarr52",
@@ -9624,11 +9654,14 @@
       "common_name": "Cape May Warbler",
       "scientific_name": "Setophaga tigrina",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "54% 49%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9726,7 +9759,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "robcarr52",
@@ -9747,11 +9780,14 @@
       "common_name": "Yellow-throated Warbler",
       "scientific_name": "Setophaga dominica",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "49% 63%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9777,7 +9813,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "robcarr52",
@@ -9798,11 +9834,14 @@
       "common_name": "Yellow-rumped Warbler",
       "scientific_name": "Setophaga coronata",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "48% 55%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9829,7 +9868,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "54% 52%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9880,7 +9919,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "47% 60%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -9931,7 +9970,7 @@
         "whole"
       ],
       "hero": true,
-      "focus": "50% 50%",
+      "focus": "45% 52%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -10000,7 +10039,9 @@
       "scientific_name": "Polioptila caerulea",
       "role": [
         "whole",
-        "gallery"
+        "gallery",
+        "display",
+        "flight"
       ],
       "primary_for": [
         "whole"
@@ -10026,7 +10067,8 @@
       "common_name": "Blue-gray Gnatcatcher",
       "scientific_name": "Polioptila caerulea",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
       "primary_for": [],
       "hero": false,
@@ -10056,7 +10098,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "robcarr52",
@@ -10077,11 +10119,14 @@
       "common_name": "White-crowned Sparrow",
       "scientific_name": "Zonotrichia leucophrys",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "47% 57%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -10107,7 +10152,7 @@
       "primary_for": [
         "whole"
       ],
-      "hero": true,
+      "hero": false,
       "focus": "50% 50%",
       "tags": [],
       "photographer": "robcarr52",
@@ -10128,11 +10173,14 @@
       "common_name": "Great Crested Flycatcher",
       "scientific_name": "Myiarchus crinitus",
       "role": [
-        "gallery"
+        "gallery",
+        "whole"
       ],
-      "primary_for": [],
-      "hero": false,
-      "focus": null,
+      "primary_for": [
+        "whole"
+      ],
+      "hero": true,
+      "focus": "40% 51%",
       "tags": [],
       "photographer": "robcarr52",
       "license": "CC-BY-NC",
@@ -10248,34 +10296,82 @@
   ],
   "_local_folders": [
     "PSBP-99997",
+    "PSBP-99963",
     "PSBP-99990",
+    "PSBP-99952",
     "PSBP-99999",
+    "PSBP-99955",
+    "PSBP-99939",
+    "PSBP-99930",
+    "PSBP-99937",
+    "PSBP-99954",
+    "PSBP-99953",
     "PSBP-99998",
     "PSBP-99991",
+    "PSBP-99965",
+    "PSBP-99962",
     "PSBP-99996",
+    "PSBP-99936",
+    "PSBP-99931",
+    "PSBP-99938",
+    "PSBP-99922",
+    "PSBP-99925",
+    "PSBP-99940",
     "PSBP-99978",
+    "PSBP-99947",
     "PSBP-99985",
     "PSBP-99971",
+    "PSBP-99949",
     "PSBP-99976",
     "PSBP-99982",
+    "PSBP-99924",
+    "PSBP-99923",
+    "PSBP-99948",
     "PSBP-99983",
     "PSBP-99977",
     "PSBP-99970",
     "PSBP-99984",
     "PSBP-99979",
+    "PSBP-99946",
+    "PSBP-99941",
+    "PSBP-99934",
+    "PSBP-99933",
+    "PSBP-99967",
     "PSBP-99993",
+    "PSBP-99958",
     "PSBP-99994",
+    "PSBP-99960",
+    "PSBP-99956",
+    "PSBP-99969",
+    "PSBP-99951",
+    "PSBP-99932",
+    "PSBP-99935",
+    "PSBP-99950",
+    "PSBP-99957",
+    "PSBP-99968",
+    "PSBP-99961",
     "PSBP-99995",
     "PSBP-99992",
+    "PSBP-99966",
+    "PSBP-99959",
+    "PSBP-99944",
     "PSBP-99988",
+    "PSBP-99943",
     "PSBP-99975",
     "PSBP-99981",
     "PSBP-99986",
     "PSBP-99972",
+    "PSBP-99926",
+    "PSBP-99921",
+    "PSBP-99928",
     "PSBP-99973",
     "PSBP-99987",
     "PSBP-99980",
     "PSBP-99974",
-    "PSBP-99989"
+    "PSBP-99989",
+    "PSBP-99942",
+    "PSBP-99945",
+    "PSBP-99929",
+    "PSBP-99927"
   ]
 }

@@ -30,7 +30,7 @@ import sys
 import urllib.parse
 
 PORT = 8000
-PHOTO_CREDITS = "/data/sources/photo_credits.json"
+PHOTO_CREDITS = "data/sources/photo_credits.json"
 PHOTOS_DIR = "photos"
 
 # Wildlife roles
