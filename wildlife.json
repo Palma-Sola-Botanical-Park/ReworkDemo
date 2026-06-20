@@ -180,6 +180,26 @@
     "page": "wildlife/PSBP-99929-Yellow-throated-Warbler.html"
   },
   {
+    "id": "PSBP-99930",
+    "common": "Cape May Warbler",
+    "sci": "Setophaga tigrina",
+    "family": "",
+    "theme": "bird",
+    "category": "Songbirds & Perching Birds",
+    "native": true,
+    "quick": "A small, tiger-striped warbler with chestnut cheek patches (male) — named for Cape May, New Jersey, where it was first collected, though it barely visits there.",
+    "aliases": [],
+    "tags": [
+      "Bird",
+      "Native",
+      "Daytime"
+    ],
+    "credit": "robcarr52",
+    "photo": "photos/PSBP-99930/682171674.jpg",
+    "focus": "54% 49%",
+    "page": "wildlife/PSBP-99930-Cape-May-Warbler.html"
+  },
+  {
     "id": "PSBP-99931",
     "common": "Palm Warbler",
     "sci": "Setophaga palmarum",
