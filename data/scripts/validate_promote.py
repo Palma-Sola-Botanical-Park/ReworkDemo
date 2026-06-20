@@ -41,6 +41,7 @@ import importlib.util
 import json
 import os
 import re
+import sys
 
 STAGING = "data/staging"
 PUBLISHED = "data/published"
@@ -79,8 +80,18 @@ def now_iso():
 def load_json(path, default=None):
     if not os.path.exists(path):
         return default
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, ValueError) as e:
+        # A generated file got corrupted (e.g. git left conflict markers in
+        # _health.json after a bad merge). These files are all disposable —
+        # the pipeline rebuilds them — so degrade to the default and shout,
+        # rather than crashing the whole run. A corrupt STAGING file this way
+        # reads as empty, which the volume guard then blocks (safe: holds
+        # last-known-good) instead of publishing nothing.
+        print(f"  ! {path}: not valid JSON ({e}) — treating as missing", file=sys.stderr)
+        return default
 
 
 def write_json(path, data):

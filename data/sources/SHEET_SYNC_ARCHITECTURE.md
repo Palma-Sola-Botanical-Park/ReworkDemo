@@ -2,7 +2,7 @@
 
 **Status:** APPROVED, not yet built. Governing document for how the director's Google Sheet becomes the static JSON the site reads. Companion to `EVENTS_DATA_MODEL.md` (which defines *what* the tabs mean); this doc defines *how* the tab data gets safely onto the site.
 **Supersedes:** the live client-side `fetchTab()` CSV path in `site.js` *in normal operation*. Once this is built, the browser fetches validated static JSON instead of the sheet — but the old live path is kept dormant as a break-glass fallback (see §6), not deleted.
-**Last updated:** 2026-06-20 (rev 5 — **as-built reconciliation.** The code now exists, and it diverges from the rule-model sketch this doc was written against. Added §3 "As-built schema contract" (the real `SCHEMA` dict shape `validate_promote.py` actually reads: no `action` key; only `severity:"error"`+`scope:"row"` quarantines; file-blocks come *only* from `required_headers`), §3 "Registering a tab" (the three switches — `PILOT_TABS` + `PUBLISH_TABS` + `MIGRATED`), and §3 "Known divergences & deferred". **The code is canonical; this doc now points at it rather than predicting it.** rev 4 — recorded the dashboard as intentionally unlinked/bookmark-only; rev 3 added §1 Consumers, the promote/visibility rule and closures-from-flag in §3, dual-mode venues + gallery existence check + screens in the decision log, and reordered the template build with venues last)
+**Last updated:** 2026-06-20 (rev 6 — **monitoring layer shipped.** Added §11 documenting the as-built feed-monitoring/observability layer: per-rule instrumentation, the volume guard, three persistence files (`_history.json`, `health/<tab>.json`, enriched `_health.json`), the two dashboards (`data-health.html` rebuilt + new `feed.html?tab=`), and a `load_json` hardening so a corrupt generated file no longer crashes the run. Schemas gained `why`/`human`/`volume_min`. rev 5 — **as-built reconciliation.** The code now exists, and it diverges from the rule-model sketch this doc was written against. Added §3 "As-built schema contract" (the real `SCHEMA` dict shape `validate_promote.py` actually reads: no `action` key; only `severity:"error"`+`scope:"row"` quarantines; file-blocks come *only* from `required_headers`), §3 "Registering a tab" (the three switches — `PILOT_TABS` + `PUBLISH_TABS` + `MIGRATED`), and §3 "Known divergences & deferred". **The code is canonical; this doc now points at it rather than predicting it.** rev 4 — recorded the dashboard as intentionally unlinked/bookmark-only; rev 3 added §1 Consumers, the promote/visibility rule and closures-from-flag in §3, dual-mode venues + gallery existence check + screens in the decision log, and reordered the template build with venues last)
 
 ---
 
@@ -312,3 +312,124 @@ Staging is **committed** (not just an artifact). Cheap on a low-write repo, and 
 
 - Apps Script `repository_dispatch` for near-instant sync.
 - Autofix actions for common warnings (trim, case-normalize vocab).
+
+---
+
+## 11. Monitoring layer (as-built, rev 6)
+
+The base pipeline (§1–§10) answers *"did this run publish clean data?"* The
+monitoring layer answers *"how is each feed doing over time, and exactly which
+check caught what?"* — so a feed that quietly degrades is visible, not silent.
+It is pure observability: it adds one gate (the volume guard) and otherwise only
+*records* and *renders* what the engine already does. **The code is canonical;
+this section points at it.**
+
+### 11.1 What it adds (the gap it fills)
+
+The §3 gate has two failure scopes: file-level (missing required column → block)
+and row-level (bad row → quarantine). Nothing watched the feed *as a whole* — 25
+valid rows becoming 3 valid rows sailed through GREEN with 22 silently gone. The
+layer adds:
+
+1. **Per-rule instrumentation.** `process_tab`'s rule loop now counts, per rule
+   per run: rows evaluated / passed / flagged, plus up to 3 example violations
+   (row label + reason). Each rule carries a stable id (`field:check`) and a live
+   status — **green** (all passed) / **amber** (some flagged) / **gray** (dormant:
+   its column isn't in the sheet, so the check is inactive, not failed).
+2. **The volume guard** (the one new gate). Per-schema `volume_min` (engine
+   default 1). If fewer than `volume_min` rows would publish, the feed is BLOCKED
+   and serves last-known-good — same hold as a missing column. Zero publishable
+   rows is almost always a broken fetch, not a real edit; holding beats serving an
+   empty feed. **Every non-empty delete still passes** — the sheet is the source of
+   truth and the pipeline never pushes back, so blocking a real big delete only
+   buys a window of lying; only total wipeout is unrecoverable-by-next-sync. The
+   guard fires on the *publishable* count, so it also catches the all-rows-
+   quarantined case (live rows > 0 but 0 survive validation). **Edge, by design:**
+   a feed intentionally emptied (every row set `off`) reads the same as a broken
+   fetch and goes red until ≥1 row is live — accepted tradeoff for the zero-block
+   rule. Raise `volume_min` per-feed only if a tab should never legitimately shrink
+   past some count.
+
+### 11.2 Schema additions
+
+Three keys added to every schema; the engine reads `volume_min`, and ignores
+`why`/`human` exactly as it ignores `tab` (they're copied into the detail file for
+the pages to render):
+
+- **`why`** — per rule. MINIMAL, PAGE-AGNOSTIC, LITERAL restatement of what the
+  rule checks ("Can't be blank.", "Must be a real date (YYYY-MM-DD)."). NOT a
+  downstream-consequence essay. Engine falls back to a per-check default if omitted.
+- **`human`** — per schema. One-line plain-language summary of the feed.
+- **`volume_min`** — per schema. The publishable-row floor (default 1).
+
+### 11.3 Persistence — three files, split by read pattern + retention
+
+| File | Scope | Retention | Read by | Pruned |
+|---|---|---|---|---|
+| `data/published/_health.json` | all feeds, snapshot | current only | summary page | n/a (overwritten) |
+| `data/published/_history.json` | all feeds, time series | ~6 months | summary page | by age, at write |
+| `data/published/health/<tab>.json` | one feed, deep detail | ~2 weeks (timeline) | drill-down page | by age, at write |
+
+- `_health.json` is now **enriched** (additive — old keys preserved, so nothing
+  that read it before breaks): per-feed `counts`, `display_breakdown`, `open`
+  warning/quarantine counts, `last_changed_at`, `schema` meta, and `links` (a
+  deep-link to Bev's sheet tab built from `fetch_sheets.py`'s `SHEET_ID`+gid map,
+  loaded by `load_fetch_meta()` so there's no duplicated gid table to drift).
+- `_history.json` holds one compact point per feed per **meaningful** run
+  (`{at, status, rows, added, changed, removed}`) — powers the summary sparklines
+  and any uptime/churn math, computed AT RENDER (governing principle: the script
+  records facts, the pages compute cleverness).
+- `health/<tab>.json` holds EXCEPTIONS only (per-rule detail, volume-guard result,
+  dropped rows with reasons, 2-week edit timeline, rendered schema) — NOT a copy
+  of the published rows. The drill-down loads `published/<tab>.json` alongside and
+  joins for the current inventory.
+- **Retention is pruned at WRITE** (`prune_by_age`), same discipline as the
+  runlog's 30-cap. No cleanup job. All three writes are gated behind the existing
+  no-op short-circuit (§5), so on an unchanged run nothing is rewritten and they
+  reflect the last *meaningful* run.
+
+### 11.4 The two dashboards
+
+- **`data-health.html`** (rebuilt) — the one-screen ops board. Reads `_health.json`
+  + `_history.json` (+ `_runlog.json` for the recent-syncs strip). Masthead washes
+  green/amber/red so fleet state reads at a glance; six-chip rollup; pipeline-pulse
+  rail; dense per-feed table with status, rows, last-change, this-sync edits in
+  plain words, an activity sparkline (needs ≥2 history points — shows a dot until
+  then), and Sheet + Detail links. Bookmark-only, intentionally unlinked from nav.
+- **`feed.html?tab=<name>`** (new) — the drill-down the board's Detail buttons open.
+  Reads `health/<tab>.json` joined with `published/<tab>.json`. Renders every rule
+  with its `why` + live green/amber/gray status + flag counts + examples, whether
+  it *drops the row* or *flags a warning*, the volume-guard result, dropped rows
+  with reasons, the 2-week edit timeline, the rendered schema (self-documenting —
+  a volunteer reads the checks without opening the `.py`), and the current
+  inventory. Feed-switcher chips across the top.
+
+Both pages read validated JSON only, never the live sheet, and both fail loud with
+a clear message if a file 404s — including naming the `file://` trap (a page opened
+by double-click can't fetch local JSON; view it served) and the `.nojekyll`
+requirement for `_`-prefixed paths. `.nojekyll` already covers the new `_history`
+and `health/` paths.
+
+### 11.5 Reliability hardening
+
+`load_json` no longer crashes on a corrupt generated file. If a pipeline-owned
+file (e.g. `_health.json` left with git conflict markers after a bad merge) won't
+parse, it logs a warning and degrades to the default — the run completes and
+rebuilds the file. A corrupt *staging* file this way reads as empty, which the
+volume guard then blocks (safe: holds last-known-good) rather than publishing
+nothing. (This is the failure that bit us 2026-06-20 during a conflicted commit.)
+
+### 11.6 Known divergences & deferred (rev 6)
+
+- **Generated JSON in `data/published/` is the merge-conflict hot spot.** It must
+  be committed (Pages serves it) yet is regenerated every run, so two sources
+  committing it disagree → conflict markers → §11.5 was the band-aid. Process rule:
+  **never hand-edit anything in `data/published/`** (the pipeline silently
+  overwrites it), and pull before running locally. A cleaner fix (e.g. generating
+  published JSON only in CI, never committing it from a laptop) is deferred.
+- **Sparklines need ≥2 history points.** Fresh feeds show a dot until `_history`
+  accumulates a second meaningful run. Expected, not a bug.
+- **Rule id `field:check` collisions** are disambiguated with a `#n` suffix; none
+  occur in the current five schemas (no field repeats the same check).
+- **`why` review pending.** All ~40 lines were drafted from the code; the only one
+  carrying a factual claim to verify is the "8 approved categories" count.
