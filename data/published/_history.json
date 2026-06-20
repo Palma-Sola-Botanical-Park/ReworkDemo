@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T22:37:18+00:00",
+  "generated_at": "2026-06-20T22:38:50+00:00",
   "series": {
     "events": [
       {
@@ -25,6 +25,14 @@
         "added": 0,
         "changed": 0,
         "removed": 0
+      },
+      {
+        "at": "2026-06-20T22:38:50+00:00",
+        "status": "green",
+        "rows": 20,
+        "added": 0,
+        "changed": 1,
+        "removed": 0
       }
     ],
     "classes": [
@@ -46,6 +54,14 @@
       },
       {
         "at": "2026-06-20T22:37:18+00:00",
+        "status": "green",
+        "rows": 4,
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      {
+        "at": "2026-06-20T22:38:50+00:00",
         "status": "green",
         "rows": 4,
         "added": 0,
@@ -77,6 +93,14 @@
         "added": 1,
         "changed": 0,
         "removed": 1
+      },
+      {
+        "at": "2026-06-20T22:38:50+00:00",
+        "status": "green",
+        "rows": 7,
+        "added": 7,
+        "changed": 0,
+        "removed": 0
       }
     ],
     "news": [
@@ -103,6 +127,14 @@
         "added": 0,
         "changed": 0,
         "removed": 0
+      },
+      {
+        "at": "2026-06-20T22:38:50+00:00",
+        "status": "green",
+        "rows": 4,
+        "added": 4,
+        "changed": 0,
+        "removed": 0
       }
     ],
     "newsletters": [
@@ -127,6 +159,14 @@
         "status": "green",
         "rows": 5,
         "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      {
+        "at": "2026-06-20T22:38:50+00:00",
+        "status": "green",
+        "rows": 5,
+        "added": 6,
         "changed": 0,
         "removed": 0
       }
