@@ -574,3 +574,36 @@ When someone hands you a photo that didn't come through iNaturalist:
 ### Migration: `photo_focus.json` → `focus` field (2026-06-19)
 
 The standalone `photo_focus.json` file (25 entries mapping PSBP IDs to CSS `object-position` values) is superseded by the `focus` field on hero photos in `photo_credits.json`. During the next photo review pass, migrate each value into the corresponding hero photo's `focus` field, then retire the standalone file. The review tool handles this automatically for new hero assignments.
+
+### Ongoing photo import pipeline (watermark model, planned)
+
+**Problem:** The park's iNat project grows continuously. A "pull everything, reject what's bad" model scales poorly — at 2000+ photos, most curation time is spent rejecting. Blocklists grow forever.
+
+**Solution: watermark-based incremental import.** Track the newest observation date already reviewed. Each scan only surfaces what's arrived *since then*. No re-reviewing, no blocklist needed, no need to account for every photo on iNat.
+
+**Pipeline stages:**
+
+1. **Scan** (automated, on-demand or scheduled)
+   Query iNat API for observations in the project newer than the watermark. Produce a *review manifest* — lightweight summary with iNat thumbnail URLs, observer, species, license, date. No downloads yet. Output: "14 new observations, 23 photos since last scan."
+
+2. **Curate** (human, ~10 minutes)
+   Open the manifest in a review tool showing iNat thumbnails (not local files). For each photo: tap "import" or skip. Skipping is not blocklisting — the photo stays on iNat, ignored. You're picking winners, not cataloging losers. Typical accept rate: 15–25% of photos.
+
+3. **Import** (automated)
+   Download only the accepted photos into `photos/PSBP-xxxxx/` subfolders, add `photo_credits.json` entries with full attribution (photographer name, date, license, observation_id, focus default). Typically 3–8 photos per scan.
+
+4. **Advance watermark**
+   The scan timestamp moves forward. Next scan starts from here. Previous photos are never re-surfaced.
+
+5. **Hero refresh** (separate, lower-frequency pass — monthly or event-driven)
+   Review tool for comparing current hero against new imports. "Rob just uploaded a stunning flight shot of the osprey — swap the hero?" Not part of the weekly import; a distinct curation task.
+
+**Watermark storage:** A single `last_scan_date` field in `photo_credits.json` meta block, or a standalone `.last_scan` file. The scan script reads it, queries iNat for `created_d1={date}`, and writes the new date on completion.
+
+**Volume math:** The one-time backfill (June 2026) processes ~2000 photos retroactively. After that, the incremental rate is ~10–30 observations per week during active season (spring–fall), near zero in winter. A weekly scan surfacing 10–30 photos for quick yes/no is completely manageable — under 10 minutes.
+
+**What this model explicitly does NOT do:**
+- Account for every photo on iNat (only winners are imported)
+- Maintain a blocklist (the watermark replaces it; skipped photos are simply not imported)
+- Automate quality judgment (humans are faster and better for small batches)
+- Require a fixed cadence (run the scan whenever — weekly, after a volunteer event, when an observer uploads a batch)
