@@ -391,6 +391,27 @@
     "page": "wildlife/PSBP-99943-Great-Horned-Owl.html"
   },
   {
+    "id": "PSBP-99944",
+    "common": "Cooper's Hawk",
+    "sci": "Astur cooperii",
+    "family": "",
+    "theme": "bird",
+    "category": "Raptors & Birds of Prey",
+    "native": true,
+    "quick": "A medium-sized hawk built for speed in tight spaces — long tail, short rounded wings, and the agility to chase songbirds through dense trees.",
+    "aliases": [],
+    "tags": [
+      "Bird",
+      "Raptor",
+      "Native",
+      "Daytime"
+    ],
+    "credit": "robcarr52",
+    "photo": "photos/PSBP-99944/681680085.jpg",
+    "focus": "45% 51%",
+    "page": "wildlife/PSBP-99944-Coopers-Hawk.html"
+  },
+  {
     "id": "PSBP-99945",
     "common": "Red-shouldered Hawk",
     "sci": "Buteo lineatus",
