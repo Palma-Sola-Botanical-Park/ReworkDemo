@@ -30,7 +30,7 @@ import sys
 import urllib.parse
 
 PORT = 8000
-PHOTO_CREDITS = "data/sources/photo_credits.json"
+PHOTO_CREDITS = "photo_credits.json"
 PHOTOS_DIR = "photos"
 
 # Wildlife roles
@@ -459,9 +459,13 @@ class ReviewHandler(http.server.SimpleHTTPRequestHandler):
                 if os.path.exists(file_path):
                     os.remove(file_path)
 
-                # Remove from JSON
+                # Remove from JSON and add to blocklist
                 data = load_credits()
                 data["photos"] = [p for p in data["photos"] if p.get("photo_id") != photo_id]
+                if "blocked_photo_ids" not in data:
+                    data["blocked_photo_ids"] = []
+                if photo_id not in data["blocked_photo_ids"]:
+                    data["blocked_photo_ids"].append(photo_id)
                 save_credits(data)
 
                 self.send_json({"ok": True})

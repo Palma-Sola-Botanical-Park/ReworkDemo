@@ -20,8 +20,8 @@ import os
 import sys
 import html as html_mod
 
-WILDLIFE_JSON = "data/sources/wildlife_signage.json"
-PHOTO_CREDITS_JSON = "data/sources/photo_credits.json"
+WILDLIFE_JSON = "wildlife_signage.json"
+PHOTO_CREDITS_JSON = "photo_credits.json"
 OUTPUT_DIR = "wildlife"
 
 THEME_MAP = {

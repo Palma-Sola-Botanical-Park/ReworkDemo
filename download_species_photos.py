@@ -48,8 +48,8 @@ from collections import defaultdict
 # ---------------------------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------------------------
-WILDLIFE_JSON = "data/sources/wildlife_signage.json"
-PHOTO_CREDITS_JSON = "data/sources/photo_credits.json"
+WILDLIFE_JSON = "wildlife_signage.json"
+PHOTO_CREDITS_JSON = "photo_credits.json"
 OBSERVATIONS_CSV = "observations-750448.csv"
 PHOTOS_DIR = "photos"  # base folder — subfolders created per species
 
@@ -152,7 +152,7 @@ def build_obs_index(csv_path):
     return index, sci_index, rows
 
 
-def process_species(species_entry, obs_ids, photo_credits, dry_run=False):
+def process_species(species_entry, obs_ids, photo_credits, blocked_ids=None, dry_run=False):
     """
     Download all licensed photos for one species.
     Returns list of new photo_credits entries.
@@ -165,8 +165,8 @@ def process_species(species_entry, obs_ids, photo_credits, dry_run=False):
     # Determine subfolder — architecture says just the ID
     subfolder = os.path.join(PHOTOS_DIR, psbp_id)
 
-    # What photo_ids are already in the registry?
-    existing_photo_ids = set()
+    # What photo_ids are already in the registry or blocklist?
+    existing_photo_ids = set(blocked_ids or [])
     has_hero = False
     for pc in photo_credits:
         if pc.get("psbp_id") == psbp_id:
@@ -329,6 +329,11 @@ def main():
     print(f"Species to process: {len(targets)}")
     print("=" * 70)
 
+    # Load blocklist of previously trashed photos
+    blocked_ids = set(str(pid) for pid in pc_data.get("blocked_photo_ids", []))
+    if blocked_ids:
+        print(f"Blocklist: {len(blocked_ids)} trashed photos will be skipped")
+
     all_new_entries = []
 
     for sp in targets:
@@ -347,7 +352,7 @@ def main():
             print(f"\n{sp['id']} — {sp['common_name']}: no observations in CSV, skipping")
             continue
 
-        new_entries = process_species(sp, obs_ids, photo_credits, dry_run=args.dry_run)
+        new_entries = process_species(sp, obs_ids, photo_credits, blocked_ids=blocked_ids, dry_run=args.dry_run)
         all_new_entries.extend(new_entries)
         # Add to running list so next species sees them
         photo_credits.extend(new_entries)
