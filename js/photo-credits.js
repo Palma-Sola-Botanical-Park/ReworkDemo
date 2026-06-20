@@ -85,13 +85,18 @@
   // ---- date handling (graceful when absent) -------------------------------
   function fmtDate(dateStr, timeStr) {
     if (!dateStr) return '';
-    var d = new Date((timeStr || dateStr).replace(' ', 'T'));
-    if (isNaN(d)) {
-      // accept a bare YYYY-MM-DD without choking
-      var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(dateStr);
-      if (!m) return '';
-      d = new Date(+m[1], +m[2] - 1, +m[3]);
+    var src = timeStr || dateStr;
+    var m = /^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2}))?/.exec(src);
+    var d;
+    if (m) {
+      // bare date -> build in LOCAL time so it never slips a day in a
+      // negative timezone; date+time -> parse whole string (honors offset)
+      d = (m[4] != null) ? new Date(src.replace(' ', 'T'))
+                         : new Date(+m[1], +m[2] - 1, +m[3]);
+    } else {
+      d = new Date(src);
     }
+    if (isNaN(d)) return '';
     var out = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     if (timeStr) {
       out += ' \u00b7 ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
@@ -144,12 +149,13 @@
 
   function creditPlate(o) {
     o = o || {};
-    var dateStr = fmtDate(o.date, o.time);
+    var dateStr = fmtDate(o.date);                 // date only, no time
+    var label = o.dateLabel ? esc(o.dateLabel) + ' ' : '';
     return '<div class="mosaic-credit">'
          +   '<div class="credit-byline">'
          +     '<span class="credit-eyebrow">Photograph by</span>'
          +     '<span class="credit-name">' + esc(o.by || 'community member') + '</span>'
-         +     (dateStr ? '<span class="credit-date">' + esc(dateStr) + '</span>' : '')
+         +     (dateStr ? '<span class="credit-date">' + label + esc(dateStr) + '</span>' : '')
          +   '</div>'
          +   '<div class="credit-license">' + ccBadge(o.license)
          +     '<span class="credit-src">via iNaturalist</span></div>'
