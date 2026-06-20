@@ -2,7 +2,7 @@
 
 **Status:** APPROVED, not yet built. Governing document for how the director's Google Sheet becomes the static JSON the site reads. Companion to `EVENTS_DATA_MODEL.md` (which defines *what* the tabs mean); this doc defines *how* the tab data gets safely onto the site.
 **Supersedes:** the live client-side `fetchTab()` CSV path in `site.js` *in normal operation*. Once this is built, the browser fetches validated static JSON instead of the sheet — but the old live path is kept dormant as a break-glass fallback (see §6), not deleted.
-**Last updated:** 2026-06-18 (evening, rev 4 — recorded the dashboard as intentionally unlinked/bookmark-only; rev 3 added §1 Consumers, the promote/visibility rule and closures-from-flag in §3, dual-mode venues + gallery existence check + screens in the decision log, and reordered the template build with venues last)
+**Last updated:** 2026-06-20 (rev 5 — **as-built reconciliation.** The code now exists, and it diverges from the rule-model sketch this doc was written against. Added §3 "As-built schema contract" (the real `SCHEMA` dict shape `validate_promote.py` actually reads: no `action` key; only `severity:"error"`+`scope:"row"` quarantines; file-blocks come *only* from `required_headers`), §3 "Registering a tab" (the three switches — `PILOT_TABS` + `PUBLISH_TABS` + `MIGRATED`), and §3 "Known divergences & deferred". **The code is canonical; this doc now points at it rather than predicting it.** rev 4 — recorded the dashboard as intentionally unlinked/bookmark-only; rev 3 added §1 Consumers, the promote/visibility rule and closures-from-flag in §3, dual-mode venues + gallery existence check + screens in the decision log, and reordered the template build with venues last)
 
 ---
 
@@ -61,7 +61,7 @@ The key is **two granularities of failure**, not one. A broken column shouldn't 
 
 ### Rule model
 
-Each tab has a rule list in `data/schemas/<tab>.py`. A rule is `{field, check, severity, scope, action}`. Examples drawn from the live model (`EVENTS_DATA_MODEL.md`):
+Each tab has a rule list in `data/schemas/<tab>.py`. A rule is `{field, check, severity, scope, action}`. **(⚠ As-built: this tuple is the original sketch and is wrong in two ways — the schema is a `SCHEMA` *dict*, and there is no `action` key. See "As-built schema contract" immediately below before writing a schema.)** Examples drawn from the live model (`EVENTS_DATA_MODEL.md`):
 
 - **Header presence** — `events` must carry `date`,`title`; `classes` must carry `weekday`. Missing → file ERROR. *(This is the 6/14 catch.)*
 - **Required cells** — `events.date` empty or unparseable → row ERROR. An event with no valid date breaks the 2-week date math; quarantine it.
@@ -72,6 +72,70 @@ Each tab has a rule list in `data/schemas/<tab>.py`. A rule is `{field, check, s
 - **Cross-tab** — `closes_park` rows deduped by date across `events` + `wedding_calendar`; `public_note` default ("Private event") applied here, in Python, once — not re-derived in the browser. Closure fires from the **flag alone**, never inferred from description prose: a row whose text reads "Park closed for private event" but is *not* flagged (e.g. Winter Nights, a ticketed marquee card) is correctly left open. Trust the flag, ignore the words.
 
 Severity and scope are per-rule, so tuning a check's harshness is a one-line edit. New tabs add a new schema file; the engine is shared.
+
+### As-built schema contract (rev 5)
+
+The rule-model sketch above predates the code. The **authoritative** shape is whatever `validate_promote.py` actually reads (`load_schema` → `process_tab` → the `CHECKS` table). Documented here so future schemas match the engine, not the sketch. **The code is the contract; this section just points at it.**
+
+A schema is a module `data/schemas/<tab>.py` that exports one dict named `SCHEMA`:
+
+```python
+SCHEMA = {
+    "tab":              "volunteer",                     # self-doc only; the engine IGNORES it (every schema carries it by convention)
+    "required_headers": ["display", "title"],            # any missing -> FILE block (red), serve last-good. STRUCTURAL cols only — content cols like `body`/`description` are NOT required (a rename degrades, doesn't block). display-first, matching events/classes
+    "identity":         ["title", "role"],              # fields that key the staging-vs-prior diff (edit counts)
+    "drop_when_display": ["off", ""],                    # display values dropped BEFORE validation; "" (blank) also means not-live (str or list)
+    "autofix_trim":     True,                            # trim every cell on a working copy (staging stays raw)
+    "rules": [
+        {"field": "title",    "check": "required", "severity": "error", "scope": "row"},
+        {"field": "display",  "check": "in_vocab",
+         "arg": ["web", "both", "screen", "off"], "severity": "warn", "scope": "field"},
+        {"field": "link_url", "check": "url_or_blank", "severity": "warn", "scope": "field"},
+        # NB: photo_url has NO url check on purpose — spotlight photos may be
+        # local /ReworkDemo/... paths, which url_or_blank (http[s]-only) would
+        # falsely flag. A missing photo degrades to a glyph, never fatal.
+    ],
+}
+```
+
+Schema-level keys the engine reads: `required_headers`, `identity`, `drop_when_display`, `autofix_trim`, `rules`. **`tab` is convention-only — present in every schema for self-documentation, but the engine never reads it** (`process_tab` uses the tab name from `PUBLISH_TABS`, not `schema["tab"]`), so a mismatch between `schema["tab"]` and the filename is harmless but pointless.
+
+Per-rule keys the engine reads: `field`, `check`, `arg` (optional, **singular** — passed to the check), `msg` (optional — overrides the default `"field: reason"` message), `severity`, `scope`.
+
+**Three facts the sketch got wrong — the ones that bite:**
+
+1. **There is no `action` key.** The engine never reads it. Leave it out.
+2. **Only `severity:"error"` + `scope:"row"` does anything special** — that pair quarantines (drops) the row. *Every other combination is treated as a warning*, including `scope:"file"`. A rule **cannot** trigger a file-level block. So `scope` is not an independent dial; only the exact `("error","row")` pair is load-bearing. (`scope:"field"` on a warning is purely for human readability.)
+3. **File-level blocking comes only from `required_headers`** — never from a rule. That list is the single mechanism that holds last-known-good when a column goes missing (the 6/14 catch).
+
+**Legal `check` values** — the entire `CHECKS` table; anything else raises at run time:
+`required`, `iso_date`, `iso_date_or_blank`, `ge_field`, `in_vocab`, `url_or_blank`, `fk`.
+- `in_vocab`, `ge_field`, `fk` consume `arg`. `ge_field` compares this date ≥ another date field (`arg` = the other field's name); `fk` takes `arg = (ref_tab, ref_field)`.
+- A rule whose `field` is **not** in the sheet's headers is **dormant** (silently skipped), not a failure — so a schema can carry rules for optional columns safely.
+
+**`drop_when_display` is per-schema, not global.** The §3 line "promote publishes everything except `off`" is really the *events* schema's choice (`["off"]`) set here — not a hardcoded pipeline rule. A tab filters whatever display values its own list names.
+
+### Registering a tab — three switches (two scripts + site.js)
+
+A tab goes fully live only when named in **all three** places. Miss one and it fails quietly, each in a distinct way:
+
+| Switch | File | If the tab is missing here |
+|---|---|---|
+| `PILOT_TABS` | `scripts/fetch_sheets.py` | never fetched → no `staging/<tab>.json` → nothing to validate (silent) |
+| `PUBLISH_TABS` | `scripts/validate_promote.py` | staged but never published → no `published/<tab>.json` |
+| `MIGRATED` | `js/site.js` | published file exists, but the browser still reads the **live sheet** for that tab |
+
+(`series` is deliberately in `PILOT_TABS` only — staged so the events FK check can resolve `series.name`, but never published as its own feed.)
+
+### Known divergences & deferred (rev 5)
+
+Things the code does that we may want to revisit — recorded so they're decisions, not surprises:
+
+- **`scope` is half-wired, and `events.py`'s docstring oversells it.** The engine acts on the pair `("error","row")` to quarantine; *every other combination — including `scope:"file"` — is treated as a warning*. But `events.py`'s module docstring claims `scope:"file" -> blocks the WHOLE tab`, a feature the engine **does not have**. No rule uses `scope:"file"` today, so it's latent — but it's a tripwire: the next person who writes a file-scoped rule expecting a block gets a silent warning instead. **Fix: correct the `events.py`/`classes.py` docstrings to say only `required_headers` blocks (recommended — matches the code), or build a real file-scope switch in `process_tab`.** We keep `scope:"field"` vs `"row"` in schemas only for human readability.
+- **`YES_NO_BLANK` differs between schemas (cosmetic).** The engine's `in_vocab` lowercases both sides, so vocab checks are already case-insensitive. `classes.py` relies on that (`["yes","no",""]`); `events.py` redundantly also lists `"Yes","No"`. Harmless, but standardize on the lowercase three-value form next time either is touched.
+- **`build_refs` hardcodes `["series"]`.** FK checks can currently resolve only against the `series` tab. Any future tab needing an FK to a *different* tab requires extending `build_refs(...)`. Fine today (series is the only FK target); noted so it isn't a mystery later.
+- **`_health`/`_runlog` are skipped on no-op runs.** The no-op short-circuit (§5) also skips rewriting these, so their timestamp is the last *meaningful* run, not the last run. Liveness ("is the sync alive?") comes from the Actions tab by design, not a committed clock.
+- **Quarantine labels need `title` or `date`.** The dashboard names a dropped row via `row.get("title") or row.get("date") or "row"`. A tab with neither column shows generic `"row"` labels. Add a label fallback to the engine if a future tab needs friendlier names.
 
 ---
 
@@ -201,7 +265,7 @@ scripts/
 data-health.html                       public dashboard
 ```
 
-Staging is **committed** (not just an artifact). Cheap on a low-write repo, and gold for forensics: when something goes dark, `git log data/staging/<tab>.json` shows the exact sync where a column vanished. Black-box recorder.
+Staging is **committed** (not just an artifact). Cheap on a low-write repo, and gold for forensics: when something goes dark, `git log data/staging/<tab>.json` shows the exact sync where a column vanished. Black-box recorder. *(As-built note: `fetch_sheets.py` also writes per-run snapshots to `data/staging/.prev/<tab>.json` — gitignored scratch that `validate_promote.py` reads to compute the dashboard's edit counts. Not committed, not forensic; just the diff base for "what changed this run".)*
 
 ---
 
