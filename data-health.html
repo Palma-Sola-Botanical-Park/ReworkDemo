@@ -76,6 +76,12 @@ const ICON = {green:"✓", amber:"!", red:"✕", gray:"–"};
 const fmt = iso => { try { return new Date(iso).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}); } catch { return iso || "—"; } };
 
 async function load(){
+  // NOTE: the leading underscore on _health.json / _runlog.json just means
+  // "script-owned — the sync writes these, don't hand-edit them." It is NOT
+  // magic. One catch: GitHub Pages runs Jekyll, which refuses to serve any
+  // file starting with "_", so a `.nojekyll` file at the repo root is required
+  // or these 404 even though they're committed. (That's what took this board
+  // dark on 2026-06-20.)
   let health, runlog;
   try { health = await (await fetch("data/published/_health.json", {cache:"no-store"})).json(); }
   catch { document.getElementById("sub").textContent = "No health data yet — the sync hasn't run, or _health.json isn't published."; 

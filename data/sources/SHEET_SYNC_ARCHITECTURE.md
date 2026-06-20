@@ -195,6 +195,7 @@ This section is the runbook for when the parts we *don't* control misbehave. The
 | 60-day inactivity pause | Only after a fully dead stretch | Scheduled sync pauses | No new runs at all; the manual button wakes it instantly |
 | Google Sheets unreachable at fetch time | Occasional | None. `fetch_sheets.py` fails → no new staging → publish unchanged → last-good holds | Run logs a fetch error; feed shows unchanged |
 | **GitHub Pages itself down** | Rare | **Whole site down**, regardless of data source | Site unreachable |
+| **Missing `.nojekyll` at repo root** | One-time | The `_`-prefixed sidecars (`_health.json`, `_runlog.json`) 404 even though committed — Pages runs Jekyll, which won't serve files starting with `_`. Feeds (`events.json` etc.) are unaffected; only the dashboard goes dark. | `data-health.html` shows "No health data yet" while the feed JSONs load fine. Fix: add an empty `.nojekyll` at the repo root. (Bit us 2026-06-20.) |
 
 Only the last one actually takes the site down — and it does so no matter how the data is fetched, so it's a pre-existing condition of hosting on Pages, not a risk this design adds. Actions and Pages don't usually fail together.
 
