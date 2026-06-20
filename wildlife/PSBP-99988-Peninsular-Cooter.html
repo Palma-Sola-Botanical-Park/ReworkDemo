@@ -143,7 +143,27 @@
     <div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">🍽️</span><span class="wild-section-title">What It Eats</span></div><div class="wild-section-body"><p>Adults are mostly herbivorous, grazing on submerged aquatic plants and algae. Young turtles also eat insects, snails, and other small aquatic animals.</p></div></div>
     <div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">📍</span><span class="wild-section-title">Where &amp; When</span></div><div class="spot-list"><div class="spot-item"><div class="spot-label">Where in the park</div><p>Basking on logs, banks, and debris at the ponds on sunny days, or as a dark head moving across the water&#x27;s surface.</p></div><div class="spot-item"><div class="spot-label">When to see it</div><p>Year-round resident. Most visible while basking on warm, sunny days.</p></div></div></div>
     <div class="wild-caution-section"><div class="wild-section-header"><span class="wild-section-icon">🤝</span><span class="wild-section-title">Watching It Respectfully</span></div><div class="wild-section-body"><p>Watch from a distance and do not handle or feed it. Basking turtles need their sun time; approaching just sends them diving off their logs.</p></div></div>
-    
+    <div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">📸</span><span class="wild-section-title">Photo Gallery</span></div>
+    <div class="gal-note">Photos contributed by park visitors and volunteers via iNaturalist</div>
+    <div class="gal-grid"><div class="gal-item" onclick="openLB(1)"><img src="../photos/PSBP-99988/638116722.jpg" loading="lazy" alt="Peninsular Cooter — photo by coleguyton"><div class="gal-credit">📷 coleguyton</div></div></div></div>
+    <div class="lightbox" id="lb" onclick="closeLB(event)">
+      <div class="lb-inner">
+        <button class="lb-close" onclick="closeLB()">&times;</button>
+        <button class="lb-prev" onclick="stepLB(-1)">&#8249;</button>
+        <img class="lb-img" id="lbImg">
+        <button class="lb-next" onclick="stepLB(1)">&#8250;</button>
+        <div class="lb-credit" id="lbCredit"></div>
+        <div class="lb-counter" id="lbCounter"></div>
+      </div>
+    </div>
+    <script>
+    var lbData=[{"src": "../photos/PSBP-99988/681678407.jpg", "credit": "robcarr52", "license": "CC-BY-NC"}, {"src": "../photos/PSBP-99988/638116722.jpg", "credit": "coleguyton", "license": "CC-BY-NC"}];
+    var lbIdx=0;
+    function openLB(i){lbIdx=i;var d=lbData[i];document.getElementById('lbImg').src=d.src;document.getElementById('lbCredit').innerHTML='📷 '+d.credit+' · '+d.license+' · via iNaturalist';document.getElementById('lbCounter').textContent=(i+1)+' / '+lbData.length;document.getElementById('lb').classList.add('active');document.body.style.overflow='hidden';}
+    function closeLB(e){if(e&&e.target!==document.getElementById('lb')&&!e.target.classList.contains('lb-close'))return;document.getElementById('lb').classList.remove('active');document.body.style.overflow='';}
+    function stepLB(dir){lbIdx=(lbIdx+dir+lbData.length)%lbData.length;openLB(lbIdx);}
+    document.addEventListener('keydown',function(e){if(!document.getElementById('lb').classList.contains('active'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')stepLB(1);if(e.key==='ArrowLeft')stepLB(-1);});
+    </script>
     <div class="wild-section"><div class="wild-section-header"><span class="wild-section-icon">🏷️</span><span class="wild-section-title">Also Known As</span></div><div class="alias-list"><span class="alias-tag">Peninsula Cooter</span><span class="alias-tag">Florida Cooter (in part)</span></div><div class="alias-list" style="padding-top:0"><span class="wild-tag">Reptile</span><span class="wild-tag">Turtle</span><span class="wild-tag">Native</span><span class="wild-tag">Basking</span><span class="wild-tag">Daytime</span><span class="wild-tag">Pond</span></div></div>
     <a class="all-wild-link" href="../nature.html#wildlife">🦎 Explore More Wildlife</a>
   </div>
