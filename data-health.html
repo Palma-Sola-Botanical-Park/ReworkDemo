@@ -294,10 +294,13 @@ async function load(name){
     try{ runlog  = await load("runlog");  }catch(e){}
     app.innerHTML = render(health, history, runlog);
   }catch(err){
+    const isFile = (typeof location!=="undefined" && location.protocol==="file:");
+    const why = isFile
+      ? `You opened this as a local file. Browsers block a <code>file://</code> page from reading the JSON next to it — that's a browser rule, not a problem with this page. View it over the server instead: push to the repo and open the GitHub&nbsp;Pages URL.`
+      : `Run the sync, or confirm <code>.nojekyll</code> exists at the repo root so Pages serves the <code>_</code>-prefixed files.`;
     app.innerHTML = `<div class="mast is-bad"><div class="mast-top">
       <div class="mast-state"><span class="big-dot"></span><span class="mast-line">No health data yet</span></div></div></div>
-      <div class="empty"><b>Couldn't read _health.json (${err.message})</b>
-      Run the sync, or confirm <code>.nojekyll</code> exists at the repo root so Pages serves the <code>_</code>-prefixed files.</div>`;
+      <div class="empty"><b>Couldn't read _health.json (${err.message})</b>${why}</div>`;
   }
 })();
 </script>
