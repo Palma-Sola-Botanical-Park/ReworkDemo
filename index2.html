@@ -160,64 +160,6 @@
   .three-things { grid-template-columns: 1fr; }
   .thing { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); padding: 1.75rem 1.5rem; }
 }
-
-/* ════════════════════════════════════════════════════════════════════
-   UNIFIED PHOTO ATTRIBUTION  —  used by hero, "Ten acres" grid, and the
-   live mosaic. We credit photographers out loud: larger type, real name,
-   the date when we have it, and the Creative Commons badge. Solidarity,
-   not fine print.
-   ════════════════════════════════════════════════════════════════════ */
-.photo-attr {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  padding: .7rem .85rem .6rem;
-  background: linear-gradient(transparent, rgba(0,0,0,.5) 35%, rgba(0,0,0,.82));
-  color: #fff; text-align: left;
-  display: flex; flex-direction: column; gap: .28rem;
-  backdrop-filter: blur(1px);
-}
-.photo-attr .attr-species {
-  font-size: .95rem; font-weight: 600; line-height: 1.3; letter-spacing: .005em;
-}
-.photo-attr .attr-species em { font-style: italic; font-weight: 400; opacity: .9; }
-.photo-attr .attr-line {
-  display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .5rem;
-  font-size: .82rem; line-height: 1.45;
-}
-.photo-attr .attr-credit { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
-.photo-attr .attr-by   { font-weight: 700; color: var(--gold-light); }
-.photo-attr .attr-date { opacity: .95; }
-.photo-attr .attr-src  { opacity: .68; font-style: italic; }
-.photo-attr .attr-dot  { opacity: .45; }
-
-/* Creative Commons badge — segmented pill echoing the one iNaturalist shows */
-.cc-badge {
-  display: inline-flex; align-items: stretch; vertical-align: middle;
-  border: 1px solid rgba(255,255,255,.5); border-radius: 3px; overflow: hidden;
-  font-size: .68rem; font-weight: 700; line-height: 1; letter-spacing: .02em;
-  background: rgba(0,0,0,.45);
-}
-.cc-badge .cc-mark, .cc-badge .cc-term { padding: .3em .44em; display: inline-flex; align-items: center; }
-.cc-badge .cc-mark { font-family: Georgia, 'Times New Roman', serif; text-transform: lowercase; letter-spacing: .05em; }
-.cc-badge .cc-term { border-left: 1px solid rgba(255,255,255,.28); }
-.cc-badge--unknown { opacity: .8; }
-
-/* "Ten acres" mosaic — now real attributed hero photos from photo_credits.json */
-.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
-.hero-grid-tile {
-  position: relative; margin: 0; border-radius: 10px; overflow: hidden;
-  aspect-ratio: 1; background-size: cover; background-position: center;
-  background-color: var(--sand);
-}
-.hero-grid-tile:nth-child(2) { margin-top: 1.5rem; }
-.hero-grid-tile:nth-child(3) { margin-top: -1.5rem; }
-.hero-grid-tile .photo-attr { padding: .55rem .65rem .5rem; }
-.hero-grid-tile .attr-species { font-size: .86rem; }
-.hero-grid-tile .attr-line { font-size: .76rem; }
-
-/* live mosaic uses .photo-attr too; mosaic-card is already position:relative */
-.mosaic-card .photo-attr { padding: .6rem .7rem .5rem; }
-
-@media (prefers-reduced-motion: reduce) { .hero-slide { transition: none; } }
 </style>
 </head>
 <body>
@@ -246,21 +188,30 @@
     </div>
   </div>
   <div class="hero-right">
-    <!-- Filled at runtime by photo-credits.js with random plant + wildlife heroes.
-         These two static slides are the last-known-good fallback if the JSON
-         or network is unavailable — the block is never blank. -->
     <div class="hero-slideshow" id="heroSlides">
       <div class="hero-slide on" style="background-image:url('photos/PSBP-00004-Silk-Floss-Tree.jpg')">
-        <div class="photo-attr">
-          <span class="attr-species">Silk Floss Tree · <em>Ceiba speciosa</em></span>
-          <span class="attr-line"><span class="attr-by">📷 randall_carter</span><span class="attr-dot">·</span><span class="cc-badge"><span class="cc-mark">cc</span><span class="cc-term">BY</span><span class="cc-term">NC</span></span><span class="attr-dot">·</span><span class="attr-src">via iNaturalist</span></span>
-        </div>
+        <div class="slide-caption">Silk Floss Tree · <em>Ceiba speciosa</em><span class="slide-credit">📷 Randall Carter · CC BY-NC · via iNaturalist</span></div>
       </div>
       <div class="hero-slide" style="background-image:url('photos/PSBP-00002-Weeping-Bottlebrush.jpg')">
-        <div class="photo-attr">
-          <span class="attr-species">Weeping Bottlebrush · <em>Melaleuca viminalis</em></span>
-          <span class="attr-line"><span class="attr-by">📷 kathynoran88</span><span class="attr-dot">·</span><span class="cc-badge"><span class="cc-mark">cc</span><span class="cc-term">BY</span><span class="cc-term">NC</span></span><span class="attr-dot">·</span><span class="attr-src">via iNaturalist</span></span>
-        </div>
+        <div class="slide-caption">Weeping Bottlebrush · <em>Melaleuca viminalis</em><span class="slide-credit">📷 kathynoran88 · CC BY-NC · via iNaturalist</span></div>
+      </div>
+      <div class="hero-slide" style="background-image:url('photos/PSBP-00010-Geiger-Tree.jpg')">
+        <div class="slide-caption">Geiger Tree · <em>Cordia sebestena</em><span class="slide-credit">📷 joanne_walker · CC BY-NC · via iNaturalist</span></div>
+      </div>
+      <div class="hero-slide" style="background-image:url('photos/PSBP-00034-Golden-Canna.jpg')">
+        <div class="slide-caption">Golden Canna · <em>Canna flaccida</em><span class="slide-credit">📷 Randall Carter · CC BY-NC · via iNaturalist</span></div>
+      </div>
+      <div class="hero-slide" style="background-image:url('photos/PSBP-00044-Screw-Pine.jpg')">
+        <div class="slide-caption">Screw Pine · <em>Pandanus utilis</em><span class="slide-credit">📷 kaiyuan3 · CC BY-NC · via iNaturalist</span></div>
+      </div>
+      <div class="hero-slide" style="background-image:url('photos/PSBP-00056-Parrots-Beak.jpg')">
+        <div class="slide-caption">Parrots Beak · <em>Heliconia psittacorum</em><span class="slide-credit">📷 elurding · CC BY-NC · via iNaturalist</span></div>
+      </div>
+      <div class="hero-slide" style="background-image:url('photos/PSBP-00070-Turks-Turban.jpg')">
+        <div class="slide-caption">Turk's Turban · <em>Clerodendrum indicum</em><span class="slide-credit">📷 forkristin · CC BY-NC · via iNaturalist</span></div>
+      </div>
+      <div class="hero-slide" style="background-image:url('photos/PSBP-00080-Dragon-Fruit.jpg');background-size:180%;background-position:center center">
+        <div class="slide-caption">Dragon Fruit · <em>Selenicereus undatus</em><span class="slide-credit">📷 coleguyton · CC BY-NC · via iNaturalist</span></div>
       </div>
     </div>
   </div>
@@ -345,14 +296,11 @@
           <a href="visit.html" class="btn btn-green">Hours & Directions →</a>
         </div>
       </div>
-      <!-- Filled at runtime by photo-credits.js — random attributed heroes,
-           offset from the slideshow's pool so they never duplicate it.
-           Static tiles below are the fallback if the JSON is unavailable. -->
-      <div class="hero-grid" id="heroGrid">
-        <figure class="hero-grid-tile" style="background-image:url('images/Quercus_myrtifolia.jpg')"></figure>
-        <figure class="hero-grid-tile" style="background-image:url('images/Trimezia_steyermarkii.jpg')"></figure>
-        <figure class="hero-grid-tile" style="background-image:url('images/Ixora_coccinea.jpg')"></figure>
-        <figure class="hero-grid-tile" style="background-image:url('images/Rhapis_excelsa.jpg')"></figure>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:1;background-image:url('images/Quercus_myrtifolia.jpg');background-size:cover;background-position:center"></div>
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:1;background-image:url('images/Trimezia_steyermarkii.jpg');background-size:cover;background-position:center;margin-top:1.5rem"></div>
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:1;background-image:url('images/Ixora_coccinea.jpg');background-size:cover;background-position:center;margin-top:-1.5rem"></div>
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:1;background-image:url('images/Rhapis_excelsa.jpg');background-size:cover;background-position:center"></div>
       </div>
     </div>
   </div>
@@ -435,14 +383,17 @@
 <div id="footer-placeholder"></div>
 
 <script src="js/site.js"></script>
-<script src="js/photo-credits.js"></script>
 <script>
 injectShared({ inatBar: false, inatFooter: true });
 
-// Hero slideshow + "Ten acres" grid are now driven by photo_credits.json
-// (random plant + wildlife heroes, with attribution). See js/photo-credits.js.
-PSBPPhotos.mountHeroSlideshow('heroSlides');
-PSBPPhotos.mountHeroGrid('heroGrid');
+// Hero slideshow — slow organic fade
+const slides = document.querySelectorAll('.hero-slide');
+let cur = 0;
+setInterval(() => {
+  slides[cur].classList.remove('on');
+  cur = (cur + 1) % slides.length;
+  slides[cur].classList.add('on');
+}, 5000);
 
 // Announcements now use the shared loadAnnouncements() from site.js (see call below)
 
@@ -461,22 +412,16 @@ loadINat().then(async data => {
     return;
   }
   grid.innerHTML = obs.map(o => {
-    const photo = o.photos?.[0] || {};
-    const url   = photo.url?.replace('square','medium');
+    const url  = o.photos?.[0]?.url?.replace('square','medium');
     if (!url) return '';
-    const common = o.species_guess || o.taxon?.preferred_common_name || o.taxon?.name || 'Unknown';
-    const sci    = o.taxon?.name && o.taxon.name !== common ? o.taxon.name : null;
-    const by     = o.user?.login || o.user?.name || 'community member';
-    // license + date come straight from the live iNaturalist record
-    const license = photo.license_code || o.license_code || null;
-    const date    = o.observed_on || (o.observed_on_details && o.observed_on_details.date) || null;
-    const time    = o.time_observed_at || null;
-    const attr = PSBPPhotos.attribution({
-      species: common, scientific: sci, by, license, date, time
-    });
+    const name = o.species_guess || o.taxon?.name || 'Unknown';
+    const by   = o.user?.login || 'observer';
+    const isPlant = ['Plantae','Fungi'].includes(o.taxon?.iconic_taxon_name);
+    const emoji = isPlant ? '🌿' : '🦎';
+    // No outbound link — display only with attribution
     return `<div class="mosaic-card">
       <div class="mosaic-img" style="background-image:url('${url}')"></div>
-      ${attr}
+      <div class="mosaic-label">${emoji} ${name}<em>📷 ${by}</em></div>
     </div>`;
   }).join('');
 });
