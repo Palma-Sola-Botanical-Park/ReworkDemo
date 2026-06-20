@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T15:16:01+00:00",
+  "generated_at": "2026-06-20T15:38:26+00:00",
   "overall": "ok",
   "feeds": [
     {
@@ -12,7 +12,7 @@
         "changed": 0,
         "removed": 0
       },
-      "last_good_at": "2026-06-20T15:16:01+00:00",
+      "last_good_at": "2026-06-20T15:38:26+00:00",
       "first_run": false,
       "messages": []
     },
@@ -26,7 +26,7 @@
         "changed": 0,
         "removed": 0
       },
-      "last_good_at": "2026-06-20T15:16:01+00:00",
+      "last_good_at": "2026-06-20T15:38:26+00:00",
       "first_run": false,
       "messages": []
     },
@@ -36,12 +36,40 @@
       "published": true,
       "rows": 7,
       "changes": {
-        "added": 1,
+        "added": 0,
         "changed": 0,
         "removed": 0
       },
-      "last_good_at": "2026-06-20T15:16:01+00:00",
+      "last_good_at": "2026-06-20T15:38:26+00:00",
       "first_run": false,
+      "messages": []
+    },
+    {
+      "tab": "news",
+      "status": "green",
+      "published": true,
+      "rows": 4,
+      "changes": {
+        "added": 4,
+        "changed": 0,
+        "removed": 0
+      },
+      "last_good_at": "2026-06-20T15:38:26+00:00",
+      "first_run": true,
+      "messages": []
+    },
+    {
+      "tab": "newsletters",
+      "status": "green",
+      "published": true,
+      "rows": 5,
+      "changes": {
+        "added": 6,
+        "changed": 0,
+        "removed": 0
+      },
+      "last_good_at": "2026-06-20T15:38:26+00:00",
+      "first_run": true,
       "messages": []
     }
   ]
