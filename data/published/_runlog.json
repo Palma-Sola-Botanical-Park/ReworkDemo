@@ -1,6 +1,11 @@
 {
   "runs": [
     {
+      "at": "2026-06-20T15:40:11+00:00",
+      "overall": "ok",
+      "summary": "newsletters +2-2"
+    },
+    {
       "at": "2026-06-20T15:38:26+00:00",
       "overall": "ok",
       "summary": "news initialized (4), newsletters initialized (5)"

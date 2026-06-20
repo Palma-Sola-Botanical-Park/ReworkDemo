@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T15:38:26+00:00",
+  "generated_at": "2026-06-20T15:40:11+00:00",
   "overall": "ok",
   "feeds": [
     {
@@ -12,7 +12,7 @@
         "changed": 0,
         "removed": 0
       },
-      "last_good_at": "2026-06-20T15:38:26+00:00",
+      "last_good_at": "2026-06-20T15:40:11+00:00",
       "first_run": false,
       "messages": []
     },
@@ -26,7 +26,7 @@
         "changed": 0,
         "removed": 0
       },
-      "last_good_at": "2026-06-20T15:38:26+00:00",
+      "last_good_at": "2026-06-20T15:40:11+00:00",
       "first_run": false,
       "messages": []
     },
@@ -40,7 +40,7 @@
         "changed": 0,
         "removed": 0
       },
-      "last_good_at": "2026-06-20T15:38:26+00:00",
+      "last_good_at": "2026-06-20T15:40:11+00:00",
       "first_run": false,
       "messages": []
     },
@@ -50,12 +50,12 @@
       "published": true,
       "rows": 4,
       "changes": {
-        "added": 4,
+        "added": 0,
         "changed": 0,
         "removed": 0
       },
-      "last_good_at": "2026-06-20T15:38:26+00:00",
-      "first_run": true,
+      "last_good_at": "2026-06-20T15:40:11+00:00",
+      "first_run": false,
       "messages": []
     },
     {
@@ -64,12 +64,12 @@
       "published": true,
       "rows": 5,
       "changes": {
-        "added": 6,
+        "added": 2,
         "changed": 0,
-        "removed": 0
+        "removed": 2
       },
-      "last_good_at": "2026-06-20T15:38:26+00:00",
-      "first_run": true,
+      "last_good_at": "2026-06-20T15:40:11+00:00",
+      "first_run": false,
       "messages": []
     }
   ]
