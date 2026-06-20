@@ -1,6 +1,11 @@
 {
   "runs": [
     {
+      "at": "2026-06-20T14:54:34+00:00",
+      "overall": "ok",
+      "summary": "volunteer ~1-1"
+    },
+    {
       "at": "2026-06-20T14:46:59+00:00",
       "overall": "ok",
       "summary": "volunteer initialized (7)"
