@@ -1,0 +1,9 @@
+{
+  "runs": [
+    {
+      "at": "2026-06-20T22:08:17+00:00",
+      "overall": "ok",
+      "summary": "events ~1, volunteer initialized (7), news initialized (4), newsletters initialized (5)"
+    }
+  ]
+}

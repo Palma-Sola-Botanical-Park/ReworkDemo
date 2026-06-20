@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-06-20T22:08:17+00:00",
+  "series": {
+    "events": [
+      {
+        "at": "2026-06-20T22:08:17+00:00",
+        "status": "green",
+        "rows": 20,
+        "added": 0,
+        "changed": 1,
+        "removed": 0
+      }
+    ],
+    "classes": [
+      {
+        "at": "2026-06-20T22:08:17+00:00",
+        "status": "green",
+        "rows": 4,
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      }
+    ],
+    "volunteer": [
+      {
+        "at": "2026-06-20T22:08:17+00:00",
+        "status": "green",
+        "rows": 7,
+        "added": 7,
+        "changed": 0,
+        "removed": 0
+      }
+    ],
+    "news": [
+      {
+        "at": "2026-06-20T22:08:17+00:00",
+        "status": "green",
+        "rows": 4,
+        "added": 4,
+        "changed": 0,
+        "removed": 0
+      }
+    ],
+    "newsletters": [
+      {
+        "at": "2026-06-20T22:08:17+00:00",
+        "status": "green",
+        "rows": 5,
+        "added": 6,
+        "changed": 0,
+        "removed": 0
+      }
+    ]
+  }
+}
