@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-19T15:25:12+00:00",
+  "generated_at": "2026-06-20T14:46:59+00:00",
   "overall": "ok",
   "feeds": [
     {
@@ -9,10 +9,10 @@
       "rows": 20,
       "changes": {
         "added": 0,
-        "changed": 1,
+        "changed": 0,
         "removed": 0
       },
-      "last_good_at": "2026-06-19T15:25:12+00:00",
+      "last_good_at": "2026-06-20T14:46:59+00:00",
       "first_run": false,
       "messages": []
     },
@@ -26,8 +26,22 @@
         "changed": 0,
         "removed": 0
       },
-      "last_good_at": "2026-06-19T15:25:12+00:00",
+      "last_good_at": "2026-06-20T14:46:59+00:00",
       "first_run": false,
+      "messages": []
+    },
+    {
+      "tab": "volunteer",
+      "status": "green",
+      "published": true,
+      "rows": 7,
+      "changes": {
+        "added": 7,
+        "changed": 0,
+        "removed": 0
+      },
+      "last_good_at": "2026-06-20T14:46:59+00:00",
+      "first_run": true,
       "messages": []
     }
   ]
