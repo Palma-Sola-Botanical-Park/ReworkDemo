@@ -1,6 +1,7 @@
 {
   "runs": [
     {
+<<<<<<< HEAD
       "at": "2026-06-20T21:57:03+00:00",
       "overall": "ok",
       "summary": "events ~1, volunteer initialized (7), news initialized (4), newsletters initialized (5)"
@@ -9,6 +10,11 @@
       "at": "2026-06-20T21:46:43+00:00",
       "overall": "ok",
       "summary": "events ~1, volunteer initialized (7), news initialized (4), newsletters initialized (5)"
+=======
+      "at": "2026-06-20T15:40:11+00:00",
+      "overall": "ok",
+      "summary": "newsletters +2-2"
+>>>>>>> 8ce061d150f0751a63bebb76773f3fb70a5f79fb
     },
     {
       "at": "2026-06-20T15:38:26+00:00",

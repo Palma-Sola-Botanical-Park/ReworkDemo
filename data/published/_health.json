@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "generated_at": "2026-06-20T21:57:03+00:00",
+=======
+  "generated_at": "2026-06-20T15:40:11+00:00",
+>>>>>>> 8ce061d150f0751a63bebb76773f3fb70a5f79fb
   "overall": "ok",
   "feeds": [
     {
@@ -12,8 +16,12 @@
         "changed": 1,
         "removed": 0
       },
+<<<<<<< HEAD
       "last_good_at": "2026-06-20T21:57:03+00:00",
       "last_changed_at": "2026-06-20T21:57:03+00:00",
+=======
+      "last_good_at": "2026-06-20T15:40:11+00:00",
+>>>>>>> 8ce061d150f0751a63bebb76773f3fb70a5f79fb
       "first_run": false,
       "messages": [],
       "counts": {
@@ -58,8 +66,12 @@
         "changed": 0,
         "removed": 0
       },
+<<<<<<< HEAD
       "last_good_at": "2026-06-20T21:57:03+00:00",
       "last_changed_at": "2026-06-20T21:46:43+00:00",
+=======
+      "last_good_at": "2026-06-20T15:40:11+00:00",
+>>>>>>> 8ce061d150f0751a63bebb76773f3fb70a5f79fb
       "first_run": false,
       "messages": [],
       "counts": {
@@ -102,6 +114,7 @@
         "changed": 0,
         "removed": 0
       },
+<<<<<<< HEAD
       "last_good_at": "2026-06-20T21:57:03+00:00",
       "last_changed_at": "2026-06-20T21:57:03+00:00",
       "first_run": true,
@@ -135,6 +148,11 @@
         "published": "data/published/volunteer.json",
         "detail": "data/published/health/volunteer.json"
       }
+=======
+      "last_good_at": "2026-06-20T15:40:11+00:00",
+      "first_run": false,
+      "messages": []
+>>>>>>> 8ce061d150f0751a63bebb76773f3fb70a5f79fb
     },
     {
       "tab": "news",
@@ -142,10 +160,11 @@
       "published": true,
       "rows": 4,
       "changes": {
-        "added": 4,
+        "added": 0,
         "changed": 0,
         "removed": 0
       },
+<<<<<<< HEAD
       "last_good_at": "2026-06-20T21:57:03+00:00",
       "last_changed_at": "2026-06-20T21:57:03+00:00",
       "first_run": true,
@@ -179,6 +198,11 @@
         "published": "data/published/news.json",
         "detail": "data/published/health/news.json"
       }
+=======
+      "last_good_at": "2026-06-20T15:40:11+00:00",
+      "first_run": false,
+      "messages": []
+>>>>>>> 8ce061d150f0751a63bebb76773f3fb70a5f79fb
     },
     {
       "tab": "newsletters",
@@ -186,10 +210,11 @@
       "published": true,
       "rows": 5,
       "changes": {
-        "added": 6,
+        "added": 2,
         "changed": 0,
-        "removed": 0
+        "removed": 2
       },
+<<<<<<< HEAD
       "last_good_at": "2026-06-20T21:57:03+00:00",
       "last_changed_at": "2026-06-20T21:57:03+00:00",
       "first_run": true,
@@ -223,6 +248,11 @@
         "published": "data/published/newsletters.json",
         "detail": "data/published/health/newsletters.json"
       }
+=======
+      "last_good_at": "2026-06-20T15:40:11+00:00",
+      "first_run": false,
+      "messages": []
+>>>>>>> 8ce061d150f0751a63bebb76773f3fb70a5f79fb
     }
   ]
 }
