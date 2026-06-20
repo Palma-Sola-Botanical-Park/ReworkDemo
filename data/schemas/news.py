@@ -7,8 +7,9 @@ Rich row: a story is headline + date plus a stack of optional content fields
 The page renders whatever is present (`if (n.intro)`, `if (n.image1)`, ...), so
 only headline + date are load-bearing; everything else degrades gracefully.
 
-Same engine as events.py; only the rule list differs. (Gate semantics: see
-events.py's header or SHEET_SYNC_ARCHITECTURE.md §3 "As-built schema contract".)
+Same engine as events.py; only the rule list differs. (`why` = the plain-language
+reason shown on the drill-down; see events.py header or
+SHEET_SYNC_ARCHITECTURE.md §3 "As-built schema contract".)
 
 Image fields (hero_image, image1) and link_url are intentionally NOT URL-checked:
 they're local /ReworkDemo/... and /docs/... paths, which url_or_blank
@@ -20,6 +21,8 @@ DISPLAY_VALUES = ["web", "both", "screen", "off"]
 
 SCHEMA = {
     "tab": "news",
+
+    "human": "Park news stories — one row per story.",
 
     # Newest-first reader keyed on the story; date+headline is a stable identity.
     "identity": ["date", "headline"],
@@ -35,16 +38,22 @@ SCHEMA = {
 
     "autofix_trim": True,
 
+    "volume_min": 1,
+
     "rules": [
         # --- row-fatal: the two fields the page can't render a story without --
-        {"field": "date",     "check": "required", "severity": "error", "scope": "row"},
-        {"field": "date",     "check": "iso_date", "severity": "error", "scope": "row"},
-        {"field": "headline", "check": "required", "severity": "error", "scope": "row"},
+        {"field": "date",     "check": "required", "severity": "error", "scope": "row",
+         "why": "Can't be blank."},
+        {"field": "date",     "check": "iso_date", "severity": "error", "scope": "row",
+         "why": "Must be a real date (YYYY-MM-DD)."},
+        {"field": "headline", "check": "required", "severity": "error", "scope": "row",
+         "why": "Can't be blank."},
 
         # --- controlled vocab (warn) ------------------------------------------
         {"field": "display", "check": "in_vocab", "arg": DISPLAY_VALUES,
          "severity": "warn", "scope": "field",
-         "msg": "unknown display value — a typo here hides the row from everyone"},
+         "msg": "unknown display value — a typo here hides the row from everyone",
+         "why": "Must be web, both, screen, or off — a typo hides the row from everyone."},
 
         # NB: hero_image / image1 / link_url are NOT url-checked — they're local
         # /ReworkDemo/... and /docs/... paths that url_or_blank would falsely flag.
