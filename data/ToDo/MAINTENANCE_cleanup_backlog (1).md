@@ -4,7 +4,7 @@ Refreshed running list for the ReworkDemo site + plant/wildlife catalog.
 Supersedes the 2026-06-08 version. Items ranked by **Criticality** (do-it-now → polish)
 and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 
-**Last updated: 2026-06-19 (rev 18 — photo gallery pipeline built; credit redesign + schema enhancements logged: C14–C15, D12–D14)**
+**Last updated: 2026-06-20 (rev 19 — home-page credit block shipped as a reusable component (`photo-credits.js`/`.css`); D12 home-page portion done, logged C16 + D15, sharpened C14)**
 
 ---
 
@@ -141,12 +141,20 @@ and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 - **Criticality:** Medium — these photos are the park's story, not stock; the credits should say so. Dates also signal "this is current, not stale."
 - **Effort:** Low — the data is already in the iNat API response; the download script just isn't saving it.
 - **Steps:** 1) Add `photographer_name` and `observed_on` to `download_species_photos.py` (capture from `user.name` and `observed_on` in the API response). 2) Update `photo_credits.json` schema in DATA_ARCHITECTURE.md. 3) Run C15 backfill for existing downloads. 4) Update `generate_wildlife_pages.py` credit template to prefer name over login and include date.
+- **Front-end is already waiting on this (2026-06-20):** the home-page credit component (`photo-credits.js`, see D12) already reads `observed_on`/`date` and will show the date the moment a record has one — **no front-end change needed for dates**. For names, add a one-line `photographer_name || photographer` preference in `photo-credits.js` once the field lands. Net: **C14 is now the gate** for dates and real names appearing on the home rotating hero + "Ten acres" blocks (the live "seen lately" mosaic needs neither — it reads the API directly).
 
 ### C15. Backfill photo metadata for existing downloaded photos
 - **Issue:** The 52 photos already downloaded (6 species, 2026-06-19 batch) lack `photographer_name` and `observed_on` — those fields didn't exist when the download script ran. Each photo has `observation_id` (or can derive it from `source_url`), so a one-pass API script can fill them in.
 - **Criticality:** Medium — blocks the credit redesign (D12) for existing photos.
 - **Effort:** Low — ~52 API calls, one script, one JSON update.
 - **Steps:** 1) For each photo in `photo_credits.json` that has `observation_id` but no `photographer_name`/`observed_on`, hit the iNat observation API. 2) Write `user.name` → `photographer_name`, `observed_on` → `observed_on`. 3) Rebuild `credit_line`. 4) Save.
+
+### C16. Move the home-page hero/credit feed off `data/` (lean projection)
+- **Issue:** The new home-page credit component (`js/photo-credits.js`, see D12) fetches **`data/sources/photo_credits.json`** at runtime to build the rotating hero + "Ten acres" tiles. It works (GitHub Pages serves `data/`), but it crosses the architecture rule *"`data/` is a workshop, never read by the live site"* — and the full master is ~300 KB today and only grows. It's a soft single-point-of-failure too: if the fetch fails, both blocks fall back to the static tiles baked into `index.html`, so nothing breaks — they just stop rotating.
+- **Fix — a lean root projection.** Add a generator that emits a root-level **`hero_photos.json`** (sibling to `plant_search.json` / `wildlife_search.json`) carrying only `hero: true` rows with the fields the credit block needs: `psbp_id`, `filename`, `photo_url`, `focus`, `photographer` (+ `photographer_name` / `observed_on` once **C14** lands), `license`, `type`. Then point `photo-credits.js` at it (one-line `SRC` change). Runtime then reads only repo-root JSON, like everything else.
+- **Criticality:** Low–Medium — not breaking (graceful static fallback), but it's a principle violation and grows unbounded. Best done before the registry reaches the thousands.
+- **Effort:** Low — small generator (filter + project) + a one-line path change in `photo-credits.js`. Already written up in `DATA_ARCHITECTURE.md` §10 ("Optional: a lean `hero_photos.json` projection").
+- **Steps:** 1) Write the projection generator (read `photo_credits.json`, filter heroes, project the fields above). 2) Emit `hero_photos.json` to repo root. 3) Change `SRC` at the top of `photo-credits.js` to `hero_photos.json`. 4) Confirm the hero + tiles still populate; the static fallback stays as the floor.
 
 ---
 
@@ -195,9 +203,11 @@ and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 ### D12. Photo credit redesign — celebration, not footnote
 - **Issue:** Photo credits currently read like legal compliance ("© robcarr52 (CC-BY-NC), via iNaturalist") in 12px italic gray — invisible and impersonal. These photos were taken *at the park* by *real visitors*, and the credit should celebrate that, not minimize it. The goal: every visitor who contributes a photo sees their name displayed proudly, which keeps the contribution loop alive.
 - **Design direction (not final):** Hero credit as a readable byline at 15–16px in the gold/cream palette: "Photographed at Palma Sola Botanical Park by Rob Carr · May 17, 2025". Lightbox credits with "Observed at Palma Sola Botanical Park." Gallery section header: "Spotted at the park" or "Seen here — photographed by our visitors." License details in a tooltip or secondary line, not the headline.
+- **Done — home page (2026-06-20):** Built as a **reusable component**, `js/photo-credits.js` + `css/photo-credits.css` (JS emits the markup, CSS styles it; include both and any page gets identical credit). Live on the home page across the rotating hero, the "Ten acres" tiles, and the "What's been seen lately" mosaic: photographer name **featured in brand gold** at readable size, a Creative Commons badge echoing iNaturalist's, date shown when available. Builders: `attribution()` (combined overlay), `speciesTag()` (name inside a photo), `creditPlate()` (byline below), `ccBadge()`. The "lately" mosaic shows the **share** date (`created_at`), not the capture date, so a recently-uploaded older photo reads as fresh. A standing "Every photograph on this site was taken by our community" line sits over the hero. Written up in `DATA_ARCHITECTURE.md` §3 "Consuming the registry." *(README folder map should gain the two new files when convenient.)*
+- **Remaining:** Apply the same treatment to the **species/wildlife pages** — either include the shared component, or have the generators emit the matching `.credit-plate` / `.photo-attr` classes (the CSS is already shared, so they just need the markup). Plus the lightbox credit + gallery section header ("Spotted at the park").
 - **Criticality:** Low — current credits work fine legally; this is brand + community building.
-- **Effort:** Medium — design pass on hero credit band, lightbox credit, gallery header. CSS + generator template changes.
-- **Depends on:** C14 (schema fields) and C15 (backfill) for real names and dates.
+- **Effort:** Medium — remaining work is the generator templates + lightbox/gallery; the styling + builders already exist.
+- **Depends on:** **C14** (schema: real names + `observed_on`) and **C15** (backfill) — the home-page consumer already reads `observed_on` (dates appear automatically when present) and just needs a one-line `photographer_name` preference for real names. The live "lately" mosaic depends on neither (reads the API directly). See also **C16** (move the feed off `data/`).
 
 ### D13. GitHub Actions — auto-scan for new iNat photos
 - **Issue:** Currently, ingesting new photos requires manually exporting observations, running the download script, curating in the review tool, and committing. A GitHub Actions workflow could periodically check the iNat project for new observations, flag new species or new photos for existing species, and either auto-download or notify. This is the "always fresh" goal — a visitor uploads a photo Tuesday, it's on the website by Friday.
@@ -210,6 +220,12 @@ and tagged with **Effort** (Low / Medium / High) plus high-level steps.
 - **Criticality:** Low — both systems work in parallel; the standalone file is just redundant.
 - **Effort:** Low — one script pass + delete.
 - **Steps:** 1) For each entry in `photo_focus.json`, find the hero photo in `photo_credits.json` with the matching `psbp_id`. 2) Set `focus` to the value. 3) Verify all 25 migrated. 4) Delete `photo_focus.json`. 5) Remove any references to it in generators/templates.
+
+### D15. "What's been seen lately" — order by share date, not observation date
+- **Issue:** The home "seen lately" mosaic now *displays* each photo's **share** date (`created_at`), so a recently-uploaded 2025 photo reads as fresh (built 2026-06-20). But the mosaic's *ordering* comes from `loadRecentObs()` in `site.js`, which may sort by **observation** date. If so, a genuinely-recent upload of an older observation could still sort low — meaning "lately" wouldn't reliably lead with the newest uploads. (Display freshness and ordering freshness are two different knobs; only display was changed.)
+- **Criticality:** Low — display already reads fresh; this only affects ordering.
+- **Effort:** Low — confirm/adjust the sort in `loadRecentObs()`.
+- **Steps:** 1) Check how `loadRecentObs()` requests/sorts iNat observations. 2) If not already, request newest-**uploaded** first (`order_by=created_at&order=desc`). 3) Verify the mosaic leads with the most recently shared photos.
 
 ---
 

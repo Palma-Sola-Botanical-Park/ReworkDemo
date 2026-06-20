@@ -2,7 +2,7 @@
 
 **Status:** ACTIVE — this is the governing document for how species content flows through the PSBP site.
 **Supersedes:** the xlsx-based pipeline described in the README's "Content build pipeline" section. The README should eventually point here; until then, this document wins on any conflict.
-**Last updated:** 2026-06-18 (initial draft, schema v1.1)
+**Last updated:** 2026-06-20 (added §3 "Consuming the registry" — the site-side `photo-credits.js`/`.css` consumer and the standardized credit block; §9/§10 entries. JSON schema unchanged.)
 
 ---
 
@@ -238,6 +238,48 @@ photos/                  ← ALL photographs, species and park
   ...
   park/                  ← venue, grounds, heroes, events, volunteers
 ```
+
+### Consuming the registry — site rendering & the credit block (`photo-credits.js` / `.css`)
+
+*Added 2026-06-20.* The registry isn't only storage — the site reads it directly to render imagery and to credit photographers consistently. Two paired runtime files do this:
+
+- **`js/photo-credits.js`** — loads `photo_credits.json`, builds the hero image pool, resolves each image to a working URL, and emits attribution markup.
+- **`css/photo-credits.css`** — styles that markup.
+
+**The pair travels together.** Any page that includes both gets identical attribution — same gold byline, same Creative Commons badge — with no per-page credit markup to drift out of sync. (This mirrors the "`site.js` is the brain" principle: define the credit block once, reuse everywhere.) Include them after `site.css` / `site.js`. The home page is the first consumer; Nature grid, species pages, and venue galleries can adopt the same builders.
+
+**The hero pool.** Photos flagged `hero: true` + `publish_ok: true` + `status` starting `OK`, across **both kingdoms**, form a shuffled pool with plants and wildlife interleaved (~180 photos today). The home page draws from it for the rotating hero and the "Ten acres" tiles.
+
+**Image resolution — local first, remote fallback, never broken.** For each photo the consumer tries, in order:
+
+| # | Candidate | Why |
+|---|-----------|-----|
+| 1 | `photos/<psbp_id>/<filename>` | the subfolder collection model (this section) |
+| 2 | `photos/<filename>` (flat, `_`→`-`) | the **current flat layout, mid-migration** |
+| 3 | `photo_url` | the iNaturalist CDN — always present in the registry |
+
+The first that loads wins; the remote URL guarantees an image even if a local file is missing or renamed. This is why the front-end keeps working **across the `photos/` flat→subfolder migration with no code change**. Note the filename quirk this bridges: the registry's `filename` uses **underscores** (`PSBP-00004_Silk_Floss_Tree.jpg`), while the current flat on-disk files use **hyphens** (`PSBP-00004-Silk-Floss-Tree.jpg`, per the README naming rule) — step 2 converts `_`→`-` to match.
+
+**Crop anchor.** Hero and tile crops honor the `focus` field (e.g. `"65% 66%"`) as `background-position`, defaulting to `50% 50%` when null — keeping the subject in frame when a hero is squeezed into a banner or card.
+
+**The standardized credit block.** Four render shapes, all from the same builders, so credit looks identical site-wide:
+
+| Builder (JS) | Emits (CSS) | Use |
+|---|---|---|
+| `PSBPPhotos.attribution()` | `.photo-attr` | Combined overlay (name + photographer + date + CC badge) on a large image — hero, tiles |
+| `PSBPPhotos.speciesTag()` | `.species-tag` | Just the species name, pinned **inside** a photo |
+| `PSBPPhotos.creditPlate()` | `.credit-plate` | Photographer byline **below** a photo — "PHOTOGRAPH BY" eyebrow + name + date + badge |
+| `PSBPPhotos.ccBadge()` | `.cc-badge` | The Creative Commons pill on its own |
+
+**Design intent: credit is a feature, not fine print.** The photographer's name is the visually featured element (brand gold), shown at readable size beside a CC badge that echoes the one iNaturalist displays. This is recognition of and solidarity with the volunteer photographers who built the collection — deliberately *not* a hidden legal line. The badge normalizes the registry's inconsistent `license` values (`cc-by-nc`, `CC-BY-NC`, `nan`, `CC-BY-ND`, `CC-BY-NC-SA`, …) into the correct rights tokens (BY / NC / ND / SA).
+
+**Dates.** The registry currently has **no observed-on/date field** (only `observation_id` / `source_url`). The credit builders read `observed_on` / `date` when present and **omit the date cleanly when absent** — so dates light up automatically once the import pipeline writes one (see §10; the watermark model already lists "date" among fields captured at import). Recommended field name: **`observed_on`** (iNat's own), with optional `time_observed_at`.
+
+**"What's been seen lately" shows the SHARE date, not the capture date.** That home-page mosaic is fed **live from the iNaturalist API** (not the registry) and deliberately shows each observation's **submission** date (`created_at`) — when it was *shared* — rather than `observed_on` (when the shutter clicked). A photo taken in 2025 but uploaded yesterday should read as fresh; showing the observed date made a feed titled "lately" look stale.
+
+**Performance — no practical cap on the hero series.** The rotating hero uses a two-layer recycling crossfade: it paints the next image just-in-time and pre-loads one ahead, so **only ~2 images are ever in memory** regardless of run length. The sequence walks the entire hero pool without repeating, then reshuffles — long non-repeating runs at flat memory and bandwidth. (The earlier "build every slide up front" approach capped realistically at ~12–20 before load/decoded-memory cost showed.)
+
+**House copy.** A standing line sits over the rotating hero, setting the tone for the whole site: *"Every photograph on this site was taken by our community … all shared via iNaturalist."* It's persistent (not per-slide); each slide's own photographer credit rides at the bottom.
 
 ---
 
@@ -506,6 +548,11 @@ The backlog item B3 (messy Size/Growing Conditions cells mixing clean key-value 
 - **`similar_species` as structured cross-links (2026-06-19).** Look-alike pairs (anhinga/cormorant, green/brown anole, the three cooters/sliders) are wired by PSBP ID, enabling auto-generated "Confused with?" cards on species pages. `psbp_id` is null when the look-alike isn't one of ours.
 - **Conservation status kept as prose, not structured (2026-06-19).** Considered `{federal, state, iucn}` object fields but decided the maintenance cost outweighs the benefit — conservation statuses change rarely and are best verified by a human when they do (cf. wood stork ESA delisting, March 2026). The traffic-light `level` (Green/Yellow/Red) is sufficient for filtering.
 - **`wildlife_signage.json` is authoritative — no upstream spreadsheet (2026-06-19).** The `meta.source` field was updated to reflect this. The xlsx is retained as a historical artifact only. All edits happen in the JSON master.
+- **Credit is a feature, not fine print (2026-06-20).** Photographer attribution on the site is rendered prominently — name in brand gold at readable size, beside a Creative Commons badge that mirrors iNaturalist's. The collection is built by volunteers; the site recognizes them out loud rather than hiding a legal line. See §3 "Consuming the registry."
+- **One credit block, shared CSS + JS (2026-06-20).** `js/photo-credits.js` + `css/photo-credits.css` are a pair: the JS emits the classes, the CSS styles them, and any page including both renders identical attribution. Chosen over per-page credit markup (which drifts) — same reasoning as keeping nav/footer in `site.js`. Builders: `attribution()` (combined overlay), `speciesTag()` (name inside a photo), `creditPlate()` (byline below a photo), `ccBadge()` (the CC pill alone).
+- **Site reads the registry directly, with a remote fallback (2026-06-20).** The consumer resolves each image local-subfolder → local-flat → `photo_url` (iNat CDN). The always-present remote URL guarantees no broken image and lets the front-end survive the `photos/` flat→subfolder migration with no code change. The hero pool is `hero && publish_ok && status~OK` across both kingdoms, interleaved.
+- **"Lately" shows the share date, not the capture date (2026-06-20).** The home "What's been seen lately" mosaic reads live from the iNat API and displays `created_at` (when shared), not `observed_on` (when shot). A recently-uploaded older photo should read as fresh; the observed date made the feed look stale.
+- **Hero slideshow recycles two layers (2026-06-20).** Just-in-time paint + one-ahead preload keeps ~2 images in memory no matter how long it runs, so the hero walks the whole pool non-repeating and reshuffles — no realistic cap, flat memory/bandwidth. Replaced an eager "load all slides up front" approach that capped near 12–20.
 
 ---
 
@@ -607,3 +654,14 @@ The standalone `photo_focus.json` file (25 entries mapping PSBP IDs to CSS `obje
 - Maintain a blocklist (the watermark replaces it; skipped photos are simply not imported)
 - Automate quality judgment (humans are faster and better for small batches)
 - Require a fixed cadence (run the scan whenever — weekly, after a volunteer event, when an observer uploads a batch)
+
+### Wiring dates into the credit block (when the import pipeline lands)
+
+The site-side credit block (§3 "Consuming the registry") already reads a date field and displays it — but only on the hero and "Ten acres" tiles, and only if the field exists. Today it doesn't, so those blocks show photographer + license without a date. Two small follow-ups close the loop:
+
+- **Write `observed_on` (and optional `time_observed_at`) at import.** The import step already lists "date" among the attribution fields it captures; pin the field name to **`observed_on`** (iNat's own) so the consumer picks it up with zero front-end change. It reads `observed_on || date`, so either name works, but standardize on one.
+- **The live "lately" mosaic needs nothing** — it gets `created_at` straight from the API. This note is only about the registry-driven blocks.
+
+### Optional: a lean `hero_photos.json` projection (when the registry grows)
+
+The home page currently fetches the **full** `photo_credits.json` master client-side to build the hero pool. That's fine at today's size, but it runs against the "browser gets lean projections, not masters" principle (§6). When the registry reaches the thousands, add a generator that emits a root-level **`hero_photos.json`** — only `hero: true` rows, carrying the few fields the credit block needs (`psbp_id`, `filename`, `photo_url`, `focus`, `photographer`, `license`, `type`, and `observed_on` once it exists). The consumer would fetch that instead. Parallel to `plant_search.json` / `wildlife_search.json`; not needed yet.
