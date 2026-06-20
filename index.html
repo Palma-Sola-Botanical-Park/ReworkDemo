@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Palma Sola Botanical Park · Bradenton, FL</title>
 <link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/photo-credits.css">
 <style>
 /* ── HOME-SPECIFIC ── */
 .hero {
@@ -130,31 +131,7 @@
 .mosaic-img > .mosaic-photo { position:absolute; inset:0; background-size:cover; background-position:center; transition: transform .5s ease; }
 .mosaic-card:hover .mosaic-img > .mosaic-photo { transform: scale(1.05); }
 
-/* species name rides INSIDE the photo */
-.species-tag {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  padding: 1rem .85rem .6rem;
-  background: linear-gradient(transparent, rgba(0,0,0,.74));
-  color: #fff;
-}
-.species-tag .attr-species { font-size: .92rem; font-weight: 600; line-height: 1.28; letter-spacing: .005em; }
-.species-tag .attr-species em { font-style: italic; font-weight: 400; opacity: .9; }
-
-/* photographer credit lives OUTSIDE, set like a field-guide byline */
-.mosaic-credit {
-  display: grid; grid-template-columns: 1fr auto; align-items: center;
-  gap: .5rem .7rem; padding: .72rem .9rem .8rem;
-  border-top: 1px solid var(--green-pale);
-}
-.credit-byline { display: flex; flex-direction: column; gap: .12rem; min-width: 0; }
-.credit-eyebrow { font-size: .6rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--green-mid); }
-.credit-name { font-size: 1rem; font-weight: 700; color: var(--gold); line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.credit-date { font-size: .72rem; color: var(--text-soft); }
-.credit-license { display: flex; flex-direction: column; align-items: flex-end; gap: .28rem; }
-.credit-src { font-size: .6rem; font-style: italic; color: var(--text-soft); opacity: .85; }
-/* CC badge on the light plate gets a light treatment */
-.mosaic-credit .cc-badge { border-color: rgba(26,58,31,.22); background: var(--cream); color: var(--green-deep); }
-.mosaic-credit .cc-badge .cc-term { border-left-color: rgba(26,58,31,.16); }
+/* .species-tag and .credit-plate now live in css/photo-credits.css */
 
 @media (max-width: 980px) { .live-mosaic { grid-template-columns: repeat(3, 1fr); } .mosaic-card:nth-child(7), .mosaic-card:nth-child(8) { display: none; } }
 @media (max-width: 680px) { .live-mosaic { grid-template-columns: repeat(2, 1fr); gap: 1rem; } .mosaic-card:nth-child(7), .mosaic-card:nth-child(8) { display: flex; } }
@@ -183,46 +160,12 @@
 }
 
 /* ════════════════════════════════════════════════════════════════════
-   UNIFIED PHOTO ATTRIBUTION  —  used by hero, "Ten acres" grid, and the
-   live mosaic. We credit photographers out loud: larger type, real name,
-   the date when we have it, and the Creative Commons badge. Solidarity,
-   not fine print.
+   Photo attribution primitives (.photo-attr, .cc-badge, .species-tag,
+   .credit-plate) now live in css/photo-credits.css — shared across pages.
+   What stays below is layout specific to THIS page.
    ════════════════════════════════════════════════════════════════════ */
-.photo-attr {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  padding: .7rem .85rem .6rem;
-  background: linear-gradient(transparent, rgba(0,0,0,.5) 35%, rgba(0,0,0,.82));
-  color: #fff; text-align: left;
-  display: flex; flex-direction: column; gap: .28rem;
-  backdrop-filter: blur(1px);
-}
-.photo-attr .attr-species {
-  font-size: .95rem; font-weight: 600; line-height: 1.3; letter-spacing: .005em;
-}
-.photo-attr .attr-species em { font-style: italic; font-weight: 400; opacity: .9; }
-.photo-attr .attr-line {
-  display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .5rem;
-  font-size: .82rem; line-height: 1.45;
-}
-.photo-attr .attr-credit { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
-.photo-attr .attr-by   { font-weight: 700; color: var(--gold-light); }
-.photo-attr .attr-date { opacity: .95; }
-.photo-attr .attr-src  { opacity: .68; font-style: italic; }
-.photo-attr .attr-dot  { opacity: .45; }
 
-/* Creative Commons badge — segmented pill echoing the one iNaturalist shows */
-.cc-badge {
-  display: inline-flex; align-items: stretch; vertical-align: middle;
-  border: 1px solid rgba(255,255,255,.5); border-radius: 3px; overflow: hidden;
-  font-size: .68rem; font-weight: 700; line-height: 1; letter-spacing: .02em;
-  background: rgba(0,0,0,.45);
-}
-.cc-badge .cc-mark, .cc-badge .cc-term { padding: .3em .44em; display: inline-flex; align-items: center; }
-.cc-badge .cc-mark { font-family: Georgia, 'Times New Roman', serif; text-transform: lowercase; letter-spacing: .05em; }
-.cc-badge .cc-term { border-left: 1px solid rgba(255,255,255,.28); }
-.cc-badge--unknown { opacity: .8; }
-
-/* "Ten acres" mosaic — now real attributed hero photos from photo_credits.json */
+/* "Ten acres" mosaic — real attributed hero photos from photo_credits.json */
 .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
 .hero-grid-tile {
   position: relative; margin: 0; border-radius: 10px; overflow: hidden;
@@ -234,9 +177,6 @@
 .hero-grid-tile .photo-attr { padding: .55rem .65rem .5rem; }
 .hero-grid-tile .attr-species { font-size: .86rem; }
 .hero-grid-tile .attr-line { font-size: .76rem; }
-
-/* live mosaic uses .photo-attr too; mosaic-card is already position:relative */
-.mosaic-card .photo-attr { padding: .6rem .7rem .5rem; }
 
 @media (prefers-reduced-motion: reduce) { .hero-slide { transition: none; } }
 </style>

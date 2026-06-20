@@ -151,7 +151,7 @@
     o = o || {};
     var dateStr = fmtDate(o.date);                 // date only, no time
     var label = o.dateLabel ? esc(o.dateLabel) + ' ' : '';
-    return '<div class="mosaic-credit">'
+    return '<div class="credit-plate">'
          +   '<div class="credit-byline">'
          +     '<span class="credit-eyebrow">Photograph by</span>'
          +     '<span class="credit-name">' + esc(o.by || 'community member') + '</span>'
@@ -245,32 +245,64 @@
   }
 
   // ---- renderers ----------------------------------------------------------
-  // Top-right hero slideshow: builds slides from the pool, crossfades them.
+  // Top-right hero slideshow.
+  //
+  // Two stacked layers that we crossfade between, painting the next photo
+  // just-in-time and pre-resolving the one after during each dwell. Only ever
+  // ~2 images live in memory no matter how long it runs, so the sequence can
+  // walk the ENTIRE hero pool without repeating, then reshuffle and keep going.
+  // No realistic cap — memory and bandwidth stay flat. (count is ignored now;
+  // kept for call-site compatibility.)
   function mountHeroSlideshow(elId, count) {
     var host = document.getElementById(elId);
     if (!host) return;
-    count = count || HERO_COUNT;
 
     loadPool().then(function (pool) {
-      if (!pool.length) return;                  // leave existing markup in place
-      var picks = pool.slice(0, count);
+      if (!pool.length) return;                  // leave the static fallback in place
 
-      Promise.all(picks.map(resolveSrc)).then(function (srcs) {
-        host.innerHTML = picks.map(function (p, i) {
-          return '<div class="hero-slide' + (i === 0 ? ' on' : '') + '" '
-               + 'style="background-image:url(\'' + esc(srcs[i]) + '\');'
-               + 'background-position:' + esc(focusOf(p)) + '">'
-               + attrFor(p, true)
-               + '</div>';
-        }).join('');
+      // reshuffling queue across the whole pool — long non-repeating runs,
+      // reshuffled each lap, avoiding an immediate repeat at the seam
+      var queue = shuffle(pool), qi = 0, last = null;
+      function nextPhoto() {
+        if (qi >= queue.length) {
+          var re = shuffle(pool);
+          if (re.length > 1 && re[0] === last) re.push(re.shift());
+          queue = re; qi = 0;
+        }
+        var p = queue[qi++]; last = p; return p;
+      }
 
-        var slides = host.querySelectorAll('.hero-slide');
-        if (slides.length < 2) return;
-        var cur = 0;
+      function paint(layer, p, src) {
+        layer.style.backgroundImage = "url('" + src + "')";
+        layer.style.backgroundPosition = focusOf(p);
+        layer.innerHTML = attrFor(p, true);
+      }
+
+      // resolve the first image BEFORE swapping out the fallback (no blank flash)
+      var first = nextPhoto();
+      resolveSrc(first).then(function (firstSrc) {
+        host.innerHTML = '<div class="hero-slide"></div><div class="hero-slide"></div>';
+        var layers = host.querySelectorAll('.hero-slide');
+        var active = 0;
+        paint(layers[0], first, firstSrc);
+        layers[0].classList.add('on');
+
+        // pre-resolve the next so its swap is instant
+        var nextP = nextPhoto();
+        var nextSrc = resolveSrc(nextP);
+
         setInterval(function () {
-          slides[cur].classList.remove('on');
-          cur = (cur + 1) % slides.length;
-          slides[cur].classList.add('on');
+          var incoming = 1 - active;
+          var showP = nextP, showSrc = nextSrc;
+          showSrc.then(function (src) {
+            paint(layers[incoming], showP, src);
+            layers[incoming].classList.add('on');
+            layers[active].classList.remove('on');
+            active = incoming;
+            // warm the following one during this dwell
+            nextP = nextPhoto();
+            nextSrc = resolveSrc(nextP);
+          });
         }, 5000);
       });
     });
