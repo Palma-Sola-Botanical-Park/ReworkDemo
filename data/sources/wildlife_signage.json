@@ -3847,7 +3847,7 @@
       "category": "Songbirds & Backyard Birds",
       "feature_tier": "Feature",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [
         "Logcock"
@@ -3972,7 +3972,7 @@
       "category": "Songbirds & Backyard Birds",
       "feature_tier": "Feature",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [
         "Mockingbird",
@@ -4105,7 +4105,7 @@
       "category": "Wading Birds",
       "feature_tier": "Standard",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [
         "Night Heron",
@@ -4237,7 +4237,7 @@
       "category": "Waterbirds & Waterfowl",
       "feature_tier": "Standard",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [
         "Dabchick",
@@ -4364,7 +4364,7 @@
       "category": "Songbirds & Backyard Birds",
       "feature_tier": "Feature",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "tags": [
@@ -4488,7 +4488,7 @@
       "category": "Songbirds & Backyard Birds",
       "feature_tier": "Standard",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [
         "Rain Dove",
@@ -4620,7 +4620,7 @@
       "category": "Lizards",
       "feature_tier": "Feature",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [
         "Carolina Anole",
@@ -4749,7 +4749,7 @@
       "category": "Butterflies & Moths",
       "feature_tier": "Feature",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [
         "Mariposa de la Muerte",
@@ -4866,7 +4866,7 @@
       "category": "Dragonflies & Damselflies",
       "feature_tier": "Standard",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [
         "Amberwing"
@@ -4984,7 +4984,7 @@
       "category": "Dragonflies & Damselflies",
       "feature_tier": "Standard",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "tags": [
@@ -5102,7 +5102,7 @@
       "category": "Butterflies & Moths",
       "feature_tier": "Standard",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [
         "Bella Moth",
@@ -5338,7 +5338,7 @@
       "category": "Other Invertebrates",
       "feature_tier": "Standard",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": false,
       "also_known_as": [
         "Mealybug Ladybird",
@@ -5458,7 +5458,7 @@
       "category": "Other Invertebrates",
       "feature_tier": "Standard",
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [
         "Blue Crab",
@@ -5901,7 +5901,7 @@
         "species": "carolinus"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -6022,7 +6022,7 @@
         "species": "pubescens"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -6137,7 +6137,7 @@
         "species": "carolinensis"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -6258,7 +6258,7 @@
         "species": "aura"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -6500,7 +6500,7 @@
         "species": "quiscula"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -6620,7 +6620,7 @@
         "species": "ater"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -6741,7 +6741,7 @@
         "species": "lineatus"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -6983,7 +6983,7 @@
         "species": "virginianus"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -7123,7 +7123,7 @@
         "species": "caerulea"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "similar_species": [],
@@ -7227,7 +7227,7 @@
         "species": "thula"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -7348,7 +7348,7 @@
         "species": "ibis"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -7469,7 +7469,7 @@
         "species": "occidentalis"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -7824,7 +7824,7 @@
         "species": "microptera"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -7940,7 +7940,7 @@
         "species": "eponina"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -8174,7 +8174,7 @@
         "species": "migratorius"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -8288,7 +8288,7 @@
         "species": "phoebe"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -8387,7 +8387,7 @@
         "species": "palmarum"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -8590,7 +8590,7 @@
         "species": "dominica"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -8689,7 +8689,7 @@
         "species": "coronata"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -8789,7 +8789,7 @@
         "species": "americana"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -8888,7 +8888,7 @@
         "species": "varia"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -8988,7 +8988,7 @@
         "species": "flavifrons"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -9092,7 +9092,7 @@
         "species": "caerulea"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -9189,7 +9189,7 @@
         "species": "leucophrys"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -9293,7 +9293,7 @@
         "species": "crinitus"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
@@ -9391,7 +9391,7 @@
         "species": "varius"
       },
       "has_sign": false,
-      "status": "research",
+      "status": "html",
       "native": true,
       "also_known_as": [],
       "danger": {
