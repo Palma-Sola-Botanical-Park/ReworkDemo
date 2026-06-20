@@ -3,17 +3,24 @@ data/schemas/events.py  —  the validation rules for the `events` tab.
 
 A schema is plain data. validate_promote.py's engine interprets it, so adding a
 new tab later = writing a new schema file like this one; the engine is shared.
+Full as-built contract: SHEET_SYNC_ARCHITECTURE.md §3 "As-built schema contract".
 
 Rule anatomy:
     {"field", "check", "severity", "scope", optional "arg", optional "msg"}
 
-  severity: "error" | "warn"
-  scope:    "file"  -> a failure blocks the WHOLE tab (keep last-known-good)
-            "row"   -> a failure QUARANTINES just that row (publish the rest)
-            "field" -> a failure is a WARNING on that row (publish, log it)
+The engine acts on exactly ONE special combination:
+    severity "error" + scope "row"  ->  QUARANTINE that row (publish the rest)
+EVERY other combination is treated as a WARNING — the row still publishes and
+the issue is logged on the board. In particular:
+    scope "field" (any severity)  ->  warning
+    scope "file"  (any severity)  ->  warning   (NOT a tab block)
 
-Severity + scope together are the gate. The whole point: a broken column and a
-single typo must NOT behave the same.
+File-level blocking — holding last-known-good when a whole column is missing —
+comes ONLY from `required_headers`, never from a rule. So `scope` is not an
+independent dial: only ("error","row") changes an outcome. We still write
+scope:"field" vs "row" for human readability, but "file" on a rule does nothing.
+(This corrects an earlier version of this docstring that claimed scope:"file"
+blocks the tab — the engine has never done that.)
 """
 
 # Controlled vocab (EVENTS_DATA_MODEL.md §2). Type these exactly in the sheet.
@@ -21,11 +28,13 @@ CATEGORIES = [
     "Fitness & Wellness", "Talks & Learning", "Workshops", "Family & Kids",
     "Arts & Music", "Community", "Volunteer", "Private",
 ]
-# display: web/both/screen all PUBLISH; off is dropped at promote; anything else
-# is a typo that would silently hide a row -> warn. (screen is not-for-web, not
-# dead — the in-park screen pages need it.)
+# display: web/both/screen all PUBLISH; off (and blank) are dropped at promote;
+# anything else is a typo that would silently hide a row -> warn. (screen is
+# not-for-web, not dead — the in-park screen pages need it.)
 DISPLAY_VALUES = ["web", "both", "screen", "off"]
-YES_NO_BLANK = ["yes", "no", "", "Yes", "No"]  # secondary flags (sheet dropdowns are capitalized)
+# secondary flags. in_vocab is case-insensitive in the engine (it lowercases
+# both sides), so the lowercase three-value form covers Yes/No/blank dropdowns.
+YES_NO_BLANK = ["yes", "no", ""]
 
 SCHEMA = {
     "tab": "events",

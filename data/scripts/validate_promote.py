@@ -35,7 +35,7 @@ SCHEMAS = "data/schemas"
 # Tabs this run validates + publishes. PILOT = events only. Others are staged
 # for reference (series, for the FK check) but not yet published. Grow this list
 # as tabs are templated.
-PUBLISH_TABS = ["events", "classes"]
+PUBLISH_TABS = ["events", "classes", "volunteer"]
 RUNLOG_CAP = 30
 
 ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")

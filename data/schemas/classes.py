@@ -6,7 +6,10 @@ events. So: no date/date_end, no series foreign key, no closes_park. The one
 field that drives everything is `weekday` — the expander turns it into dated
 instances inside the 2-week window — so a blank/bad weekday is a row-fatal error.
 
-Same engine as events.py; only the rule list differs.
+Same engine as events.py; only the rule list differs. For the rule anatomy and
+the gate's exact semantics — quarantine fires ONLY on severity:"error" +
+scope:"row"; file-level blocking comes ONLY from required_headers, never a rule
+— see events.py's header or SHEET_SYNC_ARCHITECTURE.md §3 "As-built schema contract".
 """
 
 CATEGORIES = [

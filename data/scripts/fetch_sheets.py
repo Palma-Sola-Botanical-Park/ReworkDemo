@@ -55,7 +55,7 @@ TAB = {
 # Which tabs this run should pull. PILOT = just events (+ series, which events'
 # referential-integrity check needs to resolve its `series` foreign key).
 # As tabs are templated, add them here.
-PILOT_TABS = ["events", "series", "classes"]
+PILOT_TABS = ["events", "series", "classes", "volunteer"]
 
 # Column-name tokens seen across the live tabs. We locate the header row by its
 # CONTENT (the row matching the most of these) rather than trusting a fixed row
