@@ -131,6 +131,31 @@
     return '<div class="photo-attr">' + rows.join('') + '</div>';
   }
 
+  // Split attribution, for the "What's been seen lately" mosaic:
+  // species name rides INSIDE the photo, the photographer gets a byline OUTSIDE.
+  function speciesTag(o) {
+    o = o || {};
+    if (!o.species && !o.scientific) return '';
+    return '<div class="species-tag"><span class="attr-species">'
+         + esc(o.species || '')
+         + (o.scientific ? ' \u00b7 <em>' + esc(o.scientific) + '</em>' : '')
+         + '</span></div>';
+  }
+
+  function creditPlate(o) {
+    o = o || {};
+    var dateStr = fmtDate(o.date, o.time);
+    return '<div class="mosaic-credit">'
+         +   '<div class="credit-byline">'
+         +     '<span class="credit-eyebrow">Photograph by</span>'
+         +     '<span class="credit-name">' + esc(o.by || 'community member') + '</span>'
+         +     (dateStr ? '<span class="credit-date">' + esc(dateStr) + '</span>' : '')
+         +   '</div>'
+         +   '<div class="credit-license">' + ccBadge(o.license)
+         +     '<span class="credit-src">via iNaturalist</span></div>'
+         + '</div>';
+  }
+
   // ---- data load + hero pool ---------------------------------------------
   function usableHero(p) {
     return p && p.hero === true && p.publish_ok === true && p.photo_url
@@ -165,23 +190,40 @@
     return _pool;
   }
 
-  // local path guess: filename uses underscores, on-disk uses dashes
-  function localPath(p) {
-    if (!p.filename) return null;
-    return LOCAL_DIR + p.filename.replace(/_/g, '-');
+  // local path candidates, newest architecture first:
+  //   1. photos/<psbp_id>/<filename>   (subfolder collection model, DATA_ARCHITECTURE §3)
+  //   2. photos/<filename dashes>       (current flat layout, mid-migration)
+  // resolveSrc walks these, then falls back to the remote iNat URL — so it
+  // works before AND after the photos/ subfolder migration with no edit.
+  function localCandidates(p) {
+    var c = [];
+    if (p.psbp_id && p.filename) c.push(LOCAL_DIR + p.psbp_id + '/' + p.filename);
+    if (p.filename)              c.push(LOCAL_DIR + p.filename.replace(/_/g, '-'));
+    return c;
   }
 
-  // resolve to a known-good URL: local if it loads, else remote
+  // resolve to a known-good URL: first local candidate that loads, else remote
   function resolveSrc(p) {
+    var cands = localCandidates(p);
+    var remote = p.photo_url;
     return new Promise(function (res) {
-      var local = localPath(p), remote = p.photo_url;
-      if (!local) return res(remote);
-      var img = new Image();
-      img.onload  = function () { res(local); };
-      img.onerror = function () { res(remote || local); };
-      img.src = local;
+      var i = 0;
+      function tryNext() {
+        if (i >= cands.length) return res(remote || cands[0]);
+        var url = cands[i++];
+        var img = new Image();
+        img.onload = function () { res(url); };
+        img.onerror = tryNext;
+        img.src = url;
+      }
+      if (!cands.length) return res(remote);
+      tryNext();
     });
   }
+
+  // crop anchor — DATA_ARCHITECTURE §3 `focus` field (e.g. "65% 66%"),
+  // so the subject stays in frame when a hero is squeezed into a banner/tile.
+  function focusOf(p) { return p.focus || '50% 50%'; }
 
   function attrFor(p, withSpecies) {
     return attribution({
@@ -189,7 +231,9 @@
       scientific: withSpecies ? p.scientific_name : null,
       by:         p.photographer,
       license:    p.license,
-      date:       p.observed_on || null,        // lights up once pipeline adds it
+      // reads whichever date field the import pipeline lands on; absent today,
+      // appears automatically once observed_on/date is captured at import time.
+      date:       p.observed_on || p.date || null,
       time:       p.time_observed_at || null
     });
   }
@@ -208,7 +252,8 @@
       Promise.all(picks.map(resolveSrc)).then(function (srcs) {
         host.innerHTML = picks.map(function (p, i) {
           return '<div class="hero-slide' + (i === 0 ? ' on' : '') + '" '
-               + 'style="background-image:url(\'' + esc(srcs[i]) + '\')">'
+               + 'style="background-image:url(\'' + esc(srcs[i]) + '\');'
+               + 'background-position:' + esc(focusOf(p)) + '">'
                + attrFor(p, true)
                + '</div>';
         }).join('');
@@ -240,7 +285,8 @@
 
       Promise.all(picks.map(resolveSrc)).then(function (srcs) {
         host.innerHTML = picks.map(function (p, i) {
-          return '<figure class="hero-grid-tile" style="background-image:url(\'' + esc(srcs[i]) + '\')">'
+          return '<figure class="hero-grid-tile" style="background-image:url(\'' + esc(srcs[i]) + '\');'
+               + 'background-position:' + esc(focusOf(p)) + '">'
                + attrFor(p, true)
                + '</figure>';
         }).join('');
@@ -251,6 +297,8 @@
   // ---- public API ---------------------------------------------------------
   window.PSBPPhotos = {
     attribution:        attribution,
+    speciesTag:         speciesTag,
+    creditPlate:        creditPlate,
     ccBadge:            ccBadge,
     fmtDate:            fmtDate,
     loadPool:           loadPool,
