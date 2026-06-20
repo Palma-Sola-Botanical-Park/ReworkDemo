@@ -1,7 +1,7 @@
 {
   "tab": "newsletters",
   "human": "Newsletter archive — one row per past newsletter.",
-  "generated_at": "2026-06-20T23:13:15+00:00",
+  "generated_at": "2026-06-20T23:33:40+00:00",
   "status": "green",
   "published": true,
   "block_reason": null,
@@ -70,7 +70,14 @@
     }
   ],
   "dropped_rows": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "at": "2026-06-20T23:33:40+00:00",
+      "added": 0,
+      "changed": 2,
+      "removed": 0
+    }
+  ],
   "schema": {
     "required_headers": [
       "display",
