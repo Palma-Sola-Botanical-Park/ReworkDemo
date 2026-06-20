@@ -279,7 +279,7 @@ The first that loads wins; the remote URL guarantees an image even if a local fi
 
 **Performance — no practical cap on the hero series.** The rotating hero uses a two-layer recycling crossfade: it paints the next image just-in-time and pre-loads one ahead, so **only ~2 images are ever in memory** regardless of run length. The sequence walks the entire hero pool without repeating, then reshuffles — long non-repeating runs at flat memory and bandwidth. (The earlier "build every slide up front" approach capped realistically at ~12–20 before load/decoded-memory cost showed.)
 
-**House copy.** A standing line sits over the rotating hero, setting the tone for the whole site: *"Every photograph on this site was taken by our community … all shared via iNaturalist."* It's persistent (not per-slide); each slide's own photographer credit rides at the bottom.
+**House copy.** A standing line sits over the rotating hero, setting the tone for the whole site: *"Every nature photo here was taken by our community — regular people, honoring a place they love."* It's persistent (not per-slide); each slide's own photographer credit rides at the bottom.
 
 ---
 
