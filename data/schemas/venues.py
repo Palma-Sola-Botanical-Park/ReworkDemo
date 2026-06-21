@@ -2,9 +2,11 @@
 data/schemas/venues.py  —  validation rules for the `venues` tab.
 
 Rentable options + the seasonal price grid. NO `display` column — venues are
-always-on reference data (the page decides what to show), so nothing is dropped
-on display. The canonical key is `id` (weddings/large/medium/small/...); a row
-with no id can't be addressed, so that's the one row-fatal check.
+always-on reference data (the page decides what to show), so drop_when_display is
+EMPTY: nothing is dropped on display. (If it were the usual ["off",""], every
+display-less row would read as blank and get dropped -> zero published -> block.)
+The canonical key is `id` (weddings/large/medium/small/...); id + name are the
+two columns a card can't render without, so both are row-fatal.
 
 Columns: order | id | name | category | scope | duration | capacity | includes |
          sat_season | wknd_season | wkdy_season | sat_off | wknd_off | wkdy_off |
@@ -18,8 +20,7 @@ Two deliberate NON-checks, to keep the board green and honest:
   * `photo` is NOT URL-checked — some photos may be local /ReworkDemo paths,
     which a URL check would falsely flag (same reason we skipped it on volunteer).
 
-Gate recap: quarantine ONLY on severity:"error" + scope:"row"; file-level block
-ONLY from required_headers. See events.py / SHEET_SYNC_ARCHITECTURE.md section 3.
+(`why` = the plain-language reason shown on the drill-down; see events.py header.)
 """
 
 CATEGORY_VALUES = ["wedding", "rental"]
@@ -27,6 +28,8 @@ SCOPE_VALUES    = ["Whole Park", "Building", "Partial"]
 
 SCHEMA = {
     "tab": "venues",
+
+    "human": "Rentable venues and the seasonal price grid — one row per option.",
 
     # id is the address every price/scope row hangs off; it keys the diff.
     "identity": ["id"],
@@ -38,14 +41,21 @@ SCHEMA = {
 
     "autofix_trim": True,
 
+    "volume_min": 1,
+
     "rules": [
-        # --- row-fatal: a venue with no id can't be addressed ----------------
-        {"field": "id", "check": "required", "severity": "error", "scope": "row"},
+        # --- row-fatal: id is the address, name is the label -----------------
+        {"field": "id",   "check": "required", "severity": "error", "scope": "row",
+         "why": "Can't be blank."},
+        {"field": "name", "check": "required", "severity": "error", "scope": "row",
+         "why": "Can't be blank."},
 
         # --- controlled vocab (warn) -----------------------------------------
         {"field": "category", "check": "in_vocab", "arg": CATEGORY_VALUES,
-         "severity": "warn", "scope": "field"},
+         "severity": "warn", "scope": "field",
+         "why": "Must be wedding or rental."},
         {"field": "scope",    "check": "in_vocab", "arg": SCOPE_VALUES,
-         "severity": "warn", "scope": "field"},
+         "severity": "warn", "scope": "field",
+         "why": "Must be Whole Park, Building, or Partial."},
     ],
 }
