@@ -189,14 +189,6 @@ def process_species(sp, obs_ids, photo_credits, dry_run=False, force=False):
 
     subfolder = os.path.join(PHOTOS_DIR, psbp_id)
 
-    # Resume support: if this species' subfolder already has photos, it ran in a
-    # prior pass — skip it so a re-run continues instead of starting over.
-    if not dry_run and not force and os.path.isdir(subfolder) and \
-            any(f.lower().endswith((".jpg", ".jpeg", ".png")) for f in os.listdir(subfolder)):
-        print(f"\n{psbp_id} — {common_name}: subfolder already populated, skipping "
-              f"(use --force to redo)")
-        return []
-
     existing_photo_ids = set()
     has_hero = False
     for pc in photo_credits:
@@ -215,7 +207,7 @@ def process_species(sp, obs_ids, photo_credits, dry_run=False, force=False):
         os.makedirs(subfolder, exist_ok=True)
 
     new_entries = []
-    downloaded = skipped_license = skipped_existing = 0
+    registered = skipped_license = skipped_existing = 0
 
     for i, obs_id in enumerate(sorted(obs_ids)):
         print(f"  [{i+1}/{len(obs_ids)}] obs #{obs_id}...", end=" ")
@@ -240,18 +232,22 @@ def process_species(sp, obs_ids, photo_credits, dry_run=False, force=False):
 
             filename = f"{pid}.jpg"
             dest = os.path.join(subfolder, filename)
-            is_hero = (not has_hero) and downloaded == 0 and not new_entries
+            is_hero = (not has_hero) and registered == 0 and not new_entries
             role = ["whole", "gallery"] if is_hero else ["gallery"]
+            on_disk = os.path.isfile(dest)
 
-            if not dry_run:
+            if dry_run:
+                print(f"    photo {pid}: {'have' if on_disk else 'would download'} "
+                      f"→ {filename}  (hero={is_hero})")
+            elif on_disk and not force:
+                print(f"    photo {pid}: on disk → registering ({filename})")
+            else:
                 print(f"    photo {pid}: downloading...", end=" ")
                 if not download_photo(p["large_url"], dest):
                     continue
                 print(f"✓ {filename}")
                 time.sleep(DOWNLOAD_DELAY)
-            else:
-                print(f"    photo {pid}: would download → {dest}  (hero={is_hero})")
-            downloaded += 1
+            registered += 1
 
             entry = {
                 "psbp_id": psbp_id,
@@ -283,7 +279,7 @@ def process_species(sp, obs_ids, photo_credits, dry_run=False, force=False):
 
         time.sleep(API_DELAY)
 
-    print(f"  -> downloaded {downloaded}, skipped {skipped_existing} existing, "
+    print(f"  -> registered {registered}, skipped {skipped_existing} already-in-registry, "
           f"{skipped_license} non-CC")
     heroes = [e for e in new_entries if e["hero"]]
     if heroes:

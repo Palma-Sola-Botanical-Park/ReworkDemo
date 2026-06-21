@@ -47,10 +47,14 @@ from collections import defaultdict
 # ---------------------------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------------------------
-PLANT_JSON = "plant_signage.json"
-PHOTO_CREDITS_JSON = "photo_credits.json"
-OBSERVATIONS_CSV = "observations-750817.csv"   # PLANT project export (788 obs, all Plantae)
-PHOTOS_DIR = "photos"
+# === The ONE line to change if you ever move the repo. Everything else is ===
+# === derived from it, so this script runs correctly from ANY folder.      ===
+REPO = "/Users/fiona/Documents/GitHub/ReworkDemo"
+
+PLANT_JSON         = os.path.join(REPO, "data", "sources", "plant_signage.json")
+PHOTO_CREDITS_JSON = os.path.join(REPO, "data", "sources", "photo_credits.json")
+OBSERVATIONS_CSV   = os.path.join(REPO, "data", "sources", "observations-750817.csv")
+PHOTOS_DIR         = os.path.join(REPO, "photos")
 
 API_DELAY = 1.0
 DOWNLOAD_DELAY = 0.3
@@ -178,7 +182,7 @@ def build_obs_index(csv_path):
 # PER-SPECIES
 # ---------------------------------------------------------------------------
 
-def process_species(sp, obs_ids, photo_credits, dry_run=False):
+def process_species(sp, obs_ids, photo_credits, dry_run=False, force=False):
     psbp_id = sp["id"]
     common_name = sp["common_name"]
     sci_name = sp.get("botanical_name") or sp.get("scientific_name") or ""
@@ -203,7 +207,7 @@ def process_species(sp, obs_ids, photo_credits, dry_run=False):
         os.makedirs(subfolder, exist_ok=True)
 
     new_entries = []
-    downloaded = skipped_license = skipped_existing = 0
+    registered = skipped_license = skipped_existing = 0
 
     for i, obs_id in enumerate(sorted(obs_ids)):
         print(f"  [{i+1}/{len(obs_ids)}] obs #{obs_id}...", end=" ")
@@ -228,18 +232,22 @@ def process_species(sp, obs_ids, photo_credits, dry_run=False):
 
             filename = f"{pid}.jpg"
             dest = os.path.join(subfolder, filename)
-            is_hero = (not has_hero) and downloaded == 0 and not new_entries
+            is_hero = (not has_hero) and registered == 0 and not new_entries
             role = ["whole", "gallery"] if is_hero else ["gallery"]
+            on_disk = os.path.isfile(dest)
 
-            if not dry_run:
+            if dry_run:
+                print(f"    photo {pid}: {'have' if on_disk else 'would download'} "
+                      f"→ {filename}  (hero={is_hero})")
+            elif on_disk and not force:
+                print(f"    photo {pid}: on disk → registering ({filename})")
+            else:
                 print(f"    photo {pid}: downloading...", end=" ")
                 if not download_photo(p["large_url"], dest):
                     continue
                 print(f"✓ {filename}")
                 time.sleep(DOWNLOAD_DELAY)
-            else:
-                print(f"    photo {pid}: would download → {dest}  (hero={is_hero})")
-            downloaded += 1
+            registered += 1
 
             entry = {
                 "psbp_id": psbp_id,
@@ -271,7 +279,7 @@ def process_species(sp, obs_ids, photo_credits, dry_run=False):
 
         time.sleep(API_DELAY)
 
-    print(f"  -> downloaded {downloaded}, skipped {skipped_existing} existing, "
+    print(f"  -> registered {registered}, skipped {skipped_existing} already-in-registry, "
           f"{skipped_license} non-CC")
     heroes = [e for e in new_entries if e["hero"]]
     if heroes:
@@ -289,6 +297,7 @@ def main():
     ap.add_argument("--species", help="Comma-separated PSBP IDs")
     ap.add_argument("--all", action="store_true", help="Process all plants in the JSON")
     ap.add_argument("--dry-run", action="store_true", help="Preview only")
+    ap.add_argument("--force", action="store_true", help="Re-download even if subfolder exists")
     args = ap.parse_args()
 
     if not args.species and not args.all:
@@ -320,6 +329,7 @@ def main():
     print("=" * 70)
 
     all_new = []
+    total_added = 0
     for sp in targets:
         taxon_id = sp.get("inat_taxon_id")
         obs_ids = set(obs_index.get(taxon_id, set())) if taxon_id else set()
@@ -329,17 +339,23 @@ def main():
         if not obs_ids:
             print(f"\n{sp['id']} — {sp['common_name']}: no observations in CSV, skipping")
             continue
-        new = process_species(sp, obs_ids, photo_credits, dry_run=args.dry_run)
+        new = process_species(sp, obs_ids, photo_credits,
+                              dry_run=args.dry_run, force=args.force)
+        if not new:
+            continue
         all_new.extend(new)
         photo_credits.extend(new)
+        # Save after EVERY species so a crash mid-run keeps everything done so far.
+        if not args.dry_run:
+            pc_data["photos"] = photo_credits
+            pc_data.setdefault("meta", {})["photo_count"] = len(photo_credits)
+            write_json_atomic(PHOTO_CREDITS_JSON, pc_data)
+            total_added += len(new)
+            print(f"     saved — registry now {len(photo_credits)} (+{total_added} this run)")
 
     if all_new and not args.dry_run:
-        pc_data["photos"] = photo_credits
-        pc_data.setdefault("meta", {})["photo_count"] = len(photo_credits)
-        write_json_atomic(PHOTO_CREDITS_JSON, pc_data)
         print(f"\n{'='*70}")
-        print(f"photo_credits.json updated: +{len(all_new)} entries "
-              f"(total {len(photo_credits)})")
+        print(f"photo_credits.json: +{len(all_new)} entries (total {len(photo_credits)})")
     elif all_new:
         print(f"\n{'='*70}")
         print(f"DRY RUN: would add {len(all_new)} entries")
