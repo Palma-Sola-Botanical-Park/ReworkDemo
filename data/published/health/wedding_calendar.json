@@ -1,22 +1,22 @@
 {
-  "tab": "news",
-  "human": "Park news stories — one row per story.",
+  "tab": "wedding_calendar",
+  "human": "Park-closure / not-open dates — one row per closed date.",
   "generated_at": "2026-06-21T00:22:49+00:00",
   "status": "green",
   "published": true,
   "block_reason": null,
   "counts": {
-    "staged": 4,
-    "live": 4,
-    "published": 4,
+    "staged": 57,
+    "live": 57,
+    "published": 57,
     "dropped_display": 0,
     "quarantined": 0,
     "warned": 0
   },
   "volume_guard": {
-    "min": 1,
-    "live": 4,
-    "published": 4,
+    "min": 0,
+    "live": 57,
+    "published": 57,
     "blocked": false,
     "reason": null
   },
@@ -30,8 +30,8 @@
       "severity": "error",
       "scope": "row",
       "status": "green",
-      "evaluated": 4,
-      "passed": 4,
+      "evaluated": 57,
+      "passed": 57,
       "flagged": 0,
       "examples": []
     },
@@ -44,41 +44,43 @@
       "severity": "error",
       "scope": "row",
       "status": "green",
-      "evaluated": 4,
-      "passed": 4,
+      "evaluated": 57,
+      "passed": 57,
       "flagged": 0,
       "examples": []
     },
     {
-      "id": "headline:required",
-      "field": "headline",
-      "check": "required",
-      "arg": null,
-      "why": "Can't be blank.",
-      "severity": "error",
-      "scope": "row",
-      "status": "green",
-      "evaluated": 4,
-      "passed": 4,
-      "flagged": 0,
-      "examples": []
-    },
-    {
-      "id": "display:in_vocab",
-      "field": "display",
+      "id": "status:in_vocab",
+      "field": "status",
       "check": "in_vocab",
       "arg": [
-        "web",
-        "both",
-        "screen",
-        "off"
+        "possible",
+        "booked"
       ],
-      "why": "Must be web, both, screen, or off — a typo hides the row from everyone.",
+      "why": "Must be possible or booked.",
       "severity": "warn",
       "scope": "field",
       "status": "green",
-      "evaluated": 4,
-      "passed": 4,
+      "evaluated": 57,
+      "passed": 57,
+      "flagged": 0,
+      "examples": []
+    },
+    {
+      "id": "closes_park:in_vocab",
+      "field": "closes_park",
+      "check": "in_vocab",
+      "arg": [
+        "yes",
+        "no",
+        ""
+      ],
+      "why": "Must be yes, no, or blank.",
+      "severity": "warn",
+      "scope": "field",
+      "status": "green",
+      "evaluated": 57,
+      "passed": 57,
       "flagged": 0,
       "examples": []
     }
@@ -87,23 +89,17 @@
   "timeline": [],
   "schema": {
     "required_headers": [
-      "display",
-      "date",
-      "headline"
+      "date"
     ],
     "identity": [
-      "date",
-      "headline"
+      "date"
     ],
-    "drop_when_display": [
-      "off",
-      ""
-    ],
-    "volume_min": 1
+    "drop_when_display": [],
+    "volume_min": 0
   },
   "links": {
-    "sheet": "https://docs.google.com/spreadsheets/d/12gRB-c4gND8qJWPmwBoV2X4adqTfRROYHtA8jR4-kS4/edit#gid=195499912",
-    "published": "data/published/news.json",
-    "detail": "data/published/health/news.json"
+    "sheet": "https://docs.google.com/spreadsheets/d/12gRB-c4gND8qJWPmwBoV2X4adqTfRROYHtA8jR4-kS4/edit#gid=1260078193",
+    "published": "data/published/wedding_calendar.json",
+    "detail": "data/published/health/wedding_calendar.json"
   }
 }
