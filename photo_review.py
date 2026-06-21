@@ -30,8 +30,10 @@ import sys
 import urllib.parse
 
 PORT = 8000
-PHOTO_CREDITS = "data/sources/photo_credits.json"
-PHOTOS_DIR = "photos"
+# === The ONE line to change if you ever move the repo. Run this from ANY folder. ===
+REPO = "/Users/fiona/Documents/GitHub/ReworkDemo"
+PHOTO_CREDITS = os.path.join(REPO, "data", "sources", "photo_credits.json")
+PHOTOS_DIR = os.path.join(REPO, "photos")
 
 # Wildlife roles
 WILDLIFE_ROLES = ["whole", "portrait", "flight", "feeding", "juvenile", "display", "habitat", "gallery"]
@@ -419,7 +421,7 @@ class ReviewHandler(http.server.SimpleHTTPRequestHandler):
 
         # Serve photo files
         if path.startswith("/photos/"):
-            file_path = path.lstrip("/")
+            file_path = os.path.join(REPO, path.lstrip("/"))
             if os.path.isfile(file_path):
                 self.send_response(200)
                 ext = os.path.splitext(file_path)[1].lower()
@@ -459,13 +461,9 @@ class ReviewHandler(http.server.SimpleHTTPRequestHandler):
                 if os.path.exists(file_path):
                     os.remove(file_path)
 
-                # Remove from JSON and add to blocklist
+                # Remove from JSON
                 data = load_credits()
                 data["photos"] = [p for p in data["photos"] if p.get("photo_id") != photo_id]
-                if "blocked_photo_ids" not in data:
-                    data["blocked_photo_ids"] = []
-                if photo_id not in data["blocked_photo_ids"]:
-                    data["blocked_photo_ids"].append(photo_id)
                 save_credits(data)
 
                 self.send_json({"ok": True})
