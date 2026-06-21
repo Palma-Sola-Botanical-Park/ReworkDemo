@@ -50,7 +50,8 @@ HEALTH_DIR = os.path.join(PUBLISHED, "health")   # per-feed detail files
 
 # Tabs this run validates + publishes. Grow as tabs are templated. (series is
 # staged for the FK check but never published as its own feed — so it's NOT here.)
-PUBLISH_TABS = ["events", "classes", "volunteer", "news", "newsletters"]
+PUBLISH_TABS = ["events", "classes", "series", "volunteer", "announcements",
+                "newsletters", "news", "venues", "wedding_calendar", "wedding_gallery"]
 
 RUNLOG_CAP = 30        # _runlog.json: keep the last N runs
 HISTORY_DAYS = 182     # _history.json: keep ~6 months of per-feed points
